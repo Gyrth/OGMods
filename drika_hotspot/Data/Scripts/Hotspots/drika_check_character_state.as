@@ -27,7 +27,8 @@ enum state_choices { 	awake = 0,
 						current_animation = 22,
 						ray_collides_with = 23,
 						on_ground = 24,
-						dhs_is_player = 25
+						dhs_is_player = 25,
+						item_held = 26
 					};
 
 enum AIGoal {
@@ -82,7 +83,7 @@ class HealthData{
 
 class DrikaCheckCharacterState : DrikaElement{
 	array<string> ccs_mode_names = {"Check State", "Pass All States To Variables"};
-	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "AI Patrolling", "AI Investigating", "AI Getting Help", "AI Fleeing", "In Proximity", "Right Footstep", "Left Footstep", "Takes Damage", "Blood Damage", "Blood Health", "Block Health", "Temp Health", "Permanent Health", "Current Animation", "Ray Collides With", "On Ground", "Is Player"};
+	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "AI Patrolling", "AI Investigating", "AI Getting Help", "AI Fleeing", "In Proximity", "Right Footstep", "Left Footstep", "Takes Damage", "Blood Damage", "Blood Health", "Block Health", "Temp Health", "Permanent Health", "Current Animation", "Ray Collides With", "On Ground", "Is Player", "Item Held"};
 	array<string> variable_names = {"blood_damage", "blood_health", "block_health", "temp_health", "permanent_health", "knocked_out", "state", "on_ground", "is_player", "velocity_x", "velocity_y", "velocity_z", "position_x", "position_y", "position_z", "air_time", "on_ground_time", "roll_count", "num_jumps", "attacked_by_id", "target_id", "self_id", "block_stunned_by_id", "cut_throat", "feinting", "asleep", "sitting", "in_water", "water_depth", "last_collide_time", "block_stunned", "ragdoll_time", "game_difficulty", "time", "injured_ragdoll_time", "active_blocking", "on_fire", "startled", "attacking_with_throw", "num_hit_on_ground", "num_strikes", "current_animation", "p_aggression", "p_ground_aggression", "p_damage_multiplier", "p_block_skill", "p_block_followup", "p_attack_speed_mult", "p_speed_mult", "p_attack_damage_mult", "p_attack_knockback_mult", "p_fat", "p_muscle", "p_ear_size", "g_weapon_catch_skill", "g_fear_afraid_at_health_level", "g_stick_to_nav_mesh", "g_fear_causes_fear_on_sight", "g_fear_always_afraid_on_sight", "g_fear_never_afraid_on_sight", "goal", "sub_goal", "going_to_block", "going_to_dodge", "wants_to_roll"};
 	ccs_modes ccs_mode;
 	state_choices state_choice;
@@ -90,6 +91,7 @@ class DrikaCheckCharacterState : DrikaElement{
 	int current_state_choice;
 	bool equals = true;
 	DrikaTargetSelect@ known_target;
+	DrikaTargetSelect@ target_item;
 	float proximity_distance;
 	bool continue_if_false = false;
 	DrikaGoToLineSelect@ continue_element;
@@ -104,6 +106,7 @@ class DrikaCheckCharacterState : DrikaElement{
 	float compare_value;
 	string animation_path;
 	string variable_prefix;
+	bool received_item_held = false;
 
 	DrikaCheckCharacterState(JSONValue params = JSONValue()){
 		ccs_mode = ccs_modes(GetJSONInt(params, "ccs_mode", ccs_check));
@@ -126,6 +129,7 @@ class DrikaCheckCharacterState : DrikaElement{
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
 		@known_target = DrikaTargetSelect(this, params, "known_target");
+		@target_item = DrikaTargetSelect(this, params, "target_item");
 		SetTargetOptions();
 
 		drika_element_type = drika_check_character_state;
@@ -137,6 +141,8 @@ class DrikaCheckCharacterState : DrikaElement{
 	void PostInit(){
 		continue_element.PostInit();
 		target_select.PostInit();
+		known_target.PostInit();
+		target_item.PostInit();
 	}
 
 	void SetTargetOptions(){
@@ -145,11 +151,13 @@ class DrikaCheckCharacterState : DrikaElement{
 		}else{
 			known_target.target_option = id_option | name_option | character_option | reference_option | team_option;
 		}
+		target_item.target_option = id_option | name_option | reference_option | item_option;
 	}
 
 	void StartSettings(){
 		target_select.CheckAvailableTargets();
 		known_target.CheckAvailableTargets();
+		target_item.CheckAvailableTargets();
 	}
 
 	JSONValue GetSaveData(){
@@ -164,6 +172,8 @@ class DrikaCheckCharacterState : DrikaElement{
 		}else if(state_choice == in_proximity || state_choice == ray_collides_with){
 			known_target.SaveIdentifier(data);
 			data["proximity_distance"] = JSONValue(proximity_distance);
+		}else if(state_choice == item_held){
+			target_item.SaveIdentifier(data);
 		}
 		data["continue_if_false"] = JSONValue(continue_if_false);
 		if(continue_if_false){
@@ -189,22 +199,30 @@ class DrikaCheckCharacterState : DrikaElement{
 	string GetDisplayString(){
 		continue_element.CheckLineAvailable();
 		string display_string = "CheckCharacterState ";
+
 		if(target_select.identifier_type == team && current_ccs_mode == ccs_check){
 			display_string += check_all?"all ":"any ";
 		}
+
 		display_string += target_select.GetTargetDisplayText();
+
 		if(current_ccs_mode == ccs_check){
 			display_string += (equals?" ":" not ");
 			display_string += state_choice_names[state_choice] + " ";
+
 			if(state_choice == knows_about || state_choice == in_proximity){
 				if(known_target.identifier_type == team){
 					display_string += check_all_known?"all ":"any ";
 				}
+
 				display_string += known_target.GetTargetDisplayText();
+			}else if(state_choice == item_held){
+				display_string += ": " + target_item.GetTargetDisplayText();
 			}
+
 			display_string += (continue_if_false?" else line " + continue_element.GetTargetLineIndex():"");
 		}else{
-		display_string += (" Pass To '" + variable_prefix + "' Variables");
+			display_string += (" Pass To '" + variable_prefix + "' Variables");
 		}
 
 		return display_string;
@@ -393,6 +411,12 @@ class DrikaCheckCharacterState : DrikaElement{
 				known_target.DrawSelectTargetUI();
 				ImGui_NextColumn();
 				ImGui_NextColumn();
+			}else if(state_choice == item_held){
+				ImGui_Separator();
+				ImGui_Text("Target Item");
+				ImGui_NextColumn();
+				ImGui_NextColumn();
+				target_item.DrawSelectTargetUI();
 			}
 
 			ImGui_AlignTextToFramePadding();
@@ -404,35 +428,34 @@ class DrikaCheckCharacterState : DrikaElement{
 			if(continue_if_false){
 				continue_element.DrawGoToLineUI();
 			}
-		}
-		else if(current_ccs_mode == ccs_write){
-				ImGui_Separator();
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Variable Prefix:");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				ImGui_SetTextBuf(variable_prefix);
+		}else if(current_ccs_mode == ccs_write){
+			ImGui_Separator();
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Variable Prefix:");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_SetTextBuf(variable_prefix);
 
-				if(ImGui_IsRootWindowOrAnyChildFocused() && !ImGui_IsAnyItemActive() && !ImGui_IsMouseClicked(0)){
-					ImGui_SetKeyboardFocusHere(0);
-				}
-
-				if(ImGui_InputText("##Variable Prefix",0)){
-					variable_prefix = ImGui_GetTextBuf();
-				}
-				ImGui_NextColumn();
-
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Variables:");
-				ImGui_NextColumn();
-
-				for(uint i = 0; i < variable_names.size(); i++){
-					ImGui_AlignTextToFramePadding();
-					ImGui_Text(variable_prefix + "_" + variable_names[i]);
-					ImGui_NextColumn();
-					ImGui_NextColumn();
-				}
+			if(ImGui_IsRootWindowOrAnyChildFocused() && !ImGui_IsAnyItemActive() && !ImGui_IsMouseClicked(0)){
+				ImGui_SetKeyboardFocusHere(0);
 			}
+
+			if(ImGui_InputText("##Variable Prefix",0)){
+				variable_prefix = ImGui_GetTextBuf();
+			}
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Variables:");
+			ImGui_NextColumn();
+
+			for(uint i = 0; i < variable_names.size(); i++){
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text(variable_prefix + "_" + variable_names[i]);
+				ImGui_NextColumn();
+				ImGui_NextColumn();
+			}
+		}
 	}
 
 	void DrawEditing(){
@@ -459,6 +482,18 @@ class DrikaCheckCharacterState : DrikaElement{
 					}else if(target_objects[j].GetType() == _movement_object){
 						MovementObject@ char = ReadCharacterID(target_objects[j].GetID());
 						target_location = char.position;
+					}
+					DebugDrawLine(target.position, target_location, vec3(0.0, 1.0, 0.0), _delete_on_draw);
+				}
+			}else if(state_choice == item_held){
+				array<Object@> target_objects = target_item.GetTargetObjects();
+
+				for(uint j = 0; j < target_objects.size(); j++){
+					vec3 target_location = target_objects[j].GetTranslation();
+
+					if(target_objects[j].GetType() == _item_object){
+						ItemObject@ item_obj = ReadItemID(target_objects[j].GetID());
+						target_location = item_obj.GetPhysicsPosition();
 					}
 					DebugDrawLine(target.position, target_location, vec3(0.0, 1.0, 0.0), _delete_on_draw);
 				}
@@ -680,6 +715,9 @@ class DrikaCheckCharacterState : DrikaElement{
 					state = target.GetIntVar("on_ground") == 1;
 				}else if (state_choice == dhs_is_player){
 					state = target.is_player;
+				}else if (state_choice == item_held){
+					state = received_item_held;
+					received_item_held = false;
 				}
 
 				if(!check_all && state == equals){
@@ -793,5 +831,35 @@ class DrikaCheckCharacterState : DrikaElement{
 	void Delete(){
 		target_select.Delete();
 		known_target.Delete();
+		target_item.Delete();
+	}
+
+	void ReceiveMessage(array<string> messages){
+		if(messages[0] == "character_item_pickup" && messages.size() == 3){
+			int character_id = atoi(messages[1]);
+			int item_id = atoi(messages[2]);
+			bool correct_character = false;
+			bool correct_item = false;
+
+			Log(warning, "Received " + character_id + " picking up " + item_id);
+
+			array<MovementObject@> target_characters = target_select.GetTargetMovementObjects();
+			for(uint i = 0; i < target_characters.size(); i++){
+				if(target_characters[i].GetID() == character_id){
+					correct_character = true;
+					break;
+				}
+			}
+
+			array<Object@> target_items = target_item.GetTargetObjects();
+			for(uint i = 0; i < target_items.size(); i++){
+				if(target_items[i].GetID() == item_id){
+					correct_item = true;
+					break;
+				}
+			}
+
+			received_item_held = correct_character && correct_item;
+		}
 	}
 }
