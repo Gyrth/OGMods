@@ -82,7 +82,7 @@ class DrikaUserInterface : DrikaElement{
 		current_ui_function = ui_function;
 
 		image_path = GetJSONString(params, "image_path", "Textures/ui/menus/credits/overgrowth.png");
-		fullscreen_image_path = GetJSONString(params, "image_path", "Data/Texture/drika_vignette.tga");
+		fullscreen_image_path = GetJSONString(params, "fullscreen_image_path", "Data/Textures/drika_vignette.tga");
 
 		button_image_path = GetJSONString(params, "button_image_path", "Textures/ui/menus/main/button-diamond.png");
 
