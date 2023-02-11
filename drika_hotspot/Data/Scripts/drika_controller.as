@@ -334,13 +334,17 @@ void DrawGUI(){
 }
 
 void DrawMouseBlockContainer(){
-	ImGui_PushStyleColor(ImGuiCol_WindowBg, vec4(0.0f, 0.0f, 0.0f, 0.0f));
-	ImGui_Begin("MouseBlockContainer", editing_ui, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBringToFrontOnFocus);
-	UpdateGrabber();
-	ImGui_PopStyleColor(1);
-	ImGui_SetWindowPos("MouseBlockContainer", vec2(0,0));
-	ImGui_SetWindowSize("MouseBlockContainer", vec2(GetScreenWidth(), GetScreenHeight()));
-	ImGui_End();
+	// Only block mouse input when the mouse is hovering over a grabber, image or text.
+	if(current_grabber !is null){
+		ImGui_PushStyleColor(ImGuiCol_WindowBg, vec4(0.0f, 0.0f, 0.0f, 0.0f));
+		ImGui_Begin("MouseBlockContainer", editing_ui, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoFocusOnAppearing);
+		UpdateGrabber();
+		ImGui_PopStyleColor(1);
+		ImGui_SetWindowPos("MouseBlockContainer", vec2(0,0));
+		ImGui_SetWindowSize("MouseBlockContainer", vec2(GetScreenWidth(), GetScreenHeight()));
+		ImGui_End();
+	}
+
 }
 
 int ui_snap_scale = 20;
