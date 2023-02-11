@@ -24,7 +24,8 @@ enum ui_functions	{
 						ui_text = 2,
 						ui_font = 3,
 						ui_button = 4,
-						ui_input = 5
+						ui_input = 5,
+						ui_fullscreen_image = 6
 					}
 
 array<string> tween_types = {

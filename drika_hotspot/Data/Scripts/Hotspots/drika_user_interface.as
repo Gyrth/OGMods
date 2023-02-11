@@ -9,6 +9,7 @@ class DrikaUserInterface : DrikaElement{
 	drika_input_box_modes drika_input_box_mode;
 	int current_ui_function;
 	string image_path;
+	string fullscreen_image_path;
 
 	string button_image_path;
 
@@ -66,7 +67,8 @@ class DrikaUserInterface : DrikaElement{
 												"Text",
 												"Font",
 												"Button",
-												"Input Box"
+												"Input Box",
+												"Fullscreen Image"
 											};
 
 	array<string> input_box_mode_names =	{
@@ -80,6 +82,7 @@ class DrikaUserInterface : DrikaElement{
 		current_ui_function = ui_function;
 
 		image_path = GetJSONString(params, "image_path", "Textures/ui/menus/credits/overgrowth.png");
+		fullscreen_image_path = GetJSONString(params, "image_path", "Data/Texture/drika_vignette.tga");
 
 		button_image_path = GetJSONString(params, "button_image_path", "Textures/ui/menus/main/button-diamond.png");
 
@@ -278,7 +281,7 @@ class DrikaUserInterface : DrikaElement{
 		data["ui_function"] = JSONValue(ui_function);
 		data["ui_element_identifier"] = JSONValue(ui_element_identifier);
 
-		if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_button){
+		if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_button || ui_function == ui_fullscreen_image){
 			data["use_fade_in"] = JSONValue(use_fade_in);
 			if(use_fade_in){
 				data["fade_in_duration"] = JSONValue(fade_in_duration);
@@ -382,6 +385,13 @@ class DrikaUserInterface : DrikaElement{
 			data["size"].append(size.y);
 			data["input_variable"] = JSONValue(input_variable);
 			data["drika_input_box_mode"] = JSONValue(drika_input_box_mode);
+		}else if(ui_function == ui_fullscreen_image){
+			data["fullscreen_image_path"] = JSONValue(fullscreen_image_path);
+			data["color"] = JSONValue(JSONarrayValue);
+			data["color"].append(color.x);
+			data["color"].append(color.y);
+			data["color"].append(color.z);
+			data["color"].append(color.a);
 		}
 		return data;
 	}
@@ -403,6 +413,8 @@ class DrikaUserInterface : DrikaElement{
 			display_string += "\"" + displayed_text + "\", target Line " + display_line;
 		}else if(ui_function == ui_input){
 			display_string += input_box_mode_names[current_input_box_mode]  + ", target var \"" + input_variable + "\"";
+		}else if(ui_function == ui_fullscreen_image){
+			display_string += "\"" + fullscreen_image_path + "\"";
 		}
 
 		return display_string;
@@ -895,10 +907,34 @@ class DrikaUserInterface : DrikaElement{
 
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
+		}else if(ui_function == ui_fullscreen_image){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Image Path");
+			ImGui_NextColumn();
+			if(ImGui_Button("Set Image Path")){
+				string new_path = GetUserPickedReadPath("png", "Data/Images");
+				if(new_path != ""){
+					fullscreen_image_path = ShortenPath(new_path);
+					SendUIInstruction("set_image_path", {fullscreen_image_path});
+				}
+			}
+			ImGui_SameLine();
+			ImGui_Text(fullscreen_image_path);
+			ImGui_NextColumn();
 
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Color");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_ColorEdit4("###Color", color, ImGuiColorEditFlags_HEX | ImGuiColorEditFlags_Uint8)){
+				SendUIInstruction("set_color", {color.x, color.y, color.z, color.a});
+			}
+			ImGui_PopItemWidth();
+
+			ImGui_NextColumn();
 		}
 
-		if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_button || ui_function == ui_input){
+		if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_button || ui_function == ui_input || ui_function == ui_fullscreen_image){
 			//Fade in UI-------------------------------------------------------------------------------------------------
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Use Fade In");
@@ -915,20 +951,22 @@ class DrikaUserInterface : DrikaElement{
 				DrawSelectTween("Fade In", fade_in_tween_type, fade_in_duration, ivec2());
 			}
 
-			//Move in UI-------------------------------------------------------------------------------------------------
-			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Use Move In");
-			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width);
-			if(ImGui_Checkbox("##Use Move In", use_move_in)){
-				SendRemoveUpdatebehaviour();
-				SendInUpdateBehaviour();
-			}
-			ImGui_PopItemWidth();
-			ImGui_NextColumn();
+			if(ui_function != ui_fullscreen_image){
+				//Move in UI-------------------------------------------------------------------------------------------------
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Use Move In");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				if(ImGui_Checkbox("##Use Move In", use_move_in)){
+					SendRemoveUpdatebehaviour();
+					SendInUpdateBehaviour();
+				}
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
 
-			if(use_move_in){
-				DrawSelectTween("Move In", move_in_tween_type, move_in_duration, move_in_offset);
+				if(use_move_in){
+					DrawSelectTween("Move In", move_in_tween_type, move_in_duration, move_in_offset);
+				}
 			}
 
 			//Fade out UI-------------------------------------------------------------------------------------------------
@@ -947,20 +985,22 @@ class DrikaUserInterface : DrikaElement{
 				DrawSelectTween("Fade Out", fade_out_tween_type, fade_out_duration, ivec2());
 			}
 
-			//Move out UI-------------------------------------------------------------------------------------------------
-			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Use Move Out");
-			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width);
-			if(ImGui_Checkbox("##Use Move Out", use_move_out)){
-				SendRemoveUpdatebehaviour();
-				SendOutUpdateBehaviour();
-			}
-			ImGui_PopItemWidth();
-			ImGui_NextColumn();
+			if(ui_function != ui_fullscreen_image){
+				//Move out UI-------------------------------------------------------------------------------------------------
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Use Move Out");
+				ImGui_NextColumn();
+				ImGui_PushItemWidth(second_column_width);
+				if(ImGui_Checkbox("##Use Move Out", use_move_out)){
+					SendRemoveUpdatebehaviour();
+					SendOutUpdateBehaviour();
+				}
+				ImGui_PopItemWidth();
+				ImGui_NextColumn();
 
-			if(use_move_out){
-				DrawSelectTween("Move Out", move_out_tween_type, move_out_duration, move_out_offset);
+				if(use_move_out){
+					DrawSelectTween("Move Out", move_out_tween_type, move_out_duration, move_out_offset);
+				}
 			}
 		}
 
@@ -1060,7 +1100,7 @@ class DrikaUserInterface : DrikaElement{
 			array<DrikaUserInterface@> target_elements = GetAllUIElements();
 			for(uint i = 0; i < target_elements.size(); i++){
 				//Make sure the fonts are still available when clearing the screen.
-				if(target_elements[i].ui_function == ui_image || target_elements[i].ui_function == ui_text || target_elements[i].ui_function == ui_button || target_elements[i].ui_function == ui_input){
+				if(target_elements[i].ui_function == ui_image || target_elements[i].ui_function == ui_text || target_elements[i].ui_function == ui_button || target_elements[i].ui_function == ui_input || target_elements[i].ui_function == ui_fullscreen_image){
 					target_elements[i].RequestRemoveUIElement();
 				}
 			}
@@ -1133,6 +1173,17 @@ class DrikaUserInterface : DrikaElement{
 				}else{
 					data["font_id"] = JSONValue(font_element.ui_element_identifier);
 				}
+				SendJSONMessage("drika_ui_add_element", data);
+			}
+			SendRemoveUpdatebehaviour();
+			SendInUpdateBehaviour();
+			ui_element_added = true;
+		}else if(ui_function == ui_fullscreen_image){
+			if(!ui_element_added){
+				JSONValue data = GetSaveData();
+				data["type"] = JSONValue(ui_fullscreen_image);
+				data["index"] = JSONValue(index);
+				data["hotspot_id"] = JSONValue(hotspot.GetID());
 				SendJSONMessage("drika_ui_add_element", data);
 			}
 			SendRemoveUpdatebehaviour();
@@ -1227,7 +1278,7 @@ class DrikaUserInterface : DrikaElement{
 
 	void RemoveUIElement(){
 		if(ui_element_added){
-			if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_font || ui_function == ui_button || ui_function == ui_input){
+			if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_font || ui_function == ui_button || ui_function == ui_input || ui_function == ui_fullscreen_image){
 				SendLevelMessage("drika_ui_remove_element");
 				ui_element_added = false;
 			}
@@ -1236,7 +1287,7 @@ class DrikaUserInterface : DrikaElement{
 
 	void RequestRemoveUIElement(){
 		if(ui_element_added){
-			if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_button || ui_function == ui_input){
+			if(ui_function == ui_image || ui_function == ui_text || ui_function == ui_button || ui_function == ui_input || ui_function == ui_fullscreen_image){
 				if(use_fade_out || use_move_out){
 					SendOutUpdateBehaviour();
 					if(!show_editor){
@@ -1245,6 +1296,10 @@ class DrikaUserInterface : DrikaElement{
 				}else{
 					RemoveUIElement();
 				}
+			}
+			if(!show_editor){
+				// Get a new unique identifier in case any removed elements are fading out.
+				ui_element_identifier = GetUniqueID();
 			}
 		}
 	}

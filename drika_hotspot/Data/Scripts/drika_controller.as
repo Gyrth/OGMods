@@ -2,6 +2,7 @@
 #include "drika_animation_group.as"
 #include "drika_shared.as"
 #include "drika_ui_element.as"
+#include "drika_ui_fullscreen_image.as"
 #include "drika_ui_grabber.as"
 #include "drika_ui_image.as"
 #include "drika_ui_text.as"
@@ -326,6 +327,11 @@ void DrawGUI(){
 	checkpoint_blackout_image.position.z = -2.0f;
 	checkpoint_blackout_image.scale = vec3(GetScreenWidth() + GetScreenHeight()) * 2.0f;
 	checkpoint_blackout_image.color = vec4(0.0f, 0.0f, 0.0f, checkpoint_blackout_amount);
+
+	// Log(warning, " nr " + ui_elements.size());
+	for(uint i = 0; i < ui_elements.size(); i++){
+		ui_elements[i].Draw();
+	}
 
 	if(editing_ui){
 		DrawMouseBlockContainer();
@@ -827,6 +833,7 @@ void ReceiveMessage(string msg){
 		string ui_element_identifier = token_iter.GetToken(msg);
 
 		int index = GetUIElementIndex(ui_element_identifier);
+		Log(warning, "Remove " + ui_element_identifier);
 		if(index != -1){
 			ui_elements[index].Delete();
 			ui_elements.removeAt(index);
@@ -995,6 +1002,9 @@ void AddUIElement(string json_string){
 				showing_interactive_ui = true;
 				@new_element = DrikaUIInput(json_data);
 				break;
+			case ui_fullscreen_image:
+				@new_element = DrikaUIFullscreenImage(json_data);
+				break;
 			default:
 				Log(warning, "Unknown ui element type: " + json_data["type"].asInt());
 				break;
@@ -1003,7 +1013,7 @@ void AddUIElement(string json_string){
 		// Store the original json string in the class so that it can be used by the checkpoint system.
 		new_element.json_string = json_string;
 		@current_ui_element = @new_element;
-		ui_elements.insertLast(new_element);
+		ui_elements.insertAt(0, new_element);
 	}
 }
 

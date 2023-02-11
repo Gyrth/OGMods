@@ -4,7 +4,8 @@ enum drika_ui_element_types	{
 								drika_ui_text,
 								drika_ui_font,
 								drika_ui_button,
-								drika_ui_input
+								drika_ui_input,
+								drika_ui_fullscreen_image
 							};
 
 vec4 edit_outline_color = vec4(0.5, 0.5, 0.5, 1.0);
@@ -19,6 +20,7 @@ class DrikaUIElement{
 	int hotspot_id;
 
 	void Update(){}
+	void Draw(){}
 	void AddPosition(ivec2 added_positon){}
 	void AddSize(ivec2 added_size, int direction_x, int direction_y){}
 	DrikaUIGrabber@ GetGrabber(string grabber_name){return null;}
