@@ -833,7 +833,6 @@ void ReceiveMessage(string msg){
 		string ui_element_identifier = token_iter.GetToken(msg);
 
 		int index = GetUIElementIndex(ui_element_identifier);
-		Log(warning, "Remove " + ui_element_identifier);
 		if(index != -1){
 			ui_elements[index].Delete();
 			ui_elements.removeAt(index);
