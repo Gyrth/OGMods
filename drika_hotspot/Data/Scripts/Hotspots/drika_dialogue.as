@@ -266,7 +266,7 @@ class DrikaDialogue : DrikaElement{
 
 		// These functions use placeholders that weren't saved to the level xml at first. So convert that data into placeholder transforms.
 		if(dialogue_function == set_actor_torso_direction || dialogue_function == set_actor_head_direction || dialogue_function == set_actor_eye_direction){
-			bool no_placeholder = placeholder.id == -1;
+			bool no_placeholder = !placeholder.Exists();
 
 			if(dialogue_function == set_actor_torso_direction){
 				placeholder.name = "Set Actor Torso Direction Helper";
@@ -713,7 +713,6 @@ class DrikaDialogue : DrikaElement{
 			}else if(dialogue_function == set_actor_position){
 				placeholder.path = "Data/Objects/placeholder/empty_placeholder.xml";
 				placeholder.Create();
-				PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(placeholder.object);
 
 				if(target_actor_position == vec3(0.0)){
 					if(targets.size() > 0){
@@ -725,8 +724,8 @@ class DrikaDialogue : DrikaElement{
 				}
 				placeholder.SetTranslation(target_actor_position);
 				placeholder.SetRotation(quaternion(vec4(0,1,0, target_actor_rotation * PI / 180.0f)));
-				placeholder_object.SetPreview("Data/Objects/drika_spawn_placeholder.xml");
-				placeholder_object.SetEditorDisplayName("Set Actor Position Helper");
+				placeholder.SetPreview("Data/Objects/drika_spawn_placeholder.xml");
+				placeholder.SetEditorDisplayName("Set Actor Position Helper");
 			}else if(dialogue_function == set_actor_torso_direction){
 				placeholder.name = "Set Actor Torso Direction Helper";
 				placeholder.Create();
@@ -758,7 +757,6 @@ class DrikaDialogue : DrikaElement{
 				// The camera placeholder needs to be a different object type for the preview window to show up.
 				placeholder.path = "Data/Objects/placeholder/empty_placeholder.xml";
 				placeholder.Create();
-				PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(placeholder.object);
 
 				if(target_camera_position == vec3(0.0)){
 					target_camera_position = this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0);
@@ -775,9 +773,9 @@ class DrikaDialogue : DrikaElement{
 				quaternion rot_z(vec4(0, 0, 1, target_camera_rotation.z * deg2rad));
 				placeholder.SetRotation(rot_y * rot_x * rot_z);
 
-				placeholder_object.SetPreview("Data/Objects/camera.xml");
-				placeholder_object.SetEditorDisplayName("Set Camera Position Helper");
-				placeholder_object.SetSpecialType(kCamPreview);
+				placeholder.SetPreview("Data/Objects/camera.xml");
+				placeholder.SetEditorDisplayName("Set Camera Position Helper");
+				placeholder.SetSpecialType(kCamPreview);
 			}
 		}
 	}

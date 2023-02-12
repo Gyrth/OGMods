@@ -831,7 +831,7 @@ class DrikaTargetSelect{
 				}
 			}
 		}else if(identifier_type == box_select){
-			mat4 placeholder_transform = box_select_placeholder.object.GetTransform();
+			mat4 placeholder_transform = box_select_placeholder.cube_object.GetTransform();
 
 			/* mat4 scale_mat;
 			scale_mat[0] = placeholder_transform[0] * 0.25;

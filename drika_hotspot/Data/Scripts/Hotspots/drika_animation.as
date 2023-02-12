@@ -516,11 +516,10 @@ class DrikaAnimation : DrikaElement{
 				placeholder.SetTranslation(this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0));
 			}
 
-			PlaceholderObject@ placeholder_object = cast<PlaceholderObject@>(placeholder.object);
 			if(show_editor){
-				placeholder_object.SetSpecialType(kCamPreview);
+				placeholder.SetSpecialType(kCamPreview);
 			}else{
-				placeholder_object.SetSpecialType(kSpawn);
+				placeholder.SetSpecialType(kSpawn);
 			}
 		}else{
 			placeholder.Remove();
@@ -1047,7 +1046,7 @@ class DrikaAnimation : DrikaElement{
 		AnimationKey new_key;
 		Object@ target;
 		if(target_select.identifier_type == cam){
-			@target = placeholder.object;
+			@target = placeholder.cube_object;
 		}else{
 			array<Object@> targets = target_select.GetTargetObjects();
 			if(targets.size() == 0){

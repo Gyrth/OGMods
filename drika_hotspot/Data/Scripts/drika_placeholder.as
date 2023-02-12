@@ -1,9 +1,15 @@
+enum placeholder_modes{
+							_at_cube,
+							_at_hotspot
+						};
+
 class DrikaPlaceholder{
-	int id = -1;
+	int cube_id = -1;
+	int placeholder_id = -1;
 	//The object and placeholder_object are two different models.
 	//object is a simple cube that can be translated, rotated and scaled by the user.
 	//placeholder_object is a representation of the model with texture using a stipple effect shader.
-	Object@ object;
+	Object@ cube_object;
 	Object@ placeholder_object;
 	string name;
 	vec3 default_scale = vec3(0.25);
@@ -11,7 +17,8 @@ class DrikaPlaceholder{
 	string object_path;
 	DrikaElement@ parent;
 	string placeholder_path;
-	vec3 bounding_box = vec3(1.0);
+	vec3 bounding_box;
+	placeholder_modes placeholder_mode;
 
 	DrikaPlaceholder(){
 
@@ -19,30 +26,43 @@ class DrikaPlaceholder{
 
 	void Save(JSONValue &inout data){
 		if(Exists()){
-			data["placeholder_id"] = JSONValue(id);
+			data["placeholder_id"] = JSONValue(cube_id);
+			// The bounding box data needs to be saved as well or else the scaling isn't going to be correct.
+			// This bounding box is calculated by using the placeholder scale, which isn't available outside of Editor Mode.
+			data["bounding_box"] = JSONValue(JSONarrayValue);
+			data["bounding_box"].append(bounding_box.x);
+			data["bounding_box"].append(bounding_box.y);
+			data["bounding_box"].append(bounding_box.z);
 		}
 	}
 
 	void Load(JSONValue params){
 		if(params.isMember("placeholder_id")){
-			id = params["placeholder_id"].asInt();
+			cube_id = params["placeholder_id"].asInt();
 		}
+		bounding_box = GetJSONVec3(params, "bounding_box", vec3(1.0));
+	}
+
+	void SetMode(placeholder_modes mode){
+		placeholder_mode = mode;
 	}
 
 	void Create(){
-		id = CreateObject(path, false);
-		@object = ReadObjectFromID(id);
-		object.SetName(name);
-		object.SetSelectable(true);
-		object.SetTranslatable(true);
-		object.SetScalable(true);
-		object.SetRotatable(true);
+		if(placeholder_mode == _at_cube){
+			cube_id = CreateObject(path, false);
+			@cube_object = ReadObjectFromID(cube_id);
+			cube_object.SetName(name);
+			cube_object.SetSelectable(true);
+			cube_object.SetTranslatable(true);
+			cube_object.SetScalable(true);
+			cube_object.SetRotatable(true);
 
-		object.SetDeletable(false);
-		object.SetCopyable(false);
+			cube_object.SetDeletable(false);
+			cube_object.SetCopyable(false);
 
-		object.SetScale(default_scale);
-		object.SetTranslation(this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0));
+			cube_object.SetScale(default_scale);
+			cube_object.SetTranslation(this_hotspot.GetTranslation() + vec3(0.0, 2.0, 0.0));
+		}
 	}
 
 	void AddPlaceholderObject(){
@@ -64,6 +84,23 @@ class DrikaPlaceholder{
 	void UpdatePlaceholderPreview(){
 		RemovePlaceholderObject();
 		level.SendMessage("drika_read_file " + hotspot.GetID() + " " + parent.index + " " + object_path + " " + "xml_content");
+	}
+
+	void RemovePlaceholderObject(){
+		if(@placeholder_object !is null){
+			QueueDeleteObjectID(placeholder_object.GetID());
+		}
+		@placeholder_object = null;
+		placeholder_id = -1;
+		bounding_box = vec3(1.0);
+	}
+
+	void RemoveCubeObject(){
+		if(Exists()){
+			QueueDeleteObjectID(cube_id);
+		}
+		cube_id = -1;
+		@cube_object = null;
 	}
 
 	void ReceiveMessage(string message, string identifier){
@@ -130,12 +167,14 @@ class DrikaPlaceholder{
 	}
 
 	void CreatePlaceholderMesh(){
-		int placeholder_object_id = CreateObject(placeholder_path, true);
+		placeholder_id = CreateObject(placeholder_path, true);
 		//Failing to load the path results in a -1 being given back.
-		if(placeholder_object_id != -1){
-			@placeholder_object = ReadObjectFromID(placeholder_object_id);
+		if(placeholder_id != -1){
+			@placeholder_object = ReadObjectFromID(placeholder_id);
 			SetBoundingBox(placeholder_object);
-			object.SetScale(bounding_box);
+			if(placeholder_mode == _at_cube){
+				cube_object.SetScale(bounding_box);
+			}
 			placeholder_object.SetName(name + " Mesh");
 		}else{
 			Log(error, "Failed to load placeholder path : " + placeholder_path);
@@ -149,161 +188,228 @@ class DrikaPlaceholder{
 		bounding_box.z = (bounding_box.z == 0.0)?1.0:bounding_box.z;
 	}
 
-	void RemovePlaceholderObject(){
-		if(@placeholder_object !is null){
-			QueueDeleteObjectID(placeholder_object.GetID());
-		}
-		@placeholder_object = null;
-		bounding_box = vec3(1.0);
-	}
-
 	void DrawEditing(){
-		if(@object is null or @placeholder_object is null){
-			return;
+		if(placeholder_mode == _at_hotspot){
+			if(@placeholder_object is null){
+				return;
+			}
+		}else if(placeholder_mode == _at_cube){
+			if(@cube_object is null or @placeholder_object is null){
+				return;
+			}
 		}
 		UpdatePlaceholderTransform();
 	}
 
 	void UpdatePlaceholderTransform(){
 		if(@placeholder_object !is null){
-			placeholder_object.SetTranslation(object.GetTranslation());
-			placeholder_object.SetRotation(object.GetRotation());
-			placeholder_object.SetScale(vec3(object.GetScale().x / bounding_box.x, object.GetScale().y / bounding_box.y, object.GetScale().z / bounding_box.z));
+			if(placeholder_mode == _at_hotspot){
+				placeholder_object.SetTranslation(this_hotspot.GetTranslation());
+				placeholder_object.SetRotation(this_hotspot.GetRotation());
+				placeholder_object.SetScale(vec3(1.0));
+			}else if(placeholder_mode == _at_cube){
+				placeholder_object.SetTranslation(cube_object.GetTranslation());
+				placeholder_object.SetRotation(cube_object.GetRotation());
+				placeholder_object.SetScale(vec3(cube_object.GetScale().x / bounding_box.x, cube_object.GetScale().y / bounding_box.y, cube_object.GetScale().z / bounding_box.z));
+			}
 		}
 	}
 
 	void Remove(){
-		if(Exists()){
-			QueueDeleteObjectID(id);
-		}
-		id = -1;
-		@object = null;
+		RemoveCubeObject();
 		RemovePlaceholderObject();
 	}
 
 	void Retrieve(){
-		if(duplicating_hotspot || duplicating_function){
-			if(ObjectExists(id)){
-				//Use the same transform as the original placeholder.
-				Object@ old_placeholder = ReadObjectFromID(id);
-				Create();
-				object.SetScale(old_placeholder.GetScale());
-				object.SetTranslation(old_placeholder.GetTranslation());
-				object.SetRotation(old_placeholder.GetRotation());
+		if(placeholder_mode == _at_cube){
+			if(duplicating_hotspot || duplicating_function){
+				if(ObjectExists(cube_id)){
+					//Use the same transform as the original placeholder.
+					Object@ old_placeholder = ReadObjectFromID(cube_id);
+					Create();
+					cube_object.SetScale(old_placeholder.GetScale());
+					cube_object.SetTranslation(old_placeholder.GetTranslation());
+					cube_object.SetRotation(old_placeholder.GetRotation());
+				}else{
+					cube_id = -1;
+				}
 			}else{
-				id = -1;
-			}
-		}else{
-			if(ObjectExists(id)){
-				@object = ReadObjectFromID(id);
-				object.SetName(name);
-				object.SetSelectable(false);
-				object.SetEnabled(false);
-			}else{
-				Create();
+				if(ObjectExists(cube_id)){
+					@cube_object = ReadObjectFromID(cube_id);
+					cube_object.SetName(name);
+					cube_object.SetSelectable(false);
+					cube_object.SetEnabled(false);
+				}else{
+					Create();
+				}
 			}
 		}
 	}
 
 	bool Exists(){
-		return (id != -1 && ObjectExists(id));
+		return (cube_id != -1 && ObjectExists(cube_id));
+	}
+
+	bool PlaceholderExists(){
+		return (placeholder_id != -1 && ObjectExists(placeholder_id));
 	}
 
 	void SetSelected(bool selected){
-		if(Exists()){
-			object.SetSelected(selected);
+		if(placeholder_mode == _at_cube){
+			if(Exists()){
+				cube_object.SetSelected(selected);
+			}
 		}
 	}
 
 	void SetSelectable(bool selectable){
-		if(Exists()){
-			if(object.IsSelected() && !selectable){
-				object.SetSelected(false);
+		if(placeholder_mode == _at_cube){
+			if(Exists()){
+				if(cube_object.IsSelected() && !selectable){
+					cube_object.SetSelected(false);
+				}
+				cube_object.SetSelectable(selectable);
+				cube_object.SetEnabled(selectable);
 			}
-			object.SetSelectable(selectable);
-			object.SetEnabled(selectable);
 		}
 	}
 
 	vec3 GetTranslation(){
-		if(Exists()){
-			return object.GetTranslation();
+		if(placeholder_mode == _at_cube){
+			if(Exists()){
+				return cube_object.GetTranslation();
+			}else{
+				return vec3(1.0);
+			}
 		}else{
-			return vec3(1.0);
+			return this_hotspot.GetTranslation();
 		}
 	}
 
 	quaternion GetRotation(){
-		if(Exists()){
-			return object.GetRotation();
+		if(placeholder_mode == _at_cube){
+			if(Exists()){
+				return cube_object.GetRotation();
+			}else{
+				return quaternion();
+			}
 		}else{
-			return quaternion();
+			return this_hotspot.GetRotation();
 		}
 	}
 
 	vec4 GetRotationVec4(){
-		if(Exists()){
-			return object.GetRotationVec4();
+		if(placeholder_mode == _at_cube){
+			if(Exists()){
+				return cube_object.GetRotationVec4();
+			}else{
+				return vec4(0.0);
+			}
 		}else{
-			return vec4(0.0);
+			return this_hotspot.GetRotationVec4();
 		}
 	}
 
 	vec3 GetScale(){
-		if(Exists()){
-			return vec3(object.GetScale().x / bounding_box.x, object.GetScale().y / bounding_box.y, object.GetScale().z / bounding_box.z);
+		if(placeholder_mode == _at_cube){
+			if(Exists()){
+				return vec3(cube_object.GetScale().x / bounding_box.x, cube_object.GetScale().y / bounding_box.y, cube_object.GetScale().z / bounding_box.z);
+			}else{
+				return vec3(1.0);
+			}
 		}else{
-			return vec3(1.0);
+			return this_hotspot.GetScale();
 		}
 	}
 
 	bool IsSelected(){
-		if(Exists()){
-			return object.IsSelected();
+		if(placeholder_mode == _at_cube){
+			if(Exists()){
+				return cube_object.IsSelected();
+			}else{
+				return false;
+			}
 		}else{
 			return false;
 		}
 	}
 
 	void SetTranslation(vec3 translation){
-		if(Exists()){
-			object.SetTranslation(translation);
+		if(placeholder_mode == _at_cube){
+			if(Exists()){
+				cube_object.SetTranslation(translation);
+			}
 		}
 	}
 
 	void RelativeTranslate(vec3 offset){
-		if(Exists()){
-			object.SetTranslation(object.GetTranslation() + offset);
-			UpdatePlaceholderTransform();
+		if(placeholder_mode == _at_cube){
+			if(Exists()){
+				cube_object.SetTranslation(cube_object.GetTranslation() + offset);
+				UpdatePlaceholderTransform();
+			}
 		}
 	}
 
 	void SetRotation(quaternion rotation){
-		if(Exists()){
-			object.SetRotation(rotation);
+		if(placeholder_mode == _at_cube){
+			if(Exists()){
+				cube_object.SetRotation(rotation);
+			}
 		}
 	}
 
 	void RelativeRotate(vec3 origin, mat4 before_mat, mat4 after_mat){
-		if(Exists()){
-			vec3 current_translation = object.GetTranslation();
+		if(placeholder_mode == _at_cube){
+			if(Exists()){
+				vec3 current_translation = cube_object.GetTranslation();
 
-			mat4 inverse_mat = after_mat * invert(before_mat);
-			vec3 rotated_point = origin + (inverse_mat * (current_translation - origin));
+				mat4 inverse_mat = after_mat * invert(before_mat);
+				vec3 rotated_point = origin + (inverse_mat * (current_translation - origin));
 
-			mat4 object_mat = object.GetTransform();
-			mat4 object_inverse_mat = object_mat * invert(before_mat);
-			mat4 rotation_mat = object_inverse_mat * after_mat;
-			object.SetRotation(QuaternionFromMat4(rotation_mat));
+				mat4 object_mat = cube_object.GetTransform();
+				mat4 object_inverse_mat = object_mat * invert(before_mat);
+				mat4 rotation_mat = object_inverse_mat * after_mat;
+				cube_object.SetRotation(QuaternionFromMat4(rotation_mat));
 
-			object.SetTranslation(rotated_point);
-			UpdatePlaceholderTransform();
+				cube_object.SetTranslation(rotated_point);
+				UpdatePlaceholderTransform();
+			}
 		}
 	}
 
 	void SetScale(vec3 scale){
-		if(Exists()){
-			object.SetScale(scale);
+		if(placeholder_mode == _at_cube){
+			if(Exists()){
+				cube_object.SetScale(scale);
+			}
+		}
+	}
+
+	void SetSpecialType(int special_type){
+		if(placeholder_mode == _at_cube){
+			if(Exists()){
+				PlaceholderObject@ cast_object = cast<PlaceholderObject@>(cube_object);
+				cast_object.SetSpecialType(special_type);
+			}
+		}
+	}
+
+	void SetPreview(string preview_path){
+		if(placeholder_mode == _at_cube){
+			if(Exists()){
+				PlaceholderObject@ cast_object = cast<PlaceholderObject@>(cube_object);
+				cast_object.SetPreview(preview_path);
+			}
+		}
+	}
+
+	void SetEditorDisplayName(string editor_display_name){
+		if(placeholder_mode == _at_cube){
+			if(Exists()){
+				PlaceholderObject@ cast_object = cast<PlaceholderObject@>(cube_object);
+				cast_object.SetEditorDisplayName(editor_display_name);
+			}
 		}
 	}
 }

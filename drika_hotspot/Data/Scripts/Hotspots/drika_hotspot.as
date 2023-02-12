@@ -11,7 +11,7 @@
 #include "hotspots/drika_send_character_message.as"
 #include "hotspots/drika_animation.as"
 #include "hotspots/drika_set_object_param.as"
-#include "hotspots/drika_create_object.as"
+#include "hotspots/drika_create_delete.as"
 #include "hotspots/drika_check_character_state.as"
 #include "hotspots/drika_create_particle.as"
 #include "hotspots/drika_display_image.as"
@@ -326,7 +326,7 @@ void SetEnabled(bool val){
 
 bool AcceptConnectionsTo(Object @other){
 	if(drika_elements.size() > 0){
-		if(GetCurrentElement().placeholder.id == other.GetID()){
+		if(GetCurrentElement().placeholder.cube_id == other.GetID()){
 			return false;
 		}else if(GetCurrentElement().connection_types.find(other.GetType()) != -1){
 			return true;
@@ -2030,8 +2030,8 @@ DrikaElement@ InterpElement(drika_element_types element_type, JSONValue &in func
 			return DrikaSetLevelParam(function_json);
 		case drika_set_camera_param:
 			return DrikaSetCameraParam(function_json);
-		case drika_create_object:
-			return DrikaCreateObject(function_json);
+		case drika_create_delete:
+			return DrikaCreateDelete(function_json);
 		case drika_transform_object:
 			return DrikaTransformObject(function_json);
 		case drika_set_color:

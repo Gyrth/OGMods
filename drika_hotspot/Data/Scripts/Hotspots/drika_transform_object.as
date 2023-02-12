@@ -567,7 +567,7 @@ class DrikaTransformObject : DrikaElement{
 					DebugDrawLine(targets[i].GetTranslation(), placeholder.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 				}
 				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
-				DrawGizmo(placeholder.object);
+				DrawGizmo(placeholder.GetTranslation(), placeholder.GetRotation(), placeholder.GetScale(), placeholder.IsSelected());
 			}else{
 				placeholder.Create();
 				SetPlaceholderTransform();

@@ -1,28 +1,30 @@
 enum create_delete_modes{
-							_create_object,
-							_delete_object
+							_create_at_placeholder,
+							_delete_object,
+							_create_at_hotspot
 						};
 
-class DrikaCreateObject : DrikaElement{
+class DrikaCreateDelete : DrikaElement{
 	string object_path;
 	array<int> spawned_object_ids;
 	create_delete_modes create_delete_mode;
 
 	array<string> create_delete_mode_names = 	{
-													"Create",
-													"Delete"
+													"Create At Placeholder",
+													"Delete Object",
+													"Create At Hotspot"
 												};
 
-	DrikaCreateObject(JSONValue params = JSONValue()){
+	DrikaCreateDelete(JSONValue params = JSONValue()){
 		placeholder.Load(params);
 		placeholder.name = "Create Object Helper";
 		placeholder.default_scale = vec3(1.0);
 
 		object_path = GetJSONString(params, "object_path", default_preview_mesh);
-		drika_element_type = drika_create_object;
+		drika_element_type = drika_create_delete;
 		reference_string = GetJSONString(params, "reference_string", "");
 		AttemptRegisterReference(reference_string);
-		create_delete_mode = create_delete_modes(GetJSONInt(params, "create_delete_mode", _create_object));
+		create_delete_mode = create_delete_modes(GetJSONInt(params, "create_delete_mode", _create_at_placeholder));
 
 		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = reference_option;
@@ -40,8 +42,11 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	void PostInit(){
-		if(create_delete_mode == _create_object){
+		if(create_delete_mode == _create_at_placeholder){
+			placeholder.SetMode(_at_cube);
 			placeholder.Retrieve();
+		}else if(create_delete_mode == _create_at_hotspot){
+			placeholder.SetMode(_at_hotspot);
 		}else if(create_delete_mode == _delete_object){
 			target_select.PostInit();
 		}
@@ -51,7 +56,7 @@ class DrikaCreateObject : DrikaElement{
 		JSONValue data;
 		data["triggered"] = triggered;
 
-		if(create_delete_mode == _create_object){
+		if(create_delete_mode == _create_at_placeholder || create_delete_mode == _create_at_hotspot){
 			if(triggered){
 				data["target_ids"] = JSONValue(JSONarrayValue);
 				for(uint i = 0; i < spawned_object_ids.size(); i++){
@@ -65,7 +70,7 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	void SetCheckpointData(JSONValue data = JSONValue()){
-		if(create_delete_mode == _create_object){
+		if(create_delete_mode == _create_at_placeholder || create_delete_mode == _create_at_hotspot){
 			bool checkpoint_triggered = data["triggered"].asBool();
 
 			//The hotspot got reset and the target doesn't exist anymore.
@@ -102,10 +107,13 @@ class DrikaCreateObject : DrikaElement{
 	JSONValue GetSaveData(){
 		JSONValue data;
 		data["create_delete_mode"] = JSONValue(create_delete_mode);
-		if(create_delete_mode == _create_object){
+		if(create_delete_mode == _create_at_placeholder){
 			data["object_path"] = JSONValue(object_path);
 			data["reference_string"] = JSONValue(reference_string);
 			placeholder.Save(data);
+		}else if(create_delete_mode == _create_at_hotspot){
+			data["object_path"] = JSONValue(object_path);
+			data["reference_string"] = JSONValue(reference_string);
 		}else if(create_delete_mode == _delete_object){
 			target_select.SaveIdentifier(data);
 		}
@@ -113,11 +121,17 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		if(create_delete_mode == _create_object){
-			return "CreateObject " + object_path + " " + reference_string;
+		string display_string = create_delete_mode_names[create_delete_mode];
+
+		if(create_delete_mode == _create_at_placeholder){
+			display_string += " " + object_path + " " + reference_string;
+		}else if(create_delete_mode == _create_at_hotspot){
+			display_string += " " + object_path + " " + reference_string;
 		}else{
-			return "DeleteObject " + target_select.GetTargetDisplayText();
+			display_string += " " + target_select.GetTargetDisplayText();
 		}
+
+		return display_string;
 	}
 
 	void StartSettings(){
@@ -128,7 +142,9 @@ class DrikaCreateObject : DrikaElement{
 
 	void StartEdit(){
 		DrikaElement::StartEdit();
-		if(create_delete_mode == _create_object){
+		if(create_delete_mode == _create_at_placeholder){
+			placeholder.AddPlaceholderObject();
+		}else if(create_delete_mode == _create_at_hotspot){
 			placeholder.AddPlaceholderObject();
 		}
 	}
@@ -147,7 +163,12 @@ class DrikaCreateObject : DrikaElement{
 		int current_mode = create_delete_mode;
 		if(ImGui_Combo("##Mode", current_mode, create_delete_mode_names, create_delete_mode_names.size())){
 			create_delete_mode = create_delete_modes(current_mode);
-			if(create_delete_mode == _create_object){
+			if(create_delete_mode == _create_at_placeholder){
+				placeholder.SetMode(_at_cube);
+				AttemptRegisterReference(reference_string);
+			}else if(create_delete_mode == _create_at_hotspot){
+				placeholder.SetMode(_at_hotspot);
+				placeholder.RemoveCubeObject();
 				AttemptRegisterReference(reference_string);
 			}else if(create_delete_mode == _delete_object){
 				RemoveReference(this);
@@ -158,7 +179,7 @@ class DrikaCreateObject : DrikaElement{
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
-		if(create_delete_mode == _create_object){
+		if(create_delete_mode == _create_at_placeholder || create_delete_mode == _create_at_hotspot){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Object Path");
 			ImGui_NextColumn();
@@ -181,13 +202,19 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	void DrawEditing(){
-		if(create_delete_mode == _create_object){
+		if(create_delete_mode == _create_at_placeholder){
 			if(placeholder.Exists()){
 				DebugDrawLine(placeholder.GetTranslation(), this_hotspot.GetTranslation(), vec3(0.0, 1.0, 0.0), _delete_on_draw);
 				DrawGizmo(placeholder.GetTranslation(), placeholder.GetRotation(), placeholder.GetScale(), placeholder.IsSelected());
 				placeholder.DrawEditing();
 			}else{
 				placeholder.Create();
+				StartEdit();
+			}
+		}else if(create_delete_mode == _create_at_hotspot){
+			if(placeholder.PlaceholderExists()){
+				placeholder.DrawEditing();
+			}else{
 				StartEdit();
 			}
 		}else if(create_delete_mode == _delete_object){
@@ -199,7 +226,7 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	void Reset(){
-		if(create_delete_mode == _create_object){
+		if(create_delete_mode == _create_at_placeholder || create_delete_mode == _create_at_hotspot){
 			if(triggered){
 				for(uint i = 0; i < spawned_object_ids.size(); i++){
 					DeleteObjectID(spawned_object_ids[i]);
@@ -212,7 +239,7 @@ class DrikaCreateObject : DrikaElement{
 
 	bool Trigger(){
 		triggered = true;
-		if(create_delete_mode == _create_object){
+		if(create_delete_mode == _create_at_placeholder){
 			if(placeholder.Exists()){
 				//Check if any of the spawned items have been deleted first.
 				for(uint i = 0; i < spawned_object_ids.size(); i++){
@@ -222,7 +249,6 @@ class DrikaCreateObject : DrikaElement{
 					}
 				}
 
-				Log(warning, "Create " + object_path);
 				int spawned_object_id = CreateObject(object_path);
 				spawned_object_ids.insertLast(spawned_object_id);
 
@@ -243,6 +269,27 @@ class DrikaCreateObject : DrikaElement{
 				placeholder.Create();
 				return false;
 			}
+		}else if(create_delete_mode == _create_at_hotspot){
+			//Check if any of the spawned items have been deleted first.
+			for(uint i = 0; i < spawned_object_ids.size(); i++){
+				if(!ObjectExists(spawned_object_ids[i])){
+					spawned_object_ids.removeAt(i);
+					i--;
+				}
+			}
+
+			int spawned_object_id = CreateObject(object_path);
+			spawned_object_ids.insertLast(spawned_object_id);
+
+			Object@ spawned_object = ReadObjectFromID(spawned_object_id);
+			spawned_object.SetSelectable(true);
+			spawned_object.SetTranslatable(true);
+			spawned_object.SetScalable(true);
+			spawned_object.SetRotatable(true);
+			spawned_object.SetTranslation(this_hotspot.GetTranslation());
+			spawned_object.SetRotation(this_hotspot.GetRotation());
+			AttemptRegisterReference(reference_string);
+			return true;
 		}else if(create_delete_mode == _delete_object){
 			array<Object@> targets = target_select.GetTargetObjects();
 			for(uint i = 0; i < targets.size(); i++){
@@ -259,9 +306,9 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	array<int> GetReferenceObjectIDs(){
-		if(!triggered){
+		if(!triggered && create_delete_mode == _create_at_placeholder){
 			placeholder.UpdatePlaceholderTransform();
-			return {placeholder.object.GetID()};
+			return {placeholder.cube_object.GetID()};
 		}else{
 			//Make sure the spawned objects are still there.
 			array<int> reference_object_ids;
@@ -283,7 +330,7 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	string GetReferenceString(){
-		if(create_delete_mode == _create_object){
+		if(create_delete_mode == _create_at_placeholder || create_delete_mode == _create_at_hotspot){
 			return reference_string;
 		}else{
 			return "";
@@ -291,13 +338,13 @@ class DrikaCreateObject : DrikaElement{
 	}
 
 	void HotspotStartEdit(){
-		if(create_delete_mode == _create_object){
+		if(create_delete_mode == _create_at_placeholder || create_delete_mode == _create_at_hotspot){
 			placeholder.AddPlaceholderObject();
 		}
 	}
 
 	void HotspotStopEdit(){
-		if(create_delete_mode == _create_object){
+		if(create_delete_mode == _create_at_placeholder || create_delete_mode == _create_at_hotspot){
 			placeholder.HidePlaceholderObject();
 		}
 	}
