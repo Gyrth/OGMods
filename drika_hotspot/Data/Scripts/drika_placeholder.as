@@ -19,6 +19,7 @@ class DrikaPlaceholder{
 	string placeholder_path;
 	vec3 bounding_box;
 	placeholder_modes placeholder_mode;
+	bool updating_placeholder_preview = false;
 
 	DrikaPlaceholder(){
 
@@ -82,6 +83,8 @@ class DrikaPlaceholder{
 	}
 
 	void UpdatePlaceholderPreview(){
+		if(updating_placeholder_preview){return;}
+		updating_placeholder_preview = true;
 		RemovePlaceholderObject();
 		level.SendMessage("drika_read_file " + hotspot.GetID() + " " + parent.index + " " + object_path + " " + "xml_content");
 	}
@@ -179,6 +182,8 @@ class DrikaPlaceholder{
 		}else{
 			Log(error, "Failed to load placeholder path : " + placeholder_path);
 		}
+
+		updating_placeholder_preview = false;
 	}
 
 	void SetBoundingBox(Object@ obj){
