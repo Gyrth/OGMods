@@ -1,7 +1,22 @@
 class DrikaSetBoneInflate : DrikaElement{
 	string bone_name;
 	float inflate_value;
-	array<string> bone_names = {"rightear", "leftear", "rightarm", "leftarm", "head", "torso", "tail", "right_leg", "left_leg", "lefthand", "righthand", "leftfingers", "rightfingers", "leftthumb", "rightthumb", "index"};
+	array<string> bone_names = {"rightear",
+								"leftear",
+								"rightarm",
+								"leftarm",
+								"head",
+								"torso",
+								"tail",
+								"right_leg",
+								"left_leg",
+								"lefthand",
+								"righthand",
+								"leftfingers",
+								"rightfingers",
+								"leftthumb",
+								"rightthumb",
+								"index"};
 	int current_index;
 	int bone_index;
 	int current_bone_index;
