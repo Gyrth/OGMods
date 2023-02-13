@@ -654,6 +654,7 @@ void DrawEditor(){
 		}
 
 		ImGui_Begin("Drika Hotspot" + (show_name?" - " + display_name:" " + this_hotspot.GetID()) + "###Drika Hotspot", show_editor, ImGuiWindowFlags_MenuBar);
+		ImGui_SetWindowFontScale(1.0);
 		ImGui_PopStyleVar();
 
 		ImGui_PushStyleVar(ImGuiStyleVar_WindowMinSize, vec2(350, 350));

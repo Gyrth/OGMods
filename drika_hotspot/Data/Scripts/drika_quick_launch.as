@@ -62,7 +62,7 @@ class DrikaQuickLaunch{
 		}
 
 		if(ImGui_BeginPopupModal("Quick Launch", ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar)){
-			ImGui_SetWindowFontScale(2.0);
+			ImGui_SetWindowFontScale(1.5);
 			ImGui_AlignTextToFramePadding();
 			ImGui_SetTextBuf(quick_launch_search_buffer);
 			ImGui_Text("Search");
@@ -83,25 +83,12 @@ class DrikaQuickLaunch{
 
 			//The lctrl check only works once when the popup opens. When after that, it's always returning false.
 			if(!GetInputDown(0, "lctrl") && ImGui_IsKeyPressed(ImGui_GetKeyIndex(ImGuiKey_Enter)) && results.size() != 0){
-				JSON data;
-				if(!data.parseString(results[selected_item].json)){
-					Log(warning, "Unable to parse the JSON in the Quick Launch Database! " + results[selected_item].json);
-				}else{
-					adding_function = true;
-					DrikaElement@ new_element = InterpElement(none, data.getRoot());
-					post_init_queue.insertLast(@new_element);
-					InsertElement(new_element);
-					element_added = true;
-					multi_select = {current_line};
-					ImGui_CloseCurrentPopup();
-					quick_launch_open = false;
-				}
+				AddDHSFunction(results[selected_item].json);
 			}
 
 			ImGui_PopItemWidth();
 
-			ImGui_BeginChild("Quick Launch Elements", vec2(-1, -1), false, ImGuiWindowFlags_NoInputs);
-			ImGui_SetWindowFontScale(1.5);
+			ImGui_BeginChild("Quick Launch Elements", vec2(-1, -1), false, ImGuiWindowFlags_NoTitleBar);
 			for(uint i = 0; i < results.size(); i++){
 				vec4 text_color = display_colors[results[i].type];
 				ImGui_PushStyleColor(ImGuiCol_Text, text_color);
@@ -115,8 +102,8 @@ class DrikaQuickLaunch{
 					display_string = display_string.substr(0, int(display_string.length() * (ImGui_GetWindowContentRegionWidth() / space_for_characters)) - 3) + "...";
 				}
 
-				if(ImGui_Selectable(display_string, line_selected, ImGuiSelectableFlags_AllowDoubleClick)){
-
+				if(ImGui_Selectable(display_string, line_selected, ImGuiSelectableFlags_DontClosePopups)){
+					AddDHSFunction(results[i].json);
 				}
 
 				if(update_quick_launch_scroll && line_selected){
@@ -175,6 +162,22 @@ class DrikaQuickLaunch{
 					results.insertLast(database[i]);
 				}
 			}
+		}
+	}
+
+	void AddDHSFunction(string json_data){
+		JSON data;
+		if(!data.parseString(json_data)){
+			Log(warning, "Unable to parse the JSON in the Quick Launch Database! " + results[selected_item].json);
+		}else{
+			adding_function = true;
+			DrikaElement@ new_element = InterpElement(none, data.getRoot());
+			post_init_queue.insertLast(@new_element);
+			InsertElement(new_element);
+			element_added = true;
+			multi_select = {current_line};
+			ImGui_CloseCurrentPopup();
+			quick_launch_open = false;
 		}
 	}
 
