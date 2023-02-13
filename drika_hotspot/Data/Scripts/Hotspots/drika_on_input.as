@@ -100,7 +100,7 @@ class DrikaOnInput : DrikaElement{
 		multi_input_type = multi_input_types(GetJSONInt(params, "multi_input_type", button_pressed));
 		current_input_type = input_type;
 
-		input_mode = input_modes(GetJSONInt(params, "input_mode", button_pressed));
+		input_mode = input_modes(GetJSONInt(params, "input_mode", single_input));
 		current_input_mode = input_mode;
 
 		input_count = GetJSONInt(params, "input_count", 1);
