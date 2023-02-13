@@ -28,7 +28,11 @@ class DrikaSendLevelMessage : DrikaElement{
 	}
 
 	string GetDisplayString(){
-		return "SendLevelMessage " + display_message;
+		if(level_message_type == send_message){
+			return "SendLevelMessage " + display_message;
+		}else{
+			return "SendGlobalLevelMessage " + display_message;
+		}
 	}
 
 	void DrawSettings(){
