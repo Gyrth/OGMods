@@ -40,7 +40,7 @@ class DrikaSetVelocity : DrikaElement{
 		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
 
-		add_velocity = GetJSONBool(params, "add_velocity", true);
+		add_velocity = GetJSONBool(params, "add_velocity", false);
 		
 		apply_multiplier_x = GetJSONBool(params, "apply_multiplier_x", true);
 		apply_multiplier_y = GetJSONBool(params, "apply_multiplier_y", true);
