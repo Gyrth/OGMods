@@ -31,7 +31,7 @@ class DrikaWaitLevelMessage : DrikaElement{
 		ImGui_NextColumn();
 		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
-		ImGui_InputText("Message", message, 128);
+		ImGui_InputText("###Message", message, 128);
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 	}

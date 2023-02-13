@@ -32,7 +32,7 @@ class DrikaWait : DrikaElement{
 		float second_column_width = ImGui_GetContentRegionAvailWidth();
 
 		ImGui_PushItemWidth(second_column_width);
-		ImGui_InputInt("Duration", duration);
+		ImGui_InputInt("###Duration", duration);
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 	}
