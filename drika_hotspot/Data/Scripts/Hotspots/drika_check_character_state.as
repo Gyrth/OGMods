@@ -28,7 +28,8 @@ enum state_choices { 	awake = 0,
 						ray_collides_with = 23,
 						on_ground = 24,
 						dhs_is_player = 25,
-						item_held = 26
+						item_held = 26,
+						crouching = 27
 					};
 
 enum AIGoal {
@@ -83,8 +84,8 @@ class HealthData{
 
 class DrikaCheckCharacterState : DrikaElement{
 	array<string> ccs_mode_names = {"Check State", "Pass All States To Variables"};
-	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "AI Patrolling", "AI Investigating", "AI Getting Help", "AI Fleeing", "In Proximity", "Right Footstep", "Left Footstep", "Takes Damage", "Blood Damage", "Blood Health", "Block Health", "Temp Health", "Permanent Health", "Current Animation", "Ray Collides With", "On Ground", "Is Player", "Item Held"};
-	array<string> variable_names = {"blood_damage", "blood_health", "block_health", "temp_health", "permanent_health", "knocked_out", "state", "on_ground", "is_player", "velocity_x", "velocity_y", "velocity_z", "position_x", "position_y", "position_z", "air_time", "on_ground_time", "roll_count", "num_jumps", "attacked_by_id", "target_id", "self_id", "block_stunned_by_id", "cut_throat", "feinting", "asleep", "sitting", "in_water", "water_depth", "last_collide_time", "block_stunned", "ragdoll_time", "game_difficulty", "time", "injured_ragdoll_time", "active_blocking", "on_fire", "startled", "attacking_with_throw", "num_hit_on_ground", "num_strikes", "current_animation", "p_aggression", "p_ground_aggression", "p_damage_multiplier", "p_block_skill", "p_block_followup", "p_attack_speed_mult", "p_speed_mult", "p_attack_damage_mult", "p_attack_knockback_mult", "p_fat", "p_muscle", "p_ear_size", "g_weapon_catch_skill", "g_fear_afraid_at_health_level", "g_stick_to_nav_mesh", "g_fear_causes_fear_on_sight", "g_fear_always_afraid_on_sight", "g_fear_never_afraid_on_sight", "goal", "sub_goal", "going_to_block", "going_to_dodge", "wants_to_roll"};
+	array<string> state_choice_names = {"Awake", "Unconscious", "Dead", "Knows About", "In Combat", "Moving", "Attacking", "Ragdolling", "Blocked Attack", "AI Patrolling", "AI Investigating", "AI Getting Help", "AI Fleeing", "In Proximity", "Right Footstep", "Left Footstep", "Takes Damage", "Blood Damage", "Blood Health", "Block Health", "Temp Health", "Permanent Health", "Current Animation", "Ray Collides With", "On Ground", "Is Player", "Item Held", "Crouching"};
+	array<string> variable_names = {"blood_damage", "blood_health", "block_health", "temp_health", "permanent_health", "knocked_out", "state", "on_ground", "is_player", "velocity_x", "velocity_y", "velocity_z", "position_x", "position_y", "position_z", "air_time", "on_ground_time", "roll_count", "num_jumps", "attacked_by_id", "target_id", "self_id", "block_stunned_by_id", "cut_throat", "feinting", "asleep", "sitting", "in_water", "water_depth", "last_collide_time", "block_stunned", "ragdoll_time", "game_difficulty", "time", "injured_ragdoll_time", "active_blocking", "on_fire", "startled", "attacking_with_throw", "num_hit_on_ground", "num_strikes", "current_animation", "p_aggression", "p_ground_aggression", "p_damage_multiplier", "p_block_skill", "p_block_followup", "p_attack_speed_mult", "p_speed_mult", "p_attack_damage_mult", "p_attack_knockback_mult", "p_fat", "p_muscle", "p_ear_size", "g_weapon_catch_skill", "g_fear_afraid_at_health_level", "g_stick_to_nav_mesh", "g_fear_causes_fear_on_sight", "g_fear_always_afraid_on_sight", "g_fear_never_afraid_on_sight", "goal", "sub_goal", "going_to_block", "going_to_dodge", "wants_to_roll", "crouching"};
 	ccs_modes ccs_mode;
 	state_choices state_choice;
 	int current_ccs_mode;
@@ -718,6 +719,12 @@ class DrikaCheckCharacterState : DrikaElement{
 				}else if (state_choice == item_held){
 					state = received_item_held;
 					received_item_held = false;
+				}else if(state_choice == crouching){
+					// Because GetIntVar or QueryIntFunction can't go into flip_info use the blinking boolean to store the result and get the crouching state that way.
+					string command = "blinking = WantsToCrouch() && !flip_info.IsRolling();";
+					target.Execute(command);
+					bool blinking = target.GetBoolVar("blinking");
+					state = blinking;
 				}
 
 				if(!check_all && state == equals){
