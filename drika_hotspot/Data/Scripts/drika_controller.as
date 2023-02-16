@@ -583,7 +583,21 @@ void ReceiveMessage(string msg){
 		}
 
 		token_iter.FindNextToken(msg);
-		enable_look_at_target = token_iter.GetToken(msg) == "true";
+		bool new_enable_look_at_target = token_iter.GetToken(msg) == "true";
+
+		// If the camera wasn't using lookat before, but now is then set the start transform from the placeholder.
+		if(!enable_look_at_target && new_enable_look_at_target || !enable_look_at_target && !new_enable_look_at_target){
+			level.Execute("dialogue.cam_pos = vec3(" + camera_position.x + ", " + camera_position.y + ", " + camera_position.z + ");");
+			level.Execute("dialogue.cam_rot = vec3(" + camera_rotation.x + "," + camera_rotation.y + "," + camera_rotation.z + ");");
+			level.Execute("dialogue.cam_zoom = " + camera_zoom + ");");
+
+			current_camera_position = camera_position;
+			old_camera_translation = camera_position;
+			old_camera_rotation = camera_rotation;
+			camera_settings_changed = true;
+		}
+
+		enable_look_at_target = new_enable_look_at_target;
 
 		if(enable_look_at_target){
 			token_iter.FindNextToken(msg);
@@ -609,17 +623,6 @@ void ReceiveMessage(string msg){
 				}
 				target_positional_difference = camera_position - target_location;
 			}
-		}
-
-		if(!enable_look_at_target){
-			level.Execute("dialogue.cam_pos = vec3(" + camera_position.x + ", " + camera_position.y + ", " + camera_position.z + ");");
-			level.Execute("dialogue.cam_rot = vec3(" + camera_rotation.x + "," + camera_rotation.y + "," + camera_rotation.z + ");");
-			level.Execute("dialogue.cam_zoom = " + camera_zoom + ");");
-
-			current_camera_position = camera_position;
-			old_camera_translation = camera_position;
-			old_camera_rotation = camera_rotation;
-			camera_settings_changed = true;
 		}
 
 		if(!has_camera_control){
