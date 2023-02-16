@@ -28,14 +28,14 @@ enum ui_functions	{
 						ui_fullscreen_image = 6
 					}
 
-enum play_music_modes	{
-							play_song = 0,
-							play_song_in_combat = 1,
-							play_song_player_died = 2,
-							play_song_enemies_defeated = 3,
-							play_song_ambient = 4,
-							play_silence = 5
-						}
+enum music_modes	{
+						music_song = 0,
+						music_song_in_combat = 1,
+						music_song_player_died = 2,
+						music_song_enemies_defeated = 3,
+						music_song_ambient = 4,
+						music_silence = 5
+					}
 
 array<string> tween_types = {
 								"Linear",

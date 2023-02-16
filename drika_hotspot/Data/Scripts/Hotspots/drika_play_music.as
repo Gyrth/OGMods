@@ -1,5 +1,3 @@
-
-
 class DrikaPlayMusic : DrikaElement{
 	string music_path;
 	string song_path;
@@ -7,38 +5,38 @@ class DrikaPlayMusic : DrikaElement{
 	string before_song;
 	bool from_beginning_no_fade;
 
-	int current_play_music_mode;
-	play_music_modes play_music_mode;
+	int current_music_mode;
+	music_modes music_mode;
 
-	array<string> play_music_mode_names = { "Play Song",
-											"Play Song In Combat",
-											"Play Song When Player Died",
-											"Play Song When Enemies Defeated",
-											"Play Song Ambient",
-											"Play Silence" };
+	array<string> music_mode_names = { "Song",
+										"Song In Combat",
+										"Song When Player Died",
+										"Song When Enemies Defeated",
+										"Song Ambient",
+										"Silence" };
 
 	DrikaPlayMusic(JSONValue params = JSONValue()){
 		music_path = GetJSONString(params, "music_path", "Data/Music/drika_music.xml");
 		song_path = GetJSONString(params, "song_path", "Data/Music/lugaru_menu_new.ogg");
 		song_name = GetJSONString(params, "song_name", "lugaru_menu_new.ogg");
 		from_beginning_no_fade = GetJSONBool(params, "from_beginning_no_fade", false);
-		play_music_mode = play_music_modes(GetJSONInt(params, "play_music_mode", play_song));
+		music_mode = music_modes(GetJSONInt(params, "music_mode", music_song));
 
 		// Convert old saved data to keep backwards compatibility.
 		if(GetJSONBool(params, "on_event", false) == true){
-			int music_event = GetJSONInt(params, "music_event", play_song_in_combat);
+			int music_event = GetJSONInt(params, "music_event", music_song_in_combat);
 			if(music_event == 0){
-				play_music_mode = play_song_in_combat;
+				music_mode = music_song_in_combat;
 			}else if(music_event == 1){
-				play_music_mode = play_song_player_died;
+				music_mode = music_song_player_died;
 			}else if(music_event == 2){
-				play_music_mode = play_song_enemies_defeated;
+				music_mode = music_song_enemies_defeated;
 			}else if(music_event == 3){
-				play_music_mode = play_song_ambient;
+				music_mode = music_song_ambient;
 			}
 		}
 
-		current_play_music_mode = play_music_mode;
+		current_music_mode = music_mode;
 
 		drika_element_type = drika_play_music;
 		has_settings = true;
@@ -46,7 +44,7 @@ class DrikaPlayMusic : DrikaElement{
 
 	void PostInit(){
 		//To make sure the music xml is correct each time, write it again at startup.
-		if(music_path != "Data/Music/drika_music.xml" && play_music_mode != play_silence){
+		if(music_path != "Data/Music/drika_music.xml" && music_mode != music_silence){
 			WriteMusicXML();
 		}
 	}
@@ -73,14 +71,14 @@ class DrikaPlayMusic : DrikaElement{
 		data["song_path"] = JSONValue(song_path);
 		data["song_name"] = JSONValue(song_name);
 		data["from_beginning_no_fade"] = JSONValue(from_beginning_no_fade);
-		data["play_music_mode"] = JSONValue(play_music_mode);
+		data["music_mode"] = JSONValue(music_mode);
 		return data;
 	}
 
 	string GetDisplayString(){
 		string display_string = "PlayMusic ";
-		display_string += play_music_mode_names[play_music_mode] + " ";
-		if(play_music_mode != play_silence){
+		display_string += music_mode_names[music_mode] + " ";
+		if(music_mode != music_silence){
 			display_string += song_name;
 		}
 		return display_string;
@@ -98,14 +96,14 @@ class DrikaPlayMusic : DrikaElement{
 		ImGui_NextColumn();
 		float second_column_width = ImGui_GetContentRegionAvailWidth();
 		ImGui_PushItemWidth(second_column_width);
-		if(ImGui_Combo("##Play Music Mode", current_play_music_mode, play_music_mode_names, play_music_mode_names.size())){
-			play_music_mode = play_music_modes(current_play_music_mode);
+		if(ImGui_Combo("##Play Music Mode", current_music_mode, music_mode_names, music_mode_names.size())){
+			music_mode = music_modes(current_music_mode);
 			Play(false);
 		}
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
 
-		if(play_music_mode != play_silence){
+		if(music_mode != music_silence){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Song Path");
 			ImGui_NextColumn();
@@ -191,7 +189,7 @@ class DrikaPlayMusic : DrikaElement{
 	}
 
 	bool Play(bool reset){
-		if(play_music_mode != play_silence){
+		if(music_mode != music_silence){
 			SongPathCheck();
 			if(reset){
 				RemoveMusic(music_path);
@@ -203,24 +201,20 @@ class DrikaPlayMusic : DrikaElement{
 			}
 		}
 
-		if(play_music_mode == play_song){
-			Log(warning, "Play song " + from_beginning_no_fade);
-
+		if(music_mode == music_song){
 			if(from_beginning_no_fade){
 				SetSong((reset?before_song:song_name));
 			}else{
 				PlaySong((reset?before_song:song_name));
 			}
-		}else if(play_music_mode == play_silence){
-			Log(warning, "play_silence " + from_beginning_no_fade);
-
+		}else if(music_mode == music_silence){
 			if(from_beginning_no_fade){
 				SetSong((reset?before_song:"silence"));
 			}else{
 				PlaySong((reset?before_song:"silence"));
 			}
 		}else{
-			level.SendMessage("drika_music_event " + play_music_mode + " " + (reset?before_song:song_name) + " " + from_beginning_no_fade);
+			level.SendMessage("drika_music_event " + music_mode + " " + (reset?before_song:song_name) + " " + from_beginning_no_fade);
 		}
 
 		return true;
