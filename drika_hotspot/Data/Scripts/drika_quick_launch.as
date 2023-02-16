@@ -175,6 +175,7 @@ class DrikaQuickLaunch{
 			post_init_queue.insertLast(@new_element);
 			InsertElement(new_element);
 			element_added = true;
+			update_scroll = true;
 			multi_select = {current_line};
 			ImGui_CloseCurrentPopup();
 			quick_launch_open = false;
