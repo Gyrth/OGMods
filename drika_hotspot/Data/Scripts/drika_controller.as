@@ -210,6 +210,7 @@ void Init(string str){
 }
 
 void PostInit(){
+	AddMusic("Data/Music/drika_silence.xml");
 	level.SendMessage("level_start");
 	post_init_done = true;
 }
@@ -872,16 +873,16 @@ void ReceiveMessage(string msg){
 		token_iter.FindNextToken(msg);
 		bool from_beginning_no_fade = token_iter.GetToken(msg) == "true";
 
-		if(event_type == 0){
+		if(event_type == play_song_in_combat){
 			in_combat_song = song_name;
 			in_combat_from_beginning_no_fade = from_beginning_no_fade;
-		}else if(event_type == 1){
+		}else if(event_type == play_song_player_died){
 			player_died_song = song_name;
 			player_died_from_beginning_no_fade = from_beginning_no_fade;
-		}else if(event_type == 2){
+		}else if(event_type == play_song_enemies_defeated){
 			enemies_defeated_song = song_name;
 			enemies_defeated_from_beginning_no_fade = from_beginning_no_fade;
-		}else if(event_type == 3){
+		}else if(event_type == play_song_ambient){
 			ambient_song = song_name;
 			ambient_from_beginning_no_fade = from_beginning_no_fade;
 		}
