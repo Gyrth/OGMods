@@ -43,7 +43,7 @@ class DrikaUIText : DrikaUIElement{
 		outline_container.setBorderColor(edit_outline_color);
 
 		text_container.addFloatingElement(outline_container, holder_name, vec2(position.x, position.y), 0);
-		SetNewText();
+		CreateText();
 	}
 
 	void Update(){
@@ -62,14 +62,14 @@ class DrikaUIText : DrikaUIElement{
 			SetPosition();
 		}else if(instruction[0] == "set_rotation"){
 			rotation = atof(instruction[1]);
-			SetNewText();
+			CreateText();
 		}else if(instruction[0] == "set_content"){
 			text_content = instruction[1].substr(0, instruction[1].length() - 1);
 			split_content = text_content.split("\n");
-			SetNewText();
+			CreateText();
 		}else if(instruction[0] == "font_changed"){
 			@font_element = cast<DrikaUIFont@>(GetUIElement(instruction[1]));
-			SetNewText();
+			CreateText();
 		}else if(instruction[0] == "variable_changed"){
 			SetNewText();
 		}else if(instruction[0] == "set_z_order"){
@@ -177,7 +177,7 @@ class DrikaUIText : DrikaUIElement{
 		grabber_center.SetZOrder(index);
 	}
 
-	void SetNewText(){
+	void CreateText(){
 		text_elements.resize(0);
 		holder.clear();
 		holder.setSize(vec2(-1,-1));
@@ -202,6 +202,18 @@ class DrikaUIText : DrikaUIElement{
 		// imgui needs to update once or else the position of the grabber isn't calculated correctly.
 		imGUI.update();
 		UpdateContent();
+	}
+
+	void SetNewText(){
+		split_content = text_content.split("\n");
+
+		for(uint i = 0; i < split_content.size(); i++){
+			split_content[i] = ReplaceVariablesFromText(split_content[i]);
+
+			if(i < text_elements.size()){
+				text_elements[i].setText(split_content[i]);
+			}
+		}
 	}
 
 	string ReadParamValue(string key){
