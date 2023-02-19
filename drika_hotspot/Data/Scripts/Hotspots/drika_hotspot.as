@@ -520,7 +520,11 @@ void Update(){
 		}
 	}
 
+	// Do not allow the functions to be updated when the UI isn't shown and run in editormode is disabled.
 	if(!run_in_editormode && EditorModeActive() && !show_editor){
+		return;
+	// DHS can still be edited when the hotspot is disabled, but when the UI isn't visible then stop updating.
+	}else if(!show_editor && !this_hotspot.GetEnabled()){
 		return;
 	}
 

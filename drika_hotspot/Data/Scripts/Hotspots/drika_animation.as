@@ -911,6 +911,10 @@ class DrikaAnimation : DrikaElement{
 	void Update(){
 		ApplyActorTransform();
 		if(moving_animation_key){return;}
+		UpdateTimelineEditing();
+	}
+
+	void UpdateTimelineEditing(){
 		if(preview_animation){
 			if(GetInputPressed(0, "space")){
 				preview_animation = false;
