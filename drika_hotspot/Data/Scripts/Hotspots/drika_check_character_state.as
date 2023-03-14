@@ -107,7 +107,6 @@ class DrikaCheckCharacterState : DrikaElement{
 	float compare_value;
 	string animation_path;
 	string variable_prefix;
-	bool received_item_held = false;
 
 	DrikaCheckCharacterState(JSONValue params = JSONValue()){
 		ccs_mode = ccs_modes(GetJSONInt(params, "ccs_mode", ccs_check));
@@ -717,8 +716,19 @@ class DrikaCheckCharacterState : DrikaElement{
 				}else if (state_choice == dhs_is_player){
 					state = target.is_player;
 				}else if (state_choice == item_held){
-					state = received_item_held;
-					received_item_held = false;
+					bool held = false;
+					int primary_weapon_id = target.GetArrayIntVar("weapon_slots", target.GetIntVar("primary_weapon_slot"));
+					int secondary_weapon_id = target.GetArrayIntVar("weapon_slots", target.GetIntVar("secondary_weapon_slot"));
+
+					array<Object@> target_items = target_item.GetTargetObjects();
+					for(uint j = 0; j < target_items.size(); j++){
+						if(target_items[j].GetID() == primary_weapon_id || target_items[j].GetID() == secondary_weapon_id){
+							held = true;
+							break;
+						}
+					}
+
+					state = held;
 				}else if(state_choice == crouching){
 					// Because GetIntVar or QueryIntFunction can't go into flip_info use the blinking boolean to store the result and get the crouching state that way.
 					string command = "blinking = WantsToCrouch() && !flip_info.IsRolling();";
@@ -839,34 +849,5 @@ class DrikaCheckCharacterState : DrikaElement{
 		target_select.Delete();
 		known_target.Delete();
 		target_item.Delete();
-	}
-
-	void ReceiveMessage(array<string> messages){
-		if(messages[0] == "character_item_pickup" && messages.size() == 3){
-			int character_id = atoi(messages[1]);
-			int item_id = atoi(messages[2]);
-			bool correct_character = false;
-			bool correct_item = false;
-
-			Log(warning, "Received " + character_id + " picking up " + item_id);
-
-			array<MovementObject@> target_characters = target_select.GetTargetMovementObjects();
-			for(uint i = 0; i < target_characters.size(); i++){
-				if(target_characters[i].GetID() == character_id){
-					correct_character = true;
-					break;
-				}
-			}
-
-			array<Object@> target_items = target_item.GetTargetObjects();
-			for(uint i = 0; i < target_items.size(); i++){
-				if(target_items[i].GetID() == item_id){
-					correct_item = true;
-					break;
-				}
-			}
-
-			received_item_held = correct_character && correct_item;
-		}
 	}
 }
