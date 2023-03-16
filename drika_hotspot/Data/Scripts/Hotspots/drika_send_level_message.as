@@ -9,6 +9,7 @@ class DrikaSendLevelMessage : DrikaElement{
 	level_message_types level_message_type;
 	int current_message_type;
 	array<string> message_type_choices = {"Send Message", "Global Message"};
+	string message_list = "go_to_main_menu\nreset\ndisplaytext\nscreen_message\ndisplayhud\nloadlevel\nmake_all_aware\nopen_menu";
 
 	DrikaSendLevelMessage(JSONValue params = JSONValue()){
 		message = GetJSONString(params, "message", "continue_drika_hotspot");
@@ -61,6 +62,13 @@ class DrikaSendLevelMessage : DrikaElement{
 			SetDisplayMessage();
 		}
 		ImGui_PopItemWidth();
+
+		if(ImGui_IsItemHovered()){
+			ImGui_PushStyleColor(ImGuiCol_PopupBg, titlebar_color);
+			ImGui_SetTooltip(message_list);
+			ImGui_PopStyleColor();
+		}
+
 		ImGui_NextColumn();
 	}
 
