@@ -87,22 +87,11 @@ class DrikaDialogue : DrikaElement{
 	bool dialogue_control;
 	int current_choice;
 	int nr_choices;
-	string choice_1;
-	string choice_2;
-	string choice_3;
-	string choice_4;
-	string choice_5;
-	int choice_1_go_to_line;
-	int choice_2_go_to_line;
-	int choice_3_go_to_line;
-	int choice_4_go_to_line;
-	int choice_5_go_to_line;
+	int max_choices = 5;
+	array<string> choice_texts(max_choices);
+	array<int> choice_go_to_lines(max_choices);
+	array<DrikaGoToLineSelect@> choice_elements(max_choices);
 	bool choice_ui_added = false;
-	DrikaGoToLineSelect@ choice_1_element;
-	DrikaGoToLineSelect@ choice_2_element;
-	DrikaGoToLineSelect@ choice_3_element;
-	DrikaGoToLineSelect@ choice_4_element;
-	DrikaGoToLineSelect@ choice_5_element;
 	array<float> dof_settings;
 	bool update_dof = false;
 	bool enable_look_at_target;
@@ -208,18 +197,13 @@ class DrikaDialogue : DrikaElement{
 			level.SendMessage("drika_dialogue_add_custom_animation " + target_actor_animation);
 		}
 		dialogue_control = GetJSONBool(params, "dialogue_control", true);
-		nr_choices = GetJSONInt(params, "nr_choices", 5);
-		choice_1 = GetJSONString(params, "choice_1", "Pick choice nr 1");
-		choice_2 = GetJSONString(params, "choice_2", "Pick choice nr 2");
-		choice_3 = GetJSONString(params, "choice_3", "Pick choice nr 3");
-		choice_4 = GetJSONString(params, "choice_4", "Pick choice nr 4");
-		choice_5 = GetJSONString(params, "choice_5", "Pick choice nr 5");
+		nr_choices = GetJSONInt(params, "nr_choices", max_choices);
 
-		@choice_1_element = DrikaGoToLineSelect("choice_1_go_to_line", params);
-		@choice_2_element = DrikaGoToLineSelect("choice_2_go_to_line", params);
-		@choice_3_element = DrikaGoToLineSelect("choice_3_go_to_line", params);
-		@choice_4_element = DrikaGoToLineSelect("choice_4_go_to_line", params);
-		@choice_5_element = DrikaGoToLineSelect("choice_5_go_to_line", params);
+		for(uint i = 0; i < max_choices; i++){
+			int number = i + 1;
+			choice_texts[i] = GetJSONString(params, "choice_" + number, "Pick choice nr " + number);
+			@choice_elements[i] = DrikaGoToLineSelect("choice_" + number + "_go_to_line", params);
+		}
 
 		dof_settings = GetJSONFloatArray(params, "dof_settings", {0.0, 0.0, 0.0, 0.0, 0.0, 0.0});
 		add_camera_shake = GetJSONBool(params, "add_camera_shake", false);
@@ -255,11 +239,11 @@ class DrikaDialogue : DrikaElement{
 
 	void PostInit(){
 		UpdateActorName();
-		choice_1_element.PostInit();
-		choice_2_element.PostInit();
-		choice_3_element.PostInit();
-		choice_4_element.PostInit();
-		choice_5_element.PostInit();
+
+		for(uint i = 0; i < max_choices; i++){
+			choice_elements[i].PostInit();
+		}
+
 		target_select.PostInit();
 		look_at_target.PostInit();
 		move_with_target.PostInit();
@@ -408,25 +392,11 @@ class DrikaDialogue : DrikaElement{
 			data["dialogue_control"] = JSONValue(dialogue_control);
 		}else if(dialogue_function == choice){
 			data["nr_choices"] = JSONValue(nr_choices);
-			if(nr_choices >= 1){
-				data["choice_1"] = JSONValue(choice_1);
-				choice_1_element.SaveGoToLine(data);
-			}
-			if(nr_choices >= 2){
-				data["choice_2"] = JSONValue(choice_2);
-				choice_2_element.SaveGoToLine(data);
-			}
-			if(nr_choices >= 3){
-				data["choice_3"] = JSONValue(choice_3);
-				choice_3_element.SaveGoToLine(data);
-			}
-			if(nr_choices >= 4){
-				data["choice_4"] = JSONValue(choice_4);
-				choice_4_element.SaveGoToLine(data);
-			}
-			if(nr_choices >= 5){
-				data["choice_5"] = JSONValue(choice_5);
-				choice_5_element.SaveGoToLine(data);
+
+			for(int i = 0; i < nr_choices; i++){
+				int number = i + 1;
+				data["choice_" + number] = JSONValue(choice_texts[i]);
+				choice_elements[i].SaveGoToLine(data);
 			}
 		}else if(dialogue_function == start){
 			data["use_fade"] = JSONValue(use_fade);
@@ -477,11 +447,9 @@ class DrikaDialogue : DrikaElement{
 			display_string += actor_name + " ";
 			display_string += dialogue_control;
 		}else if(dialogue_function == choice){
-			choice_1_element.CheckLineAvailable();
-			if(nr_choices >= 2)	choice_2_element.CheckLineAvailable();
-			if(nr_choices >= 3)	choice_3_element.CheckLineAvailable();
-			if(nr_choices >= 4)	choice_4_element.CheckLineAvailable();
-			if(nr_choices >= 5)	choice_5_element.CheckLineAvailable();
+			for(int i = 0; i < nr_choices; i++){
+				choice_elements[i].CheckLineAvailable();
+			}
 		}
 
 		return display_string;
@@ -1132,71 +1100,20 @@ class DrikaDialogue : DrikaElement{
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
 
-			ImGui_Separator();
-			ImGui_AlignTextToFramePadding();
-			ImGui_Text("Choice 1");
-			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width);
-			if(ImGui_InputText("##text1", choice_1, 64)){
-				Reset();
-			}
-			ImGui_PopItemWidth();
-			ImGui_NextColumn();
-			choice_1_element.DrawGoToLineUI();
-
-			if(nr_choices >= 2){
+			for(int i = 0; i < nr_choices; i++){
+				int number = i + 1;
 				ImGui_Separator();
 				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Choice 2");
+				ImGui_Text("Choice " + number);
 				ImGui_NextColumn();
 				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_InputText("##text2", choice_2, 64)){
+				if(ImGui_InputText("##text" + number, choice_texts[i], 64)){
 					Reset();
 				}
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
-				choice_2_element.DrawGoToLineUI();
+				choice_elements[i].DrawGoToLineUI();
 			}
-			if(nr_choices >= 3){
-				ImGui_Separator();
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Choice 3");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_InputText("##text3", choice_3, 64)){
-					Reset();
-				}
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				choice_3_element.DrawGoToLineUI();
-			}
-			if(nr_choices >= 4){
-				ImGui_Separator();
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Choice 4");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_InputText("##text4", choice_4, 64)){
-					Reset();
-				}
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				choice_4_element.DrawGoToLineUI();
-			}
-			if(nr_choices >= 5){
-				ImGui_Separator();
-				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Choice 5");
-				ImGui_NextColumn();
-				ImGui_PushItemWidth(second_column_width);
-				if(ImGui_InputText("##text5", choice_5, 64)){
-					Reset();
-				}
-				ImGui_PopItemWidth();
-				ImGui_NextColumn();
-				choice_5_element.DrawGoToLineUI();
-			}
-
 		}else if(dialogue_function == set_camera_position){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Near Blur");
@@ -1657,20 +1574,8 @@ class DrikaDialogue : DrikaElement{
 			choice_ui_added = true;
 			string merged_choices;
 
-			if(nr_choices >= 1){
-				merged_choices += "\"" + ReplaceQuotes(choice_1) + "\"";
-			}
-			if(nr_choices >= 2){
-				merged_choices += "\"" + ReplaceQuotes(choice_2) + "\"";
-			}
-			if(nr_choices >= 3){
-				merged_choices += "\"" + ReplaceQuotes(choice_3) + "\"";
-			}
-			if(nr_choices >= 4){
-				merged_choices += "\"" + ReplaceQuotes(choice_4) + "\"";
-			}
-			if(nr_choices >= 5){
-				merged_choices += "\"" + ReplaceQuotes(choice_5) + "\"";
+			for(int i = 0; i < nr_choices; i++){
+				merged_choices += "\"" + ReplaceQuotes(choice_texts[i]) + "\"";
 			}
 
 			level.SendMessage("drika_dialogue_choice " + this_hotspot.GetID() + " " +  merged_choices);
@@ -1687,15 +1592,15 @@ class DrikaDialogue : DrikaElement{
 			}else if(GetInputPressed(0, "jump") || GetInputPressed(0, "skip_dialogue")){
 				return GoToCurrentChoice();
 			}else if(GetInputPressed(0, "1") && nr_choices >= 1){
-				return PickChoice(choice_1_element.GetTargetLineIndex());
+				return PickChoice(choice_elements[0].GetTargetLineIndex());
 			}else if(GetInputPressed(0, "2") && nr_choices >= 2){
-				return PickChoice(choice_2_element.GetTargetLineIndex());
+				return PickChoice(choice_elements[1].GetTargetLineIndex());
 			}else if(GetInputPressed(0, "3") && nr_choices >= 3){
-				return PickChoice(choice_3_element.GetTargetLineIndex());
+				return PickChoice(choice_elements[2].GetTargetLineIndex());
 			}else if(GetInputPressed(0, "4") && nr_choices >= 4){
-				return PickChoice(choice_4_element.GetTargetLineIndex());
+				return PickChoice(choice_elements[3].GetTargetLineIndex());
 			}else if(GetInputPressed(0, "5") && nr_choices >= 5){
-				return PickChoice(choice_5_element.GetTargetLineIndex());
+				return PickChoice(choice_elements[4].GetTargetLineIndex());
 			}
 		}
 
@@ -1707,19 +1612,7 @@ class DrikaDialogue : DrikaElement{
 	}
 
 	bool GoToCurrentChoice(){
-		int new_target_line;
-		if(current_choice + 1 == 1){
-			new_target_line = choice_1_element.GetTargetLineIndex();
-		}else if(current_choice + 1 == 2){
-			new_target_line = choice_2_element.GetTargetLineIndex();
-		}else if(current_choice + 1 == 3){
-			new_target_line = choice_3_element.GetTargetLineIndex();
-		}else if(current_choice + 1 == 4){
-			new_target_line = choice_4_element.GetTargetLineIndex();
-		}else if(current_choice + 1 == 5){
-			new_target_line = choice_5_element.GetTargetLineIndex();
-		}
-
+		int new_target_line = choice_elements[current_choice].GetTargetLineIndex();
 		return PickChoice(new_target_line);
 	}
 
