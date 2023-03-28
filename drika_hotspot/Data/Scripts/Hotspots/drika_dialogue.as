@@ -87,7 +87,7 @@ class DrikaDialogue : DrikaElement{
 	bool dialogue_control;
 	int current_choice;
 	int nr_choices;
-	int max_choices = 5;
+	int max_choices = 10;
 	array<string> choice_texts(max_choices);
 	array<int> choice_go_to_lines(max_choices);
 	array<DrikaGoToLineSelect@> choice_elements(max_choices);
@@ -199,7 +199,7 @@ class DrikaDialogue : DrikaElement{
 		dialogue_control = GetJSONBool(params, "dialogue_control", true);
 		nr_choices = GetJSONInt(params, "nr_choices", max_choices);
 
-		for(uint i = 0; i < max_choices; i++){
+		for(int i = 0; i < max_choices; i++){
 			int number = i + 1;
 			choice_texts[i] = GetJSONString(params, "choice_" + number, "Pick choice nr " + number);
 			@choice_elements[i] = DrikaGoToLineSelect("choice_" + number + "_go_to_line", params);
@@ -240,7 +240,7 @@ class DrikaDialogue : DrikaElement{
 	void PostInit(){
 		UpdateActorName();
 
-		for(uint i = 0; i < max_choices; i++){
+		for(int i = 0; i < max_choices; i++){
 			choice_elements[i].PostInit();
 		}
 
@@ -1094,7 +1094,7 @@ class DrikaDialogue : DrikaElement{
 			ImGui_Text("Number of choices");
 			ImGui_NextColumn();
 			ImGui_PushItemWidth(second_column_width);
-			if(ImGui_SliderInt("###Number of choices", nr_choices, 1, 5, "%.0f")){
+			if(ImGui_SliderInt("###Number of choices", nr_choices, 1, max_choices, "%.0f")){
 				Reset();
 			}
 			ImGui_PopItemWidth();
@@ -1591,16 +1591,13 @@ class DrikaDialogue : DrikaElement{
 				level.SendMessage("drika_dialogue_choice_select " + current_choice);
 			}else if(GetInputPressed(0, "jump") || GetInputPressed(0, "skip_dialogue")){
 				return GoToCurrentChoice();
-			}else if(GetInputPressed(0, "1") && nr_choices >= 1){
-				return PickChoice(choice_elements[0].GetTargetLineIndex());
-			}else if(GetInputPressed(0, "2") && nr_choices >= 2){
-				return PickChoice(choice_elements[1].GetTargetLineIndex());
-			}else if(GetInputPressed(0, "3") && nr_choices >= 3){
-				return PickChoice(choice_elements[2].GetTargetLineIndex());
-			}else if(GetInputPressed(0, "4") && nr_choices >= 4){
-				return PickChoice(choice_elements[3].GetTargetLineIndex());
-			}else if(GetInputPressed(0, "5") && nr_choices >= 5){
-				return PickChoice(choice_elements[4].GetTargetLineIndex());
+			}else{
+				for(int i = 0; i < nr_choices; i++){
+					int number = i + 1;
+					if(GetInputPressed(0, "" + number)){
+						return PickChoice(choice_elements[i].GetTargetLineIndex());
+					}
+				}	
 			}
 		}
 
