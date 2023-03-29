@@ -91,6 +91,9 @@ class DrikaDialogue : DrikaElement{
 	array<string> choice_texts(max_choices);
 	array<int> choice_go_to_lines(max_choices);
 	array<DrikaGoToLineSelect@> choice_elements(max_choices);
+	array<bool> check_variables(max_choices);
+	array<string> check_variable_names(max_choices);
+	array<int> available_choices(max_choices);
 	bool choice_ui_added = false;
 	array<float> dof_settings;
 	bool update_dof = false;
@@ -203,6 +206,8 @@ class DrikaDialogue : DrikaElement{
 			int number = i + 1;
 			choice_texts[i] = GetJSONString(params, "choice_" + number, "Pick choice nr " + number);
 			@choice_elements[i] = DrikaGoToLineSelect("choice_" + number + "_go_to_line", params);
+			check_variables[i] = GetJSONBool(params, "check_variable_" + number, false);
+			check_variable_names[i] = GetJSONString(params, "check_variable_name_" + number, "Task Done");
 		}
 
 		dof_settings = GetJSONFloatArray(params, "dof_settings", {0.0, 0.0, 0.0, 0.0, 0.0, 0.0});
@@ -396,6 +401,10 @@ class DrikaDialogue : DrikaElement{
 			for(int i = 0; i < nr_choices; i++){
 				int number = i + 1;
 				data["choice_" + number] = JSONValue(choice_texts[i]);
+				data["check_variable_" + number] = JSONValue(check_variables[i]);
+				if(check_variables[i]){
+					data["check_variable_name_" + number] = JSONValue(check_variable_names[i]);
+				}
 				choice_elements[i].SaveGoToLine(data);
 			}
 		}else if(dialogue_function == start){
@@ -1113,6 +1122,17 @@ class DrikaDialogue : DrikaElement{
 				ImGui_PopItemWidth();
 				ImGui_NextColumn();
 				choice_elements[i].DrawGoToLineUI();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Check Variable");
+				ImGui_NextColumn();
+				ImGui_Checkbox("###Check Variable" + number, check_variables[i]);
+				if(check_variables[i]){
+					ImGui_SameLine();
+					ImGui_PushItemWidth(second_column_width - 25.0f);
+					ImGui_InputText("##Check Variable Name" + number, check_variable_names[i], 64);
+				}
+				ImGui_NextColumn();
 			}
 		}else if(dialogue_function == set_camera_position){
 			ImGui_AlignTextToFramePadding();
@@ -1574,7 +1594,17 @@ class DrikaDialogue : DrikaElement{
 			choice_ui_added = true;
 			string merged_choices;
 
+			available_choices.resize(0);
+
 			for(int i = 0; i < nr_choices; i++){
+				if(check_variables[i]){
+					SavedLevel@ data = save_file.GetSavedLevel("drika_data");
+					if(data.GetValue(check_variable_names[i]) != "true"){
+						continue;
+					}
+				}
+
+				available_choices.insertLast(i);
 				merged_choices += "\"" + ReplaceQuotes(choice_texts[i]) + "\"";
 			}
 
@@ -1583,19 +1613,18 @@ class DrikaDialogue : DrikaElement{
 
 
 		if(!preview){
-			if((GetInputPressed(0, "up") || GetInputPressed(0, "menu_up")) && current_choice > 0){
-				current_choice -= 1;
-				level.SendMessage("drika_dialogue_choice_select " + current_choice);
-			}else if((GetInputPressed(0, "down") || GetInputPressed(0, "menu_down")) && current_choice < (nr_choices - 1)){
-				current_choice += 1;
-				level.SendMessage("drika_dialogue_choice_select " + current_choice);
+			if(GetInputPressed(0, "up") || GetInputPressed(0, "menu_up")){
+				SelectChoice(current_choice - 1);
+			}else if(GetInputPressed(0, "down") || GetInputPressed(0, "menu_down")){
+				SelectChoice(current_choice + 1);
 			}else if(GetInputPressed(0, "jump") || GetInputPressed(0, "skip_dialogue")){
 				return GoToCurrentChoice();
 			}else{
-				for(int i = 0; i < nr_choices; i++){
+				for(int i = 0; i < int(available_choices.size()); i++){
+					int choice_index = available_choices[i];
 					int number = i + 1;
 					if(GetInputPressed(0, "" + number)){
-						return PickChoice(choice_elements[i].GetTargetLineIndex());
+						return PickChoice(choice_elements[choice_index].GetTargetLineIndex());
 					}
 				}	
 			}
@@ -1608,8 +1637,16 @@ class DrikaDialogue : DrikaElement{
 		return false;
 	}
 
+	void SelectChoice(int target_choice){
+		if(target_choice > -1 && target_choice < int(available_choices.size()) && target_choice != current_choice){
+			current_choice = target_choice;
+			level.SendMessage("drika_dialogue_choice_select " + current_choice);
+		}
+	}
+
 	bool GoToCurrentChoice(){
-		int new_target_line = choice_elements[current_choice].GetTargetLineIndex();
+		int choice_index = available_choices[current_choice];
+		int new_target_line = choice_elements[choice_index].GetTargetLineIndex();
 		return PickChoice(new_target_line);
 	}
 
