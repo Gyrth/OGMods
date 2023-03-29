@@ -200,7 +200,7 @@ class DrikaDialogue : DrikaElement{
 			level.SendMessage("drika_dialogue_add_custom_animation " + target_actor_animation);
 		}
 		dialogue_control = GetJSONBool(params, "dialogue_control", true);
-		nr_choices = GetJSONInt(params, "nr_choices", max_choices);
+		nr_choices = GetJSONInt(params, "nr_choices", 4);
 
 		for(int i = 0; i < max_choices; i++){
 			int number = i + 1;
