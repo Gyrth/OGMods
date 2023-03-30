@@ -149,6 +149,28 @@ enum IMTweenType {
 					outInBounceTween = 32
 				};
 
+enum check_modes {
+					check_mode_equals = 0,
+					check_mode_notequals = 1,
+					check_mode_greaterthan = 2,
+					check_mode_lessthan = 3,
+					check_mode_variable = 4,
+					check_mode_notvariable = 5,
+					check_mode_greaterthanvariable = 6,
+					check_mode_lessthanvariable = 7
+				};
+
+array<string> check_mode_choices = {
+										"Is Equal To",
+										"Is Not Equal To",
+										"Is Greater Than",
+										"Is Less Than",
+										"Matches Variable",
+										"Does Not Match Variable",
+										"Greater Than Variable",
+										"Less Than Variable"
+									};
+
 class BeforeValue{
 	string string_value;
 	float float_value;
@@ -593,4 +615,33 @@ void DrawTweenGraph(IMTweenType tween_type){
 		ImGui_EndTooltip();
 		ImGui_PopStyleColor();
 	} */
+}
+
+//This function is used to see if the user is attempting an illegal operation on a string.
+//All it does is check to see if the string contains anything aside from numbers and a few cases to handle decimals and negative numbers.
+//For reference, "-"[0] is just a quick way to refer to the ASCII location of that character.
+bool IsFloat(string test){
+	bool decimal_found = false;
+
+	// Checking for certain edge cases
+	if(test == "." || test == "-" || test == "-.") return false;
+		for (uint i = 0; i < test.length(); i++)
+		{
+			if(test[i] == "."[0])
+				{if(decimal_found) {return false;} else {decimal_found = true;} }
+
+			else if(test[i] == "-"[0])
+				{if(i > 0) {return false;} }
+
+			else if(test[i] < "0"[0] || test[i] > "9"[0]) {return false;}
+		}
+
+	return true;
+}
+
+int CheckEpsilon(string operand1, string operand2){
+	float op1 = atof(operand1);
+	float op2 = atof(operand2);
+
+	return (abs(op1 - op2) < 0.0000000001)? 1:0;
 }

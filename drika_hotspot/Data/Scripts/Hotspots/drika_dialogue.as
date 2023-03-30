@@ -91,8 +91,10 @@ class DrikaDialogue : DrikaElement{
 	array<string> choice_texts(max_choices);
 	array<int> choice_go_to_lines(max_choices);
 	array<DrikaGoToLineSelect@> choice_elements(max_choices);
-	array<bool> check_variables(max_choices);
-	array<string> check_variable_names(max_choices);
+	array<bool> check_parameters(max_choices);
+	array<string> parameter_names(max_choices);
+	array<string> parameter_check_values(max_choices);
+	array<check_modes> parameter_check_modes(max_choices);
 	array<int> available_choices(max_choices);
 	bool choice_ui_added = false;
 	array<float> dof_settings;
@@ -206,8 +208,11 @@ class DrikaDialogue : DrikaElement{
 			int number = i + 1;
 			choice_texts[i] = GetJSONString(params, "choice_" + number, "Pick choice nr " + number);
 			@choice_elements[i] = DrikaGoToLineSelect("choice_" + number + "_go_to_line", params);
-			check_variables[i] = GetJSONBool(params, "check_variable_" + number, false);
-			check_variable_names[i] = GetJSONString(params, "check_variable_name_" + number, "Task Done");
+			
+			check_parameters[i] = GetJSONBool(params, "check_parameter_" + number, false);
+			parameter_names[i] = GetJSONString(params, "check_parameter_name_" + number, "Task Done");
+			parameter_check_values[i] = GetJSONString(params, "check_parameter_value_" + number, "true");
+			parameter_check_modes[i] = check_modes(GetJSONInt(params, "check_parameter_mode_" + number, check_mode_equals));
 		}
 
 		dof_settings = GetJSONFloatArray(params, "dof_settings", {0.0, 0.0, 0.0, 0.0, 0.0, 0.0});
@@ -401,9 +406,11 @@ class DrikaDialogue : DrikaElement{
 			for(int i = 0; i < nr_choices; i++){
 				int number = i + 1;
 				data["choice_" + number] = JSONValue(choice_texts[i]);
-				data["check_variable_" + number] = JSONValue(check_variables[i]);
-				if(check_variables[i]){
-					data["check_variable_name_" + number] = JSONValue(check_variable_names[i]);
+				data["check_parameter_" + number] = JSONValue(check_parameters[i]);
+				if(check_parameters[i]){
+					data["check_parameter_name_" + number] = JSONValue(parameter_names[i]);
+					data["check_parameter_value_" + number] = JSONValue(parameter_check_values[i]);
+					data["check_parameter_mode_" + number] = JSONValue(parameter_check_modes[i]);
 				}
 				choice_elements[i].SaveGoToLine(data);
 			}
@@ -1124,14 +1131,29 @@ class DrikaDialogue : DrikaElement{
 				choice_elements[i].DrawGoToLineUI();
 
 				ImGui_AlignTextToFramePadding();
-				ImGui_Text("Check Variable");
+				ImGui_Text("Parameter Check");
 				ImGui_NextColumn();
-				ImGui_Checkbox("###Check Variable" + number, check_variables[i]);
-				if(check_variables[i]){
+				ImGui_Checkbox("###Parameter Check" + number, check_parameters[i]);
+
+				if(check_parameters[i]){
+					ImGui_NextColumn();
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width / 3.0f);
+					ImGui_InputText("##Parameter Name" + number, parameter_names[i], 64);
+					ImGui_PopItemWidth();
 					ImGui_SameLine();
-					ImGui_PushItemWidth(second_column_width - 25.0f);
-					ImGui_InputText("##Check Variable Name" + number, check_variable_names[i], 64);
+					ImGui_PushItemWidth(second_column_width / 3.0f);
+					int current_parameter_check_mode = parameter_check_modes[i];
+					if(ImGui_Combo("##Parameter Check " + number, current_parameter_check_mode, check_mode_choices, check_mode_choices.size())){
+						parameter_check_modes[i] = check_modes(current_parameter_check_mode);
+					}
+					ImGui_PopItemWidth();
+					ImGui_SameLine();
+					ImGui_PushItemWidth(second_column_width / 3.0f);
+					ImGui_InputText("##Parameter Value" + number, parameter_check_values[i], 64);
+					ImGui_PopItemWidth();
 				}
+
 				ImGui_NextColumn();
 			}
 		}else if(dialogue_function == set_camera_position){
@@ -1597,11 +1619,9 @@ class DrikaDialogue : DrikaElement{
 			available_choices.resize(0);
 
 			for(int i = 0; i < nr_choices; i++){
-				if(check_variables[i]){
-					SavedLevel@ data = save_file.GetSavedLevel("drika_data");
-					if(data.GetValue(check_variable_names[i]) != "true"){
-						continue;
-					}
+				// Skip adding this choice to the UI when parameter checking is enabled AND the parameter check returns false.
+				if(check_parameters[i] && !CheckParameterValue(parameter_names[i], parameter_check_values[i], parameter_check_modes[i])){
+					continue;
 				}
 
 				available_choices.insertLast(i);
@@ -1632,6 +1652,66 @@ class DrikaDialogue : DrikaElement{
 
 		if(triggered){
 			return GoToCurrentChoice();
+		}
+
+		return false;
+	}
+
+	bool CheckParameterValue(string parameter_name, string parameter_check_value, check_modes check_mode){
+		// If the variable doesn't exist then don't add the choice.
+		SavedLevel@ data = save_file.GetSavedLevel("drika_data");
+		if(data.GetValue("[" + parameter_name + "]") != "true"){
+			return false;
+		}
+
+		string parameter_value = data.GetValue(parameter_name);
+
+		switch(check_mode){
+			case check_mode_equals:
+				//Because floats aren't exact, we simply check if they are very very close.
+				if(IsFloat(parameter_value) == true){
+					return CheckEpsilon(parameter_value, parameter_check_value) == 1;
+				}else{
+					return parameter_value == parameter_check_value;
+				}
+			case check_mode_notequals:
+				if(IsFloat(parameter_value) == true){
+					return CheckEpsilon(parameter_value, parameter_check_value) != 1;
+				}else{
+					return parameter_value != parameter_check_value;
+				}
+			case check_mode_greaterthan:
+				if(IsFloat(parameter_value) == true){
+					return atof(parameter_value) > atof(parameter_check_value);
+				}
+				break;
+			case check_mode_lessthan:
+				if(IsFloat(parameter_value) == true){
+					return atof(parameter_value) < atof(parameter_check_value);
+				}
+				break;
+			case check_mode_variable:
+				if(IsFloat(parameter_value) == true){
+					return CheckEpsilon(parameter_value, parameter_check_value) == 1;
+				}else{
+					return parameter_value == parameter_check_value;
+				}
+			case check_mode_notvariable:
+				if(IsFloat(parameter_value) == true){
+					return CheckEpsilon(parameter_value, parameter_check_value) != 1;
+				}else{
+					return parameter_value != parameter_check_value;
+				}
+			case check_mode_greaterthanvariable:
+				if(IsFloat(parameter_value) == true && IsFloat(parameter_check_value) == true){
+					return atof(parameter_value) > atof(parameter_check_value);
+				}
+				break;
+			case check_mode_lessthanvariable:
+				if(IsFloat(parameter_value) == true && IsFloat(parameter_check_value) == true){
+					return atof(parameter_value) < atof(parameter_check_value);
+				}
+				break;
 		}
 
 		return false;

@@ -1,9 +1,9 @@
-enum read_write_modes 				{
+enum read_write_modes	{
 									read = 0,
 									write = 1
-									};
+						};
 
-enum operator_modes 				{
+enum operator_modes	{
 									operator_mode_set = 0,
 									operator_mode_reference = 1,
 									operator_mode_add = 2,
@@ -14,26 +14,15 @@ enum operator_modes 				{
 									operator_mode_subtractvariable = 7,
 									operator_mode_dividevariable = 8,
 									operator_mode_multiplyvariable = 9
-									};
+					};
 
-enum check_modes 					{
-									check_mode_equals = 0,
-									check_mode_notequals = 1,
-									check_mode_greaterthan = 2,
-									check_mode_lessthan = 3,
-									check_mode_variable = 4,
-									check_mode_notvariable = 5,
-									check_mode_greaterthanvariable = 6,
-									check_mode_lessthanvariable = 7
-									};
-
-enum error_states 					{
+enum error_states	{
 									error_state_nothing = 0,
 									error_state_opcheckstring = 1,
 									error_state_dividebyzero = 2,
 									error_state_floatoverflow = 3,
 									error_state_emptyvariable = 4
-									};
+					};
 
 class DrikaReadWriteSaveFile : DrikaElement{
 	//The variables that can be changed by the user don't have a default value, instead this is done in the constructor.
@@ -71,9 +60,18 @@ class DrikaReadWriteSaveFile : DrikaElement{
 	bool if_any_are_true;
 	//These strings are not changed by the user, but simply to display readable text in the dropdown menus.
 	array<string> mode_choices = {"Read", "Write"};
-	array<string> operator_mode_choices = {"Set To", "Reference Variable", "Add", "Subtract", "Divide By", "Multiply By", "Add Variable", "Subtract Variable", "Divide By Variable", "Multiply By Variable"};
-	array<string> check_mode_choices = {"Is Equal To", "Is Not Equal To", "Is Greater Than", "Is Less Than", "Matches Variable", "Does Not Match Variable", "Greater Than Variable", "Less Than Variable"};
-
+	array<string> operator_mode_choices = 	{
+												"Set To",
+												"Reference Variable",
+												"Add",
+												"Subtract",
+												"Divide By",
+												"Multiply By",
+												"Add Variable",
+												"Subtract Variable",
+												"Divide By Variable",
+												"Multiply By Variable"
+											};
 	//These are versions of the above strings that are used in DisplayString.
 	array<string> check_mode_display = {"=", "not =", ">", "<", "= Variable", "not = Variable", "> Variable", "< Variable"};
 	//There are two copies here because of how Display String splits up the statement to make it easier to read for non coders.
@@ -459,28 +457,6 @@ class DrikaReadWriteSaveFile : DrikaElement{
 		return my_string;
 	}
 
-	//This function is used to see if the user is attempting an illegal operation on a string.
-	//All it does is check to see if the string contains anything aside from numbers and a few cases to handle decimals and negative numbers.
-	//For reference, "-"[0] is just a quick way to refer to the ASCII location of that character.
-	bool IsFloat(string test){
-		bool decimal_found = false;
-
-		// Checking for certain edge cases
-		if(test == "." || test == "-" || test == "-.") return false;
-			for (uint i = 0; i < test.length(); i++)
-			{
-				if(test[i] == "."[0])
-					{if(decimal_found) {return false;} else {decimal_found = true;} }
-
-				else if(test[i] == "-"[0])
-					{if(i > 0) {return false;} }
-
-				else if(test[i] < "0"[0] || test[i] > "9"[0]) {return false;}
-			}
-
-		return true;
-		}
-
 	//In this function, array_pos is the important bit. It's taken from the current condition_count in the Trigger loop.
 	//There are a few cases where we want to pass extra info. is_float is used for add and addvariable. set_direct is for the debug set value button.
 	void WriteParamValue(int array_pos, bool is_float = false, bool set_direct = false){
@@ -590,26 +566,26 @@ class DrikaReadWriteSaveFile : DrikaElement{
 				switch (checkmodes[i])
 					{
 					case check_mode_equals:
-						if(CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
+						if(CheckExisting(local_parameter, local_parameter) == false)			{current_error_state = error_state_emptyvariable;}
 						//Because floats aren't exact, we simply check if they are very very close.
 						if(IsFloat(saved_parameter) == true) 									{count += CheckEpsilon(saved_parameter, local_value);}
 						else																	{count += (saved_parameter == local_value)? 1:0;}
 						break;
 
 					case check_mode_notequals:
-						if(CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
+						if(CheckExisting(local_parameter, local_parameter) == false)			{current_error_state = error_state_emptyvariable;}
 						if(IsFloat(saved_parameter) == true) 									{count += CheckEpsilon(saved_parameter, local_value);}
 						else																	{count += (saved_parameter != local_value)? 1:0;}
 						break;
 
 					case check_mode_greaterthan:
-						if(CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
+						if(CheckExisting(local_parameter, local_parameter) == false)			{current_error_state = error_state_emptyvariable;}
 						if(IsFloat(saved_parameter) == true)									{count += (atof(saved_parameter) > atof(local_value))? 1:0;}
 						else 																	{current_error_state = error_state_opcheckstring;}
 						break;
 
 					case check_mode_lessthan:
-						if(CheckExisting(local_parameter, local_parameter) == false)				{current_error_state = error_state_emptyvariable;}
+						if(CheckExisting(local_parameter, local_parameter) == false)			{current_error_state = error_state_emptyvariable;}
 						if(IsFloat(saved_parameter) == true)									{count += (atof(saved_parameter) < atof(local_value))? 1:0;}
 						else 																	{current_error_state = error_state_opcheckstring;}
 						break;
@@ -750,13 +726,6 @@ class DrikaReadWriteSaveFile : DrikaElement{
 		else if(operation == "/") result = op1 / op2;
 
 		return abs(result) > max_float_range;
-	}
-
-	int CheckEpsilon(string operand1, string operand2){
-		float op1 = atof(operand1);
-		float op2 = atof(operand2);
-
-		return (abs(op1 - op2) < 0.0000000001)? 1:0;
 	}
 
 	bool CheckExisting(string operand1, string operand2){
