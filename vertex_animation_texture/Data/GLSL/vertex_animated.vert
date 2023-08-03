@@ -358,4 +358,6 @@ void main() {
 	vec3 transformed_vertex = transform_vec3(GetInstancedModelScale(instance_id), GetInstancedModelRotationQuat(instance_id), model_translation_attrib, animated_vertex_position);
 
 	gl_Position = projection_view_mat * vec4(transformed_vertex, 1.0);
+
+	world_vert = transformed_vertex;
 }
