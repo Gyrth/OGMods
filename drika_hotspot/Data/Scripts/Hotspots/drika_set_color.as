@@ -9,11 +9,17 @@ class DrikaSetColor : DrikaElement{
 	int current_palette_slot;
 	vec3 before_color;
 	vec3 after_color;
+	vec3 starting_color;
 	int current_color_type;
 	color_types color_type;
 	array<string> palette_indexes;
 	array<string> color_type_choices = {"Tint", "Palette Color"};
 	float overbright;
+	bool transition;
+	IMTweenType tween_type;
+	int current_tween_type;
+	float transition_duration;
+	float timer;
 
 	DrikaSetColor(JSONValue params = JSONValue()){
 		color_type = color_types(GetJSONInt(params, "color_type", 0));
@@ -22,6 +28,10 @@ class DrikaSetColor : DrikaElement{
 		current_palette_slot = palette_slot;
 		after_color = GetJSONVec3(params, "after_color", vec3(1));
 		overbright = GetJSONFloat(params, "overbright", 0.0f);
+		transition = GetJSONBool(params, "transition", false);
+		transition_duration = GetJSONFloat(params, "transition_duration", 1.0f);
+		tween_type = IMTweenType(GetJSONInt(params, "ease_function", linearTween));
+		current_tween_type = tween_type;
 
 		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
@@ -45,6 +55,11 @@ class DrikaSetColor : DrikaElement{
 		data["after_color"].append(after_color.x);
 		data["after_color"].append(after_color.y);
 		data["after_color"].append(after_color.z);
+		data["transition"] = JSONValue(transition);
+		if(transition){
+			data["ease_function"] = JSONValue(tween_type);
+			data["transition_duration"] = JSONValue(transition_duration);
+		}
 		target_select.SaveIdentifier(data);
 		return data;
 	}
@@ -55,7 +70,13 @@ class DrikaSetColor : DrikaElement{
     }
 
 	string GetDisplayString(){
-		return "SetColor " + target_select.GetTargetDisplayText() + " " + Vec3ToString(after_color);
+		string display_string = "SetColor " + target_select.GetTargetDisplayText() + " " + Vec3ToString(after_color);
+
+		if(transition){
+			display_string += " Transition " + transition_duration;
+		}
+
+		return display_string;
 	}
 
 	void StartEdit(){
@@ -116,7 +137,6 @@ class DrikaSetColor : DrikaElement{
 	}
 
 	void TargetChanged(){
-		Log(warning, "Check");
 		GetNumPaletteColors();
 		GetBeforeColor();
 		SetColor(false);
@@ -127,7 +147,7 @@ class DrikaSetColor : DrikaElement{
 	}
 
 	void DrawSettings(){
-		float option_name_width = 120.0;
+		float option_name_width = 145.0;
 
 		ImGui_Columns(2, false);
 		ImGui_SetColumnWidth(0, option_name_width);
@@ -191,6 +211,46 @@ class DrikaSetColor : DrikaElement{
 		}
 		ImGui_PopItemWidth();
 		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Transition");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+		ImGui_Checkbox("###Transition", transition);
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		if(transition){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Transition Duration");
+			ImGui_NextColumn();
+
+			ImGui_PushItemWidth(second_column_width);
+			if(ImGui_DragFloat("###Transition Duration", transition_duration, 0.01f, 0.0f, 5.0f, "%.3f")){
+
+			}
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("Easing Function");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+
+			if(ImGui_BeginCombo("###Easing Function", tween_types[current_tween_type], ImGuiComboFlags_HeightLarge)){
+				for(uint i = 0; i < tween_types.size(); i++){
+					if(ImGui_Selectable(tween_types[i], current_tween_type == int(i))){
+						current_tween_type = i;
+						tween_type = IMTweenType(current_tween_type);
+					}
+					DrawTweenGraph(tween_type);
+				}
+				ImGui_EndCombo();
+			}
+
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+		}
 	}
 
 	void DrawEditing(){
@@ -206,8 +266,9 @@ class DrikaSetColor : DrikaElement{
 	}
 
 	bool Trigger(){
+		bool done = SetColor(false);
 		triggered = true;
-		return SetColor(false);
+		return done;
 	}
 
 	void GetBeforeColor(){
@@ -223,26 +284,70 @@ class DrikaSetColor : DrikaElement{
 		}
 	}
 
+	void GetStartingColor(){
+		array<Object@> targets = target_select.GetTargetObjects();
+		for(uint i = 0; i < targets.size(); i++){
+			if(color_type == object_palette_color){
+				if(targets[i].GetType() == _movement_object && targets[i].GetNumPaletteColors() > palette_slot){
+					starting_color = targets[i].GetPaletteColor(palette_slot);
+				}
+			}else if(color_type == object_tint){
+				starting_color = targets[i].GetTint();
+			}
+		}
+	}
+
 	bool SetColor(bool reset){
+		if(transition && !reset){
+			return SetColorTransition();
+		}else{
+			array<Object@> targets = target_select.GetTargetObjects();
+			float multiplier = 1.0 + overbright;
+
+			for(uint i = 0; i < targets.size(); i++){
+				if(color_type == object_palette_color){
+					if(targets[i].GetType() == _movement_object && targets[i].GetNumPaletteColors() > palette_slot){
+						targets[i].SetPaletteColor(palette_slot, reset?before_color:after_color*multiplier);
+					}
+				}else if(color_type == object_tint){
+					targets[i].SetTint(reset?before_color:after_color*multiplier);
+				}
+			}
+
+			return true;
+		}
+	}
+
+	bool SetColorTransition(){
 		array<Object@> targets = target_select.GetTargetObjects();
 		float multiplier = 1.0 + overbright;
+
+		if(!triggered){
+			GetStartingColor();
+			timer = 0.0;
+		}
+
+		timer += time_step;
+
+		vec3 transition_color = mix(starting_color, after_color, ApplyTween((timer / transition_duration), IMTweenType(tween_type)));
 
 		for(uint i = 0; i < targets.size(); i++){
 			if(color_type == object_palette_color){
 				if(targets[i].GetType() == _movement_object && targets[i].GetNumPaletteColors() > palette_slot){
-					targets[i].SetPaletteColor(palette_slot, reset?before_color:after_color*multiplier);
+					targets[i].SetPaletteColor(palette_slot, transition_color * multiplier);
 				}
 			}else if(color_type == object_tint){
-				targets[i].SetTint(reset?before_color:after_color*multiplier);
+				targets[i].SetTint(transition_color * multiplier);
 			}
 		}
-		return true;
+
+		return timer >= transition_duration;
 	}
 
 	void Reset(){
 		if(triggered){
-			triggered = false;
 			SetColor(true);
+			triggered = false;
 		}
 	}
 }
