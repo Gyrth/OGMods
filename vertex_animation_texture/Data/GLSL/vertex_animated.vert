@@ -80,10 +80,13 @@ out vec2 tex_coords;
 out mat3 tangent_to_world;
 out vec3 orig_vert;
 out vec3 world_vert;
-flat out int instance_id;
+
+#ifndef NO_INSTANCE_ID
+	flat out int instance_id;
+#endif
+
 out vec3 vertex_color;
 out vec3 frag_normal;
-flat out int skip_render;
 
 uniform mat4 projection_view_mat;
 uniform vec3 cam_pos;
@@ -135,160 +138,14 @@ vec2 EncodeFloatRG(float v){
 	return enc;
 }
 
-
-//#define GRASS_ESSENTIALS
-#ifdef GRASS_ESSENTIALS
-layout (std140) uniform ClusterInfo {
-    uvec3 grid_size;
-    uint num_decals;
-    uint num_lights;
-    uint light_cluster_data_offset;
-    uint light_data_offset;
-    uint cluster_width;
-    mat4 inv_proj_mat;
-    vec4 viewport;
-    float z_near;
-    float z_mult;
-    float pad3;
-    float pad4;
-};
-
-
-#define NUM_GRID_COMPONENTS 2u
-#define ZCLUSTERFUNC(val) (log(-1.0 * (val) - z_near + 1.0) * z_mult)
-
-#define light_decal_data_buffer tex15
-#define cluster_buffer tex13
-
-const uint COUNT_BITS = 24u;
-const uint COUNT_MASK = ((1u << (32u - COUNT_BITS)) - 1u);
-const uint INDEX_MASK = ((1u << (COUNT_BITS)) - 1u);
-
-uniform samplerBuffer light_decal_data_buffer;
-uniform usamplerBuffer cluster_buffer;
-
-// this MUST match the one in source or bad things happen
-struct DecalData {
-    vec3 scale;
-    float spawn_time;
-    vec4 rotation;  // quaternion
-    vec3 position;
-    float pad1;
-
-    vec4 tint;
-    vec4 uv;
-    vec4 normal;
-};
-
-#define DECAL_SIZE_VEC4 6u
-
-DecalData FetchDecal(uint decal_index) {
-    DecalData decal;
-
-    vec4 temp        = texelFetch(light_decal_data_buffer, int(DECAL_SIZE_VEC4 * decal_index + 0u));
-    decal.scale      = temp.xyz;
-    decal.spawn_time = temp.w;
-    decal.rotation   = texelFetch(light_decal_data_buffer, int(DECAL_SIZE_VEC4 * decal_index + 1u));
-    decal.position   = texelFetch(light_decal_data_buffer, int(DECAL_SIZE_VEC4 * decal_index + 2u)).xyz;
-    decal.pad1       = 0.0f;
-
-    decal.tint = texelFetch(light_decal_data_buffer, int(DECAL_SIZE_VEC4 * decal_index + 3u));
-
-    decal.uv = texelFetch(light_decal_data_buffer, int(DECAL_SIZE_VEC4 * decal_index + 4u));
-
-    decal.normal = texelFetch(light_decal_data_buffer, int(DECAL_SIZE_VEC4 * decal_index + 5u));
-
-    return decal;
-}
-
-mat3 mat_from_quat(vec4 q) {
-    float qxx = q.x * q.x;
-    float qyy = q.y * q.y;
-    float qzz = q.z * q.z;
-    float qxz = q.x * q.z;
-    float qxy = q.x * q.y;
-    float qyz = q.y * q.z;
-    float qwx = q.w * q.x;
-    float qwy = q.w * q.y;
-    float qwz = q.w * q.z;
-
-    mat3 m;
-    m[0][0] = 1.0f - 2.0f * (qyy +  qzz);
-    m[0][1] = 2.0f * (qxy + qwz);
-    m[0][2] = 2.0f * (qxz - qwy);
-
-    m[1][0] = 2.0f * (qxy - qwz);
-    m[1][1] = 1.0f - 2.0f * (qxx +  qzz);
-    m[1][2] = 2.0f * (qyz + qwx);
-
-    m[2][0] = 2.0f * (qxz + qwy);
-    m[2][1] = 2.0f * (qyz - qwx);
-    m[2][2] = 1.0f - 2.0f * (qxx +  qyy);
-
-    return m;
-}
-
-#define decalShadow 1
-
-void CalculateDecals(uint decal_val, inout vec3 vert) {
-    // number of decals in current cluster
-    uint decal_count = (decal_val >> COUNT_BITS) & COUNT_MASK;
-
-    //colormap.xyz = vec3(decal_count) / 16.0;
-    //return;
-
-    // debug option, uncomment to visualize clusters
-    //colormap.xyz = vec3(min(decal_count, 63u) / 63.0);
-    //colormap.xyz = vec3(g.z / grid_size.z);
-
-    // index into cluster_decals
-    uint first_decal_index = decal_val & INDEX_MASK;
-
-    // decal list data is immediately after cluster lookup data
-    uint num_clusters = grid_size.x * grid_size.y * grid_size.z;
-    first_decal_index = first_decal_index + 2u * num_clusters;
-
-    vec3 orig_vert = vert;
-    for (uint i = 0u; i < decal_count; ++i) {
-        // texelFetch takes int
-        uint decal_index = texelFetch(cluster_buffer, int(first_decal_index + i)).x;
-
-        DecalData decal = FetchDecal(decal_index);
-        float spawn_time = decal.spawn_time;
-
-        vec2 start_uv = decal.uv.xy;
-        vec2 size_uv = decal.uv.zw;
-
-        vec2 start_normal = decal.normal.xy;
-        vec2 size_normal = decal.normal.zw;
-
-        // We omit scale component because we want to keep normal unit length
-        // We omit translation component because normal
-        mat3 rotation_mat = mat_from_quat(decal.rotation);
-        vec3 decal_ws_normal = rotation_mat * vec3(0.0, 1.0, 0.0);
-
-        vec3 inv_scale = vec3(1.0f) / decal.scale;
-        mat3 inv_rotation_mat = transpose(rotation_mat);
-        vec3 temp = (inv_rotation_mat * (orig_vert - decal.position)) * inv_scale;
-        if(abs(temp[0]) < 0.5 && abs(temp[1]) < 0.5 && abs(temp[2]) < 0.5){
-            bool ambient_shadow = false;
-            int type = int(decal.tint[3]);
-            bool skip = false;
-            vec3 dir;
-            switch (type) {
-                case decalShadow:
-                    dir = normalize(orig_vert - decal.position);
-                    dir.y = -1.0;
-                    dir = normalize(dir);
-                    vert += dir * max(0.0, (0.8 - length(temp)*2.0))*0.2;
-                    break;
-            }
-        }
-    }
-}
-#endif
-
 void main() {
+	#ifdef NO_INSTANCE_ID
+		int instance_id = gl_InstanceID;
+		return;
+	#else
+		instance_id = gl_InstanceID;
+	#endif
+
 	int index = gl_VertexID;
 	vec3 animated_vertex_position = vertex_attrib;
 	float texture_mult = 1.0f;
@@ -296,15 +153,8 @@ void main() {
 	frag_tex_coords = tex_coord_attrib;
 	frag_tex_coords[1] = 1.0 - frag_tex_coords[1];
 
-	vec4 albedo_color = textureLod(tex0, frag_tex_coords, 0.0);
-	vec4 normal_color = textureLod(tex1, frag_tex_coords, 0.0);
-
-	if(albedo_color == normal_color){
-		skip_render = 1;
-		return;
-	}else{
-		skip_render = 0;
-	}
+	vec4 albedo_color = texture(tex0, frag_tex_coords);
+	vec4 normal_color = texture(tex1, frag_tex_coords);
 
 	vec2 texture_size = textureSize(tex1, 0);
 	int target_resolution = int(texture_size.x / texture_mult);
@@ -317,8 +167,8 @@ void main() {
 	int y_pixel = 90;
 	float y_pos = 1.0 / target_resolution * y_pixel;
 
-	vec4 settings_color_1 = textureLod(tex1, vec2(half_pixel_offset, half_pixel_offset), 0.0);
-	vec4 settings_color_2 = textureLod(tex5, vec2(half_pixel_offset, half_pixel_offset), 0.0);
+	vec4 settings_color_1 = texture(tex1, vec2(half_pixel_offset, half_pixel_offset));
+	vec4 settings_color_2 = texture(tex5, vec2(half_pixel_offset, half_pixel_offset));
 
 	// The top row of the images is used for settings. Currently only the animation length, but there's room for more features.
 	vec3 settings;
@@ -334,8 +184,8 @@ void main() {
 	float animation_progress = mod((time * 0.1 + position_offset) * range, range) + skip_frames;
 	y_pos = animation_progress;
 
-	vec4 color_1 = textureLod(tex1, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset), 0.0);
-	vec4 color_2 = textureLod(tex5, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset), 0.0);
+	vec4 color_1 = texture(tex1, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset));
+	vec4 color_2 = texture(tex5, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset));
 
 	vec3 vertex_position;
 	vertex_position.x = DecodeFloatRG(vec2(color_1.x, color_2.x));
@@ -347,17 +197,12 @@ void main() {
 
 	animated_vertex_position = vertex_attrib - vertex_position;
 
-	if(skip_render == 1){
-		skip_render = 0;
+	#ifdef NO_INSTANCE_ID
 		animated_vertex_position = vertex_attrib;
-	}
-
-	instance_id = gl_InstanceID;
-	vertex_color = albedo_color.xyz;
+	#endif
 
 	vec3 transformed_vertex = transform_vec3(GetInstancedModelScale(instance_id), GetInstancedModelRotationQuat(instance_id), model_translation_attrib, animated_vertex_position);
-
 	gl_Position = projection_view_mat * vec4(transformed_vertex, 1.0);
-
+	vertex_color = albedo_color.xyz;
 	world_vert = transformed_vertex;
 }

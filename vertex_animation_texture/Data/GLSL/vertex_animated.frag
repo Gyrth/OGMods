@@ -126,12 +126,9 @@ in mat3 tangent_to_world;
 in vec3 frag_normal;
 in vec3 vertex_color;
 flat in int vertex_id;
-flat in int skip_render;
 
 uniform float overbright;
 const float cloud_speed = 0.1;
-
-UNIFORM_AVG_COLOR4
 
 #include "decals.glsl"
 
@@ -147,12 +144,9 @@ vec3 quat_mul_vec3(vec4 q, vec3 v) {
 }
 
 void main() {
-	if(skip_render == 1){
+	#ifdef NO_INSTANCE_ID
+		int instance_id;
 		discard;
-	}
-
-	#if defined(NO_INSTANCE_ID)
-		int instance_id = 0;
 	#endif
 
 	vec4 colormap;
@@ -194,6 +188,13 @@ void main() {
 	float zVal = ZCLUSTERFUNC(eyePos.z);
 	zVal = max(0u, min(zVal, grid_size.z - 1u));
 	uvec3 g = uvec3(uvec2(gl_FragCoord.xy) / cluster_width, zVal);
+
+	// decal/light cluster stuff
+	#if !(defined(NO_DECALS) || defined(DEPTH_ONLY))
+		uint decal_cluster_index = NUM_GRID_COMPONENTS * ((g.y * grid_size.x + g.x) * grid_size.z + g.z);
+		uint decal_val = texelFetch(cluster_buffer, int(decal_cluster_index)).x;
+	#endif
+
 	uint light_cluster_index = NUM_GRID_COMPONENTS * ((g.y * grid_size.x + g.x) * grid_size.z + g.z) + 1u;
 
 	#if defined(DEPTH_ONLY)
@@ -236,11 +237,17 @@ void main() {
 		shadow_coords[3] = shadow_matrix[3] * vec4(world_vert, 1.0);
 	#endif
 
-	vec3 shadow_tex = vec3(1.0);
-	shadow_tex.r = GetCascadeShadow(tex4, shadow_coords, length(ws_vertex));
+	#ifdef NO_INSTANCE_ID
+		// out_color.xyz = vec3(1.0, 0.0, 0.0);
+		// out_color.xyz = world_vert;
+		// discard;
+	#else
+		vec3 shadow_tex = vec3(1.0);
+		shadow_tex.r = GetCascadeShadow(tex4, shadow_coords, length(ws_vertex));
 
-	CALC_DIRECT_DIFFUSE_COLOR
+		CALC_DIRECT_DIFFUSE_COLOR
 
-	float shadow = GetCascadeShadow(shadow_sampler, shadow_coords, distance(cam_pos, world_vert));
-	out_color.xyz *= mix(0.2, 1.0, shadow);
+		float shadow = GetCascadeShadow(shadow_sampler, shadow_coords, distance(cam_pos, world_vert));
+		out_color.xyz *= mix(0.2,1.0,shadow);
+	#endif
 }
