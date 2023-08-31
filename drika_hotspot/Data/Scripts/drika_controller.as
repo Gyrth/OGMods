@@ -1601,8 +1601,9 @@ void Update(){
 
 		if(message.name == "drika_button_go_to_line"){
 			GetUIElement(message.getString(0)).ReadUIInstruction({"button_clicked"});
-		}
-		if(message.name == "drika_input_clicked"){
+		}else if(message.name == "drika_button_hover_enter"){
+			GetUIElement(message.getString(0)).ReadUIInstruction({"button_hovered"});
+		}else if(message.name == "drika_input_clicked"){
 			GetUIElement(message.getString(0)).ReadUIInstruction({"input_clicked"});
 		}
 	}

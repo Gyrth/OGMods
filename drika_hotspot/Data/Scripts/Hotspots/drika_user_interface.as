@@ -12,6 +12,9 @@ class DrikaUserInterface : DrikaElement{
 	string fullscreen_image_path;
 
 	string button_image_path;
+	bool ui_sounds;
+	string hover_sound_path;
+	string click_sound_path;
 
 	string input_image_path;
 	int input_max_length;
@@ -92,6 +95,9 @@ class DrikaUserInterface : DrikaElement{
 		current_input_box_mode = drika_input_box_mode;
 
 		@button_line = DrikaGoToLineSelect("button_line", params);
+		ui_sounds = GetJSONBool(params, "ui_sounds", false);
+		hover_sound_path = GetJSONString(params, "hover_sound_path", "Data/Sounds/ui_hover.xml");
+		click_sound_path = GetJSONString(params, "click_sound_path", "Data/Sounds/ui_click.xml");
 
 		rotation = GetJSONFloat(params, "rotation", 0.0);
 		position = GetJSONIVec2(params, "position", ivec2(ui_snap_scale, ui_snap_scale) * 5);
@@ -366,6 +372,11 @@ class DrikaUserInterface : DrikaElement{
 			data["size"].append(size.x);
 			data["size"].append(size.y);
 			data["button_text"] = JSONValue(button_text);
+			data["ui_sounds"] = JSONValue(ui_sounds);
+			if(ui_sounds){
+				data["hover_sound_path"] = JSONValue(hover_sound_path);
+				data["click_sound_path"] = JSONValue(click_sound_path);
+			}
 			button_line.SaveGoToLine(data);
 		}else if(ui_function == ui_input){
 			data["input_image_path"] = JSONValue(input_image_path);
@@ -485,7 +496,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Position");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width/2);
+			ImGui_PushItemWidth((second_column_width / 2.0) - 4.0);
 			if(ImGui_DragInt("##Position X", position.x, 1.0, 0, 2560, "%.0f")){
 				SendUIInstruction("set_position", {position.x, position.y});
 			}
@@ -499,7 +510,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Size");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width/2);
+			ImGui_PushItemWidth((second_column_width / 2.0) - 4.0);
 			if(ImGui_DragInt("##size_x", size.x, 1.0, 1.0f, 1000, "%.0f")){
 				SendUIInstruction("set_size", {size.x, size.y});
 			}
@@ -513,7 +524,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Position Offset");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width/2);
+			ImGui_PushItemWidth((second_column_width / 2.0) - 4.0);
 			if(ImGui_DragInt("##position_offset_x", position_offset.x, 1.0, 0.0f, max_offset.x, "%.0f")){
 				SendUIInstruction("set_position_offset", {position_offset.x, position_offset.y});
 			}
@@ -527,7 +538,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Size Offset");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width/2);
+			ImGui_PushItemWidth((second_column_width / 2.0) - 4.0);
 			if(ImGui_DragInt("##size_offset_x", size_offset.x, 1.0, 1.0f, max_offset.x, "%.0f")){
 				SendUIInstruction("set_size_offset", {size_offset.x, size_offset.y});
 			}
@@ -601,7 +612,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_Text("Position");
 
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width/2);
+			ImGui_PushItemWidth((second_column_width / 2.0) - 4.0);
 			if(ImGui_DragInt("##Position X", position.x, 1.0, 0, 2560, "%.0f")){
 				SendUIInstruction("set_position", {position.x, position.y});
 			}
@@ -699,7 +710,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Position");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width/2);
+			ImGui_PushItemWidth((second_column_width / 2.0) - 4.0);
 			if(ImGui_DragInt("##Button Position X", position.x, 1.0, 0, 2560, "%.0f")){
 				SendUIInstruction("set_position", {position.x, position.y});
 			}
@@ -713,7 +724,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Size");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width/2);
+			ImGui_PushItemWidth((second_column_width / 2.0) - 4.0);
 			if(ImGui_DragInt("##size_x", size.x, 1.0, 1.0f, 1000, "%.0f")){
 				SendUIInstruction("set_size", {size.x, size.y});
 			}
@@ -777,6 +788,46 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_PopItemWidth();
 			ImGui_NextColumn();
 
+			button_line.DrawGoToLineUI();
+
+			ImGui_Separator();
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("UI Sounds");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_Checkbox("###Use Sounds", ui_sounds);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			if(ui_sounds){
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Hover Sound");
+				ImGui_NextColumn();
+				if(ImGui_Button("Set Sound Path")){
+					string new_path = GetUserPickedReadPath("wav", "Data/Sounds");
+					// The path will be returned empty if the user cancels the file pick.
+					if(new_path != ""){
+						hover_sound_path = ShortenPath(new_path);
+					}
+				}
+				ImGui_SameLine();
+				ImGui_Text(hover_sound_path);
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Click Sound");
+				ImGui_NextColumn();
+				if(ImGui_Button("Set Sound Path")){
+					string new_path = GetUserPickedReadPath("wav", "Data/Sounds");
+					// The path will be returned empty if the user cancels the file pick.
+					if(new_path != ""){
+						click_sound_path = ShortenPath(new_path);
+					}
+				}
+				ImGui_SameLine();
+				ImGui_Text(click_sound_path);
+				ImGui_NextColumn();
+			}
 		}else if(ui_function == ui_input){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Input Box Image");
@@ -801,7 +852,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Position");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width/2);
+			ImGui_PushItemWidth((second_column_width / 2.0) - 4.0);
 			if(ImGui_DragInt("##Input Position X", position.x, 1.0, 0, 2560, "%.0f")){
 				SendUIInstruction("set_position", {position.x, position.y});
 			}
@@ -815,7 +866,7 @@ class DrikaUserInterface : DrikaElement{
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Size");
 			ImGui_NextColumn();
-			ImGui_PushItemWidth(second_column_width/2);
+			ImGui_PushItemWidth((second_column_width / 2.0) - 4.0);
 			if(ImGui_DragInt("##size_x", size.x, 1.0, 1.0f, 1000, "%.0f")){
 				SendUIInstruction("set_size", {size.x, size.y});
 			}
@@ -1002,10 +1053,6 @@ class DrikaUserInterface : DrikaElement{
 					DrawSelectTween("Move Out", move_out_tween_type, move_out_duration, move_out_offset);
 				}
 			}
-		}
-
-		if(ui_function == ui_button){
-			button_line.DrawGoToLineUI();
 		}
 	}
 
@@ -1249,6 +1296,16 @@ class DrikaUserInterface : DrikaElement{
 			if(button_line !is null && !show_editor){
 				current_line = button_line.GetTargetLineIndex();
 				display_index = drika_indexes[button_line.GetTargetLineIndex()];
+
+				if(ui_sounds){
+					string click_sound_path_extension = click_sound_path.substr(click_sound_path.length() - 3, 3);
+					click_sound_path_extension == "xml"?PlaySoundGroup(click_sound_path):PlaySound(click_sound_path);
+				}
+			}
+		}else if(instruction[0] == "button_hovered"){
+			if(ui_sounds){
+				string hover_sound_path_extension = hover_sound_path.substr(hover_sound_path.length() - 3, 3);
+				hover_sound_path_extension == "xml"?PlaySoundGroup(hover_sound_path):PlaySound(hover_sound_path);
 			}
 		}
 	}

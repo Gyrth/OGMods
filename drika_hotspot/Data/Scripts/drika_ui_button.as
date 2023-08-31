@@ -56,8 +56,12 @@ class DrikaUIButton : DrikaUIImage{
 		holder.sendMouseOverToChildren(true);
 
 		IMMessage on_click("drika_button_go_to_line");
+		IMMessage on_hover_enter("drika_button_hover_enter");
+	    IMMessage nil_message("");
 		on_click.addString(ui_element_identifier);
+		on_hover_enter.addString(ui_element_identifier);
 		outline_container.addLeftMouseClickBehavior(IMFixedMessageOnClick(on_click), "");
+		outline_container.addMouseOverBehavior(IMFixedMessageOnMouseOver(on_hover_enter, nil_message, nil_message), "");
 
 		image_container.addFloatingElement(outline_container, image_name, vec2(position.x, position.y), 0);
 		new_image.setRotation(rotation);
@@ -119,7 +123,7 @@ class DrikaUIButton : DrikaUIImage{
 	void ReadUIInstruction(array<string> instruction){
 		DrikaUIImage::ReadUIInstruction(instruction);
 
-		/* Log(warning, "Got instruction " + instruction[0]); */
+		// Log(warning, "Got instruction " + instruction[0]);
 
 		if(instruction[0] == "set_button_image_path"){
 			image_path = instruction[1];
@@ -137,6 +141,8 @@ class DrikaUIButton : DrikaUIImage{
 			SetSize();
 		}else if(instruction[0] == "button_clicked"){
 			SendUIFunctionEvent({"button_clicked"});
+		}else if(instruction[0] == "button_hovered"){
+			SendUIFunctionEvent({"button_hovered"});
 		}else if(instruction[0] == "set_color"){
 			mouseover_color = vec4(color.x + mouseover_effect, color.y + mouseover_effect, color.z + mouseover_effect, color.a + mouseover_effect);
 			AddMouseOverBehavior();

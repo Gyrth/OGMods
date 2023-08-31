@@ -1149,7 +1149,7 @@ class DrikaDialogue : DrikaElement{
 				if(check_parameters[i]){
 					ImGui_NextColumn();
 					ImGui_NextColumn();
-					ImGui_PushItemWidth((second_column_width / 3.0) - 5.0f);
+					ImGui_PushItemWidth((second_column_width / 3.0) - 5.0);
 					ImGui_InputText("##Parameter Name" + number, parameter_names[i], 64);
 					ImGui_SameLine();
 					int current_parameter_check_mode = parameter_check_modes[i];
