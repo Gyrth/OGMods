@@ -97,6 +97,9 @@ class DrikaDialogue : DrikaElement{
 	array<check_modes> parameter_check_modes(max_choices);
 	array<int> available_choices(max_choices);
 	bool choice_ui_added = false;
+	bool ui_sounds;
+	string hover_sound_path;
+	string click_sound_path;
 	array<float> dof_settings;
 	bool update_dof = false;
 	bool enable_look_at_target;
@@ -203,6 +206,9 @@ class DrikaDialogue : DrikaElement{
 		}
 		dialogue_control = GetJSONBool(params, "dialogue_control", true);
 		nr_choices = GetJSONInt(params, "nr_choices", 4);
+		ui_sounds = GetJSONBool(params, "ui_sounds", false);
+		hover_sound_path = GetJSONString(params, "hover_sound_path", "Data/Sounds/ui_hover.xml");
+		click_sound_path = GetJSONString(params, "click_sound_path", "Data/Sounds/ui_click.xml");
 
 		for(int i = 0; i < max_choices; i++){
 			int number = i + 1;
@@ -402,6 +408,11 @@ class DrikaDialogue : DrikaElement{
 			data["dialogue_control"] = JSONValue(dialogue_control);
 		}else if(dialogue_function == choice){
 			data["nr_choices"] = JSONValue(nr_choices);
+			data["ui_sounds"] = JSONValue(ui_sounds);
+			if(ui_sounds){
+				data["hover_sound_path"] = JSONValue(hover_sound_path);
+				data["click_sound_path"] = JSONValue(click_sound_path);
+			}
 
 			for(int i = 0; i < nr_choices; i++){
 				int number = i + 1;
@@ -1156,6 +1167,46 @@ class DrikaDialogue : DrikaElement{
 
 				ImGui_NextColumn();
 			}
+
+			ImGui_Separator();
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("UI Sounds");
+			ImGui_NextColumn();
+			ImGui_PushItemWidth(second_column_width);
+			ImGui_Checkbox("###Use Sounds", ui_sounds);
+			ImGui_PopItemWidth();
+			ImGui_NextColumn();
+
+			if(ui_sounds){
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Hover Sound");
+				ImGui_NextColumn();
+				if(ImGui_Button("Set Sound Path")){
+					string new_path = GetUserPickedReadPath("wav", "Data/Sounds");
+					// The path will be returned empty if the user cancels the file pick.
+					if(new_path != ""){
+						hover_sound_path = ShortenPath(new_path);
+					}
+				}
+				ImGui_SameLine();
+				ImGui_Text(hover_sound_path);
+				ImGui_NextColumn();
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Click Sound");
+				ImGui_NextColumn();
+				if(ImGui_Button("Set Sound Path")){
+					string new_path = GetUserPickedReadPath("wav", "Data/Sounds");
+					// The path will be returned empty if the user cancels the file pick.
+					if(new_path != ""){
+						click_sound_path = ShortenPath(new_path);
+					}
+				}
+				ImGui_SameLine();
+				ImGui_Text(click_sound_path);
+				ImGui_NextColumn();
+			}
+
 		}else if(dialogue_function == set_camera_position){
 			ImGui_AlignTextToFramePadding();
 			ImGui_Text("Near Blur");
@@ -1371,11 +1422,10 @@ class DrikaDialogue : DrikaElement{
 
 	void ReceiveMessage(string message, int param){
 		if(message == "drika_dialogue_choice_select"){
-			current_choice = param;
-			level.SendMessage("drika_dialogue_choice_select " + current_choice);
+			SelectChoice(param);
 		}else if(message == "drika_dialogue_choice_pick" && !editing){
-			triggered = true;
 			current_choice = param;
+			triggered = true;
 		}
 	}
 
@@ -1721,6 +1771,10 @@ class DrikaDialogue : DrikaElement{
 		if(target_choice > -1 && target_choice < int(available_choices.size()) && target_choice != current_choice){
 			current_choice = target_choice;
 			level.SendMessage("drika_dialogue_choice_select " + current_choice);
+			if(ui_sounds){
+				string hover_sound_path_extension = hover_sound_path.substr(hover_sound_path.length() - 3, 3);
+				hover_sound_path_extension == "xml"?PlaySoundGroup(hover_sound_path):PlaySound(hover_sound_path);
+			}
 		}
 	}
 
@@ -1738,6 +1792,11 @@ class DrikaDialogue : DrikaElement{
 
 		current_line = new_target_line;
 		display_index = drika_indexes[new_target_line];
+
+		if(ui_sounds){
+			string click_sound_path_extension = click_sound_path.substr(click_sound_path.length() - 3, 3);
+			click_sound_path_extension == "xml"?PlaySoundGroup(click_sound_path):PlaySound(click_sound_path);
+		}
 
 		return true;
 	}
