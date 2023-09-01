@@ -158,7 +158,7 @@ class AnimatedImage{
 					integer_padding = j;
 					string check_path = "Data/" + base_path + ApplyPadding(i) + extention;
 					if(FileExists(check_path)){
-						Log(warning, "Valid " + check_path);
+						// Log(warning, "Valid " + check_path);
 						range_min = i;
 						//Now find the highest number of frame.
 						for(int k = range_min; k <= 500; k++){
