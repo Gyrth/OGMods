@@ -107,6 +107,8 @@ class DrikaCheckCharacterState : DrikaElement{
 	float compare_value;
 	string animation_path;
 	string variable_prefix;
+	bool attack_path_check;
+	string attack_path;
 
 	DrikaCheckCharacterState(JSONValue params = JSONValue()){
 		ccs_mode = ccs_modes(GetJSONInt(params, "ccs_mode", ccs_check));
@@ -124,6 +126,8 @@ class DrikaCheckCharacterState : DrikaElement{
 		compare_value = GetJSONFloat(params, "compare_value", 1.0);
 		animation_path = GetJSONString(params, "animation_path", "Data/Animations/");
 		variable_prefix = GetJSONString(params, "variable_prefix", "character_var");
+		attack_path_check = GetJSONBool(params, "attack_path_check", false);
+		attack_path = GetJSONString(params, "attack_path", "Data/Attacks/sweep.xml");
 
 		@target_select = DrikaTargetSelect(this, params);
 		target_select.target_option = id_option | name_option | character_option | reference_option | team_option;
@@ -186,10 +190,18 @@ class DrikaCheckCharacterState : DrikaElement{
 		}
 
 		if(state_choice == current_animation){
-		data["animation_path"] = JSONValue(animation_path);
+			data["animation_path"] = JSONValue(animation_path);
 		}
+
 		if(ccs_mode == current_ccs_mode){
-		data["variable_prefix"] = JSONValue(variable_prefix);
+			data["variable_prefix"] = JSONValue(variable_prefix);
+		}
+
+		if(state_choice == attacking){
+			data["attack_path_check"] = JSONValue(attack_path_check);
+			if(attack_path_check){
+				data["attack_path"] = JSONValue(attack_path);
+			}
 		}
 
 		target_select.SaveIdentifier(data);
@@ -403,6 +415,23 @@ class DrikaCheckCharacterState : DrikaElement{
 					animation_path = ImGui_GetTextBuf();
 				}
 				ImGui_NextColumn();
+			}else if(state_choice == attacking){
+
+				ImGui_AlignTextToFramePadding();
+				ImGui_Text("Attack Path Check");
+				ImGui_NextColumn();
+
+				ImGui_Checkbox("###Attack Path Check", attack_path_check);
+				ImGui_NextColumn();
+
+				if(attack_path_check){
+					ImGui_AlignTextToFramePadding();
+					ImGui_Text("Attack Path");
+					ImGui_NextColumn();
+					ImGui_PushItemWidth(second_column_width);
+					ImGui_InputText("##Attack Path", attack_path, 64);
+					ImGui_NextColumn();
+				}
 			}else if(state_choice == ray_collides_with){
 				ImGui_Separator();
 				ImGui_Text("Target For Ray:");
@@ -539,6 +568,12 @@ class DrikaCheckCharacterState : DrikaElement{
 					state = (length(target.velocity) > 1.0);
 				}else if(state_choice == attacking){
 					state = (target.GetIntVar("state") == _attack_state);
+					if(state && attack_path_check){
+						string command = "blinking = attack_getter.GetPath().split(\" \")[0] == \"" + attack_path + "\";";
+						target.Execute(command);
+						bool same_attack = target.GetBoolVar("blinking");
+						state = same_attack;
+					}
 				}else if(state_choice == ragdolling){
 					state = (target.GetIntVar("state") == _ragdoll_state);
 				}else if(state_choice == hit_reacting){
