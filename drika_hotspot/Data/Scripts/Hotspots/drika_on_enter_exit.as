@@ -10,7 +10,8 @@ enum hotspot_trigger_types	{
 								on_object_enter = 8,
 								on_object_exit = 9,
 								while_object_inside = 10,
-								while_object_outside = 11
+								while_object_outside = 11,
+								while_character_in_view = 12
 							};
 
 array<string> hotspot_trigger_choices = {
@@ -25,7 +26,8 @@ array<string> hotspot_trigger_choices = {
 											"On Object Enter",
 											"On Object Exit",
 											"While Object Inside",
-											"While Object Outside"
+											"While Object Outside",
+											"While Character In View"
 										};
 
 class DrikaOnEnterExit : DrikaElement{
@@ -39,6 +41,8 @@ class DrikaOnEnterExit : DrikaElement{
 	array<int> reference_ids;
 	bool initial_setup_done = false;
 	bool check_all;
+	bool view_obstruction_check;
+	float camera_fov;
 
 	vec3 external_hotspot_translation;
 	quaternion external_hotspot_rotation;
@@ -125,7 +129,7 @@ class DrikaOnEnterExit : DrikaElement{
 	}
 
 	bool IsCharacterFunction(){
-		if(hotspot_trigger_type == on_character_enter || hotspot_trigger_type == on_character_exit || hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside){
+		if(hotspot_trigger_type == on_character_enter || hotspot_trigger_type == on_character_exit || hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside || hotspot_trigger_type == while_character_in_view){
 			return true;
 		}
 		return false;
@@ -145,7 +149,7 @@ class DrikaOnEnterExit : DrikaElement{
 	}
 
 	bool IsWhileFunction(){
-		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside || hotspot_trigger_type == while_item_inside || hotspot_trigger_type == while_item_outside || hotspot_trigger_type == while_object_inside || hotspot_trigger_type == while_object_outside){
+		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside || hotspot_trigger_type == while_item_inside || hotspot_trigger_type == while_item_outside || hotspot_trigger_type == while_object_inside || hotspot_trigger_type == while_object_outside || hotspot_trigger_type == while_character_in_view){
 			return true;
 		}
 		return false;
@@ -184,6 +188,11 @@ class DrikaOnEnterExit : DrikaElement{
 			data["reset_when_false"] = JSONValue(reset_when_false);
 			data["check_all"] = JSONValue(check_all);
 		}
+
+		if(hotspot_trigger_type == while_character_in_view){
+			data["view_obstruction_check"] = JSONValue(view_obstruction_check);
+		}
+
 		target_select.SaveIdentifier(data);
 		return data;
 	}
@@ -314,6 +323,14 @@ class DrikaOnEnterExit : DrikaElement{
 			ImGui_Text("Reset When False");
 			ImGui_NextColumn();
 			ImGui_Checkbox("##Reset When False", reset_when_false);
+			ImGui_NextColumn();
+		}
+
+		if(hotspot_trigger_type == while_character_in_view){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("View Obstruction Check");
+			ImGui_NextColumn();
+			ImGui_Checkbox("###View Obstruction Check", view_obstruction_check);
 			ImGui_NextColumn();
 		}
 
@@ -467,8 +484,8 @@ class DrikaOnEnterExit : DrikaElement{
 			initial_setup_done = true;
 		}
 
-		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside){
-			if(hotspot_trigger_type == while_character_inside && InsideCheck() || hotspot_trigger_type == while_character_outside && !InsideCheck()){
+		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside || hotspot_trigger_type == while_character_in_view){
+			if(hotspot_trigger_type == while_character_inside && InsideCheck() || hotspot_trigger_type == while_character_outside && !InsideCheck() || hotspot_trigger_type == while_character_in_view && InsideViewCheck()){
 				triggered = true;
 
 				//If this is the last element then just return true to finish the script.
@@ -630,6 +647,60 @@ class DrikaOnEnterExit : DrikaElement{
 				if(hotspot_trigger_type == while_character_outside){
 					reference_ids.insertLast(chars[i].GetID());
 				}
+				all_inside = false;
+			}
+		}
+
+		if(check_all){
+			return all_inside;
+		}else{
+			return one_inside;
+		}
+	}
+
+	bool InsideViewCheck(){
+		Object@ target_hotspot = external_hotspot?external_hotspot_obj:this_hotspot;
+		reference_ids.resize(0);
+		bool all_inside = true;
+		bool one_inside = false;
+
+		float camera_fov = camera.GetFOV();
+		vec3 camera_facing = camera.GetFacing();
+		vec3 camera_position = camera.GetPos();
+
+		vec2 screen_dims = vec2(GetScreenWidth(), GetScreenHeight());
+		float screen_aspect_ratio = screen_dims.x / screen_dims.y;
+
+		array<MovementObject@> chars = target_select.GetTargetMovementObjects();
+		for(uint i = 0; i < chars.size(); i++){
+
+			RiggedObject@ rigged_object = chars[i].rigged_object();
+			Skeleton@ skeleton = rigged_object.skeleton();
+			int chest_bone = skeleton.IKBoneStart("torso");
+			BoneTransform chest_frame_matrix = rigged_object.GetFrameMatrix(chest_bone);
+			vec3 character_direction = normalize(chest_frame_matrix.origin - camera_position);
+
+			bool view_obstruction_check_valid = true;
+			if(view_obstruction_check){
+				vec3 result = col.GetRayCollision(camera_position, chest_frame_matrix.origin);
+				view_obstruction_check_valid = distance(chest_frame_matrix.origin, result) < 0.1;
+			}
+
+			float dot_product = dot(camera_facing, character_direction) / (length(camera_facing) * length(character_direction));
+			float angle = acos(dot_product) / 3.14159265f * 180.0f;
+			// Since the viewport isn't perfectly square at 90 degrees by default, we need to calculate
+			// a new FOV based on the screen aspect ratio.
+			float fov_radians = camera_fov * 3.1415f / 180.0f;
+			float vertical_fov = 2.0 * atan(tan(fov_radians / 2.0) * screen_aspect_ratio);
+			// Convert the radians back into degrees.
+			vertical_fov = (vertical_fov / 3.14159265f * 180.0f);
+			// TODO Do a vertical as well as a horizontal check to see if the character is offscreen.
+			// Log(warning, vertical_fov + " onscreen " + (angle < vertical_fov / 2.0));
+			// If the angle to the character is more than half the FOV then it's off screen.
+			if(angle < vertical_fov / 2.0 && view_obstruction_check_valid){
+				reference_ids.insertLast(chars[i].GetID());
+				one_inside = true;
+			}else{
 				all_inside = false;
 			}
 		}
