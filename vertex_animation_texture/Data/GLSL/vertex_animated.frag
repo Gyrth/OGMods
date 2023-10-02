@@ -146,7 +146,7 @@ vec3 quat_mul_vec3(vec4 q, vec3 v) {
 void main() {
 	#ifdef NO_INSTANCE_ID
 		int instance_id;
-		discard;
+		// discard;
 	#endif
 
 	vec4 colormap;
@@ -238,6 +238,7 @@ void main() {
 	#endif
 
 	#ifdef NO_INSTANCE_ID
+		// out_color = texture(tex1, vec2(frag_tex_coords));
 		// out_color.xyz = vec3(1.0, 0.0, 0.0);
 		// out_color.xyz = world_vert;
 		// discard;
