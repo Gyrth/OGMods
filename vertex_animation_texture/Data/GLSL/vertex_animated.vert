@@ -148,7 +148,6 @@ void main() {
 
 	int index = gl_VertexID;
 	vec3 animated_vertex_position = vertex_attrib;
-	float texture_mult = 1.0f;
 
 	frag_tex_coords = tex_coord_attrib;
 	frag_tex_coords[1] = 1.0 - frag_tex_coords[1];
@@ -156,19 +155,16 @@ void main() {
 	vec4 albedo_color = texture(tex0, frag_tex_coords);
 	vec4 normal_color = texture(tex1, frag_tex_coords);
 
-	vec2 texture_size = textureSize(tex1, 0);
-	int target_resolution = int(texture_size.x / texture_mult);
+	vec2 texture_size = textureSize(tex5, 0);
+	float target_resolution = int(texture_size.x);
+	float one_pixel_offset = (1.0 / target_resolution);
 	float half_pixel_offset = (1.0 / target_resolution) / 2.0;
 
 	int x_pixel = index;
 	float x_pos = 1.0 / target_resolution * x_pixel;
 
-	//Not used
-	int y_pixel = 90;
-	float y_pos = 1.0 / target_resolution * y_pixel;
-
-	vec4 settings_color_1 = texture(tex1, vec2(half_pixel_offset, half_pixel_offset));
-	vec4 settings_color_2 = texture(tex5, vec2(half_pixel_offset, half_pixel_offset));
+	vec4 settings_color_1 = texture(tex5, vec2(half_pixel_offset, half_pixel_offset));
+	vec4 settings_color_2 = texture(tex5, vec2(half_pixel_offset, half_pixel_offset + one_pixel_offset));
 
 	// The top row of the images is used for settings. Currently only the animation length, but there's room for more features.
 	vec3 settings;
@@ -177,15 +173,21 @@ void main() {
 	settings.z = DecodeFloatRG(vec2(settings_color_1.z, settings_color_2.z));
 
 	float animation_length = int(settings.x * 10000.0);
-	float range = animation_length / (texture_size.y / texture_mult);
-	float skip_frames = half_pixel_offset * 4.0f;
+
+	animation_length = animation_length;
+	float range = animation_length / texture_size.y;
 
 	float position_offset = length(texture(tex0, vec2(model_translation_attrib.x, model_translation_attrib.z)));
-	float animation_progress = mod((time * 0.1 + position_offset) * range, range) + skip_frames;
-	y_pos = animation_progress;
+	position_offset = 0.0;
+	float animation_speed = 0.25;
 
-	vec4 color_1 = texture(tex1, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset));
-	vec4 color_2 = texture(tex5, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset));
+	float animation_progress = mod((time * animation_speed + position_offset) * range, range);
+	float settings_skip = one_pixel_offset + one_pixel_offset;
+	float y_pos = animation_progress + settings_skip;
+
+	// Use half a pixel to get the center of the pixel.
+	vec4 color_1 = texture(tex5, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset));
+	vec4 color_2 = texture(tex5, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset + (one_pixel_offset * animation_length)));
 
 	vec3 vertex_position;
 	vertex_position.x = DecodeFloatRG(vec2(color_1.x, color_2.x));
@@ -203,6 +205,6 @@ void main() {
 
 	vec3 transformed_vertex = transform_vec3(GetInstancedModelScale(instance_id), GetInstancedModelRotationQuat(instance_id), model_translation_attrib, animated_vertex_position);
 	gl_Position = projection_view_mat * vec4(transformed_vertex, 1.0);
-	vertex_color = albedo_color.xyz;
+	// vertex_color = albedo_color.xyz;
 	world_vert = transformed_vertex;
 }

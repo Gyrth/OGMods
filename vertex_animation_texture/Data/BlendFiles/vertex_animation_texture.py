@@ -57,14 +57,14 @@ def GetPixel(img,x,y, image_size):
         color.append( img.pixels[offs + i] )
     return color
 
-def BoundedFloatToTextures(f, x, y, output_image_1, output_image_2, image_size):
+def BoundedFloatToTextures(f, x, y, output_image, image_size, animation_length):
     # Range need to be adjusted so it's between 0.0 - 1.0f;
     origin_adjusted_location = f + (bounds / 2.0)
     range_adjusted_location = origin_adjusted_location / bounds.x
     
-    FloatToTextures(range_adjusted_location, x, y, output_image_1, output_image_2, image_size)
+    FloatToTextures(range_adjusted_location, x, y, output_image, image_size, animation_length)
 
-def FloatToTextures(f, x, y, output_image_1, output_image_2, image_size):
+def FloatToTextures(f, x, y, output_image, image_size, animation_length):
     # The y and z axis might need to be swapped so they are correct in-engine.
     split_x = EncodeFloatRG(f.x)
     split_y = EncodeFloatRG(f.z)
@@ -73,8 +73,8 @@ def FloatToTextures(f, x, y, output_image_1, output_image_2, image_size):
     color_image_1 = (split_x.x, split_y.x, split_z.x, 1.0)
     color_image_2 = (split_x.y, split_y.y, split_z.y, 1.0)
     
-    SetPixel(output_image_1, x, y, color_image_1, image_size)
-    SetPixel(output_image_2, x, y, color_image_2, image_size)
+    SetPixel(output_image, x, y, color_image_1, image_size)
+    SetPixel(output_image, x, y - animation_length, color_image_2, image_size)
 
 def CreateAnimationTextures(export_path, model_name, info):
     # The image size can be increased to hold more animations, vertices or longer animation.
@@ -143,30 +143,21 @@ def CreateAnimationTextures(export_path, model_name, info):
     encoded_background_value = EncodeFloatRG(background_value)
     
     # The single float value is split into two texture color values.
-    background_color_1 = Vector([encoded_background_value.x, encoded_background_value.x, encoded_background_value.x, 1.0])
-    background_color_2 = Vector([encoded_background_value.y, encoded_background_value.y, encoded_background_value.y, 1.0])
+    background_color = Vector([encoded_background_value.x, encoded_background_value.x, encoded_background_value.x, 1.0])
     
     # Remove any existing images before creating new ones.
-    if bpy.data.images.get('Output1') != None:
-        bpy.data.images.remove(bpy.data.images['Output1'])
+    if bpy.data.images.get('Output') != None:
+        bpy.data.images.remove(bpy.data.images['Output'])
     
-    if bpy.data.images.get('Output2') != None:
-        bpy.data.images.remove(bpy.data.images['Output2'])
-    
-    bpy.ops.image.new(name='Output1', width=image_size, height=image_size, color=background_color_1, alpha=False)
-    output_image_1 = bpy.data.images['Output1']
-    output_image_1.filepath_raw = target_folder + "/Textures/" + model_name + "_1.png"
-    output_image_1.file_format = 'PNG'
-    bpy.ops.image.new(name='Output2', width=image_size, height=image_size, color=background_color_2, alpha=False)
-    output_image_2 = bpy.data.images['Output2']
-    output_image_2.filepath_raw = target_folder + "/Textures/" + model_name + "_2.png"
-    output_image_2.file_format = 'PNG'
+    bpy.ops.image.new(name='Output', width=image_size, height=image_size, color=background_color, alpha=False)
+    output_image = bpy.data.images['Output']
+    output_image.filepath_raw = target_folder + "/Textures/" + model_name + ".png"
+    output_image.file_format = 'PNG'
 
     # The vertices location in rest position is used to calculate the vertex offset for the animation.
     rest_data = []
     
-    pixels_1 = list(output_image_1.pixels)
-    pixels_2 = list(output_image_2.pixels)
+    pixels = list(output_image.pixels)
     
     depgraph = bpy.context.evaluated_depsgraph_get()
     bme = bmesh.new()
@@ -184,6 +175,9 @@ def CreateAnimationTextures(export_path, model_name, info):
     
     frame_start = bpy.context.scene.frame_start
     frame_end = bpy.context.scene.frame_end
+    
+    animation_length = frame_end - frame_start
+    print("Animation Length : ", animation_length)
 
     bpy.context.scene.frame_set(frame_start)
     bpy.context.view_layer.update()
@@ -199,7 +193,7 @@ def CreateAnimationTextures(export_path, model_name, info):
         
         depgraph = bpy.context.evaluated_depsgraph_get()
         vertex_counter = 0
-        position_y = image_size - 2 - frame_counter
+        position_y = image_size - 3 - frame_counter
         
         if position_y < 0:
             break
@@ -221,28 +215,23 @@ def CreateAnimationTextures(export_path, model_name, info):
                 difference = rest_vert - vert
                 position_x = vertex_counter
                 
-                BoundedFloatToTextures(difference, position_x, position_y, pixels_1, pixels_2, image_size)
+                BoundedFloatToTextures(difference, position_x, position_y, pixels, image_size, animation_length)
                 vertex_counter += 1
             
             bm.free()
     
     settings = Vector([(frame_counter - 1) / 10000.0, 0.0, 0.0])
-    FloatToTextures(settings, 0, image_size - 1, pixels_1, pixels_2, image_size)
+    FloatToTextures(settings, 0, image_size - 1, pixels, image_size, 1)
     
     print("Image size :", image_size, "px")
     print("Vertex count :", vertex_count)
     print("Animation length :", frame_counter)
     print("Center Location :", center_location)
     
-    output_image_1.pixels[:] = pixels_1
-    output_image_2.pixels[:] = pixels_2
-
+    output_image.pixels[:] = pixels
     # Should probably update image
-    output_image_1.update()
-    output_image_2.update()
-    
-    output_image_1.save()
-    output_image_2.save()
+    output_image.update()
+    output_image.save()
     
     bpy.data.objects.remove(joined_object, do_unlink=True)
     
@@ -455,10 +444,8 @@ def SortTextures(cache_path, export_path, model_name, info):
     
     input_model_obj_filename = str(Path(directory + export_path + "/Models/" + model_name + ".obj").resolve())
     input_model_cache_json_filename = str(Path(directory + "/" + model_name + ".json").resolve())
-    input_image_filename_1 = str(Path(directory + export_path + "/Textures/" + model_name + "_1.png").resolve())
-    input_image_filename_2 = str(Path(directory + export_path + "/Textures/" + model_name + "_2.png").resolve())
-    output_image_filename_1 = str(Path(directory + export_path + "/Textures/" + model_name + "_sorted_1.png").resolve())
-    output_image_filename_2 = str(Path(directory + export_path + "/Textures/" + model_name + "_sorted_2.png").resolve())
+    input_image_filename = str(Path(directory + export_path + "/Textures/" + model_name + ".png").resolve())
+    output_image_filename = str(Path(directory + export_path + "/Textures/" + model_name + "_sorted.png").resolve())
     
     print("obj", input_model_obj_filename)
     print("json", input_model_cache_json_filename)
@@ -471,12 +458,8 @@ def SortTextures(cache_path, export_path, model_name, info):
         print('file not found:', input_model_cache_json_filename)
         return
 
-    if not path.exists(input_image_filename_1):
-        print('file not found:', input_image_filename_1)
-        return
-    
-    if not path.exists(input_image_filename_2):
-        print('file not found:', input_image_filename_2)
+    if not path.exists(input_image_filename):
+        print('file not found:', input_image_filename)
         return
 
     # load model checksum
@@ -548,7 +531,7 @@ def SortTextures(cache_path, export_path, model_name, info):
         for optimized_index in optimize_vert_reorder_indices
     ]
 
-    with Image.open(input_image_filename_1) as input_image:
+    with Image.open(input_image_filename) as input_image:
         column_height = input_image.height
         greatest_input_dimension = max(model_cache_data['optimize_vert_reorder_index_count'], column_height)
         output_image_dimensions = 1 << (greatest_input_dimension - 1).bit_length()  # smallest power of 2 that is >= greatest_input_dimension
@@ -563,26 +546,8 @@ def SortTextures(cache_path, export_path, model_name, info):
             copied_column = input_image.crop((input_column_index, 1, input_column_index + 1, column_height))
             output_image.paste(copied_column, (output_column_index, 1, output_column_index + 1, column_height))
 
-        output_image.save(output_image_filename_1)
-        print("Written sorted image", output_image_filename_1)
-    
-    with Image.open(input_image_filename_2) as input_image:
-        column_height = input_image.height
-        greatest_input_dimension = max(model_cache_data['optimize_vert_reorder_index_count'], column_height)
-        output_image_dimensions = 1 << (greatest_input_dimension - 1).bit_length()  # smallest power of 2 that is >= greatest_input_dimension
-
-        output_image = Image.new(mode='RGB', size=(output_image_dimensions, output_image_dimensions))
-        
-        # The settings are on the first row of the image. So copy those over.
-        copied_row = input_image.crop((0, 0, column_height, column_height))
-        output_image.paste(copied_row, (0, 0, column_height, column_height))
-
-        for output_column_index, input_column_index in enumerate(optimized_indices):
-            copied_column = input_image.crop((input_column_index, 1, input_column_index + 1, column_height))
-            output_image.paste(copied_column, (output_column_index, 1, output_column_index + 1, column_height))
-
-        output_image.save(output_image_filename_2)
-        print("Written sorted image", output_image_filename_2)
+        output_image.save(output_image_filename)
+        print("Written sorted image", output_image_filename)
 
 
 class VAT_OT_CreateTextures(Operator):
