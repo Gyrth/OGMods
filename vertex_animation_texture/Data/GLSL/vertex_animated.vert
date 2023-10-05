@@ -172,9 +172,20 @@ void main() {
 	settings.y = DecodeFloatRG(vec2(settings_color_1.y, settings_color_2.y));
 	settings.z = DecodeFloatRG(vec2(settings_color_1.z, settings_color_2.z));
 
-	float animation_length = int(settings.x * 10000.0);
+	float animation_length = int(settings.z * 10000.0);
+	float start_pixel = int(settings.y * 10000.0);
+	float end_pixel = int(settings.z * 10000.0);
 
-	animation_length = animation_length;
+	if(end_pixel == 320.0){
+		vertex_color = vec3(0.0, 1.0, 0.0);
+	}else{
+		vertex_color = vec3(0.0, 0.0, 0.0);
+	}
+
+	// animation_length = animation_length;
+	animation_length = end_pixel - start_pixel;
+	animation_length = 320;
+	// animation_length = end_pixel;
 	float range = animation_length / texture_size.y;
 
 	float position_offset = length(texture(tex0, vec2(model_translation_attrib.x, model_translation_attrib.z)));
@@ -205,6 +216,6 @@ void main() {
 
 	vec3 transformed_vertex = transform_vec3(GetInstancedModelScale(instance_id), GetInstancedModelRotationQuat(instance_id), model_translation_attrib, animated_vertex_position);
 	gl_Position = projection_view_mat * vec4(transformed_vertex, 1.0);
-	vertex_color = albedo_color.xyz;
+	// vertex_color = albedo_color.xyz;
 	world_vert = transformed_vertex;
 }

@@ -48,7 +48,7 @@
     <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-64.068" t1="23.2783" t2="-141.945" s0="1" s1="1" s2="1" q0="0.0204164" q1="-0.308243" q2="0.00661704" q3="0.951065" euler_x="0.0429272" euler_y="-0.626841" euler_z="0" id="0">
+    <CameraObject t0="-58.6659" t1="26.0409" t2="-170.327" s0="1" s1="1" s2="1" q0="0.132431" q1="-0.179853" q2="0.024443" q3="0.974432" euler_x="0.270156" euler_y="-0.365036" euler_z="0" id="0">
         <parameters />
     </CameraObject>
     <EnvObject t0="-40.235" t1="-8.91578" t2="5.20651" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/IGF_Characters/IGF_Turner.xml">
@@ -359,7 +359,7 @@
         <EnvObject t0="-32.5299" t1="38.4922" t2="-198.101" s0="3.42213" s1="3.42213" s2="3.42213" q0="-0.411391" q1="-0.574865" q2="-0.575884" q3="0.410664" euler_x="1.56902" euler_y="-1.2406" euler_z="-3.14159" id="202" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
             <parameters />
         </EnvObject>
-        <EnvObject t0="-34.1617" t1="36.965" t2="-193.225" s0="3.42213" s1="3.42213" s2="3.42213" q0="0.698681" q1="0.697448" q2="0.112825" q3="0.112613" euler_x="2.82141" euler_y="-0.000573948" euler_z="1.56912" id="203" color_r="1" color_g="1" color_b="1" overbright="31" type_file="Data/Objects/Buildings/Post1.xml">
+        <EnvObject t0="-34.1617" t1="36.965" t2="-193.225" s0="3.42213" s1="3.42213" s2="3.42213" q0="0.698681" q1="0.697448" q2="0.112825" q3="0.112613" euler_x="2.82141" euler_y="-0.000573948" euler_z="1.56912" id="203" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
             <parameters />
         </EnvObject>
         <EnvObject t0="-38.1183" t1="35.88" t2="-194.498" s0="1.75635" s1="1.75635" s2="1.75635" q0="0" q1="0.558275" q2="0" q3="0.829656" euler_x="0" euler_y="1.18461" euler_z="0" id="204" color_r="1" color_g="0.835294" color_b="0.584314" overbright="0" type_file="Data/Objects/Buildings/window_boxes/box_base_squared.xml">

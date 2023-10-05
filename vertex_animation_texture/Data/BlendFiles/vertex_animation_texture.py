@@ -57,18 +57,20 @@ def GetPixel(img,x,y, image_size):
         color.append( img.pixels[offs + i] )
     return color
 
-def BoundedFloatToTextures(f, x, y, output_image, image_size, animation_length):
+def BoundedVec3ToTexture(value, x, y, output_image, image_size, animation_length):
     # Range need to be adjusted so it's between 0.0 - 1.0f;
-    origin_adjusted_location = f + (bounds / 2.0)
+    origin_adjusted_location = value + (bounds / 2.0)
     range_adjusted_location = origin_adjusted_location / bounds.x
     
-    FloatToTextures(range_adjusted_location, x, y, output_image, image_size, animation_length)
+    # The y and z axis need to be swapped so they are correct in-engine.
+    swapped = Vector([range_adjusted_location.x, range_adjusted_location.z, range_adjusted_location.y * -1.0])
+    
+    Vec3ToTexture(swapped, x, y, output_image, image_size, animation_length)
 
-def FloatToTextures(f, x, y, output_image, image_size, animation_length):
-    # The y and z axis might need to be swapped so they are correct in-engine.
-    split_x = EncodeFloatRG(f.x)
-    split_y = EncodeFloatRG(f.z)
-    split_z = EncodeFloatRG(f.y * -1.0)
+def Vec3ToTexture(value, x, y, output_image, image_size, animation_length):
+    split_x = EncodeFloatRG(value.x)
+    split_y = EncodeFloatRG(value.y)
+    split_z = EncodeFloatRG(value.z)
     
     color_image_1 = (split_x.x, split_y.x, split_z.x, 1.0)
     color_image_2 = (split_x.y, split_y.y, split_z.y, 1.0)
@@ -137,19 +139,11 @@ def CreateAnimationTextures(export_path, model_name, info):
     
     #------------------------------------------------
     
-    # Based on the bounds we need to set a background color that's contains NO vertex offset.
-    background_value = (bounds.x / 2.0)
-    background_value = background_value / bounds.x
-    encoded_background_value = EncodeFloatRG(background_value)
-    
-    # The single float value is split into two texture color values.
-    background_color = Vector([encoded_background_value.x, encoded_background_value.x, encoded_background_value.x, 1.0])
-    
     # Remove any existing images before creating new ones.
     if bpy.data.images.get('Output') != None:
         bpy.data.images.remove(bpy.data.images['Output'])
     
-    bpy.ops.image.new(name='Output', width=image_size, height=image_size, color=background_color, alpha=False)
+    bpy.ops.image.new(name='Output', width=image_size, height=image_size, alpha=False)
     output_image = bpy.data.images['Output']
     output_image.filepath_raw = target_folder + "/Textures/" + model_name + ".png"
     output_image.file_format = 'PNG'
@@ -215,18 +209,21 @@ def CreateAnimationTextures(export_path, model_name, info):
                 difference = rest_vert - vert
                 position_x = vertex_counter
                 
-                BoundedFloatToTextures(difference, position_x, position_y, pixels, image_size, animation_length)
+                BoundedVec3ToTexture(difference, position_x, position_y, pixels, image_size, animation_length)
                 vertex_counter += 1
             
             bm.free()
     
-    settings = Vector([(frame_counter - 1) / 10000.0, 0.0, 0.0])
-    FloatToTextures(settings, 0, image_size - 1, pixels, image_size, 1)
+    settings = Vector([(frame_counter - 1) / 10000.0, (frame_counter - 1) / 10000.0, (frame_counter - 1) / 10000.0])
+    Vec3ToTexture(settings, 0, image_size - 1, pixels, image_size, 1)
     
     print("Image size :", image_size, "px")
     print("Vertex count :", vertex_count)
     print("Animation length :", frame_counter)
     print("Center Location :", center_location)
+    print("Start Pixel :", 3)
+    print("End Pixel :", 3 + animation_length)
+    print("Calculated length :", (3 + animation_length) - 3)
     
     output_image.pixels[:] = pixels
     # Should probably update image
@@ -535,16 +532,16 @@ def SortTextures(cache_path, export_path, model_name, info):
         column_height = input_image.height
         greatest_input_dimension = max(model_cache_data['optimize_vert_reorder_index_count'], column_height)
         output_image_dimensions = 1 << (greatest_input_dimension - 1).bit_length()  # smallest power of 2 that is >= greatest_input_dimension
-
-        output_image = Image.new(mode='RGB', size=(output_image_dimensions, output_image_dimensions))
         
+        output_image = Image.new(mode='RGB', size=(output_image_dimensions, output_image_dimensions))
+            
         # The settings are on the first row of the image. So copy those over.
         copied_row = input_image.crop((0, 0, column_height, column_height))
         output_image.paste(copied_row, (0, 0, column_height, column_height))
 
         for output_column_index, input_column_index in enumerate(optimized_indices):
-            copied_column = input_image.crop((input_column_index, 1, input_column_index + 1, column_height))
-            output_image.paste(copied_column, (output_column_index, 1, output_column_index + 1, column_height))
+            copied_column = input_image.crop((input_column_index, 2, input_column_index + 1, column_height))
+            output_image.paste(copied_column, (output_column_index, 2, output_column_index + 1, column_height))
 
         output_image.save(output_image_filename)
         print("Written sorted image", output_image_filename)
