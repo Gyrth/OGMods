@@ -1,5 +1,4 @@
-#version 150
-#extension GL_ARB_shading_language_420pack : enable
+#version 450 core
 
 uniform float time;
 uniform vec3 cam_pos;
@@ -169,7 +168,7 @@ void main() {
 	// vec4 colormap = textureLod(detail_normal, vec3(pixelated_coord, detail_normal_indices[normal_image]), 0.0);
 	// vec4 colormap = textureLod(tex0, vec2(frag_tex_coords), 6.0);
 
-	#if defined(VERTEX_COLOR)
+	#if !defined(VERTEX_COLOR)
 		out_color.xyz = vertex_color;
 		colormap = out_color;
 	#else

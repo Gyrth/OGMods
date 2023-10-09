@@ -1,5 +1,4 @@
-#version 150
-#extension GL_ARB_shading_language_420pack : enable
+#version 450 core
 
 #include "lighting150.glsl"
 
@@ -120,22 +119,71 @@ uniform vec4 detail_normal_indices;
 
 const vec3 bounds = vec3(20.0, 20.0, 20.0);
 
+const float SRGB_GAMMA = 1.0 / 2.2;
+const float SRGB_INVERSE_GAMMA = 2.2;
+const float SRGB_ALPHA = 0.055;
+
 float DecodeFloatRG(vec2 enc){
-	vec2 kDecodeDot = vec2(1.0, 1.0 / 255.0);
+	vec2 kDecodeDot = vec2(1.0, 1.0 / 256.0);
 	return dot(enc, kDecodeDot);
 }
 
 vec2 EncodeFloatRG(float v){
-	vec2 kEncodeMul = vec2(1.0f, 255.0f);
+	vec2 kEncodeMul = vec2(1.0, 255.0);
 	float kEncodeBit = 1.0 / 255.0;
 	vec2 enc = kEncodeMul * v;
 
-	enc.x = mod(enc.x, 1.0f);
-	enc.y = mod(enc.y, 1.0f);
+	enc.x = mod(enc.x, 1.0);
+	enc.y = mod(enc.y, 1.0);
 
 	enc.x -= enc.y * kEncodeBit;
 
 	return enc;
+}
+
+vec4 toLinear(vec4 sRGB) {
+    bvec4 cutoff = lessThan(sRGB, vec4(0.04045));
+    vec4 higher = pow((sRGB + vec4(0.055))/vec4(1.055), vec4(2.4));
+    vec4 lower = sRGB/vec4(12.92);
+
+    return mix(higher, lower, cutoff);
+}
+
+// Converts a single linear channel to srgb
+float linear_to_srgb(float channel) {
+    if(channel <= 0.0031308)
+        return 12.92 * channel;
+    else
+        return (1.0 + SRGB_ALPHA) * pow(channel, 1.0/2.4) - SRGB_ALPHA;
+}
+
+// Converts a linear rgb color to a srgb color (exact, not approximated)
+vec3 rgb_to_srgb(vec3 rgb) {
+    return vec3(
+        linear_to_srgb(rgb.r),
+        linear_to_srgb(rgb.g),
+        linear_to_srgb(rgb.b)
+    );
+}
+
+// Converts a linear rgb color to a srgb color (approximated, but fast)
+vec3 rgb_to_srgb_approx(vec3 rgb) {
+    return pow(rgb, vec3(SRGB_GAMMA));
+}
+
+vec4 NormalizeColor(in vec4 value){
+  vec4 denorm = value * 255.0;
+  vec4 rounded = round(denorm);
+  return rounded / 255.0;
+}
+
+vec4 GammaCorrect(vec4 value){
+	return vec4(pow(value.r, 2.2), pow(value.g, 2.2), pow(value.b, 2.2), value.a);
+}
+
+vec4 GammaUnCorrect(vec4 value){
+	float gamma = 1.0 / 2.2;
+	return vec4(255 * pow(value.r / 255, gamma), 255 * pow(value.g / 255, gamma), 255 * pow(value.b / 255, gamma), value.a);
 }
 
 void main() {
@@ -156,15 +204,18 @@ void main() {
 	vec4 normal_color = texture(tex1, frag_tex_coords);
 
 	vec2 texture_size = textureSize(tex5, 0);
-	float target_resolution = int(texture_size.x);
+	float target_resolution = int(texture_size.y);
 	float one_pixel_offset = (1.0 / target_resolution);
 	float half_pixel_offset = (1.0 / target_resolution) / 2.0;
 
 	int x_pixel = index;
 	float x_pos = 1.0 / target_resolution * x_pixel;
 
-	vec4 settings_color_1 = texture(tex5, vec2(half_pixel_offset, half_pixel_offset));
-	vec4 settings_color_2 = texture(tex5, vec2(half_pixel_offset, half_pixel_offset + one_pixel_offset));
+	vec4 settings_color_1 = textureLod(tex5, vec2(half_pixel_offset, half_pixel_offset), 0);
+	vec4 settings_color_2 = textureLod(tex5, vec2(half_pixel_offset, one_pixel_offset + half_pixel_offset), 0);
+
+	settings_color_1 = toLinear(settings_color_1);
+	settings_color_2 = toLinear(settings_color_2);
 
 	// The top row of the images is used for settings. Currently only the animation length, but there's room for more features.
 	vec3 settings;
@@ -172,11 +223,11 @@ void main() {
 	settings.y = DecodeFloatRG(vec2(settings_color_1.y, settings_color_2.y));
 	settings.z = DecodeFloatRG(vec2(settings_color_1.z, settings_color_2.z));
 
-	float animation_length = int(settings.z * 10000.0);
+	float animation_length = int(settings.x * 10000.0);
 	float start_pixel = int(settings.y * 10000.0);
 	float end_pixel = int(settings.z * 10000.0);
 
-	if(end_pixel == 320.0){
+	if(animation_length == 319.0){
 		vertex_color = vec3(0.0, 1.0, 0.0);
 	}else{
 		vertex_color = vec3(0.0, 0.0, 0.0);

@@ -18,6 +18,7 @@ import json
 import os
 import re
 import struct
+from fractions import Fraction as frac
 
 bpy.types.Scene.export_path = StringProperty(subtype='DIR_PATH', name="Export Path")
 bpy.types.Scene.model_name = StringProperty(subtype='FILE_NAME', name="Model Name")
@@ -33,8 +34,10 @@ def EncodeFloatRG(v):
     kEncodeBit = 1.0 / 255.0
     enc = kEncodeMul * v
     
-    enc.x = enc.x % 1
-    enc.y = enc.y % 1
+    enc = Vector([enc.x - math.floor(enc.x), enc.y - math.floor(enc.y)]);
+    
+#    enc.x = enc.x % 1
+#    enc.y = enc.y % 1
     
     enc.x -= enc.y * kEncodeBit
     
@@ -44,13 +47,22 @@ def DecodeFloatRG(enc):
     kDecodeDot = Vector([1.0, 1 / 255.0])
     return enc.dot(kDecodeDot)
 
+def EncodeFloatRGBA(v):
+    kEncodeMul = Vector([1.0, 255.0, 65025.0, 16581375.0])
+    kEncodeBit = 1.0 / 255.0
+    enc = kEncodeMul * v;
+    
+    enc -= enc.yzww * kEncodeBit;
+    
+    return enc;
+
 def SetPixel(img, x, y, color, image_size):
     offs = (x + int(y * image_size)) * 4
     if x >= 0 and x < image_size and y >= 0 and y < image_size:
         for i in range(4):
             img[offs + i] = color[i]
 
-def GetPixel(img,x,y, image_size):
+def GetPixel(img, x, y, image_size):
     color = []
     offs = (x + y * image_size) * 4
     for i in range(4):
@@ -68,6 +80,7 @@ def BoundedVec3ToTexture(value, x, y, output_image, image_size, animation_length
     Vec3ToTexture(swapped, x, y, output_image, image_size, animation_length)
 
 def Vec3ToTexture(value, x, y, output_image, image_size, animation_length):
+    
     split_x = EncodeFloatRG(value.x)
     split_y = EncodeFloatRG(value.y)
     split_z = EncodeFloatRG(value.z)
@@ -147,6 +160,7 @@ def CreateAnimationTextures(export_path, model_name, info):
     output_image = bpy.data.images['Output']
     output_image.filepath_raw = target_folder + "/Textures/" + model_name + ".png"
     output_image.file_format = 'PNG'
+#    output_image.depth = 16
 
     # The vertices location in rest position is used to calculate the vertex offset for the animation.
     rest_data = []
@@ -214,16 +228,18 @@ def CreateAnimationTextures(export_path, model_name, info):
             
             bm.free()
     
-    settings = Vector([(frame_counter - 1) / 10000.0, (frame_counter - 1) / 10000.0, (frame_counter - 1) / 10000.0])
+    settings = Vector([321 / 1000.0, 321 / 1000.0, 321 / 1000.0])
     Vec3ToTexture(settings, 0, image_size - 1, pixels, image_size, 1)
     
     print("Image size :", image_size, "px")
     print("Vertex count :", vertex_count)
     print("Animation length :", frame_counter)
     print("Center Location :", center_location)
-    print("Start Pixel :", 3)
-    print("End Pixel :", 3 + animation_length)
-    print("Calculated length :", (3 + animation_length) - 3)
+    print("Start Pixel :", settings[1])
+    print("End Pixel :", settings[2])
+    print("Calculated length :", (settings[2] - settings[1]) )
+    
+#    encoded = EncodeFloatRG(value.x)
     
     output_image.pixels[:] = pixels
     # Should probably update image
@@ -534,7 +550,7 @@ def SortTextures(cache_path, export_path, model_name, info):
         output_image_dimensions = 1 << (greatest_input_dimension - 1).bit_length()  # smallest power of 2 that is >= greatest_input_dimension
         
         output_image = Image.new(mode='RGB', size=(output_image_dimensions, output_image_dimensions))
-            
+        
         # The settings are on the first row of the image. So copy those over.
         copied_row = input_image.crop((0, 0, column_height, column_height))
         output_image.paste(copied_row, (0, 0, column_height, column_height))
@@ -543,7 +559,7 @@ def SortTextures(cache_path, export_path, model_name, info):
             copied_column = input_image.crop((input_column_index, 2, input_column_index + 1, column_height))
             output_image.paste(copied_column, (output_column_index, 2, output_column_index + 1, column_height))
 
-        output_image.save(output_image_filename)
+        output_image.save(output_image_filename, info=input_image.info)
         print("Written sorted image", output_image_filename)
 
 
