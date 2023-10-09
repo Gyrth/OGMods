@@ -100,12 +100,10 @@ def get_from_object_xml(xml_path, og_path, workshop_path, tag, info):
             if content.split("\n")[0] != "<?xml version=\"1.0\" ?>":
                 content = "<?xml version=\"1.0\" ?>\n" + content
             
-            content = content.replace("scale=1", "scale=\"1\"")
-            content = content.replace("scale=2", "scale=\"2\"")
-            content = content.replace("scale=3", "scale=\"3\"")
+            content = re.sub('scale=\S+', '', content)
             content = content.replace("no_collision=true", "no_collision=\"true\"")
             
-#            print(xml_path)
+#            print(resolved_path + " tag " + tag)
             result = re.findall('(?s)<Object>.+?</Object>', content)
             
             root = ET.fromstring('\n'.join(result))
@@ -427,19 +425,21 @@ def decimate_all():
             element.select=False
 
 def get_asset_path(path, og_path, workshop_path):
+    if path == '':
+        return None
+    
     resolved_path = path_insensitive(og_path + path)
-    if resolved_path == None: return
-
-    if path == '' or os.path.exists(resolved_path):
+    
+    if resolved_path != None and os.path.exists(resolved_path):
         return resolved_path
     
     workshop_folders = os.listdir(workshop_path)
     for mod_folder in workshop_folders:
         resolved_path = path_insensitive(workshop_path + mod_folder + "/" + path)
-        if os.path.exists(resolved_path):
+        if resolved_path != None and os.path.exists(resolved_path):
             return resolved_path
 
-    return
+    return None
 
 def path_insensitive(path):
     base = os.path.basename(path)  # may be a directory or a file
