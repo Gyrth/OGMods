@@ -89,7 +89,7 @@ def get_from_object_xml(xml_path, og_path, workshop_path, tag, info):
     
     if resolved_path is None:
         check = str(Path(og_path + xml_path).resolve())
-        print("resolved_path " + check)
+#        print("resolved_path " + check)
         info.report({'WARNING'}, "Couldn't resolve : " + xml_path)
         
         return None
@@ -100,8 +100,9 @@ def get_from_object_xml(xml_path, og_path, workshop_path, tag, info):
             if content.split("\n")[0] != "<?xml version=\"1.0\" ?>":
                 content = "<?xml version=\"1.0\" ?>\n" + content
             
-            content = re.sub('scale=\S+', '', content)
+            content = content.replace("\\", "/")
             content = content.replace("no_collision=true", "no_collision=\"true\"")
+            content = re.sub('scale=.*?\/>', '/>', content)
             
 #            print(resolved_path + " tag " + tag)
             result = re.findall('(?s)<Object>.+?</Object>', content)
@@ -502,6 +503,7 @@ class ImportOperator(Operator):
         print(resolved_level_path)
         
         read_level_xml(resolved_og_path, resolved_workshop_path, resolved_level_path, self)
+
         return {'FINISHED'}
 
 class ClearOperator(Operator):
