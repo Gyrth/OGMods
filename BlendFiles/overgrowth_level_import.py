@@ -47,18 +47,18 @@ def read_level_xml(og_path, workshop_path, level_path, info):
             if resolved_path != None and os.path.isfile(resolved_path):
                 img = bpy.data.images.load(resolved_path, check_existing=True)
             else:
-                print("Could not find " + skydome_path)
+                info.report({'WARNING'}, "Could not find skydome " + skydome_path)
                 return
         env_texture.image = img
         
-        read_terrain(og_path, workshop_path, root.find("Terrain"))
+        read_terrain(og_path, workshop_path, root.find("Terrain"), info)
         read_body(og_path, workshop_path, root, info)
 
-def read_terrain(og_path, workshop_path, terrain):
+def read_terrain(og_path, workshop_path, terrain, info):
     if import_terrain and terrain != None:
         color_map = terrain.find("ColorMap").text
         terrain_path = terrain.find("Heightmap").text + ".obj"
-        print("Loading terrain : " + terrain_path)
+        info.report({'INFO'}, "Loading terrain : " + terrain_path)
         
         if terrain.find("ModelOverride") != None:
             terrain_path = terrain.find("ModelOverride").text
@@ -66,9 +66,11 @@ def read_terrain(og_path, workshop_path, terrain):
         normal_path = terrain.find("Heightmap").text + "_normal.png"
         
         model = load_model(og_path, workshop_path, terrain_path, terrain_path, (0.0, 0.0, 0.0), (1.0, 1.0, 1.0), Quaternion(), False)
-        create_material(og_path, workshop_path, color_map, model, [1.0, 1.0, 1.0, 1.0], False, normal_path, True)
-        model.rotation_mode = 'XYZ'
-        rotate_object(model, radians(90.0), (1.0, 0.0, 0.0), (0.0, 0.0, 0.0))
+        create_material(og_path, workshop_path, color_map, model, [1.0, 1.0, 1.0, 1.0], False, normal_path, True, info)
+        
+        if model != None:
+            model.rotation_mode = 'XYZ'
+            rotate_object(model, radians(90.0), (1.0, 0.0, 0.0), (0.0, 0.0, 0.0))
 
 def read_body(og_path, workshop_path, root, info):
     list = find_child(root, "EnvObject")
@@ -87,10 +89,11 @@ def find_child(root, tag):
 def get_from_object_xml(xml_path, og_path, workshop_path, tag, info):
     resolved_path = get_asset_path(xml_path, og_path, workshop_path)
     
+#    resolved_path = "/home/gyrth/.steam/debian-installation/steamapps/common/Overgrowth/Data/Objects/error_object.xml"
+    
     if resolved_path is None:
         check = str(Path(og_path + xml_path).resolve())
-#        print("resolved_path " + check)
-        info.report({'WARNING'}, "Couldn't resolve : " + xml_path)
+        info.report({'WARNING'}, "Couldn't resolve " + xml_path)
         
         return None
     
@@ -102,16 +105,21 @@ def get_from_object_xml(xml_path, og_path, workshop_path, tag, info):
             
             content = content.replace("\\", "/")
             content = content.replace("no_collision=true", "no_collision=\"true\"")
-            content = re.sub('scale=.*?\/>', '/>', content)
+            content = content.replace("scale=1", "scale=\"1\"")
+            content = content.replace("scale=2", "scale=\"2\"")
+            content = content.replace("scale=3", "scale=\"3\"")
+            content = content.replace("scale=4", "scale=\"4\"")
+            content = content.replace("scale=2.6", "scale=\"2.6\"")
             
-#            print(resolved_path + " tag " + tag)
             result = re.findall('(?s)<Object>.+?</Object>', content)
-            
             root = ET.fromstring('\n'.join(result))
             
             return root.find(tag).text
     except IOError:
-        print("Could not find " + path)
+        info.report({'WARNING'}, "Could not load " + xml_path)
+        return None
+    except ET.ParseError:
+        info.report({'WARNING'}, "XML parsing error in " + xml_path)
         return None
 
 def extract_env_object(og_path, workshop_path, env_data, import_plants, info):
@@ -126,7 +134,6 @@ def extract_env_object(og_path, workshop_path, env_data, import_plants, info):
       use_transparency = True
     elif 'plant' in shader_name or 'PLANT' in shader_name:
         if not import_plants:
-            print("Not loading " + xml_path)
             return
         else:
             use_transparency = True
@@ -137,8 +144,6 @@ def extract_env_object(og_path, workshop_path, env_data, import_plants, info):
     model_path = get_from_object_xml(xml_path, og_path, workshop_path, 'Model', info)
     color_map = get_from_object_xml(xml_path, og_path, workshop_path, 'ColorMap', info)
     normal_map = get_from_object_xml(xml_path, og_path, workshop_path, 'NormalMap', info)
-    
-    print("Loading xml : " + xml_path)
 
     if model_path != None:
         scale = Vector((get_float(env_data, 's0'), get_float(env_data, 's1'), get_float(env_data, 's2')))
@@ -164,13 +169,13 @@ def extract_env_object(og_path, workshop_path, env_data, import_plants, info):
         model['NormalMap'] = normal_map
         
         if color_map != None and model != None:
-            create_material(og_path, workshop_path, color_map, model, color, use_transparency, normal_map, use_tangent)
+            create_material(og_path, workshop_path, color_map, model, color, use_transparency, normal_map, use_tangent, info)
             model.rotation_mode = 'XYZ'
             rotate_object(model, radians(90.0), (1.0, 0.0, 0.0), (0.0, 0.0, 0.0))
             if draw_during_import:
                 bpy.ops.wm.redraw_timer(type='DRAW_WIN_SWAP', iterations=1)
     else:
-        raise TypeError('Could not get model path : ' + model_path)
+        raise TypeError('Could not get model ' + model_path)
 
 def get_float(data, key):
     if data.get(key) != None:
@@ -179,7 +184,7 @@ def get_float(data, key):
         return 1.0
 #        raise TypeError('Unable to get : ' + key)
 
-def get_image(path, og_path, workshop_path):
+def get_image(path, og_path, workshop_path, info):
     resolved_path = get_asset_path(path, og_path, workshop_path)
     image = None
     if resolved_path != None and os.path.isfile(resolved_path):
@@ -189,15 +194,15 @@ def get_image(path, og_path, workshop_path):
         if resolved_path != None and os.path.isfile(resolved_path):
             image = bpy.data.images.load(resolved_path, check_existing=True)
         else:
-            print("Could not find " + path)
+            info.report({'WARNING'}, "Could not find image " + path)
     return image
 
-def create_material(og_path, workshop_path, color_map, model, color, use_transparency, normal_path, use_tangent):
-    if not create_materials or len(model.data.materials) > 0:
+def create_material(og_path, workshop_path, color_map, model, color, use_transparency, normal_path, use_tangent, info):
+    if model == None or not create_materials or len(model.data.materials) > 0:
         return
     
-    color_image = get_image(color_map, og_path, workshop_path)
-    normal_image = get_image(normal_path, og_path, workshop_path)
+    color_image = get_image(color_map, og_path, workshop_path, info)
+    normal_image = get_image(normal_path, og_path, workshop_path, info)
     
     color_image.alpha_mode = "CHANNEL_PACKED"
     material = bpy.data.materials.new(name=color_map)
@@ -263,7 +268,6 @@ def create_material(og_path, workshop_path, color_map, model, color, use_transpa
 
 def load_model(og_path, workshop_path, model_path, xml_path, position, scale, rotation, recenter):
     resolved_path = get_asset_path(model_path, og_path, workshop_path)
-#    print(og_path + model_path)
     
     if resolved_path != None and os.path.isfile(resolved_path):
         if not load_models:
@@ -305,7 +309,7 @@ def load_model(og_path, workshop_path, model_path, xml_path, position, scale, ro
                 
         return bpy.context.selected_objects[0]
     else:
-        raise TypeError('Could not find model : ' + model_path)
+#        raise TypeError('Could not find model : ' + model_path)
         return None
 
 def rotate_object(obj, angle, direction, point):
@@ -498,9 +502,9 @@ class ImportOperator(Operator):
         resolved_workshop_path = str(Path(context.scene.workshop_path).resolve()) + "/"
         resolved_level_path = str(Path(context.scene.level_path).resolve())
         
-        print(resolved_og_path)
-        print(resolved_workshop_path)
-        print(resolved_level_path)
+        self.report({'INFO'}, "Overgrowth path " + resolved_og_path)
+        self.report({'INFO'}, "Workshop path " + resolved_workshop_path)
+        self.report({'INFO'}, "Level path " + resolved_level_path)
         
         read_level_xml(resolved_og_path, resolved_workshop_path, resolved_level_path, self)
 
