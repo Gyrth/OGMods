@@ -10,6 +10,7 @@ from bpy.props import BoolProperty, IntVectorProperty, StringProperty
 from bpy.types import (Panel, Operator)
 
 bpy.types.Scene.og_path = StringProperty(subtype='DIR_PATH', name="Overgrowth Path")
+bpy.types.Scene.cache_path = StringProperty(subtype='DIR_PATH', name="Cache Path")
 bpy.types.Scene.workshop_path = StringProperty(subtype='FILE_PATH', name="Workshop Path")
 bpy.types.Scene.level_path = StringProperty(subtype='FILE_PATH', name="Level Path")
 bpy.types.Scene.import_plants = BoolProperty(name="Import Plants")
@@ -26,7 +27,7 @@ create_materials = True
 cached_object_names = []
 cached_object_meshes = []
 
-def read_level_xml(og_path, workshop_path, level_path, info):
+def read_level_xml(og_path, cache_path, workshop_path, level_path, info):
     with open(level_path, 'r') as file:
         content = file.read()
         content = content.replace("<?xml version=\"2.0\" ?>\n", "")
@@ -39,11 +40,11 @@ def read_level_xml(og_path, workshop_path, level_path, info):
         env_texture = node_tree.nodes["Environment Texture"]
         img = None
         
-        resolved_path = get_asset_path(skydome_path, og_path, workshop_path)
+        resolved_path = get_asset_path(skydome_path, og_path, cache_path, workshop_path)
         if resolved_path != None and os.path.isfile(resolved_path):
             img = bpy.data.images.load(resolved_path, check_existing=True)
         else:
-            resolved_path = get_asset_path(skydome_path + '_converted.dds', og_path, workshop_path)
+            resolved_path = get_asset_path(skydome_path + '_converted.dds', og_path, cache_path, workshop_path)
             if resolved_path != None and os.path.isfile(resolved_path):
                 img = bpy.data.images.load(resolved_path, check_existing=True)
             else:
@@ -51,10 +52,10 @@ def read_level_xml(og_path, workshop_path, level_path, info):
                 return
         env_texture.image = img
         
-        read_terrain(og_path, workshop_path, root.find("Terrain"), info)
-        read_body(og_path, workshop_path, root, info)
+        read_terrain(og_path, cache_path, workshop_path, root.find("Terrain"), info)
+        read_body(og_path, cache_path, workshop_path, root, info)
 
-def read_terrain(og_path, workshop_path, terrain, info):
+def read_terrain(og_path, cache_path, workshop_path, terrain, info):
     if import_terrain and terrain != None:
         color_map = terrain.find("ColorMap").text
         terrain_path = terrain.find("Heightmap").text + ".obj"
@@ -64,19 +65,20 @@ def read_terrain(og_path, workshop_path, terrain, info):
             terrain_path = terrain.find("ModelOverride").text
         
         normal_path = terrain.find("Heightmap").text + "_normal.png"
+        print(normal_path)
         
-        model = load_model(og_path, workshop_path, terrain_path, terrain_path, (0.0, 0.0, 0.0), (1.0, 1.0, 1.0), Quaternion(), False)
-        create_material(og_path, workshop_path, color_map, model, [1.0, 1.0, 1.0, 1.0], False, normal_path, True, info)
+        model = load_model(og_path, cache_path, workshop_path, terrain_path, terrain_path, (0.0, 0.0, 0.0), (1.0, 1.0, 1.0), Quaternion(), False)
+        create_material(og_path, cache_path, workshop_path, color_map, model, [1.0, 1.0, 1.0, 1.0], False, normal_path, True, info)
         
         if model != None:
             model.rotation_mode = 'XYZ'
             rotate_object(model, radians(90.0), (1.0, 0.0, 0.0), (0.0, 0.0, 0.0))
 
-def read_body(og_path, workshop_path, root, info):
+def read_body(og_path, cache_path, workshop_path, root, info):
     list = find_child(root, "EnvObject")
     for child in list:
         print("Loading object : " + str(list.index(child)) + "/" + str(len(list)))
-        extract_env_object(og_path, workshop_path, child, import_plants, info)
+        extract_env_object(og_path, cache_path, workshop_path, child, import_plants, info)
 
 def find_child(root, tag):
     list = []
@@ -86,8 +88,8 @@ def find_child(root, tag):
         list.extend(find_child(child, tag))
     return list
 
-def get_from_object_xml(xml_path, og_path, workshop_path, tag, info):
-    resolved_path = get_asset_path(xml_path, og_path, workshop_path)
+def get_from_object_xml(xml_path, og_path, cache_path, workshop_path, tag, info):
+    resolved_path = get_asset_path(xml_path, og_path, cache_path, workshop_path)
     
 #    resolved_path = "/home/gyrth/.steam/debian-installation/steamapps/common/Overgrowth/Data/Objects/error_object.xml"
     
@@ -122,12 +124,12 @@ def get_from_object_xml(xml_path, og_path, workshop_path, tag, info):
         info.report({'WARNING'}, "XML parsing error in " + xml_path)
         return None
 
-def extract_env_object(og_path, workshop_path, env_data, import_plants, info):
+def extract_env_object(og_path, cache_path, workshop_path, env_data, import_plants, info):
     map_scale = False
     xml_path = env_data.get('type_file')
     use_transparency = False
 
-    shader_name = get_from_object_xml(xml_path, og_path, workshop_path, 'ShaderName', info)
+    shader_name = get_from_object_xml(xml_path, og_path, cache_path, workshop_path, 'ShaderName', info)
     if shader_name == None:
         return
     elif 'cubemapalpha' in shader_name:
@@ -141,9 +143,9 @@ def extract_env_object(og_path, workshop_path, env_data, import_plants, info):
         map_scale = True
     
     use_tangent = "TANGENT" in shader_name or shader_name == "cubemap" or shader_name == "plant" or shader_name == "plant_less_movement" or shader_name == "plant_foliage" or shader_name == "detailmap4tangent"
-    model_path = get_from_object_xml(xml_path, og_path, workshop_path, 'Model', info)
-    color_map = get_from_object_xml(xml_path, og_path, workshop_path, 'ColorMap', info)
-    normal_map = get_from_object_xml(xml_path, og_path, workshop_path, 'NormalMap', info)
+    model_path = get_from_object_xml(xml_path, og_path, cache_path, workshop_path, 'Model', info)
+    color_map = get_from_object_xml(xml_path, og_path, cache_path, workshop_path, 'ColorMap', info)
+    normal_map = get_from_object_xml(xml_path, og_path, cache_path, workshop_path, 'NormalMap', info)
 
     if model_path != None:
         scale = Vector((get_float(env_data, 's0'), get_float(env_data, 's1'), get_float(env_data, 's2')))
@@ -161,7 +163,7 @@ def extract_env_object(og_path, workshop_path, env_data, import_plants, info):
             rotation = Quaternion((get_float(env_data, 'q3'), get_float(env_data, 'q0'), get_float(env_data, 'q1'), get_float(env_data, 'q2')))
 
         color = Vector((get_float(env_data, 'color_r'), get_float(env_data, 'color_g'), get_float(env_data, 'color_b'), 1.0))
-        model = load_model(og_path, workshop_path, model_path, xml_path, position, scale, rotation, True)
+        model = load_model(og_path, cache_path, workshop_path, model_path, xml_path, position, scale, rotation, True)
         
         model['ShaderName'] = shader_name
         model['Model'] = model_path
@@ -169,7 +171,7 @@ def extract_env_object(og_path, workshop_path, env_data, import_plants, info):
         model['NormalMap'] = normal_map
         
         if color_map != None and model != None:
-            create_material(og_path, workshop_path, color_map, model, color, use_transparency, normal_map, use_tangent, info)
+            create_material(og_path, cache_path, workshop_path, color_map, model, color, use_transparency, normal_map, use_tangent, info)
             model.rotation_mode = 'XYZ'
             rotate_object(model, radians(90.0), (1.0, 0.0, 0.0), (0.0, 0.0, 0.0))
             if draw_during_import:
@@ -184,25 +186,25 @@ def get_float(data, key):
         return 1.0
 #        raise TypeError('Unable to get : ' + key)
 
-def get_image(path, og_path, workshop_path, info):
-    resolved_path = get_asset_path(path, og_path, workshop_path)
+def get_image(path, og_path, cache_path, workshop_path, info):
+    resolved_path = get_asset_path(path, og_path, cache_path, workshop_path)
     image = None
     if resolved_path != None and os.path.isfile(resolved_path):
         image = bpy.data.images.load(resolved_path, check_existing=True)
     else:
-        resolved_path = get_asset_path(path + '_converted.dds', og_path, workshop_path)
+        resolved_path = get_asset_path(path + '_converted.dds', og_path, cache_path, workshop_path)
         if resolved_path != None and os.path.isfile(resolved_path):
             image = bpy.data.images.load(resolved_path, check_existing=True)
         else:
             info.report({'WARNING'}, "Could not find image " + path)
     return image
 
-def create_material(og_path, workshop_path, color_map, model, color, use_transparency, normal_path, use_tangent, info):
+def create_material(og_path, cache_path, workshop_path, color_map, model, color, use_transparency, normal_path, use_tangent, info):
     if model == None or not create_materials or len(model.data.materials) > 0:
         return
     
-    color_image = get_image(color_map, og_path, workshop_path, info)
-    normal_image = get_image(normal_path, og_path, workshop_path, info)
+    color_image = get_image(color_map, og_path, cache_path, workshop_path, info)
+    normal_image = get_image(normal_path, og_path, cache_path, workshop_path, info)
     
     color_image.alpha_mode = "CHANNEL_PACKED"
     material = bpy.data.materials.new(name=color_map)
@@ -266,8 +268,8 @@ def create_material(og_path, workshop_path, color_map, model, color, use_transpa
 #        img.use_alpha = False
         pass
 
-def load_model(og_path, workshop_path, model_path, xml_path, position, scale, rotation, recenter):
-    resolved_path = get_asset_path(model_path, og_path, workshop_path)
+def load_model(og_path, cache_path, workshop_path, model_path, xml_path, position, scale, rotation, recenter):
+    resolved_path = get_asset_path(model_path, og_path, cache_path, workshop_path)
     
     if resolved_path != None and os.path.isfile(resolved_path):
         if not load_models:
@@ -309,7 +311,7 @@ def load_model(og_path, workshop_path, model_path, xml_path, position, scale, ro
                 
         return bpy.context.selected_objects[0]
     else:
-#        raise TypeError('Could not find model : ' + model_path)
+#        raise TypeError('Could not find model : ', resolved_path)
         return None
 
 def rotate_object(obj, angle, direction, point):
@@ -429,15 +431,21 @@ def decimate_all():
         else:
             element.select=False
 
-def get_asset_path(path, og_path, workshop_path):
+def get_asset_path(path, og_path, cache_path, workshop_path):
     if path == '':
         return None
     
+    # Look for the asset in the OG install folder.
     resolved_path = path_insensitive(og_path + path)
-    
     if resolved_path != None and os.path.exists(resolved_path):
         return resolved_path
     
+    # Look for the asset in the OG cache folder.
+    resolved_path = path_insensitive(cache_path + path)
+    if resolved_path != None and os.path.exists(resolved_path):
+        return resolved_path
+    
+    # Go through all the workshop item folders to find the asset.
     workshop_folders = os.listdir(workshop_path)
     for mod_folder in workshop_folders:
         resolved_path = path_insensitive(workshop_path + mod_folder + "/" + path)
@@ -498,15 +506,17 @@ class ImportOperator(Operator):
         import_terrain = context.scene.import_terrain
         create_materials = context.scene.create_materials
         
-        resolved_og_path = str(Path(context.scene.og_path).resolve()) + "/"
-        resolved_workshop_path = str(Path(context.scene.workshop_path).resolve()) + "/"
-        resolved_level_path = str(Path(context.scene.level_path).resolve())
+        resolved_og_path = bpy.path.abspath(context.scene.og_path)
+        resolved_cache_path = bpy.path.abspath(context.scene.cache_path)
+        resolved_workshop_path = bpy.path.abspath(context.scene.workshop_path)
+        resolved_level_path = bpy.path.abspath(context.scene.level_path)
         
         self.report({'INFO'}, "Overgrowth path " + resolved_og_path)
+        self.report({'INFO'}, "Cache path " + resolved_cache_path)
         self.report({'INFO'}, "Workshop path " + resolved_workshop_path)
         self.report({'INFO'}, "Level path " + resolved_level_path)
         
-        read_level_xml(resolved_og_path, resolved_workshop_path, resolved_level_path, self)
+        read_level_xml(resolved_og_path, resolved_cache_path, resolved_workshop_path, resolved_level_path, self)
 
         return {'FINISHED'}
 
@@ -527,6 +537,7 @@ class OGLevelImport(Panel):
     def draw(self, context):
         layout = self.layout
         self.layout.prop(context.scene, "og_path")
+        self.layout.prop(context.scene, "cache_path")
         self.layout.prop(context.scene, "workshop_path")
         self.layout.prop(context.scene, "level_path")
         self.layout.prop(context.scene, "import_plants")
