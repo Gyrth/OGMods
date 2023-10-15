@@ -227,21 +227,21 @@ void main() {
 	float start_pixel = int(settings.y * 10000.0);
 	float end_pixel = int(settings.z * 10000.0);
 
-	if(animation_length == 319.0){
-		vertex_color = vec3(0.0, 1.0, 0.0);
-	}else{
-		vertex_color = vec3(0.0, 0.0, 0.0);
-	}
+	// if(animation_length == 319.0){
+	// 	vertex_color = vec3(0.0, 1.0, 0.0);
+	// }else{
+	// 	vertex_color = vec3(0.0, 0.0, 0.0);
+	// }
 
 	// animation_length = animation_length;
 	animation_length = end_pixel - start_pixel;
-	animation_length = 320;
+	animation_length = 24;
 	// animation_length = end_pixel;
 	float range = animation_length / texture_size.y;
 
 	float position_offset = length(texture(tex0, vec2(model_translation_attrib.x, model_translation_attrib.z)));
 	position_offset = 0.0;
-	float animation_speed = 0.25;
+	float animation_speed = 2.25;
 
 	float animation_progress = mod((time * animation_speed + position_offset) * range, range);
 	float settings_skip = one_pixel_offset + one_pixel_offset;
