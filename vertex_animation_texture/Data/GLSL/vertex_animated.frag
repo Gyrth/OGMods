@@ -12,6 +12,7 @@ UNIFORM_COMMON_TEXTURES
 UNIFORM_LIGHT_DIR
 
 #define detail_normal tex7
+uniform sampler2D base_normal_tex;
 
 uniform sampler2D tex3; // Diffuse cubemap
 
@@ -142,15 +143,35 @@ vec3 quat_mul_vec3(vec4 q, vec3 v) {
     return v + ((uv * q.w) + uuv) * 2;
 }
 
+// From http://www.thetenthplanet.de/archives/1180
+mat3 cotangent_frame( vec3 N, vec3 p, vec2 uv )
+{
+    // get edge vectors of the pixel triangle
+    vec3 dp1 = dFdx( p );
+    vec3 dp2 = dFdy( p );
+    vec2 duv1 = dFdx( uv );
+    vec2 duv2 = dFdy( uv );
+
+    // solve the linear system
+    vec3 dp2perp = cross( dp2, N );
+    vec3 dp1perp = cross( N, dp1 );
+    vec3 T = dp2perp * duv1.x + dp1perp * duv2.x;
+    vec3 B = dp2perp * duv1.y + dp1perp * duv2.y;
+
+    // construct a scale-invariant frame
+    float invmax = inversesqrt( max( dot(T,T), dot(B,B) ) );
+    return mat3( T * invmax, B * invmax, N );
+}
+
 void main() {
 	#ifdef NO_INSTANCE_ID
 		int instance_id;
-		// discard;
+		discard;
 	#endif
 
 	vec4 colormap;
-	vec3 os_normal = frag_normal;
-	vec3 ws_normal = quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), os_normal);
+	// vec3 os_normal = frag_normal;
+	// vec3 ws_normal = quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), os_normal);
 
 	// vec2 pixelated_coord;
 	// int normal_image = 0;
@@ -168,12 +189,25 @@ void main() {
 	// vec4 colormap = textureLod(detail_normal, vec3(pixelated_coord, detail_normal_indices[normal_image]), 0.0);
 	// vec4 colormap = textureLod(tex0, vec2(frag_tex_coords), 6.0);
 
+
+	// vec4 normalmap = texture(normal_tex, tc0);
+	// vec3 normal = UnpackTanNormal(normalmap);
+	// vec3 ws_normal = tangent_to_world * normal;
+
+
+	vec4 normalmap = texture(tex1, tc0);
+	vec3 unpacked_normal = UnpackTanNormal(normalmap);
+	vec3 ws_normal = quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), frag_normal);
+	mat3 cotangent_frame = cotangent_frame(ws_normal, normalize(world_vert - cam_pos), tc0);
+	ws_normal = cotangent_frame * unpacked_normal;
+
 	#if defined(VERTEX_COLOR)
 		out_color.xyz = vertex_color;
 		colormap = out_color;
 	#else
 		colormap = texture(tex0, vec2(frag_tex_coords));
 		out_color = colormap;
+		// out_color.xyz = normalmap.xyz;
 	#endif
 
 	vec4 ndcPos;
