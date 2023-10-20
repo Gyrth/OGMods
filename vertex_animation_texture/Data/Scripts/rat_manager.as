@@ -136,7 +136,6 @@ float resting_mouth_pose_time = 0.0f;
 
 float old_time = 0.0f;
 
-vec3 ground_normal(0,1,0);
 vec3 flip_modifier_axis;
 float flip_modifier_rotation;
 vec3 tilt_modifier;
@@ -542,17 +541,25 @@ uint rat_amount = 0;
 
 class Rat{
 
+    float UPDATE_AABB_INTERVAL = 5.0;
+
     vec3 position;
     vec3 position_lerped;
     vec3 velocity;
     quaternion rotation = quaternion(0.0, 0.0, 0.0, 1.0);
     Object@ model;
-    float timer;
+    float update_aabb_timer = RangedRandomFloat(0.0, UPDATE_AABB_INTERVAL);
+    vec3 movement_direction = vec3(1.0, 0.0, 0.0);
+    vec3 nav_target;
+    vec3 ground_normal(0.0, 1.0, 0.0);
+    vec3 wall_normal(0.0, 1.0, 0.0);
+    bool on_wall = false;
 
     vec3 last_col_pos;
     float flat_movement_velocity = 0.0f;
     float vertical_movement_velocity = 0.0f;
     float in_air_timer = 0.0f;
+    bool deleted = false;
 
     Rat(){
         position = this_mo.position;
@@ -563,17 +570,27 @@ class Rat{
         @model = ReadObjectFromID(model_id);
         model.SetTranslation(position);
         model.SetRotation(rotation);
+        GetRandomNavTarget();
     }
 
     ~Rat(){
-        QueueDeleteObjectID(model.GetID());
+        deleted = true;
+        // QueueDeleteObjectID(model.GetID());
     }
 
     void Update(const Timestep &in ts){
+        if(deleted){return;}
 
         HandleGroundCollisions();
         ApplyPhysics(ts);
         ApplyControl();
+        UpdateModelTransform(ts);
+        
+        last_col_pos = position;
+    }
+
+    void UpdateModelTransform(const Timestep &in ts){
+        update_aabb_timer += time_step;
 
         vec3 flat_vel = vec3(velocity.x, 0, velocity.z);
         flat_vel = normalize(flat_vel);
@@ -585,12 +602,24 @@ class Rat{
 
         rotation = mix(rotation, quaternion(vec4(0.0, 1.0, 0.0, target_rotation)), ts.step() * 10.0);
         position_lerped = mix(position_lerped, position, ts.step() * 10.0);
-        model.SetTranslationRotationFast(position, rotation);
-
-        // model.SetRotation(rotation);
-        // model.SetTranslation(position_lerped);
+        model.SetTranslationRotationFast(position_lerped, rotation);
         
-        last_col_pos = position;
+        if(update_aabb_timer >= UPDATE_AABB_INTERVAL){
+            model.SetRotation(rotation);
+            model.SetTranslation(position);
+
+            update_aabb_timer = 0.0f;
+        }
+    }
+
+    void GetRandomNavTarget(){
+        vec3 collision_check_position = this_mo.position;
+
+        collision_check_position.x += RangedRandomFloat(-10.0f, 10.0f);
+        collision_check_position.z += RangedRandomFloat(-10.0f, 10.0f);
+
+        vec3 collision_position = col.GetRayCollision(collision_check_position + vec3(0.0f, 10.0f, 0.0f), collision_check_position + vec3(0.0f, -10.0f, 0.0f));
+        nav_target = collision_position;
     }
 
     void Draw(){
@@ -614,6 +643,7 @@ class Rat{
         vec3 flat_current_position = position;
         vec3 flat_last_position = last_col_pos;
         vec3 last_normal = vec3(0.0f, 1.0f, 0.0f);
+        vec3 last_wall_normal = vec3(0.0f, 0.0f, 0.0f);
         flat_current_position.y = 0.0;
         flat_last_position.y = 0.0;
         // The vertical and flat movement velocity is used later on to drive the animations and offset the camera.
@@ -633,10 +663,14 @@ class Rat{
                 collision_below = true;
                 last_normal = sphere_col.GetContact(i).normal;
                 break;
+            }else{
+                wall_normal = sphere_col.GetContact(i).normal;
+                on_wall = true;
             }
         }
 
         ground_normal = mix(ground_normal, last_normal, time_step * 20.0f);
+        wall_normal = mix(wall_normal, last_wall_normal, time_step * 20.0f);
 
         if(collision_below){
             // When the character has found a collision below and was previously off the ground
@@ -645,12 +679,14 @@ class Rat{
                 Land();
             }
             on_ground = true;
+            on_wall = false;
             in_air_timer = 0.0f;
             // Reduce the velocity when standing on the ground, as if affected by friction.
             velocity *= pow(0.95f, ts.frames());
 
         }else{
             on_ground = false;
+            if(length(wall_normal) > 0.1){on_wall = true;}
             in_air_timer += time_step;
             // Keep adding velocity in the gravity direction to speed up faling.
             velocity += physics.gravity_vector * ts.step();
@@ -667,7 +703,20 @@ class Rat{
     }
 
     void ApplyControl(){
-        velocity += vec3(RangedRandomFloat(-1.0, 1.0), RangedRandomFloat(-1.0, 1.0), RangedRandomFloat(-1.0, 1.0)) * time_step * 50.0f;
+
+        if(distance(position, nav_target) < 0.35){
+            GetRandomNavTarget();
+        }
+
+        DebugDrawLine(position, position + ground_normal, vec3(0.0, 1.0, 0.0), _delete_on_update);
+        DebugDrawLine(position, position + wall_normal, vec3(1.0, 1.0, 0.0), _delete_on_update);
+        DebugDrawLine(position, nav_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
+        DebugDrawWireSphere(nav_target, 0.25, vec3(0.0, 0.0, 1.0), _delete_on_update);
+
+        vec3 nav_target_direction = normalize(nav_target - position);
+        movement_direction = mix(movement_direction, nav_target_direction, time_step * 15.0f);
+
+        velocity += movement_direction * time_step * 50.0f;
     }
 
 }
