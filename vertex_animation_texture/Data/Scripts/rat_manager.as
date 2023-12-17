@@ -541,13 +541,13 @@ uint rat_amount = 0;
 
 class Rat{
 
-    float UPDATE_AABB_INTERVAL = 5.0;
+    float UPDATE_AABB_INTERVAL = 0.25;
 
     vec3 position;
-    vec3 position_lerped;
     vec3 velocity;
     quaternion rotation = quaternion(0.0, 0.0, 0.0, 1.0);
     Object@ model;
+    Object@ blob_model;
     float update_aabb_timer = RangedRandomFloat(0.0, UPDATE_AABB_INTERVAL);
     vec3 movement_direction = vec3(1.0, 0.0, 0.0);
     vec3 nav_target;
@@ -563,19 +563,25 @@ class Rat{
 
     Rat(){
         position = this_mo.position;
-        position_lerped = position;
         Log(warning, "Add rat");
+
+        int blob_id = CreateObject("Data/Objects/Decals/blob_shadow.xml");
+        // int blob_id = CreateObject("Data/objects/vat_mouse.xml");
+        @blob_model = ReadObjectFromID(blob_id);
+        blob_model.SetTranslation(position);
+        blob_model.SetTint(vec3(0.1, 0.1, 0.1));
 
         int model_id = CreateObject("Data/objects/vat_mouse.xml");
         @model = ReadObjectFromID(model_id);
         model.SetTranslation(position);
         model.SetRotation(rotation);
+        model.SetTint(vec3(RangedRandomFloat(0.0, 1.0)));
         GetRandomNavTarget();
     }
 
     ~Rat(){
         deleted = true;
-        // QueueDeleteObjectID(model.GetID());
+        QueueDeleteObjectID(model.GetID());
     }
 
     void Update(const Timestep &in ts){
@@ -595,28 +601,30 @@ class Rat{
         vec3 flat_vel = vec3(velocity.x, 0, velocity.z);
         flat_vel = normalize(flat_vel);
 
-        DebugDrawLine(position, position + flat_vel, vec3(1.0, 0.0, 0.0), _delete_on_update);
+        // DebugDrawLine(position, position + flat_vel, vec3(1.0, 0.0, 0.0), _delete_on_update);
 
         float target_rotation = atan2(-flat_vel.z, flat_vel.x);
         target_rotation += 3.1417f * 0.5f;
 
         rotation = mix(rotation, quaternion(vec4(0.0, 1.0, 0.0, target_rotation)), ts.step() * 10.0);
-        position_lerped = mix(position_lerped, position, ts.step() * 10.0);
-        model.SetTranslationRotationFast(position_lerped, rotation);
         
         if(update_aabb_timer >= UPDATE_AABB_INTERVAL){
             model.SetRotation(rotation);
             model.SetTranslation(position);
 
             update_aabb_timer = 0.0f;
+        }else{
+            model.SetTranslationRotationFast(position, rotation);
+            blob_model.SetTranslation(position);
         }
     }
 
     void GetRandomNavTarget(){
         vec3 collision_check_position = this_mo.position;
 
-        collision_check_position.x += RangedRandomFloat(-10.0f, 10.0f);
-        collision_check_position.z += RangedRandomFloat(-10.0f, 10.0f);
+        float max_range = 20.0;
+        collision_check_position.x += RangedRandomFloat(-max_range, max_range);
+        collision_check_position.z += RangedRandomFloat(-max_range, max_range);
 
         vec3 collision_position = col.GetRayCollision(collision_check_position + vec3(0.0f, 10.0f, 0.0f), collision_check_position + vec3(0.0f, -10.0f, 0.0f));
         nav_target = collision_position;
@@ -708,10 +716,10 @@ class Rat{
             GetRandomNavTarget();
         }
 
-        DebugDrawLine(position, position + ground_normal, vec3(0.0, 1.0, 0.0), _delete_on_update);
-        DebugDrawLine(position, position + wall_normal, vec3(1.0, 1.0, 0.0), _delete_on_update);
-        DebugDrawLine(position, nav_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
-        DebugDrawWireSphere(nav_target, 0.25, vec3(0.0, 0.0, 1.0), _delete_on_update);
+        // DebugDrawLine(position, position + ground_normal, vec3(0.0, 1.0, 0.0), _delete_on_update);
+        // DebugDrawLine(position, position + wall_normal, vec3(1.0, 1.0, 0.0), _delete_on_update);
+        // DebugDrawLine(position, nav_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
+        // DebugDrawWireSphere(nav_target, 0.25, vec3(0.0, 0.0, 1.0), _delete_on_update);
 
         vec3 nav_target_direction = normalize(nav_target - position);
         movement_direction = mix(movement_direction, nav_target_direction, time_step * 15.0f);

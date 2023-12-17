@@ -227,6 +227,8 @@ void main() {
 	float start_pixel = int(settings.y * 10000.0);
 	float end_pixel = int(settings.z * 10000.0);
 
+	vec4 tint = GetInstancedColorTint(instance_id);
+
 	// if(animation_length == 319.0){
 	// 	vertex_color = vec3(0.0, 1.0, 0.0);
 	// }else{
@@ -240,7 +242,7 @@ void main() {
 	float range = animation_length / texture_size.y;
 
 	float position_offset = length(texture(tex0, vec2(model_translation_attrib.x, model_translation_attrib.z)));
-	position_offset = 0.0;
+	position_offset = tint.r;
 	float animation_speed = 2.25;
 
 	float animation_progress = mod((time * animation_speed + position_offset) * range, range);
@@ -267,6 +269,6 @@ void main() {
 
 	vec3 transformed_vertex = transform_vec3(GetInstancedModelScale(instance_id), GetInstancedModelRotationQuat(instance_id), model_translation_attrib, animated_vertex_position);
 	gl_Position = projection_view_mat * vec4(transformed_vertex, 1.0);
-	// vertex_color = albedo_color.xyz;
+	vertex_color = albedo_color.xyz;
 	world_vert = transformed_vertex;
 }

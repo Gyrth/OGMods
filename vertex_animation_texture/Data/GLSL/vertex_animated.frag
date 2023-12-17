@@ -261,6 +261,9 @@ void main() {
 
 	#endif
 
+	vec4 tint = GetInstancedColorTint(instance_id);
+	out_color.xyz *= tint.r + 0.2;
+
 	vec4 shadow_coords[4];
 
 	#if !defined(DEPTH_ONLY)

@@ -33,6 +33,7 @@
     <parameter name="Level Boundaries" type="int" val="1" />
     <parameter name="Objectives" type="string" val="destroy_all" />
     <parameter name="Saturation" type="float" val="1" />
+    <parameter name="Shared Camera" type="int" val="0" />
     <parameter name="Sky Brightness" type="float" val="1" />
     <parameter name="Sky Rotation" type="float" val="0" />
     <parameter name="Sky Tint" type="string" val="255, 255, 255" />
@@ -101,15 +102,13 @@
             <Color label="Fur" channel="2" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <EnvObject t0="43.3625" t1="4.61971" t2="-133.246" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/vat_mouse.xml">
-        <parameters />
-    </EnvObject>
-    <NavmeshRegionObject t0="45.5928" t1="5.17391" t2="-135.621" s0="26.6116" s1="26.6116" s2="26.6116" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6">
+    <NavmeshRegionObject t0="45.5929" t1="5.17419" t2="-135.621" s0="26.6116" s1="26.6116" s2="26.6116" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6">
         <parameters />
     </NavmeshRegionObject>
     <ActorObject t0="42.7697" t1="6.46996" t2="-128.587" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" type_file="Data/Characters/rat_manager.xml" is_player="0">
         <parameters>
             <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Rat Amount" type="int" val="500" />
             <parameter name="Teams" type="string" val="turner" />
         </parameters>
         <Connections>
@@ -123,10 +122,7 @@
             <Color label="Armor" channel="3" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <EnvObject t0="43.471" t1="1.39195" t2="-132.907" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
-        <parameters />
-    </EnvObject>
-    <CameraObject t0="40.0895" t1="7.14966" t2="-126.252" s0="1" s1="1" s2="1" q0="0.167004" q1="0.397792" q2="-0.0738867" q3="0.899117" euler_x="0.367298" euler_y="0.833074" euler_z="0" id="271">
+    <CameraObject t0="33.8899" t1="22.9423" t2="-110.28" s0="1" s1="1" s2="1" q0="0.384986" q1="0.208453" q2="-0.0897081" q3="0.894587" euler_x="0.812789" euler_y="0.457862" euler_z="0" id="271">
         <parameters />
     </CameraObject>
 </ActorObjects>
@@ -135,4 +131,7 @@
     <SpawnerItem display_name="vat_mouse.xml" path="Data/Objects/vat_mouse.xml" thumbnail_path="empty_placeholder.png" />
     <SpawnerItem display_name="Nav Region" path="Data/Objects/navmesh/navmesh_region.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/empty_placeholder.png" />
     <SpawnerItem display_name="rat_manager.xml" path="Data/Characters/rat_manager.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="Blob Shadow" path="Data/Objects/Decals/blob_shadow.xml" thumbnail_path="" />
+    <SpawnerItem display_name="env_blob_shadow.xml" path="Data/Objects/Decals/env_blob_shadow.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="env_blob_shadow_square.xml" path="Data/Objects/Decals/env_blob_shadow_square.xml" thumbnail_path="empty_placeholder.png" />
 </RecentItems>
