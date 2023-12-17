@@ -542,6 +542,11 @@ uint rat_amount = 0;
 class Rat{
 
     float UPDATE_AABB_INTERVAL = 0.25;
+    bool ENABLE_SHADOW = true;
+
+    vec3 offset = vec3(0.0, 0.0, 0.0);
+    vec3 scale = vec3(1.0);
+    float size = 0.125f;
 
     vec3 position;
     vec3 velocity;
@@ -565,17 +570,20 @@ class Rat{
         position = this_mo.position;
         Log(warning, "Add rat");
 
-        int blob_id = CreateObject("Data/Objects/Decals/blob_shadow.xml");
-        // int blob_id = CreateObject("Data/objects/vat_mouse.xml");
-        @blob_model = ReadObjectFromID(blob_id);
-        blob_model.SetTranslation(position);
-        blob_model.SetTint(vec3(0.1, 0.1, 0.1));
+        if(ENABLE_SHADOW){
+            int blob_id = CreateObject("Data/Objects/Decals/blob_shadow.xml");
+            @blob_model = ReadObjectFromID(blob_id);
+            blob_model.SetTranslation(position);
+            blob_model.SetTint(vec3(0.1, 0.1, 0.1));
+            blob_model.SetScale(vec3(size * 5.0));
+        }
 
         int model_id = CreateObject("Data/objects/vat_mouse.xml");
         @model = ReadObjectFromID(model_id);
         model.SetTranslation(position);
         model.SetRotation(rotation);
         model.SetTint(vec3(RangedRandomFloat(0.0, 1.0)));
+        model.SetScale(vec3(0.5));
         GetRandomNavTarget();
     }
 
@@ -615,18 +623,21 @@ class Rat{
             update_aabb_timer = 0.0f;
         }else{
             model.SetTranslationRotationFast(position, rotation);
-            blob_model.SetTranslation(position);
+
+            if(ENABLE_SHADOW){
+                blob_model.SetTranslation(position);
+            }
         }
     }
 
     void GetRandomNavTarget(){
         vec3 collision_check_position = this_mo.position;
 
-        float max_range = 20.0;
+        float max_range = 15.0;
         collision_check_position.x += RangedRandomFloat(-max_range, max_range);
         collision_check_position.z += RangedRandomFloat(-max_range, max_range);
 
-        vec3 collision_position = col.GetRayCollision(collision_check_position + vec3(0.0f, 10.0f, 0.0f), collision_check_position + vec3(0.0f, -10.0f, 0.0f));
+        vec3 collision_position = col.GetRayCollision(collision_check_position + vec3(0.0f, max_range, 0.0f), collision_check_position + vec3(0.0f, -max_range, 0.0f));
         nav_target = collision_position;
     }
 
@@ -635,10 +646,6 @@ class Rat{
     }
 
     void HandleGroundCollisions(){
-        vec3 offset = vec3(0.0, 0.0, 0.0);
-        vec3 scale = vec3(1.0);
-        float size = 0.25f;
-
         // DebugDrawWireScaledSphere(position + offset, size, scale, vec3(0.0f, 1.0f, 0.0f), _delete_on_update);
 
         col.GetSlidingScaledSphereCollision(position + offset, size, scale);
@@ -721,10 +728,13 @@ class Rat{
         // DebugDrawLine(position, nav_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
         // DebugDrawWireSphere(nav_target, 0.25, vec3(0.0, 0.0, 1.0), _delete_on_update);
 
-        vec3 nav_target_direction = normalize(nav_target - position);
-        movement_direction = mix(movement_direction, nav_target_direction, time_step * 15.0f);
+        if(on_ground){
+            float movement_speed = 15.0;
+            vec3 nav_target_direction = normalize(nav_target - position);
+            movement_direction = mix(movement_direction, nav_target_direction, time_step * movement_speed);
 
-        velocity += movement_direction * time_step * 50.0f;
+            velocity += movement_direction * time_step * 25.0f;
+        }
     }
 
 }
