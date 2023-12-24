@@ -215,14 +215,14 @@ void main() {
 
 	int x_pixel = index;
 	float x_pos = 1.0 / target_resolution * x_pixel;
-	float animation_length = 24.0;
+	float animation_length = 48.0;
 
 	vec4 tint = GetInstancedColorTint(instance_id);
-	float range = 24.0 / texture_size.y;
+	float range = animation_length / texture_size.y;
 
 	float position_offset = length(texture(tex0, vec2(model_translation_attrib.x, model_translation_attrib.z)));
 	position_offset = tint.r;
-	float animation_speed = 2.25;
+	float animation_speed = 0.5;
 
 	float animation_progress = mod((time * animation_speed + position_offset) * range, range);
 	float y_pos = animation_progress;

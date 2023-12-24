@@ -94,7 +94,7 @@ def Vec3ToTexture(value, x, y, output_image, image_size, animation_length):
 def CreateAnimationTextures(export_path, model_name, info):
     # The image size can be increased to hold more animations, vertices or longer animation.
     image_size = 1
-    arm = None
+    armature = None
     selected_objects = []
     copied_objects = []
     
@@ -106,12 +106,12 @@ def CreateAnimationTextures(export_path, model_name, info):
             copied_objects.append(obj_copy)
             selected_objects.append(object)
         elif object.type == 'ARMATURE':
-            arm = object
+            armature = object
         
         object.select_set(False)
     
-    if not arm is None:
-        arm.data.pose_position = 'REST'
+    if not armature is None:
+        armature.data.pose_position = 'REST'
     
     joined_object = copied_objects[0]
     ctx = bpy.context.copy()
@@ -179,64 +179,65 @@ def CreateAnimationTextures(export_path, model_name, info):
     
     #-------------------------------------------
     
-    frame_counter = 0
+    if not armature is None:
+        armature.data.pose_position = 'POSE'
     
-    frame_start = bpy.context.scene.frame_start
-    frame_end = bpy.context.scene.frame_end
+    position_y = image_size
     
-    animation_length = frame_end - frame_start
-    print("Animation Length : ", animation_length)
+    for animation in bpy.data.actions:
+        frame_counter = 0
+        
+        armature.animation_data.action = animation
+    
+        frame_start = bpy.context.scene.frame_start
+        frame_end = bpy.context.scene.frame_end
+        
+        animation_length = frame_end - frame_start
+        print("Animation Name : ", animation.name)
+        print("Animation Length : ", animation_length)
 
-    bpy.context.scene.frame_set(frame_start)
-    bpy.context.view_layer.update()
-    
-    if not arm is None:
-        arm.data.pose_position = 'POSE'
-    
-    # Each animation frame is single pixel in the x axis on the texture.
-    for frame_index in range(frame_start, frame_end + 1):
-        print("Frame", frame_counter, "/", (frame_end - frame_start))
-        bpy.context.scene.frame_set(frame_index)
+        bpy.context.scene.frame_set(frame_start)
         bpy.context.view_layer.update()
         
-        depgraph = bpy.context.evaluated_depsgraph_get()
-        vertex_counter = 0
-        position_y = image_size - 1 - frame_counter
-        
-        if position_y < 0:
-            break
-        
-        frame_counter += 1
+        # Each animation frame is single pixel in the x axis on the texture.
+        for frame_index in range(frame_start, frame_end + 1):
+            print("Frame", frame_counter, "/", (frame_end - frame_start))
+            bpy.context.scene.frame_set(frame_index)
+            bpy.context.view_layer.update()
+            
+            depgraph = bpy.context.evaluated_depsgraph_get()
+            vertex_counter = 0
+            
+            position_y -= 1
+            frame_counter += 1
 
-        for obj in selected_objects:
-            bm = bmesh.new()
-            bm.from_object(obj, depgraph)
-            bm.verts.ensure_lookup_table()
-            origin_difference = center_location - obj.location
-            
-            # Go over all the mesh's vertices in order.
-            for v in bm.verts:
-                rest_vert = rest_data[vertex_counter]
-                global_vert = obj.matrix_world @ v.co
-                vert = global_vert - center_location
+            for obj in selected_objects:
+                bm = bmesh.new()
+                bm.from_object(obj, depgraph)
+                bm.verts.ensure_lookup_table()
+                origin_difference = center_location - obj.location
                 
-                difference = rest_vert - vert
-                position_x = vertex_counter
+                # Go over all the mesh's vertices in order.
+                for v in bm.verts:
+                    rest_vert = rest_data[vertex_counter]
+                    global_vert = obj.matrix_world @ v.co
+                    vert = global_vert - center_location
+                    
+                    difference = rest_vert - vert
+                    position_x = vertex_counter
+                    
+                    BoundedVec3ToTexture(difference, position_x, position_y, pixels, image_size, animation_length)
+                    vertex_counter += 1
                 
-                BoundedVec3ToTexture(difference, position_x, position_y, pixels, image_size, animation_length)
-                vertex_counter += 1
-            
-            bm.free()
-    
-    print("Image size :", image_size, "px")
-    print("Vertex count :", vertex_count)
-    print("Animation length :", frame_counter)
-    print("Center Location :", center_location)
-    print("Start Pixel :", 0)
-    print("End Pixel :", 1)
-    print("Calculated length :", 1)
-    
-#    encoded = EncodeFloatRG(value.x)
+                bm.free()
+        
+        print("Image size :", image_size, "px")
+        print("Vertex count :", vertex_count)
+        print("Animation length :", frame_counter)
+        print("Center Location :", center_location)
+        print("Start Pixel :", 0)
+        print("End Pixel :", 1)
+        print("Calculated length :", 1)
     
     output_image.pixels[:] = pixels
     # Should probably update image
