@@ -108,7 +108,7 @@
     <ActorObject t0="42.7697" t1="6.46996" t2="-128.587" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" type_file="Data/Characters/rat_manager.xml" is_player="0">
         <parameters>
             <parameter name="Character Scale" type="float" val="1" />
-            <parameter name="Rat Amount" type="int" val="50" />
+            <parameter name="Rat Amount" type="int" val="500" />
             <parameter name="Teams" type="string" val="turner" />
         </parameters>
         <Connections>

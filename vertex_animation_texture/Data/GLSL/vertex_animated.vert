@@ -219,13 +219,7 @@ void main() {
 
 	vec4 tint = GetInstancedColorTint(instance_id);
 	float range = animation_length / texture_size.y;
-
-	float position_offset = length(texture(tex0, vec2(model_translation_attrib.x, model_translation_attrib.z)));
-	position_offset = tint.r;
-	float animation_speed = 0.5;
-
-	float animation_progress = mod((time * animation_speed + position_offset) * range, range);
-	float y_pos = animation_progress;
+	float y_pos = tint.g * 1000.0 * one_pixel_offset;
 
 	// Use half a pixel to get the center of the pixel.
 	vec4 color_1 = texture(tex0, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset));

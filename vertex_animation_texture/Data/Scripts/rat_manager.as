@@ -537,9 +537,22 @@ void AttachWeapon(int id){}
 void SetEnabled(bool on){}
 void UpdatePaused(){}
 
+enum RatAnimations{
+    Idle,
+    Run
+}
+
 array<Rat@> rats;
 uint rat_amount = 0;
 int rat_manager_id = -1;
+
+const int IDLE_ANIMATION_START = 0;
+const int IDLE_ANIMATION_END = 24;
+const float IDLE_ANIMATION_SPEED = 1.0;
+
+const int RUN_ANIMATION_START = 25;
+const int RUN_ANIMATION_END = 48;
+const float RUN_ANIMATION_SPEED = 1.0;
 
 class Rat{
 
@@ -568,11 +581,12 @@ class Rat{
     float vertical_movement_velocity = 0.0f;
     float in_air_timer = 0.0f;
     bool deleted = false;
-    float run_progress = RangedRandomFloat(0.0, 1.0);
+    int current_animation = Run;
+    float animation_progress = RangedRandomFloat(0.0, 1.0);
+    float random_tint_value = RangedRandomFloat(0.0, 1.0);
 
     Rat(){
         position = this_mo.position;
-        Log(warning, "Add rat");
 
         if(ENABLE_SHADOW){
             int blob_id = CreateObject("Data/Objects/Decals/blob_shadow.xml");
@@ -586,7 +600,6 @@ class Rat{
         @model = ReadObjectFromID(model_id);
         model.SetTranslation(position);
         model.SetRotation(rotation);
-        model.SetTint(vec3(RangedRandomFloat(0.0, 1.0)));
         model.SetScale(vec3(0.5));
         GetRandomNavTarget();
     }
@@ -609,10 +622,23 @@ class Rat{
     }
 
     void UpdateAnimations(){
-        run_progress += time_step;
-        string sound_path;
 
-        if(run_progress >= 1.0){
+        switch(current_animation){
+            case Idle:
+                UpdateIdleAnimation();
+                break;
+            case Run:
+                UpdateRunAnimation();
+                break;
+        }
+    }
+    
+    void UpdateRunAnimation(){
+
+        animation_progress += time_step * length(velocity) * RUN_ANIMATION_SPEED;
+
+        if(animation_progress > 1.0){
+            string sound_path;
             
             switch(rand() % 7) {
                 case 0:
@@ -633,10 +659,24 @@ class Rat{
 
             int sound_id = PlaySound(sound_path, position);
             SetSoundGain(sound_id, RangedRandomFloat(0.25, 0.5));
-            SetSoundPitch(sound_id, RangedRandomFloat(1.1, 1.25));
+            SetSoundPitch(sound_id, RangedRandomFloat(1.05, 1.2));
 
-            run_progress = 0.0;
+            animation_progress -= 1.0;
         }
+
+        float current_frame = mix(RUN_ANIMATION_START, RUN_ANIMATION_END, animation_progress);
+        model.SetTint(vec3(random_tint_value, current_frame / 1000.0, 0.0));
+    }
+
+    void UpdateIdleAnimation(){
+        animation_progress += time_step * length(velocity) * IDLE_ANIMATION_SPEED;
+
+        if(animation_progress > 1.0){
+            animation_progress -= 1.0;
+        }
+
+        float current_frame = mix(IDLE_ANIMATION_START, IDLE_ANIMATION_END, animation_progress);
+        model.SetTint(vec3(random_tint_value, current_frame / 1000.0, 0.0));
     }
 
     void UpdateModelTransform(const Timestep &in ts){
@@ -669,7 +709,7 @@ class Rat{
     void GetRandomNavTarget(){
         vec3 collision_check_position = this_mo.position;
 
-        float max_range = 5.0;
+        float max_range = 15.0;
         collision_check_position.x += RangedRandomFloat(-max_range, max_range);
         collision_check_position.z += RangedRandomFloat(-max_range, max_range);
 
@@ -810,8 +850,8 @@ void Update(int num_frames) {
         rats[i].Update(ts);
     }
 
-    UpdateRatPush();
-    UpdateCharacterPush();
+    // UpdateRatPush();
+    // UpdateCharacterPush();
 
     if(rats.size() < rat_amount){
         rats.insertLast(Rat());
