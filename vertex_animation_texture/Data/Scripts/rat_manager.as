@@ -329,6 +329,7 @@ void Reset() {
 }
 
 bool Init(string character_path) {
+    rat_manager_id = this_mo.GetID();
     this_mo.char_path = character_path;
     bool success = character_getter.Load(this_mo.char_path);
     if(success){
@@ -538,10 +539,11 @@ void UpdatePaused(){}
 
 array<Rat@> rats;
 uint rat_amount = 0;
+int rat_manager_id = -1;
 
 class Rat{
 
-    float UPDATE_AABB_INTERVAL = 0.25;
+    float UPDATE_AABB_INTERVAL = 0.15;
     bool ENABLE_SHADOW = true;
 
     vec3 offset = vec3(0.0, 0.0, 0.0);
@@ -559,13 +561,14 @@ class Rat{
     vec3 ground_normal(0.0, 1.0, 0.0);
     vec3 wall_normal(0.0, 1.0, 0.0);
     bool on_wall = false;
+    vec3 push_force = vec3(0.0, 0.0, 0.0);
 
     vec3 last_col_pos;
     float flat_movement_velocity = 0.0f;
     float vertical_movement_velocity = 0.0f;
     float in_air_timer = 0.0f;
     bool deleted = false;
-    float run_progress = 0.0;
+    float run_progress = RangedRandomFloat(0.0, 1.0);
 
     Rat(){
         position = this_mo.position;
@@ -666,7 +669,7 @@ class Rat{
     void GetRandomNavTarget(){
         vec3 collision_check_position = this_mo.position;
 
-        float max_range = 15.0;
+        float max_range = 5.0;
         collision_check_position.x += RangedRandomFloat(-max_range, max_range);
         collision_check_position.z += RangedRandomFloat(-max_range, max_range);
 
@@ -729,6 +732,11 @@ class Rat{
             on_ground = true;
             on_wall = false;
             in_air_timer = 0.0f;
+
+            vec3 push_adjusted_movement_direction = mix(movement_direction, push_force, min(1.0, length(push_force)));
+            push_force *= pow(0.95f, ts.frames());
+
+            velocity += push_adjusted_movement_direction * time_step * 25.0f;
             // Reduce the velocity when standing on the ground, as if affected by friction.
             velocity *= pow(0.95f, ts.frames());
 
@@ -765,9 +773,29 @@ class Rat{
             float movement_speed = 15.0;
             vec3 nav_target_direction = normalize(nav_target - position);
             movement_direction = mix(movement_direction, nav_target_direction, time_step * movement_speed);
-
-            velocity += movement_direction * time_step * 25.0f;
         }
+    }
+
+    void AvoidRat(Rat@ rat){
+        if(on_ground){
+            vec3 difference = rat.position - position;
+            vec3 push_direction = normalize(difference) * -1.0;
+            float dist = length(difference);
+
+            float push_length = max(0.0, 2.0 - dist);
+            vec3 added_force = push_length * 10.0 * push_direction * time_step;
+            push_force += added_force;
+            rat.push_force -= added_force;
+        }
+    }
+
+    void AvoidCharacter(MovementObject@ char){
+        vec3 difference = char.position - position;
+        vec3 push_direction = normalize(difference) * -1.0;
+        float dist = length(difference);
+
+        float push_length = max(0.0, 4.0 - dist);
+        push_force += push_length * 10.0 * push_direction * time_step;
     }
 
 }
@@ -782,10 +810,37 @@ void Update(int num_frames) {
         rats[i].Update(ts);
     }
 
+    UpdateRatPush();
+    UpdateCharacterPush();
+
     if(rats.size() < rat_amount){
         rats.insertLast(Rat());
     }else if(rats.size() > rat_amount){
         rats.removeAt(rats.size() - 1);
+    }
+}
+
+void UpdateRatPush(){
+    array<Rat@> push_queue;
+    push_queue.insertAt(0, rats);
+
+    while(push_queue.size() > 0){
+        for(uint i = 1; i < push_queue.size(); i++){
+            push_queue[0].AvoidRat(push_queue[i]);
+        }
+        push_queue.removeAt(0);
+    }
+}
+
+void UpdateCharacterPush(){
+    for(int i = 0; i < GetNumCharacters(); i++){
+        MovementObject@ char = ReadCharacter(i);
+
+        if(char.GetID() != rat_manager_id){
+            for(uint j = 0; j < rats.size(); j++){
+                rats[j].AvoidCharacter(char);
+            }
+        }
     }
 }
 
