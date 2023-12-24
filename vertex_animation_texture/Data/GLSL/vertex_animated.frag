@@ -183,7 +183,6 @@ void main() {
 	#else
 		colormap = texture(tex5, vec2(frag_tex_coords));
 		out_color = colormap;
-		// out_color.xyz = normalmap.xyz;
 	#endif
 
 	vec4 ndcPos;

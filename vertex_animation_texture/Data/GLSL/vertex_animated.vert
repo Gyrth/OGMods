@@ -80,9 +80,7 @@ out mat3 tangent_to_world;
 out vec3 orig_vert;
 out vec3 world_vert;
 
-#ifndef NO_INSTANCE_ID
-	flat out int instance_id;
-#endif
+flat out int instance_id;
 
 out vec4 vertex_color;
 out vec3 frag_normal;
@@ -201,15 +199,8 @@ vec4 toLinear(vec4 sRGB)
 }
 
 void main() {
-	#ifdef NO_INSTANCE_ID
-		int instance_id = gl_InstanceID;
-		// return;
-	#else
-		instance_id = gl_InstanceID;
-	#endif
-
+	instance_id = gl_InstanceID;
 	int index = gl_VertexID;
-	vec3 animated_vertex_position = vertex_attrib;
 
 	frag_tex_coords = tex_coord_attrib;
 	frag_tex_coords[1] = 1.0 - frag_tex_coords[1];
@@ -252,9 +243,9 @@ void main() {
 	vertex_position = vertex_position * bounds.x;
 	vertex_position = vertex_position - (bounds / 2.0f);
 
-	animated_vertex_position = vertex_attrib - vertex_position;
-
+	vec3 animated_vertex_position = vertex_attrib - vertex_position;
 	vec3 transformed_vertex = transform_vec3(GetInstancedModelScale(instance_id), GetInstancedModelRotationQuat(instance_id), model_translation_attrib, animated_vertex_position);
+
 	gl_Position = projection_view_mat * vec4(transformed_vertex, 1.0);
 	world_vert = transformed_vertex;
 }
