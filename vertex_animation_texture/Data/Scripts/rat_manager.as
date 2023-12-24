@@ -565,6 +565,7 @@ class Rat{
     float vertical_movement_velocity = 0.0f;
     float in_air_timer = 0.0f;
     bool deleted = false;
+    float run_progress = 0.0;
 
     Rat(){
         position = this_mo.position;
@@ -599,8 +600,40 @@ class Rat{
         ApplyPhysics(ts);
         ApplyControl();
         UpdateModelTransform(ts);
+        UpdateAnimations();
         
         last_col_pos = position;
+    }
+
+    void UpdateAnimations(){
+        run_progress += time_step;
+        string sound_path;
+
+        if(run_progress >= 1.0){
+            
+            switch(rand() % 7) {
+                case 0:
+                    sound_path = "Data/Sounds/Footsteps-Rock1.wav"; break;
+                case 1:
+                    sound_path = "Data/Sounds/Footsteps-Rock2.wav"; break;
+                case 2:
+                    sound_path = "Data/Sounds/Footsteps-Rock3.wav"; break;
+                case 3:
+                    sound_path = "Data/Sounds/Footsteps-Rock4.wav"; break;
+                case 4:
+                    sound_path = "Data/Sounds/Footsteps-Rock5.wav"; break;
+                case 5:
+                    sound_path = "Data/Sounds/Footsteps-Rock6.wav"; break;
+                case 6:
+                    sound_path = "Data/Sounds/Footsteps-Rock7.wav"; break;
+            }
+
+            int sound_id = PlaySound(sound_path, position);
+            SetSoundGain(sound_id, RangedRandomFloat(0.25, 0.5));
+            SetSoundPitch(sound_id, RangedRandomFloat(1.1, 1.25));
+
+            run_progress = 0.0;
+        }
     }
 
     void UpdateModelTransform(const Timestep &in ts){
@@ -712,7 +745,7 @@ class Rat{
 
     void Land(){
         // Create a landing sound effect at the feet of the character.
-        vec3 sound_position = position + vec3(0.0f, -1.0f, 0.0);
+        vec3 sound_position = position + vec3(0.0f, 0.0f, 0.0);
         PlaySound("Data/Sounds/fps_gun_land.wav", sound_position);
         // DebugDrawWireSphere(position + vec3(0.0f, -1.0f, 0.0), 0.5, vec3(1.0), _fade);
     }
