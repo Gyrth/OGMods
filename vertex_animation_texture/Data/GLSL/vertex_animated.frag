@@ -124,7 +124,7 @@ in vec2 base_tex_coord;
 in vec3 orig_vert;
 in mat3 tangent_to_world;
 in vec3 frag_normal;
-in vec3 vertex_color;
+in vec4 vertex_color;
 flat in int vertex_id;
 
 uniform float overbright;
@@ -166,34 +166,10 @@ mat3 cotangent_frame( vec3 N, vec3 p, vec2 uv )
 void main() {
 	#ifdef NO_INSTANCE_ID
 		int instance_id;
-		discard;
+		return;
 	#endif
 
 	vec4 colormap;
-	// vec3 os_normal = frag_normal;
-	// vec3 ws_normal = quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), os_normal);
-
-	// vec2 pixelated_coord;
-	// int normal_image = 0;
-	// vec2 texture_size = textureSize(tex0, 0);
-	// float pixels = texture_size.y;
-	//
-	// pixelated_coord.x = (floor(frag_tex_coords.x * pixels) / pixels + ceil(frag_tex_coords.x * pixels) / pixels) / 2.0f;
-	// pixelated_coord.y = (floor(frag_tex_coords.y * pixels) / pixels + ceil(frag_tex_coords.y * pixels) / pixels) / 2.0f;
-
-	// vec4 colormap = texture(tex0, pixelated_coord);
-	// vec4 colormap = textureLod(detail_normal, vec2(frag_tex_coords), 0.0);
-	// vec4 colormap = textureLod(detail_normal, vec3(frag_tex_coords, 1.0), 0.0);
-	// vec4 colormap = textureLod(detail_normal, vec3(pixelated_coord, detail_normal_indices[0]), 0.0);
-
-	// vec4 colormap = textureLod(detail_normal, vec3(pixelated_coord, detail_normal_indices[normal_image]), 0.0);
-	// vec4 colormap = textureLod(tex0, vec2(frag_tex_coords), 6.0);
-
-
-	// vec4 normalmap = texture(normal_tex, tc0);
-	// vec3 normal = UnpackTanNormal(normalmap);
-	// vec3 ws_normal = tangent_to_world * normal;
-
 
 	vec4 normalmap = texture(tex1, tc0);
 	vec3 unpacked_normal = UnpackTanNormal(normalmap);
@@ -202,10 +178,10 @@ void main() {
 	ws_normal = cotangent_frame * unpacked_normal;
 
 	#if defined(VERTEX_COLOR)
-		out_color.xyz = vertex_color;
+		out_color = vertex_color;
 		colormap = out_color;
 	#else
-		colormap = texture(tex0, vec2(frag_tex_coords));
+		colormap = texture(tex5, vec2(frag_tex_coords));
 		out_color = colormap;
 		// out_color.xyz = normalmap.xyz;
 	#endif

@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
 <Object>
 	<Model>Data/Models/vat_mouse.obj</Model>
-	<ColorMap>Data/Textures/mouse_c.png</ColorMap>
+	<ColorMap>Data/Textures/vat_mouse_sorted.png</ColorMap>
 	<NormalMap>Data/Textures/mouse_n.png</NormalMap>
-	<WeightMap>Data/Textures/vat_mouse_sorted.png</WeightMap>
+	<WeightMap>Data/Textures/mouse_c.png</WeightMap>
 	<ShaderName>vertex_animated</ShaderName>
 	<flags no_collision = "true" transparent = "false" double_sided = "true" dynamic = "true"/>
 </Object>

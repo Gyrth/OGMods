@@ -84,7 +84,7 @@ out vec3 world_vert;
 	flat out int instance_id;
 #endif
 
-out vec3 vertex_color;
+out vec4 vertex_color;
 out vec3 frag_normal;
 
 uniform mat4 projection_view_mat;
@@ -141,14 +141,6 @@ vec2 EncodeFloatRG(float v){
 	return enc;
 }
 
-vec4 toLinear(vec4 sRGB) {
-    bvec4 cutoff = lessThan(sRGB, vec4(0.04045));
-    vec4 higher = pow((sRGB + vec4(0.055))/vec4(1.055), vec4(2.4));
-    vec4 lower = sRGB/vec4(12.92);
-
-    return mix(higher, lower, cutoff);
-}
-
 // Converts a single linear channel to srgb
 float linear_to_srgb(float channel) {
     if(channel <= 0.0031308)
@@ -158,11 +150,12 @@ float linear_to_srgb(float channel) {
 }
 
 // Converts a linear rgb color to a srgb color (exact, not approximated)
-vec3 rgb_to_srgb(vec3 rgb) {
-    return vec3(
-        linear_to_srgb(rgb.r),
-        linear_to_srgb(rgb.g),
-        linear_to_srgb(rgb.b)
+vec4 rgba_to_srgb(vec4 rgba) {
+    return vec4(
+        linear_to_srgb(rgba.r),
+        linear_to_srgb(rgba.g),
+        linear_to_srgb(rgba.b),
+		rgba.a
     );
 }
 
@@ -178,7 +171,8 @@ vec4 NormalizeColor(in vec4 value){
 }
 
 vec4 GammaCorrect(vec4 value){
-	return vec4(pow(value.r, 2.2), pow(value.g, 2.2), pow(value.b, 2.2), value.a);
+	float gamma = 2.2;
+    return vec4(pow(value.rgb, vec3(1.0 / gamma)), value.a);
 }
 
 vec4 GammaUnCorrect(vec4 value){
@@ -186,10 +180,30 @@ vec4 GammaUnCorrect(vec4 value){
 	return vec4(255 * pow(value.r / 255, gamma), 255 * pow(value.g / 255, gamma), 255 * pow(value.b / 255, gamma), value.a);
 }
 
+// Converts a color from linear light gamma to sRGB gamma
+vec4 fromLinear(vec4 linearRGB)
+{
+    bvec4 cutoff = lessThan(linearRGB, vec4(0.0031308));
+    vec4 higher = vec4(1.055)*pow(linearRGB, vec4(1.0/2.4)) - vec4(0.055);
+    vec4 lower = linearRGB * vec4(12.92);
+
+    return mix(higher, lower, cutoff);
+}
+
+// Converts a color from sRGB gamma to linear light gamma
+vec4 toLinear(vec4 sRGB)
+{
+    bvec4 cutoff = lessThan(sRGB, vec4(0.04045));
+    vec4 higher = pow((sRGB + vec4(0.055))/vec4(1.055), vec4(2.4));
+    vec4 lower = sRGB/vec4(12.92);
+
+    return mix(higher, lower, cutoff);
+}
+
 void main() {
 	#ifdef NO_INSTANCE_ID
 		int instance_id = gl_InstanceID;
-		return;
+		// return;
 	#else
 		instance_id = gl_InstanceID;
 	#endif
@@ -200,46 +214,20 @@ void main() {
 	frag_tex_coords = tex_coord_attrib;
 	frag_tex_coords[1] = 1.0 - frag_tex_coords[1];
 
-	vec4 albedo_color = texture(tex0, frag_tex_coords);
+	vertex_color = texture(tex5, frag_tex_coords);
 	vec4 normal_color = texture(tex1, frag_tex_coords);
 
-	vec2 texture_size = textureSize(tex5, 0);
+	vec2 texture_size = textureSize(tex0, 0);
 	float target_resolution = int(texture_size.y);
 	float one_pixel_offset = (1.0 / target_resolution);
 	float half_pixel_offset = (1.0 / target_resolution) / 2.0;
 
 	int x_pixel = index;
 	float x_pos = 1.0 / target_resolution * x_pixel;
-
-	vec4 settings_color_1 = textureLod(tex5, vec2(half_pixel_offset, half_pixel_offset), 0);
-	vec4 settings_color_2 = textureLod(tex5, vec2(half_pixel_offset, one_pixel_offset + half_pixel_offset), 0);
-
-	settings_color_1 = toLinear(settings_color_1);
-	settings_color_2 = toLinear(settings_color_2);
-
-	// The top row of the images is used for settings. Currently only the animation length, but there's room for more features.
-	vec3 settings;
-	settings.x = DecodeFloatRG(vec2(settings_color_1.x, settings_color_2.x));
-	settings.y = DecodeFloatRG(vec2(settings_color_1.y, settings_color_2.y));
-	settings.z = DecodeFloatRG(vec2(settings_color_1.z, settings_color_2.z));
-
-	float animation_length = int(settings.x * 10000.0);
-	float start_pixel = int(settings.y * 10000.0);
-	float end_pixel = int(settings.z * 10000.0);
+	float animation_length = 24.0;
 
 	vec4 tint = GetInstancedColorTint(instance_id);
-
-	// if(animation_length == 319.0){
-	// 	vertex_color = vec3(0.0, 1.0, 0.0);
-	// }else{
-	// 	vertex_color = vec3(0.0, 0.0, 0.0);
-	// }
-
-	// animation_length = animation_length;
-	animation_length = end_pixel - start_pixel;
-	animation_length = 24;
-	// animation_length = end_pixel;
-	float range = animation_length / texture_size.y;
+	float range = 24.0 / texture_size.y;
 
 	float position_offset = length(texture(tex0, vec2(model_translation_attrib.x, model_translation_attrib.z)));
 	position_offset = tint.r;
@@ -250,8 +238,11 @@ void main() {
 	float y_pos = animation_progress + settings_skip;
 
 	// Use half a pixel to get the center of the pixel.
-	vec4 color_1 = texture(tex5, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset));
-	vec4 color_2 = texture(tex5, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset + (one_pixel_offset * animation_length)));
+	vec4 color_1 = texture(tex0, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset));
+	vec4 color_2 = texture(tex0, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset + (one_pixel_offset * animation_length)));
+
+	color_1 = fromLinear(color_1);
+	color_2 = fromLinear(color_2);
 
 	vec3 vertex_position;
 	vertex_position.x = DecodeFloatRG(vec2(color_1.x, color_2.x));
@@ -263,12 +254,7 @@ void main() {
 
 	animated_vertex_position = vertex_attrib - vertex_position;
 
-	#ifdef NO_INSTANCE_ID
-		animated_vertex_position = vertex_attrib;
-	#endif
-
 	vec3 transformed_vertex = transform_vec3(GetInstancedModelScale(instance_id), GetInstancedModelRotationQuat(instance_id), model_translation_attrib, animated_vertex_position);
 	gl_Position = projection_view_mat * vec4(transformed_vertex, 1.0);
-	vertex_color = albedo_color.xyz;
 	world_vert = transformed_vertex;
 }
