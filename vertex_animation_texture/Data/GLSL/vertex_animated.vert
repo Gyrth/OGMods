@@ -225,12 +225,11 @@ void main() {
 	float animation_speed = 2.25;
 
 	float animation_progress = mod((time * animation_speed + position_offset) * range, range);
-	float settings_skip = one_pixel_offset + one_pixel_offset;
-	float y_pos = animation_progress + settings_skip;
+	float y_pos = animation_progress;
 
 	// Use half a pixel to get the center of the pixel.
 	vec4 color_1 = texture(tex0, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset));
-	vec4 color_2 = texture(tex0, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset + (one_pixel_offset * animation_length)));
+	vec4 color_2 = texture(tex0, vec2(x_pos + half_pixel_offset, 0.5 + y_pos + half_pixel_offset));
 
 	color_1 = fromLinear(color_1);
 	color_2 = fromLinear(color_2);

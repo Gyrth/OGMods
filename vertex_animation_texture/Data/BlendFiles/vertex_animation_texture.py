@@ -89,7 +89,7 @@ def Vec3ToTexture(value, x, y, output_image, image_size, animation_length):
     color_image_2 = (split_x.y, split_y.y, split_z.y, 1.0)
     
     SetPixel(output_image, x, y, color_image_1, image_size)
-    SetPixel(output_image, x, y - animation_length, color_image_2, image_size)
+    SetPixel(output_image, x, y - (image_size / 2.0), color_image_2, image_size)
 
 def CreateAnimationTextures(export_path, model_name, info):
     # The image size can be increased to hold more animations, vertices or longer animation.
@@ -201,7 +201,7 @@ def CreateAnimationTextures(export_path, model_name, info):
         
         depgraph = bpy.context.evaluated_depsgraph_get()
         vertex_counter = 0
-        position_y = image_size - 3 - frame_counter
+        position_y = image_size - 1 - frame_counter
         
         if position_y < 0:
             break
@@ -228,16 +228,13 @@ def CreateAnimationTextures(export_path, model_name, info):
             
             bm.free()
     
-    settings = Vector([321 / 1000.0, 321 / 1000.0, 321 / 1000.0])
-    Vec3ToTexture(settings, 0, image_size - 1, pixels, image_size, 1)
-    
     print("Image size :", image_size, "px")
     print("Vertex count :", vertex_count)
     print("Animation length :", frame_counter)
     print("Center Location :", center_location)
-    print("Start Pixel :", settings[1])
-    print("End Pixel :", settings[2])
-    print("Calculated length :", (settings[2] - settings[1]) )
+    print("Start Pixel :", 0)
+    print("End Pixel :", 1)
+    print("Calculated length :", 1)
     
 #    encoded = EncodeFloatRG(value.x)
     
@@ -551,14 +548,13 @@ def SortTextures(cache_path, export_path, model_name, info):
         
         output_image = Image.new(mode='RGB', size=(output_image_dimensions, output_image_dimensions))
         
-        # The settings are on the first row of the image. So copy those over.
-        copied_row = input_image.crop((0, 0, column_height, column_height))
-        output_image.paste(copied_row, (0, 0, column_height, column_height))
-
         for output_column_index, input_column_index in enumerate(optimized_indices):
-            copied_column = input_image.crop((input_column_index, 2, input_column_index + 1, column_height))
-            output_image.paste(copied_column, (output_column_index, 2, output_column_index + 1, column_height))
-
+            copied_column = input_image.crop((input_column_index, 0, input_column_index + 1, int(column_height / 2)))
+            output_image.paste(copied_column, (output_column_index, 0))
+            
+            copied_column_2 = input_image.crop((input_column_index, int(column_height / 2) + 1, input_column_index + 1, column_height))
+            output_image.paste(copied_column_2, (output_column_index, int(output_image_dimensions / 2) + 1))
+        
         output_image.save(output_image_filename, info=input_image.info)
         print("Written sorted image", output_image_filename)
 
