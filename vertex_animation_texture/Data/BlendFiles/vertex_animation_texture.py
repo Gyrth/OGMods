@@ -194,6 +194,8 @@ def CreateAnimationTextures(export_path, model_name, info):
         
         animation_length = frame_end - frame_start
         print("Animation Name : ", animation.name)
+        print("Animation Start : ", position_y)
+        print("Animation End : ", position_y + animation_length)
         print("Animation Length : ", animation_length)
 
         bpy.context.scene.frame_set(frame_start)
@@ -201,7 +203,6 @@ def CreateAnimationTextures(export_path, model_name, info):
         
         # Each animation frame is single pixel in the x axis on the texture.
         for frame_index in range(frame_start, frame_end + 1):
-            print("Frame", frame_counter, "/", (frame_end - frame_start))
             bpy.context.scene.frame_set(frame_index)
             bpy.context.view_layer.update()
             
@@ -230,14 +231,6 @@ def CreateAnimationTextures(export_path, model_name, info):
                     vertex_counter += 1
                 
                 bm.free()
-        
-        print("Image size :", image_size, "px")
-        print("Vertex count :", vertex_count)
-        print("Animation length :", frame_counter)
-        print("Center Location :", center_location)
-        print("Start Pixel :", 0)
-        print("End Pixel :", 1)
-        print("Calculated length :", 1)
     
     output_image.pixels[:] = pixels
     # Should probably update image
