@@ -102,7 +102,7 @@
             <Color label="Fur" channel="2" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <NavmeshRegionObject t0="45.5929" t1="5.17419" t2="-135.621" s0="26.6116" s1="26.6116" s2="26.6116" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6">
+    <NavmeshRegionObject t0="45.5929" t1="5.17419" t2="-135.621" s0="80.2655" s1="80.2655" s2="80.2655" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6">
         <parameters />
     </NavmeshRegionObject>
     <ActorObject t0="42.6563" t1="4.08788" t2="-127.098" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" type_file="Data/Characters/rat_manager.xml" is_player="0">
@@ -127,7 +127,22 @@
             <Color label="Armor" channel="3" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <CameraObject t0="43.2748" t1="11.0852" t2="-115.454" s0="1" s1="1" s2="1" q0="0.313837" q1="0.00605056" q2="-0.00199996" q3="0.949455" euler_x="0.638477" euler_y="0.0127451" euler_z="0" id="271">
+    <EnvObject t0="36.6874" t1="5.72123" t2="-148.851" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="207" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="53.601" t1="7.09413" t2="-148.469" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="208" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="21.4302" t1="6.25231" t2="-151.237" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="209" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="34.6575" t1="3.31654" t2="-128.191" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="210" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="61.837" t1="3.31654" t2="-124.544" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="211" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+        <parameters />
+    </EnvObject>
+    <CameraObject t0="39.2171" t1="11.5959" t2="-113.064" s0="1" s1="1" s2="1" q0="0.278847" q1="0.102232" q2="-0.0298687" q3="0.954411" euler_x="0.568508" euler_y="0.213417" euler_z="0" id="271">
         <parameters />
     </CameraObject>
 </ActorObjects>
@@ -139,4 +154,5 @@
     <SpawnerItem display_name="Blob Shadow" path="Data/Objects/Decals/blob_shadow.xml" thumbnail_path="" />
     <SpawnerItem display_name="env_blob_shadow.xml" path="Data/Objects/Decals/env_blob_shadow.xml" thumbnail_path="empty_placeholder.png" />
     <SpawnerItem display_name="env_blob_shadow_square.xml" path="Data/Objects/Decals/env_blob_shadow_square.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="Crete Block Marble Standard" path="Data/Objects/Crete/crete_block_marble_standard.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/crete_block_marble_standard.png" />
 </RecentItems>

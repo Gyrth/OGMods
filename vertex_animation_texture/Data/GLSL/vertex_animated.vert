@@ -158,8 +158,8 @@ vec4 rgba_to_srgb(vec4 rgba) {
 }
 
 // Converts a linear rgb color to a srgb color (approximated, but fast)
-vec3 rgb_to_srgb_approx(vec3 rgb) {
-    return pow(rgb, vec3(SRGB_GAMMA));
+vec4 rgba_to_srgb_approx(vec4 rgba) {
+    return vec4(pow(rgba.rgb, vec3(SRGB_GAMMA)), rgba.a);
 }
 
 vec4 NormalizeColor(in vec4 value){

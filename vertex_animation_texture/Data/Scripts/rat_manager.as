@@ -578,6 +578,7 @@ class Rat{
     Object@ blob_model;
     float update_aabb_timer = RangedRandomFloat(0.0, UPDATE_AABB_INTERVAL);
     vec3 movement_direction = vec3(1.0, 0.0, 0.0);
+    vec3 nav_target_direction = vec3(1.0, 0.0, 0.0);
     vec3 nav_target;
     vec3 ground_normal(0.0, 1.0, 0.0);
     vec3 wall_normal(0.0, 1.0, 0.0);
@@ -665,8 +666,8 @@ class Rat{
     }
 
     void UpdateRoaming(const Timestep &in ts){
-        if(distance(position, nav_target) < 0.25){
-            if(rand() & 50 == 0){
+        if(distance(position, nav_target) < 0.2){
+            if(rand() % 50 == 0){
                 current_state = Look;
                 current_animation = LookAround;
                 look_around_timer = RangedRandomFloat(0.5, 5.0);
@@ -677,7 +678,7 @@ class Rat{
 
         if(on_ground){
             float movement_speed = 15.0;
-            vec3 nav_target_direction = normalize(nav_target - position);
+            nav_target_direction = normalize(nav_target - position);
             movement_direction = mix(movement_direction, nav_target_direction, ts.step() * movement_speed);
         }
     }
@@ -884,7 +885,7 @@ class Rat{
             on_wall = false;
             in_air_timer = 0.0f;
 
-            vec3 push_adjusted_movement_direction = mix(movement_direction, normalize(push_force), min(1.0, length(push_force)));
+            vec3 push_adjusted_movement_direction = mix(movement_direction, push_force, min(1.0, length(push_force)));
             push_force *= pow(0.95f, ts.frames());
 
             velocity += push_adjusted_movement_direction * ts.step() * 25.0f;
@@ -933,12 +934,23 @@ class Rat{
     }
 
     void AvoidCharacter(MovementObject@ char, const Timestep &in ts){
-        vec3 difference = char.position - position;
-        vec3 push_direction = normalize(difference) * -1.0;
-        float dist = length(difference);
+        if(current_state != Roam){return;}
 
+        vec3 difference = char.position - position;
+        vec3 character_direction = normalize(difference);
+        vec3 up_down = cross(nav_target_direction, character_direction);
+
+        vec3 push_direction = cross(character_direction, up_down);
+        push_direction = normalize(vec3(push_direction.x, 0.0, push_direction.z));
+
+        // DebugDrawLine(position, position + character_direction, vec3(0.0, 1.0, 0.0), _delete_on_update);
+        // DebugDrawLine(position, position + push_direction, vec3(1.0, 1.0, 0.0), _delete_on_update);
+        // DebugDrawLine(position, position + movement_direction, vec3(1.0, 0.0, 0.0), _delete_on_update);
+
+        float dist = length(difference);
         float push_length = max(0.0, 4.0 - dist);
-        push_force += push_length * 2.0 * push_direction * ts.step();
+
+        push_force += push_length * 4.0 * push_direction * ts.step();
     }
 
 }
