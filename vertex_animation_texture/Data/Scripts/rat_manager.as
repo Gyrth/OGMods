@@ -523,7 +523,15 @@ void UpdatePaused(){}
 enum RatAnimations{
     Idle,
     Run,
-    Flail
+    Flail,
+    LookAround
+}
+
+enum RatStates{
+    Roam,
+    Look,
+    Follow,
+    Attack
 }
 
 array<Rat@> rats;
@@ -546,6 +554,10 @@ const float IDLE_ANIMATION_SPEED = 1.0;
 const int RUN_ANIMATION_START = 50;
 const int RUN_ANIMATION_END = 74;
 const float RUN_ANIMATION_SPEED = 1.0;
+
+const int LOOK_ANIMATION_START = 50;
+const int LOOK_ANIMATION_END = 74;
+const float LOOK_ANIMATION_SPEED = 1.0;
 
 const float IDLE_THRESHOLD = 0.85;
 const float RUN_THRESHOLD = 0.9;
@@ -578,8 +590,10 @@ class Rat{
     float in_air_timer = 0.0f;
     bool deleted = false;
     int current_animation = Idle;
+    int current_state = Roam;
     float animation_progress = RangedRandomFloat(0.0, 1.0);
     float random_tint_value = RangedRandomFloat(0.0, 1.0);
+    float look_around_timer = 0.0f;
 
     Rat(){
         position = this_mo.position;
@@ -616,6 +630,7 @@ class Rat{
 
             UpdateModelTransform(ts);
             UpdateAnimations(ts);
+            UpdateStates(ts);
         }
 
         last_col_pos = position;
@@ -629,7 +644,53 @@ class Rat{
 
             UpdateModelTransform(ts);
             UpdateAnimations(ts);
+            UpdateStates(ts);
         }
+    }
+
+    void UpdateStates(const Timestep &in ts){
+
+        switch(current_state){
+            case Roam:
+                UpdateRoaming(ts);
+                break;
+            case Look:
+                UpdateLooking(ts);
+                break;
+            case Follow:
+                break;
+            case Attack:
+                break;
+        }
+    }
+
+    void UpdateRoaming(const Timestep &in ts){
+        if(distance(position, nav_target) < 0.25){
+            if(rand() & 6 == 0){
+                current_state = Look;
+                current_animation = LookAround;
+                look_around_timer = RangedRandomFloat(0.5, 5.0);
+            }else{
+                GetRandomNavTarget();
+            }
+        }
+
+        if(on_ground){
+            float movement_speed = 15.0;
+            vec3 nav_target_direction = normalize(nav_target - position);
+            movement_direction = mix(movement_direction, nav_target_direction, ts.step() * movement_speed);
+        }
+    }
+
+    void UpdateLooking(const Timestep &in ts){
+        look_around_timer -= time_step;
+
+        if(look_around_timer <= 0.0){
+            current_state = Roam;
+            current_animation = Idle;
+        }
+
+        movement_direction = vec3(0.0);
     }
 
     void UpdateAnimations(const Timestep &in ts){
@@ -644,7 +705,21 @@ class Rat{
             case Flail:
                 UpdateFlailAnimation(ts);
                 break;
+            case LookAround:
+                UpdateLookAroundAnimation(ts);
+                break;
         }
+    }
+
+    void UpdateLookAroundAnimation(const Timestep &in ts){
+        animation_progress += ts.step() * LOOK_ANIMATION_SPEED;
+
+        if(animation_progress > 1.0){
+            animation_progress -= 1.0;
+        }
+
+        float current_frame = mix(LOOK_ANIMATION_START, LOOK_ANIMATION_END, animation_progress);
+        model.SetTint(vec3(random_tint_value, current_frame / 1000.0, 0.0));
     }
 
     void UpdateFlailAnimation(const Timestep &in ts){
@@ -837,20 +912,11 @@ class Rat{
 
     void ApplyControl(const Timestep &in ts){
 
-        if(distance(position, nav_target) < 0.35){
-            GetRandomNavTarget();
-        }
-
         // DebugDrawLine(position, position + ground_normal, vec3(0.0, 1.0, 0.0), _delete_on_update);
         // DebugDrawLine(position, position + wall_normal, vec3(1.0, 1.0, 0.0), _delete_on_update);
         // DebugDrawLine(position, nav_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
         // DebugDrawWireSphere(nav_target, 0.25, vec3(0.0, 0.0, 1.0), _delete_on_update);
 
-        if(on_ground){
-            float movement_speed = 15.0;
-            vec3 nav_target_direction = normalize(nav_target - position);
-            movement_direction = mix(movement_direction, nav_target_direction, ts.step() * movement_speed);
-        }
     }
 
     void AvoidRat(Rat@ rat, const Timestep &in ts){
@@ -872,7 +938,7 @@ class Rat{
         float dist = length(difference);
 
         float push_length = max(0.0, 4.0 - dist);
-        push_force += push_length * 8.0 * push_direction * ts.step();
+        push_force += push_length * 4.0 * push_direction * ts.step();
     }
 
 }
@@ -892,11 +958,11 @@ void Update(int num_frames) {
     }
 
     if(push_rat){
-        UpdateRatPush(ts);
+        UpdatePushRat(ts);
     }
 
     if(push_character){
-        UpdateCharacterPush(ts);
+        UpdatePushCharacter(ts);
     }
 
     if(rats.size() < rat_amount){
@@ -906,7 +972,7 @@ void Update(int num_frames) {
     }
 }
 
-void UpdateRatPush(const Timestep &in ts){
+void UpdatePushRat(const Timestep &in ts){
     array<Rat@> push_queue;
     push_queue.insertAt(0, rats);
 
@@ -918,7 +984,7 @@ void UpdateRatPush(const Timestep &in ts){
     }
 }
 
-void UpdateCharacterPush(const Timestep &in ts){
+void UpdatePushCharacter(const Timestep &in ts){
     for(int i = 0; i < GetNumCharacters(); i++){
         MovementObject@ char = ReadCharacter(i);
 
