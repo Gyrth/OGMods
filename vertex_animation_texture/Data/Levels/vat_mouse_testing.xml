@@ -108,7 +108,8 @@
     <ActorObject t0="42.7697" t1="6.46996" t2="-128.587" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" type_file="Data/Characters/rat_manager.xml" is_player="0">
         <parameters>
             <parameter name="Character Scale" type="float" val="1" />
-            <parameter name="Rat Amount" type="int" val="500" />
+            <parameter name="Rat Amount" type="int" val="1" />
+            <parameter name="Super Speed" type="int" val="0" />
             <parameter name="Teams" type="string" val="turner" />
         </parameters>
         <Connections>
@@ -122,7 +123,7 @@
             <Color label="Armor" channel="3" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <CameraObject t0="33.8899" t1="22.9423" t2="-110.28" s0="1" s1="1" s2="1" q0="0.384986" q1="0.208453" q2="-0.0897081" q3="0.894587" euler_x="0.812789" euler_y="0.457862" euler_z="0" id="271">
+    <CameraObject t0="41.6456" t1="19.171" t2="-114.393" s0="1" s1="1" s2="1" q0="0.308271" q1="0.0889514" q2="-0.0289654" q3="0.946688" euler_x="0.629606" euler_y="0.187371" euler_z="0" id="271">
         <parameters />
     </CameraObject>
 </ActorObjects>

@@ -312,9 +312,6 @@ bool targeted_jump = false;
 
 void HandleCollisionsBetweenTwoCharacters(MovementObject @other){}
 
-void FinalAttachedItemUpdate(int num_frames) {
-}
-
 void HandleAnimationEvent(string event, vec3 world_pos){
 
 }
@@ -332,11 +329,13 @@ bool Init(string character_path) {
     rat_manager_id = this_mo.GetID();
     this_mo.char_path = character_path;
     bool success = character_getter.Load(this_mo.char_path);
+
     if(success){
         this_mo.RecreateRiggedObject(this_mo.char_path);
         this_mo.SetAnimation("Data/Animations/r_combatidlethreat.anm", 20.0f, 0);
         this_mo.SetScriptUpdatePeriod(1);
     }
+
     return success;
 }
 
@@ -397,50 +396,35 @@ void HitByItem(string material, vec3 point, int id, int type) {}
 void ImpactSound(float magnitude, vec3 position) {}
 
 void ResetLayers() {
-
 }
 
 void Dispose() {
 }
 
-void DisplayMatrixUpdate(){
-}
-
 void MovementObjectDeleted(int id){
 }
 
-bool queue_fix_discontinuity = false;
-void FixDiscontinuity() {
-    queue_fix_discontinuity = true;
+void DisplayMatrixUpdate() {
 }
 
-void PreDrawCameraNoCull(float curr_game_time) {
-    if(queue_fix_discontinuity){
-        this_mo.FixDiscontinuity();
-        // FinalAnimationMatrixUpdate(1);
-        queue_fix_discontinuity = false;
-    }
+void FinalAttachedItemUpdate(int num_frames){
+    
+}
+
+void PreDrawCamera(float curr_game_time){
 }
 
 void FinalAnimationMatrixUpdate(int num_frames) {
+    Timestep ts(time_step, max(1, num_frames));
 
     for(uint i = 0; i < rats.size(); i++){
-        rats[i].Draw();
+        rats[i].SlowUpdate(ts);
     }
-
-    vec3 offset2;
-    vec3 scale;
-    float size;
-    GetCollisionSphere(offset2, scale, size);
 
     RiggedObject@ rigged_object = this_mo.rigged_object();
     BoneTransform local_to_world;
     vec3 offset = this_mo.position;
-    offset.y -= size;
-    vec3 facing = this_mo.GetFacing();
-    float cur_rotation = atan2(facing.x, facing.z);
-    quaternion rotation(vec4(0,1,0,cur_rotation));
-    local_to_world.rotation = rotation;
+    offset.y -= 100.0f;
     local_to_world.origin = offset;
     rigged_object.TransformAllFrameMats(local_to_world);
 }
@@ -525,7 +509,6 @@ int GetPlayerCharacterID() {
     return -1;
 }
 
-
 void NotifyItemDetach(int idex){}
 void HandleEditorAttachment(int x, int y, bool mirror){}
 void Contact(){}
@@ -545,6 +528,8 @@ enum RatAnimations{
 array<Rat@> rats;
 uint rat_amount = 0;
 int rat_manager_id = -1;
+bool super_speed = false;
+int update_frequency = 1;
 
 const int IDLE_ANIMATION_START = 0;
 const int IDLE_ANIMATION_END = 24;
@@ -614,28 +599,43 @@ class Rat{
 
         HandleGroundCollisions();
         ApplyPhysics(ts);
-        ApplyControl();
-        UpdateModelTransform(ts);
-        UpdateAnimations();
-        
+
+        if(!super_speed){
+            ApplyControl(ts);
+
+            UpdateModelTransform(ts);
+            UpdateAnimations(ts);
+        }
+
         last_col_pos = position;
     }
 
-    void UpdateAnimations(){
+    void SlowUpdate(const Timestep &in ts){
+        if(deleted){return;}
+
+        if(super_speed){
+            ApplyControl(ts);
+
+            UpdateModelTransform(ts);
+            UpdateAnimations(ts);
+        }
+    }
+
+    void UpdateAnimations(const Timestep &in ts){
 
         switch(current_animation){
             case Idle:
-                UpdateIdleAnimation();
+                UpdateIdleAnimation(ts);
                 break;
             case Run:
-                UpdateRunAnimation();
+                UpdateRunAnimation(ts);
                 break;
         }
     }
     
-    void UpdateRunAnimation(){
+    void UpdateRunAnimation(const Timestep &in ts){
 
-        animation_progress += time_step * length(velocity) * RUN_ANIMATION_SPEED;
+        animation_progress += ts.step() * length(velocity) * RUN_ANIMATION_SPEED;
 
         if(animation_progress > 1.0){
             string sound_path;
@@ -668,8 +668,8 @@ class Rat{
         model.SetTint(vec3(random_tint_value, current_frame / 1000.0, 0.0));
     }
 
-    void UpdateIdleAnimation(){
-        animation_progress += time_step * length(velocity) * IDLE_ANIMATION_SPEED;
+    void UpdateIdleAnimation(const Timestep &in ts){
+        animation_progress += ts.step() * length(velocity) * IDLE_ANIMATION_SPEED;
 
         if(animation_progress > 1.0){
             animation_progress -= 1.0;
@@ -680,7 +680,7 @@ class Rat{
     }
 
     void UpdateModelTransform(const Timestep &in ts){
-        update_aabb_timer += time_step;
+        update_aabb_timer += ts.step();
 
         vec3 flat_vel = vec3(velocity.x, 0, velocity.z);
         flat_vel = normalize(flat_vel);
@@ -717,10 +717,6 @@ class Rat{
         nav_target = collision_position;
     }
 
-    void Draw(){
-        
-    }
-
     void HandleGroundCollisions(){
         // DebugDrawWireScaledSphere(position + offset, size, scale, vec3(0.0f, 1.0f, 0.0f), _delete_on_update);
 
@@ -738,8 +734,8 @@ class Rat{
         flat_current_position.y = 0.0;
         flat_last_position.y = 0.0;
         // The vertical and flat movement velocity is used later on to drive the animations and offset the camera.
-        vertical_movement_velocity = (position.y - last_col_pos.y) / time_step;
-        flat_movement_velocity = distance(flat_current_position, flat_last_position) / time_step;
+        vertical_movement_velocity = (position.y - last_col_pos.y) / ts.step();
+        flat_movement_velocity = distance(flat_current_position, flat_last_position) / ts.step();
         // Check every collision to see if the character is standing on the ground.
         for(int i = 0; i < sphere_col.NumContacts(); i++){
             vec3 collision_point = sphere_col.GetContact(i).position;
@@ -760,8 +756,8 @@ class Rat{
             }
         }
 
-        ground_normal = mix(ground_normal, last_normal, time_step * 20.0f);
-        wall_normal = mix(wall_normal, last_wall_normal, time_step * 20.0f);
+        ground_normal = mix(ground_normal, last_normal, ts.step() * 20.0f);
+        wall_normal = mix(wall_normal, last_wall_normal, ts.step() * 20.0f);
 
         if(collision_below){
             // When the character has found a collision below and was previously off the ground
@@ -776,19 +772,19 @@ class Rat{
             vec3 push_adjusted_movement_direction = mix(movement_direction, push_force, min(1.0, length(push_force)));
             push_force *= pow(0.95f, ts.frames());
 
-            velocity += push_adjusted_movement_direction * time_step * 25.0f;
+            velocity += push_adjusted_movement_direction * ts.step() * 25.0f;
             // Reduce the velocity when standing on the ground, as if affected by friction.
             velocity *= pow(0.95f, ts.frames());
 
         }else{
             on_ground = false;
             if(length(wall_normal) > 0.1){on_wall = true;}
-            in_air_timer += time_step;
+            in_air_timer += ts.step();
             // Keep adding velocity in the gravity direction to speed up faling.
             velocity += physics.gravity_vector * ts.step();
         }
 
-        position += velocity * time_step;
+        position += velocity * ts.step();
     }
 
     void Land(){
@@ -798,7 +794,7 @@ class Rat{
         // DebugDrawWireSphere(position + vec3(0.0f, -1.0f, 0.0), 0.5, vec3(1.0), _fade);
     }
 
-    void ApplyControl(){
+    void ApplyControl(const Timestep &in ts){
 
         if(distance(position, nav_target) < 0.35){
             GetRandomNavTarget();
@@ -812,46 +808,50 @@ class Rat{
         if(on_ground){
             float movement_speed = 15.0;
             vec3 nav_target_direction = normalize(nav_target - position);
-            movement_direction = mix(movement_direction, nav_target_direction, time_step * movement_speed);
+            movement_direction = mix(movement_direction, nav_target_direction, ts.step() * movement_speed);
         }
     }
 
-    void AvoidRat(Rat@ rat){
+    void AvoidRat(Rat@ rat, const Timestep &in ts){
         if(on_ground){
             vec3 difference = rat.position - position;
             vec3 push_direction = normalize(difference) * -1.0;
             float dist = length(difference);
 
             float push_length = max(0.0, 2.0 - dist);
-            vec3 added_force = push_length * 10.0 * push_direction * time_step;
+            vec3 added_force = push_length * 10.0 * push_direction * ts.step();
             push_force += added_force;
             rat.push_force -= added_force;
         }
     }
 
-    void AvoidCharacter(MovementObject@ char){
+    void AvoidCharacter(MovementObject@ char, const Timestep &in ts){
         vec3 difference = char.position - position;
         vec3 push_direction = normalize(difference) * -1.0;
         float dist = length(difference);
 
         float push_length = max(0.0, 4.0 - dist);
-        push_force += push_length * 10.0 * push_direction * time_step;
+        push_force += push_length * 10.0 * push_direction * ts.step();
     }
 
 }
 
-
 void Update(int num_frames) {
     Timestep ts(time_step, num_frames);
     time += ts.step();
+
+    if(EditorModeActive()){
+        DebugDrawBillboard("Data/Textures/ui/eye_widget.tga", this_mo.position, 0.5, vec4(0.25, 1.0, 0.25, 1.0), _delete_on_update);
+    }
+
     this_mo.position = ReadObjectFromID(this_mo.GetID()).GetTranslation();
 
     for(uint i = 0; i < rats.size(); i++){
         rats[i].Update(ts);
     }
 
-    // UpdateRatPush();
-    // UpdateCharacterPush();
+    // UpdateRatPush(ts);
+    // UpdateCharacterPush(ts);
 
     if(rats.size() < rat_amount){
         rats.insertLast(Rat());
@@ -860,25 +860,25 @@ void Update(int num_frames) {
     }
 }
 
-void UpdateRatPush(){
+void UpdateRatPush(const Timestep &in ts){
     array<Rat@> push_queue;
     push_queue.insertAt(0, rats);
 
     while(push_queue.size() > 0){
         for(uint i = 1; i < push_queue.size(); i++){
-            push_queue[0].AvoidRat(push_queue[i]);
+            push_queue[0].AvoidRat(push_queue[i], ts);
         }
         push_queue.removeAt(0);
     }
 }
 
-void UpdateCharacterPush(){
+void UpdateCharacterPush(const Timestep &in ts){
     for(int i = 0; i < GetNumCharacters(); i++){
         MovementObject@ char = ReadCharacter(i);
 
         if(char.GetID() != rat_manager_id){
             for(uint j = 0; j < rats.size(); j++){
-                rats[j].AvoidCharacter(char);
+                rats[j].AvoidCharacter(char, ts);
             }
         }
     }
@@ -890,11 +890,19 @@ void SetParameters() {
     params.AddIntSlider("Rat Amount", 100, "min:0,max:10");
     rat_amount = max(0, params.GetInt("Rat Amount"));
 
+    params.AddIntSlider("Update Frequency", 1, "min:0,max:10");
+    if(update_frequency != max(0, params.GetInt("Update Frequency"))){
+        update_frequency = max(0, params.GetInt("Update Frequency"));
+        this_mo.SetScriptUpdatePeriod(update_frequency);
+    }
+
+    params.AddIntCheckbox("Super Speed", false);
+    super_speed = params.GetInt("Super Speed") == 1;
+
     params.AddFloatSlider("Character Scale",1,"min:0.6,max:1.4,step:0.02,text_mult:100");
     character_scale = params.GetFloat("Character Scale");
     if(character_scale != this_mo.rigged_object().GetRelativeCharScale()){
         this_mo.RecreateRiggedObject(this_mo.char_path);
         this_mo.SetAnimation("Data/Animations/r_combatidlethreat.anm", 20.0f, 0);
-        FixDiscontinuity();
     }
 }
