@@ -5,5 +5,5 @@
 	<NormalMap>Data/Textures/mouse_n.png</NormalMap>
 	<WeightMap>Data/Textures/mouse_c.png</WeightMap>
 	<ShaderName>vertex_animated</ShaderName>
-	<flags no_collision = "true" transparent = "false" double_sided = "true" dynamic = "true"/>
+	<flags no_collision = "true" transparent = "false" double_sided = "false" dynamic = "true"/>
 </Object>

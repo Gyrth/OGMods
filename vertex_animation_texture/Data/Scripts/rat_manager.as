@@ -522,7 +522,8 @@ void UpdatePaused(){}
 
 enum RatAnimations{
     Idle,
-    Run
+    Run,
+    Flail
 }
 
 array<Rat@> rats;
@@ -531,12 +532,16 @@ int rat_manager_id = -1;
 bool super_speed = false;
 int update_frequency = 1;
 
-const int IDLE_ANIMATION_START = 0;
-const int IDLE_ANIMATION_END = 24;
+const int FLAIL_ANIMATION_START = 0;
+const int FLAIL_ANIMATION_END = 24;
+const float FLAIL_ANIMATION_SPEED = 1.0;
+
+const int IDLE_ANIMATION_START = 25;
+const int IDLE_ANIMATION_END = 49;
 const float IDLE_ANIMATION_SPEED = 1.0;
 
-const int RUN_ANIMATION_START = 25;
-const int RUN_ANIMATION_END = 48;
+const int RUN_ANIMATION_START = 50;
+const int RUN_ANIMATION_END = 74;
 const float RUN_ANIMATION_SPEED = 1.0;
 
 const float IDLE_THRESHOLD = 1.0;
@@ -633,7 +638,26 @@ class Rat{
             case Run:
                 UpdateRunAnimation(ts);
                 break;
+            case Flail:
+                UpdateFlailAnimation(ts);
+                break;
         }
+    }
+
+    void UpdateFlailAnimation(const Timestep &in ts){
+        float velocity_length = abs(vertical_movement_velocity);
+        animation_progress += ts.step() * velocity_length * FLAIL_ANIMATION_SPEED;
+
+        if(animation_progress > 1.0){
+            animation_progress -= 1.0;
+        }
+
+        if(on_ground){
+            current_animation = Idle;
+        }
+
+        float current_frame = mix(FLAIL_ANIMATION_START, FLAIL_ANIMATION_END, animation_progress);
+        model.SetTint(vec3(random_tint_value, current_frame / 1000.0, 0.0));
     }
     
     void UpdateRunAnimation(const Timestep &in ts){
@@ -666,7 +690,7 @@ class Rat{
             }
 
             int sound_id = PlaySound(sound_path, position);
-            SetSoundGain(sound_id, RangedRandomFloat(0.25, 0.5));
+            SetSoundGain(sound_id, RangedRandomFloat(0.5, 0.75));
             SetSoundPitch(sound_id, RangedRandomFloat(1.05, 1.2));
 
             animation_progress -= 1.0;
@@ -792,6 +816,7 @@ class Rat{
 
         }else{
             on_ground = false;
+            current_animation = Flail;
             if(length(wall_normal) > 0.1){on_wall = true;}
             in_air_timer += ts.step();
             // Keep adding velocity in the gravity direction to speed up faling.
