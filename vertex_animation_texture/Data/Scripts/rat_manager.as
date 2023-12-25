@@ -579,7 +579,6 @@ class Rat{
     float update_aabb_timer = RangedRandomFloat(0.0, UPDATE_AABB_INTERVAL);
     vec3 movement_direction = vec3(1.0, 0.0, 0.0);
     vec3 nav_target_direction = vec3(1.0, 0.0, 0.0);
-    vec3 nav_target;
     vec3 ground_normal(0.0, 1.0, 0.0);
     vec3 wall_normal(0.0, 1.0, 0.0);
     bool on_wall = false;
@@ -595,6 +594,12 @@ class Rat{
     float animation_progress = RangedRandomFloat(0.0, 1.0);
     float random_tint_value = RangedRandomFloat(0.0, 1.0);
     float look_around_timer = 0.0f;
+    bool at_nav_target = false;
+
+    NavPath path;
+    int current_path_point = 0;
+    uint16 inclusive_flags = POLYFLAGS_ALL;
+    uint16 exclusive_flags = POLYFLAGS_NONE;
 
     Rat(){
         position = this_mo.position;
@@ -666,20 +671,24 @@ class Rat{
     }
 
     void UpdateRoaming(const Timestep &in ts){
-        if(distance(position, nav_target) < 0.2){
-            if(rand() % 50 == 0){
+        vec3 nav_target = GetNextPathPoint();
+
+        if(on_ground){
+            float movement_speed = 15.0;
+
+            // DebugDrawLine(position, nav_target, vec3(1.0, 0.0, 0.0), _delete_on_update);
+            nav_target_direction = normalize(nav_target - position);
+            movement_direction = mix(movement_direction, nav_target_direction, ts.step() * movement_speed);
+        }
+
+        if(at_nav_target){
+            if(rand() % 30 == 0){
                 current_state = Look;
                 current_animation = LookAround;
                 look_around_timer = RangedRandomFloat(0.5, 5.0);
             }else{
                 GetRandomNavTarget();
             }
-        }
-
-        if(on_ground){
-            float movement_speed = 15.0;
-            nav_target_direction = normalize(nav_target - position);
-            movement_direction = mix(movement_direction, nav_target_direction, ts.step() * movement_speed);
         }
     }
 
@@ -830,7 +839,48 @@ class Rat{
         collision_check_position.z += RangedRandomFloat(-max_random_nav, max_random_nav);
 
         vec3 collision_position = col.GetRayCollision(collision_check_position + vec3(0.0f, max_random_nav, 0.0f), collision_check_position + vec3(0.0f, -max_random_nav, 0.0f));
-        nav_target = collision_position;
+        
+        GetNavPath(collision_position);
+    }
+
+    void GetNavPath(vec3 target_pos){
+        vec3 nav_from = GetNavPointPos(position);
+        vec3 nav_to = GetNavPointPos(target_pos);
+
+        at_nav_target = false;
+
+        path = GetPath(nav_from,
+                        nav_to,
+                        inclusive_flags,
+                        exclusive_flags);
+        
+        current_path_point = 0;
+
+        // int num_points = path.NumPoints();
+
+        // for(int i = 0; i < num_points - 1; i++) {
+        //     DebugDrawLine(path.GetPoint(i),
+        //                   path.GetPoint(i + 1),
+        //                   vec3(1.0f, 1.0f, 1.0f),
+        //                   _persistent);
+        // }
+    }
+
+    vec3 GetNextPathPoint(){
+        int num_points = path.NumPoints();
+
+        if(num_points == current_path_point){
+            at_nav_target = true;
+            return position;
+        }
+
+        vec3 next_point = path.GetPoint(current_path_point);
+
+        if(xz_distance_squared(position, next_point) < 1.0f){
+            current_path_point += 1;
+        }
+
+        return next_point;
     }
 
     void HandleGroundCollisions(){
@@ -894,9 +944,13 @@ class Rat{
 
         }else{
             on_ground = false;
-            current_animation = Flail;
             if(length(wall_normal) > 0.1){on_wall = true;}
+
             in_air_timer += ts.step();
+            if(in_air_timer > 0.15){
+                current_animation = Flail;
+            }
+
             // Keep adding velocity in the gravity direction to speed up faling.
             velocity += physics.gravity_vector * ts.step();
         }
@@ -915,8 +969,6 @@ class Rat{
 
         // DebugDrawLine(position, position + ground_normal, vec3(0.0, 1.0, 0.0), _delete_on_update);
         // DebugDrawLine(position, position + wall_normal, vec3(1.0, 1.0, 0.0), _delete_on_update);
-        // DebugDrawLine(position, nav_target, vec3(0.0, 0.0, 1.0), _delete_on_update);
-        // DebugDrawWireSphere(nav_target, 0.25, vec3(0.0, 0.0, 1.0), _delete_on_update);
 
     }
 
