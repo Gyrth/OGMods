@@ -539,6 +539,9 @@ const int RUN_ANIMATION_START = 25;
 const int RUN_ANIMATION_END = 48;
 const float RUN_ANIMATION_SPEED = 1.0;
 
+const float IDLE_THRESHOLD = 1.0;
+const float RUN_THRESHOLD = 1.25;
+
 class Rat{
 
     float UPDATE_AABB_INTERVAL = 0.15;
@@ -566,7 +569,7 @@ class Rat{
     float vertical_movement_velocity = 0.0f;
     float in_air_timer = 0.0f;
     bool deleted = false;
-    int current_animation = Run;
+    int current_animation = Idle;
     float animation_progress = RangedRandomFloat(0.0, 1.0);
     float random_tint_value = RangedRandomFloat(0.0, 1.0);
 
@@ -635,7 +638,12 @@ class Rat{
     
     void UpdateRunAnimation(const Timestep &in ts){
 
-        animation_progress += ts.step() * length(velocity) * RUN_ANIMATION_SPEED;
+        float velocity_length = length(velocity);
+        animation_progress += ts.step() * velocity_length * RUN_ANIMATION_SPEED;
+
+        if(velocity_length < IDLE_THRESHOLD){
+            current_animation = Idle;
+        }
 
         if(animation_progress > 1.0){
             string sound_path;
@@ -669,7 +677,13 @@ class Rat{
     }
 
     void UpdateIdleAnimation(const Timestep &in ts){
-        animation_progress += ts.step() * length(velocity) * IDLE_ANIMATION_SPEED;
+
+        float velocity_length = length(velocity);
+        animation_progress += ts.step() * velocity_length * IDLE_ANIMATION_SPEED;
+
+        if(velocity_length > RUN_THRESHOLD){
+            current_animation = Run;
+        }
 
         if(animation_progress > 1.0){
             animation_progress -= 1.0;
