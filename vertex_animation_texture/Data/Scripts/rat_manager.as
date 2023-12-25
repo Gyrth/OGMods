@@ -551,13 +551,13 @@ const int IDLE_ANIMATION_START = 25;
 const int IDLE_ANIMATION_END = 49;
 const float IDLE_ANIMATION_SPEED = 1.0;
 
-const int RUN_ANIMATION_START = 50;
-const int RUN_ANIMATION_END = 74;
-const float RUN_ANIMATION_SPEED = 1.0;
-
 const int LOOK_ANIMATION_START = 50;
 const int LOOK_ANIMATION_END = 74;
 const float LOOK_ANIMATION_SPEED = 1.0;
+
+const int RUN_ANIMATION_START = 75;
+const int RUN_ANIMATION_END = 99;
+const float RUN_ANIMATION_SPEED = 1.0;
 
 const float IDLE_THRESHOLD = 0.85;
 const float RUN_THRESHOLD = 0.9;
@@ -666,7 +666,7 @@ class Rat{
 
     void UpdateRoaming(const Timestep &in ts){
         if(distance(position, nav_target) < 0.25){
-            if(rand() & 6 == 0){
+            if(rand() & 20 == 0){
                 current_state = Look;
                 current_animation = LookAround;
                 look_around_timer = RangedRandomFloat(0.5, 5.0);
@@ -938,7 +938,7 @@ class Rat{
         float dist = length(difference);
 
         float push_length = max(0.0, 4.0 - dist);
-        push_force += push_length * 4.0 * push_direction * ts.step();
+        push_force += push_length * 2.0 * push_direction * ts.step();
     }
 
 }
