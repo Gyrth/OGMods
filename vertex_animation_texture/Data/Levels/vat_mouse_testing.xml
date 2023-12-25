@@ -112,6 +112,10 @@
             <parameter name="Push Character" type="int" val="0" />
             <parameter name="Push Rat" type="int" val="0" />
             <parameter name="Rat Amount" type="int" val="100" />
+            <parameter name="Spiral A" type="float" val="0.05" />
+            <parameter name="Spiral Angle Offset" type="float" val="66.667" />
+            <parameter name="Spiral Degrees" type="float" val="25" />
+            <parameter name="Spiral Max R" type="float" val="3.402" />
             <parameter name="Super Speed" type="int" val="0" />
             <parameter name="Teams" type="string" val="turner" />
             <parameter name="Update Frequency" type="int" val="1" />
@@ -208,7 +212,7 @@
     <EnvObject t0="61.837" t1="3.31654" t2="-124.544" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="211" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
         <parameters />
     </EnvObject>
-    <CameraObject t0="45.0719" t1="10.6037" t2="-116.018" s0="1" s1="1" s2="1" q0="0.325039" q1="-0.0721926" q2="0.0248941" q3="0.942612" euler_x="0.66412" euler_y="-0.152877" euler_z="0" id="271">
+    <CameraObject t0="48.081" t1="9.34296" t2="-135.179" s0="1" s1="1" s2="1" q0="0.199024" q1="-0.777635" q2="0.515199" q3="0.300405" euler_x="-1.97134" euler_y="-0.737291" euler_z="3.14159" id="271">
         <parameters />
     </CameraObject>
 </ActorObjects>

@@ -534,6 +534,7 @@ enum RatStates{
     Attack
 }
 
+bool post_init = true;
 array<Rat@> rats;
 uint rat_amount = 0;
 int rat_manager_id = -1;
@@ -542,6 +543,8 @@ int update_frequency = 1;
 bool push_character = false;
 bool push_rat = false;
 float max_random_nav = 15.0;
+int rat_king_id = -1;
+MovementObject@ rat_king;
 
 const int FLAIL_ANIMATION_START = 0;
 const int FLAIL_ANIMATION_END = 24;
@@ -1007,9 +1010,16 @@ class Rat{
 
 }
 
+float spiral_degrees = 5.0;
+float spiral_A = 7.0;
+float spiral_max_r = 50.0;
+float spiral_angle_offset = 65.0;
+
 void Update(int num_frames) {
     Timestep ts(time_step, num_frames);
     time += ts.step();
+
+    PostInit();
 
     if(EditorModeActive()){
         DebugDrawBillboard("Data/Textures/ui/eye_widget.tga", this_mo.position, 0.5, vec4(0.25, 1.0, 0.25, 1.0), _delete_on_update);
@@ -1034,6 +1044,59 @@ void Update(int num_frames) {
     }else if(rats.size() > rat_amount){
         rats.removeAt(rats.size() - 1);
     }
+
+    float pi = 3.141592653589;
+
+    array<vec2> points;
+
+    float dtheta = spiral_degrees * pi / 180.0; // Five degrees.
+
+    for(float theta = (dtheta * 15.0); ; theta += dtheta){
+        // Calculate r.
+        float r = spiral_A * theta;
+
+        // Convert to Cartesian coordinates.
+        vec2 pos = PolarToCartesian(r, theta + spiral_angle_offset);
+
+        // Create the point.
+        points.insertLast(pos);
+
+        // If we have gone far enough, stop.
+        if (r > spiral_max_r) break;
+    }
+    
+    vec3 last_position = rat_king.position;
+
+    for(uint i = 0; i < points.size(); i++){
+        vec3 new_position = rat_king.position + vec3(points[i].x, 0.0, points[i].y);
+        
+        DebugDrawLine(last_position, new_position, vec3(1.0, 0.0, 0.0), _delete_on_update);
+        last_position = new_position;
+    }
+
+}
+
+// Convert polar coordinates into Cartesian coordinates.
+vec2 PolarToCartesian(float r, float theta){
+    vec2 result;
+    result.x = r * cos(theta);
+    result.y = r * sin(theta);
+    return result;
+}
+
+void PostInit(){
+    if(post_init == false){return;}
+
+    for(int i = 0; i < GetNumCharacters(); i++){
+        MovementObject@ char = ReadCharacter(i);
+
+        if(char.is_player){
+            rat_king_id = char.GetID();
+            @rat_king = char;
+        }
+    }
+
+    post_init = false;
 }
 
 void UpdatePushRat(const Timestep &in ts){
@@ -1083,6 +1146,18 @@ void SetParameters() {
 
     params.AddFloatSlider("Max Random Nav", 15.0, "min:1.0,max:50.0,step:1.0,text_mult:1");
     max_random_nav = params.GetFloat("Max Random Nav");
+
+    params.AddFloatSlider("Spiral A", 7.0, "min:0.1, max:10.0,step:0.1,text_mult:1");
+    spiral_A = params.GetFloat("Spiral A");
+
+    params.AddFloatSlider("Spiral Angle Offset", 65.0, "min:0.0, max:100.0,step:0.1,text_mult:1");
+    spiral_angle_offset = params.GetFloat("Spiral Angle Offset");
+
+    params.AddFloatSlider("Spiral Degrees", 5.0, "min:0.1, max:90.0,step:0.1,text_mult:1");
+    spiral_degrees = params.GetFloat("Spiral Degrees");
+
+    params.AddFloatSlider("Spiral Max R", 50.0, "min:0.0, max:90.0,step:0.1,text_mult:1");
+    spiral_max_r = params.GetFloat("Spiral Max R");
 
     params.AddFloatSlider("Character Scale", 1, "min:0.6,max:1.4,step:0.02,text_mult:100");
     character_scale = params.GetFloat("Character Scale");
