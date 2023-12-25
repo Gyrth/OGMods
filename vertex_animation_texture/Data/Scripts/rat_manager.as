@@ -531,6 +531,9 @@ uint rat_amount = 0;
 int rat_manager_id = -1;
 bool super_speed = false;
 int update_frequency = 1;
+bool push_character = false;
+bool push_rat = false;
+float max_random_nav = 15.0;
 
 const int FLAIL_ANIMATION_START = 0;
 const int FLAIL_ANIMATION_END = 24;
@@ -544,8 +547,8 @@ const int RUN_ANIMATION_START = 50;
 const int RUN_ANIMATION_END = 74;
 const float RUN_ANIMATION_SPEED = 1.0;
 
-const float IDLE_THRESHOLD = 1.0;
-const float RUN_THRESHOLD = 1.25;
+const float IDLE_THRESHOLD = 0.85;
+const float RUN_THRESHOLD = 0.9;
 
 class Rat{
 
@@ -690,7 +693,7 @@ class Rat{
             }
 
             int sound_id = PlaySound(sound_path, position);
-            SetSoundGain(sound_id, RangedRandomFloat(0.5, 0.75));
+            SetSoundGain(sound_id, 0.5);
             SetSoundPitch(sound_id, RangedRandomFloat(1.05, 1.2));
 
             animation_progress -= 1.0;
@@ -747,11 +750,10 @@ class Rat{
     void GetRandomNavTarget(){
         vec3 collision_check_position = this_mo.position;
 
-        float max_range = 15.0;
-        collision_check_position.x += RangedRandomFloat(-max_range, max_range);
-        collision_check_position.z += RangedRandomFloat(-max_range, max_range);
+        collision_check_position.x += RangedRandomFloat(-max_random_nav, max_random_nav);
+        collision_check_position.z += RangedRandomFloat(-max_random_nav, max_random_nav);
 
-        vec3 collision_position = col.GetRayCollision(collision_check_position + vec3(0.0f, max_range, 0.0f), collision_check_position + vec3(0.0f, -max_range, 0.0f));
+        vec3 collision_position = col.GetRayCollision(collision_check_position + vec3(0.0f, max_random_nav, 0.0f), collision_check_position + vec3(0.0f, -max_random_nav, 0.0f));
         nav_target = collision_position;
     }
 
@@ -807,7 +809,7 @@ class Rat{
             on_wall = false;
             in_air_timer = 0.0f;
 
-            vec3 push_adjusted_movement_direction = mix(movement_direction, push_force, min(1.0, length(push_force)));
+            vec3 push_adjusted_movement_direction = mix(movement_direction, normalize(push_force), min(1.0, length(push_force)));
             push_force *= pow(0.95f, ts.frames());
 
             velocity += push_adjusted_movement_direction * ts.step() * 25.0f;
@@ -857,7 +859,7 @@ class Rat{
             vec3 push_direction = normalize(difference) * -1.0;
             float dist = length(difference);
 
-            float push_length = max(0.0, 2.0 - dist);
+            float push_length = max(0.0, 1.0 - dist);
             vec3 added_force = push_length * 10.0 * push_direction * ts.step();
             push_force += added_force;
             rat.push_force -= added_force;
@@ -870,7 +872,7 @@ class Rat{
         float dist = length(difference);
 
         float push_length = max(0.0, 4.0 - dist);
-        push_force += push_length * 10.0 * push_direction * ts.step();
+        push_force += push_length * 8.0 * push_direction * ts.step();
     }
 
 }
@@ -889,8 +891,13 @@ void Update(int num_frames) {
         rats[i].Update(ts);
     }
 
-    // UpdateRatPush(ts);
-    // UpdateCharacterPush(ts);
+    if(push_rat){
+        UpdateRatPush(ts);
+    }
+
+    if(push_character){
+        UpdateCharacterPush(ts);
+    }
 
     if(rats.size() < rat_amount){
         rats.insertLast(Rat());
@@ -929,16 +936,25 @@ void SetParameters() {
     params.AddIntSlider("Rat Amount", 100, "min:0,max:10");
     rat_amount = max(0, params.GetInt("Rat Amount"));
 
-    params.AddIntSlider("Update Frequency", 1, "min:0,max:10");
-    if(update_frequency != max(0, params.GetInt("Update Frequency"))){
-        update_frequency = max(0, params.GetInt("Update Frequency"));
+    params.AddIntSlider("Update Frequency", 1, "min:1,max:10");
+    if(update_frequency != max(1, params.GetInt("Update Frequency"))){
+        update_frequency = max(1, params.GetInt("Update Frequency"));
         this_mo.SetScriptUpdatePeriod(update_frequency);
     }
 
     params.AddIntCheckbox("Super Speed", false);
     super_speed = params.GetInt("Super Speed") == 1;
 
-    params.AddFloatSlider("Character Scale",1,"min:0.6,max:1.4,step:0.02,text_mult:100");
+    params.AddIntCheckbox("Push Rat", false);
+    push_rat = params.GetInt("Push Rat") == 1;
+
+    params.AddIntCheckbox("Push Character", false);
+    push_character = params.GetInt("Push Character") == 1;
+
+    params.AddFloatSlider("Max Random Nav", 15.0, "min:1.0,max:50.0,step:1.0,text_mult:1");
+    max_random_nav = params.GetFloat("Max Random Nav");
+
+    params.AddFloatSlider("Character Scale", 1, "min:0.6,max:1.4,step:0.02,text_mult:100");
     character_scale = params.GetFloat("Character Scale");
     if(character_scale != this_mo.rigged_object().GetRelativeCharScale()){
         this_mo.RecreateRiggedObject(this_mo.char_path);
