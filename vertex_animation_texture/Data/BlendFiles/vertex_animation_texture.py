@@ -25,7 +25,7 @@ bpy.types.Scene.model_name = StringProperty(subtype='FILE_NAME', name="Model Nam
 bpy.types.Scene.cache_path = StringProperty(subtype='FILE_PATH', name="Cache Path")
 
 # This is the max the vertex can move out of it's own rest pose. 5 units each way.
-bounds = Vector([20.0, 20.0, 20.0])
+bounds = Vector([2.0, 2.0, 2.0])
 
 SUPPORTED_CACHE_FILE_VERSION = 41
 
@@ -193,9 +193,7 @@ def CreateAnimationTextures(export_path, model_name, info):
         frame_end = bpy.context.scene.frame_end
         
         animation_length = frame_end - frame_start
-        print("Animation Name : ", animation.name)
-        print("Animation Start : ", position_y)
-        print("Animation End : ", position_y + animation_length)
+        print("Animation Name : ", animation.name, (image_size - position_y), (image_size - position_y + animation_length))
         print("Animation Length : ", animation_length)
 
         bpy.context.scene.frame_set(frame_start)

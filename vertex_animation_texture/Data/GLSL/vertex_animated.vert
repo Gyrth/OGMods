@@ -115,7 +115,7 @@ uniform vec4 detail_color_indices;
 uniform sampler2DArray detail_normal;
 uniform vec4 detail_normal_indices;
 
-const vec3 bounds = vec3(20.0, 20.0, 20.0);
+const vec3 bounds = vec3(2.0, 2.0, 2.0);
 
 const float SRGB_GAMMA = 1.0 / 2.2;
 const float SRGB_INVERSE_GAMMA = 2.2;

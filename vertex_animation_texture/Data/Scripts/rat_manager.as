@@ -666,7 +666,7 @@ class Rat{
 
     void UpdateRoaming(const Timestep &in ts){
         if(distance(position, nav_target) < 0.25){
-            if(rand() & 20 == 0){
+            if(rand() & 50 == 0){
                 current_state = Look;
                 current_animation = LookAround;
                 look_around_timer = RangedRandomFloat(0.5, 5.0);
