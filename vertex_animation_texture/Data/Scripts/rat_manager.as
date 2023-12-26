@@ -546,6 +546,8 @@ float max_random_nav = 15.0;
 int rat_king_id = -1;
 MovementObject@ rat_king;
 
+const float PI = 3.141592653589;
+
 const int FLAIL_ANIMATION_START = 0;
 const int FLAIL_ANIMATION_END = 24;
 const float FLAIL_ANIMATION_SPEED = 1.0;
@@ -586,6 +588,7 @@ class Rat{
     vec3 wall_normal(0.0, 1.0, 0.0);
     bool on_wall = false;
     vec3 push_force = vec3(0.0, 0.0, 0.0);
+    float movement_speed = 50.0f;
 
     vec3 last_col_pos;
     float flat_movement_velocity = 0.0f;
@@ -593,11 +596,12 @@ class Rat{
     float in_air_timer = 0.0f;
     bool deleted = false;
     int current_animation = Idle;
-    int current_state = Roam;
+    int current_state = Follow;
     float animation_progress = RangedRandomFloat(0.0, 1.0);
     float random_tint_value = RangedRandomFloat(0.0, 1.0);
     float look_around_timer = 0.0f;
     bool at_nav_target = false;
+    vec3 follow_position;
 
     NavPath path;
     int current_path_point = 0;
@@ -667,6 +671,7 @@ class Rat{
                 UpdateLooking(ts);
                 break;
             case Follow:
+                UpdateFollowing(ts);
                 break;
             case Attack:
                 break;
@@ -675,13 +680,14 @@ class Rat{
 
     void UpdateRoaming(const Timestep &in ts){
         vec3 nav_target = GetNextPathPoint();
+        movement_speed = 50.0f;
 
         if(on_ground){
-            float movement_speed = 15.0;
+            float interpolate_speed = 15.0;
 
             // DebugDrawLine(position, nav_target, vec3(1.0, 0.0, 0.0), _delete_on_update);
             nav_target_direction = normalize(nav_target - position);
-            movement_direction = mix(movement_direction, nav_target_direction, ts.step() * movement_speed);
+            movement_direction = mix(movement_direction, nav_target_direction, ts.step() * interpolate_speed);
         }
 
         if(at_nav_target){
@@ -692,6 +698,21 @@ class Rat{
             }else{
                 GetRandomNavTarget();
             }
+        }
+    }
+
+    void UpdateFollowing(const Timestep &in ts){
+        movement_speed = 75.0f;
+
+        if(on_ground){
+            float interpolate_speed = 15.0;
+
+            // DebugDrawLine(position, nav_target, vec3(1.0, 0.0, 0.0), _delete_on_update);
+            vec3 target_position = vec3(follow_position.x, position.y, follow_position.z);
+            float dist = xz_distance(target_position, position);
+            nav_target_direction = normalize(target_position - position) * min(1.0, dist);
+
+            movement_direction = mix(movement_direction, nav_target_direction, ts.step() * interpolate_speed);
         }
     }
 
@@ -794,7 +815,7 @@ class Rat{
     void UpdateIdleAnimation(const Timestep &in ts){
 
         float velocity_length = length(velocity);
-        animation_progress += ts.step() * velocity_length * IDLE_ANIMATION_SPEED;
+        animation_progress += ts.step() * IDLE_ANIMATION_SPEED;
 
         if(velocity_length > RUN_THRESHOLD){
             current_animation = Run;
@@ -812,14 +833,17 @@ class Rat{
         update_aabb_timer += ts.step();
 
         vec3 flat_vel = vec3(velocity.x, 0, velocity.z);
-        flat_vel = normalize(flat_vel);
 
         // DebugDrawLine(position, position + flat_vel, vec3(1.0, 0.0, 0.0), _delete_on_update);
 
-        float target_rotation = atan2(-flat_vel.z, flat_vel.x);
-        target_rotation += 3.1417f * 0.5f;
+        if(length(flat_vel) > 0.25){
+            flat_vel = normalize(flat_vel);
+            float target_rotation = atan2(-flat_vel.z, flat_vel.x);
+            target_rotation += 3.1417f * 0.5f;
 
-        rotation = mix(rotation, quaternion(vec4(0.0, 1.0, 0.0, target_rotation)), ts.step() * 10.0);
+            rotation = mix(rotation, quaternion(vec4(0.0, 1.0, 0.0, target_rotation)), ts.step() * 10.0);
+        }
+
         
         if(update_aabb_timer >= UPDATE_AABB_INTERVAL){
             model.SetRotation(rotation);
@@ -941,9 +965,9 @@ class Rat{
             vec3 push_adjusted_movement_direction = mix(movement_direction, push_force, min(1.0, length(push_force)));
             push_force *= pow(0.95f, ts.frames());
 
-            velocity += push_adjusted_movement_direction * ts.step() * 25.0f;
+            velocity += push_adjusted_movement_direction * ts.step() * movement_speed;
             // Reduce the velocity when standing on the ground, as if affected by friction.
-            velocity *= pow(0.95f, ts.frames());
+            velocity *= pow(0.9f, ts.frames());
 
         }else{
             on_ground = false;
@@ -1012,7 +1036,6 @@ class Rat{
 
 float spiral_degrees = 5.0;
 float spiral_A = 7.0;
-float spiral_max_r = 50.0;
 float spiral_angle_offset = 65.0;
 
 void Update(int num_frames) {
@@ -1026,9 +1049,16 @@ void Update(int num_frames) {
     }
 
     this_mo.position = ReadObjectFromID(this_mo.GetID()).GetTranslation();
+    vec3 last_position = rat_king.position;
 
     for(uint i = 0; i < rats.size(); i++){
         rats[i].Update(ts);
+
+        vec3 follow_position = GetSpiralOffset(i);
+        rats[i].follow_position = follow_position;
+        
+        DebugDrawLine(last_position, follow_position, vec3(1.0, 0.0, 0.0), _delete_on_update);
+        last_position = follow_position;
     }
 
     if(push_rat){
@@ -1045,35 +1075,22 @@ void Update(int num_frames) {
         rats.removeAt(rats.size() - 1);
     }
 
-    float pi = 3.141592653589;
+}
 
-    array<vec2> points;
+vec3 GetSpiralOffset(int offset){
+    float dtheta = spiral_degrees * PI / 180.0; // Five degrees.
+    int skip = 50;
+    float theta = dtheta * (skip + offset);
 
-    float dtheta = spiral_degrees * pi / 180.0; // Five degrees.
+    // Calculate r.
+    float r = spiral_A * theta;
 
-    for(float theta = (dtheta * 15.0); ; theta += dtheta){
-        // Calculate r.
-        float r = spiral_A * theta;
+    // Convert to Cartesian coordinates.
+    vec2 spiral_offset = PolarToCartesian(r, theta + spiral_angle_offset);
+    vec3 position_with_offset = rat_king.position + vec3(spiral_offset.x, 0.0, spiral_offset.y);
 
-        // Convert to Cartesian coordinates.
-        vec2 pos = PolarToCartesian(r, theta + spiral_angle_offset);
-
-        // Create the point.
-        points.insertLast(pos);
-
-        // If we have gone far enough, stop.
-        if (r > spiral_max_r) break;
-    }
-    
-    vec3 last_position = rat_king.position;
-
-    for(uint i = 0; i < points.size(); i++){
-        vec3 new_position = rat_king.position + vec3(points[i].x, 0.0, points[i].y);
-        
-        DebugDrawLine(last_position, new_position, vec3(1.0, 0.0, 0.0), _delete_on_update);
-        last_position = new_position;
-    }
-
+    // Create the point.
+    return position_with_offset;
 }
 
 // Convert polar coordinates into Cartesian coordinates.
@@ -1155,9 +1172,6 @@ void SetParameters() {
 
     params.AddFloatSlider("Spiral Degrees", 5.0, "min:0.1, max:90.0,step:0.1,text_mult:1");
     spiral_degrees = params.GetFloat("Spiral Degrees");
-
-    params.AddFloatSlider("Spiral Max R", 50.0, "min:0.0, max:90.0,step:0.1,text_mult:1");
-    spiral_max_r = params.GetFloat("Spiral Max R");
 
     params.AddFloatSlider("Character Scale", 1, "min:0.6,max:1.4,step:0.02,text_mult:100");
     character_scale = params.GetFloat("Character Scale");
