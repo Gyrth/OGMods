@@ -596,7 +596,7 @@ class Rat{
     float in_air_timer = 0.0f;
     bool deleted = false;
     int current_animation = Idle;
-    int current_state = Follow;
+    int current_state = Roam;
     float animation_progress = RangedRandomFloat(0.0, 1.0);
     float random_tint_value = RangedRandomFloat(0.0, 1.0);
     float look_around_timer = 0.0f;
@@ -610,20 +610,22 @@ class Rat{
 
     Rat(){
         position = this_mo.position;
+        float random_size = RangedRandomFloat(0.75, 1.25);
+        size *= random_size;
 
         if(ENABLE_SHADOW){
             int blob_id = CreateObject("Data/Objects/Decals/blob_shadow.xml");
             @blob_model = ReadObjectFromID(blob_id);
             blob_model.SetTranslation(position);
             blob_model.SetTint(vec3(0.1, 0.1, 0.1));
-            blob_model.SetScale(vec3(size * 5.0));
+            blob_model.SetScale(vec3(size * 5.0 * random_size));
         }
 
         int model_id = CreateObject("Data/objects/vat_mouse.xml");
         @model = ReadObjectFromID(model_id);
         model.SetTranslation(position);
         model.SetRotation(rotation);
-        model.SetScale(vec3(0.5));
+        model.SetScale(vec3(0.5 * random_size));
         GetRandomNavTarget();
     }
 
@@ -686,7 +688,8 @@ class Rat{
             float interpolate_speed = 15.0;
 
             // DebugDrawLine(position, nav_target, vec3(1.0, 0.0, 0.0), _delete_on_update);
-            nav_target_direction = normalize(nav_target - position);
+            float dist = xz_distance(nav_target, position);
+            nav_target_direction = normalize(nav_target - position) * min(1.0, dist);
             movement_direction = mix(movement_direction, nav_target_direction, ts.step() * interpolate_speed);
         }
 
