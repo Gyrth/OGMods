@@ -564,8 +564,8 @@ const int RUN_ANIMATION_START = 75;
 const int RUN_ANIMATION_END = 99;
 const float RUN_ANIMATION_SPEED = 1.0;
 
-const float IDLE_THRESHOLD = 0.85;
-const float RUN_THRESHOLD = 0.9;
+const float IDLE_THRESHOLD = 0.25;
+const float RUN_THRESHOLD = 0.3;
 
 class Rat{
 
@@ -596,7 +596,7 @@ class Rat{
     float in_air_timer = 0.0f;
     bool deleted = false;
     int current_animation = Idle;
-    int current_state = Roam;
+    int current_state = Follow;
     float animation_progress = RangedRandomFloat(0.0, 1.0);
     float random_tint_value = RangedRandomFloat(0.0, 1.0);
     float look_around_timer = 0.0f;
@@ -1057,11 +1057,14 @@ void Update(int num_frames) {
     for(uint i = 0; i < rats.size(); i++){
         rats[i].Update(ts);
 
-        vec3 follow_position = GetSpiralOffset(i);
-        rats[i].follow_position = follow_position;
+        vec2 spiral_offset = GetSpiralOffset(i);
+
+        rats[i].follow_position = rat_king.position;
+        rats[i].follow_position.y = rats[i].position.y;
+        rats[i].follow_position += vec3(spiral_offset.x, 0.0, spiral_offset.y);
         
-        DebugDrawLine(last_position, follow_position, vec3(1.0, 0.0, 0.0), _delete_on_update);
-        last_position = follow_position;
+        // DebugDrawLine(last_position, rats[i].follow_position, vec3(1.0, 0.0, 0.0), _delete_on_update);
+        // last_position = rats[i].follow_position;
     }
 
     if(push_rat){
@@ -1078,9 +1081,31 @@ void Update(int num_frames) {
         rats.removeAt(rats.size() - 1);
     }
 
+    UpdateCircling(ts);
 }
 
-vec3 GetSpiralOffset(int offset){
+const float CIRCLE_THRESHOLD = 10.0f;
+float circle_timer = 0.0f;
+
+void UpdateCircling(const Timestep &in ts){
+
+    if(length(rat_king.velocity) < 0.1){
+        circle_timer += ts.step();
+
+        if(circle_timer > CIRCLE_THRESHOLD){
+
+            spiral_angle_offset += ts.step() * min(0.5f, (circle_timer - CIRCLE_THRESHOLD) * 0.25f);
+
+            if(spiral_angle_offset > 360.0){
+                spiral_angle_offset -= 360.0;
+            }
+        }
+    }else{
+        circle_timer = 0.0f;
+    }
+}
+
+vec2 GetSpiralOffset(int offset){
     float dtheta = spiral_degrees * PI / 180.0; // Five degrees.
     int skip = 50;
     float theta = dtheta * (skip + offset);
@@ -1090,10 +1115,9 @@ vec3 GetSpiralOffset(int offset){
 
     // Convert to Cartesian coordinates.
     vec2 spiral_offset = PolarToCartesian(r, theta + spiral_angle_offset);
-    vec3 position_with_offset = rat_king.position + vec3(spiral_offset.x, 0.0, spiral_offset.y);
 
     // Create the point.
-    return position_with_offset;
+    return spiral_offset;
 }
 
 // Convert polar coordinates into Cartesian coordinates.
@@ -1167,8 +1191,8 @@ void SetParameters() {
     params.AddFloatSlider("Max Random Nav", 15.0, "min:1.0,max:50.0,step:1.0,text_mult:1");
     max_random_nav = params.GetFloat("Max Random Nav");
 
-    params.AddFloatSlider("Spiral A", 7.0, "min:0.1, max:10.0,step:0.1,text_mult:1");
-    spiral_A = params.GetFloat("Spiral A");
+    params.AddFloatSlider("Spiral A", 0.1, "min:0.01, max:1.0,step:0.01,text_mult:1");
+    spiral_A = max(0.01, params.GetFloat("Spiral A"));
 
     params.AddFloatSlider("Spiral Angle Offset", 65.0, "min:0.0, max:100.0,step:0.1,text_mult:1");
     spiral_angle_offset = params.GetFloat("Spiral Angle Offset");
