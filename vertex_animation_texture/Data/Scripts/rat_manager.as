@@ -600,7 +600,7 @@ class Rat{
     int current_state = Follow;
     float animation_progress = RangedRandomFloat(0.0, 1.0);
     float random_tint_value = RangedRandomFloat(0.0, 1.0);
-    float look_around_timer = 0.0f;
+    float look_around_timer = RangedRandomFloat(0.5, 5.0);
     bool at_nav_target = false;
     vec3 follow_position;
 
@@ -708,6 +708,8 @@ class Rat{
     void UpdateFollowing(const Timestep &in ts){
         movement_speed = 75.0f;
 
+        LookAroundWhenIdle(ts);
+
         if(on_ground){
             float interpolate_speed = 15.0;
             vec3 target_position;
@@ -726,6 +728,27 @@ class Rat{
 
             // DebugDrawLine(position, nav_target, vec3(1.0, 0.0, 0.0), _delete_on_update);
             movement_direction = mix(movement_direction, nav_target_direction, ts.step() * interpolate_speed);
+        }
+    }
+
+    void LookAroundWhenIdle(const Timestep &in ts){
+        if(current_animation == Idle){
+            look_around_timer -= ts.step();
+            
+            if(look_around_timer <= 0.0){
+                look_around_timer = RangedRandomFloat(0.5, 5.0);
+
+                if(rand() % 60 == 0){
+                    current_animation = LookAround;
+                }
+            }
+        }else if(current_animation == LookAround){
+            float velocity_length = length(velocity);
+            look_around_timer -= ts.step();
+
+            if(velocity_length > IDLE_THRESHOLD || look_around_timer <= 0.0){
+                current_animation = Idle;
+            }
         }
     }
 
@@ -1095,7 +1118,7 @@ void Update(int num_frames) {
     UpdateCircling(ts);
 }
 
-const float CIRCLE_THRESHOLD = 10.0f;
+const float CIRCLE_THRESHOLD = 15.0f;
 float circle_timer = 0.0f;
 
 void UpdateCircling(const Timestep &in ts){
