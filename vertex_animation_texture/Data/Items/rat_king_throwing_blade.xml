@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<item>
+    <type>weapon</type>
+    <appearance obj_path = "Data/Objects/Weapons/rat_weapons/rat_throwing_blade.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_dogweapongrip.anm"
+		  hands = "1"/>
+    <sheathe ik_attach = "hip"
+          anim = "Data/Animations/r_dogweaponsheathed.anm"/>
+    <physics mass = "0.9 kg"/>
+    <points>
+        <pommel x="0.021" z="0.0094" y="-0.0595"/>
+        <pommel_blade x="0.075" z="0.0045" y="-0.139"/>
+        <guard x="-0.020" z="0.0065" y="0.1424"/>
+        <tip x="-0.0092" z="0.0109" y="0.62"/>
+        <upper_blade_start x="-0.0005" z="0.0109" y="0.4904"/>
+        <upper_blade_end x="-0.1891" z="0.0109" y="0.4542"/>
+        <lower_blade_start x="0.0024" z="0.0109" y="0.1930"/>
+        <lower_blade_end x="0.1808" z="0.0109" y="0.2279"/>
+    </points>
+    <lines>
+        <wood start="pommel" end="guard"/>
+        <metal start="guard" end="tip"/>
+        <metal start="pommel" end="pommel_blade"/>
+        <metal start="upper_blade_start" end="upper_blade_end"/>
+        <metal start="lower_blade_start" end="lower_blade_end"/>
+    </lines>
+    <anim_override idle = "Data/Animations/r_knifestancerear.xml"/>
+    <attack_override moving = "Data/Attacks/knifeslash.xml"
+                     moving_close = "Data/Attacks/knifeslash.xml"
+                     stationary = "Data/Attacks/knifeslash.xml"
+                     stationary_close = "Data/Attacks/knifeslash.xml"/>
+    <range multiply = "0.8"/>
+</item>

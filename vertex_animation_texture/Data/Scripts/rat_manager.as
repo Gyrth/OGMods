@@ -399,6 +399,7 @@ void ResetLayers() {
 }
 
 void Dispose() {
+    
 }
 
 void MovementObjectDeleted(int id){
@@ -471,6 +472,7 @@ float repulsor_delay = 0.0f;
 
 void MindReceiveMessage(string msg){
 }
+
 void ReceiveMessage(string msg){
 }
 
@@ -531,7 +533,8 @@ enum RatStates{
     Roam,
     Look,
     Follow,
-    Attack
+    Attack,
+    Strike
 }
 
 bool post_init = true;
@@ -582,7 +585,7 @@ class Rat{
     quaternion rotation = quaternion(0.0, 0.0, 0.0, 1.0);
     Object@ model;
     Object@ blob_model;
-    float update_aabb_timer = RangedRandomFloat(0.0, UPDATE_AABB_INTERVAL);
+    float update_aabb_timer;
     vec3 movement_direction = vec3(1.0, 0.0, 0.0);
     vec3 nav_target_direction = vec3(1.0, 0.0, 0.0);
     vec3 ground_normal(0.0, 1.0, 0.0);
@@ -598,12 +601,13 @@ class Rat{
     bool deleted = false;
     int current_animation = Idle;
     int current_state = Follow;
-    float animation_progress = RangedRandomFloat(0.0, 1.0);
-    float random_tint_value = RangedRandomFloat(0.0, 1.0);
-    float look_around_timer = RangedRandomFloat(0.5, 5.0);
+    int attack_target = -1;
+    float animation_progress;
+    float random_tint_value;
+    float look_around_timer;
     bool at_nav_target = false;
     vec3 follow_position;
-    float random_noise_timer = RangedRandomFloat(10.0, 50.0);
+    float random_noise_timer;
 
     NavPath path;
     int current_path_point = 0;
@@ -614,6 +618,12 @@ class Rat{
         position = this_mo.position;
         float random_size = RangedRandomFloat(0.75, 1.25);
         size *= random_size;
+
+        update_aabb_timer = RangedRandomFloat(0.0, UPDATE_AABB_INTERVAL);
+        animation_progress = RangedRandomFloat(0.0, 1.0);
+        random_tint_value = RangedRandomFloat(0.0, 1.0);
+        look_around_timer = RangedRandomFloat(0.5, 5.0);
+        random_noise_timer = RangedRandomFloat(0.0, 100.0);
 
         if(ENABLE_SHADOW){
             int blob_id = CreateObject("Data/Objects/Decals/blob_shadow.xml");
@@ -678,7 +688,106 @@ class Rat{
                 UpdateFollowing(ts);
                 break;
             case Attack:
+                UpdateAttacking(ts);
                 break;
+            case Strike:
+                UpdateStriking(ts);
+                break;
+        }
+    }
+
+    float strike_timer = 0.0f;
+
+    void UpdateStriking(const Timestep &in ts){
+
+        strike_timer += ts.step();
+
+        MovementObject@ target = ReadCharacterID(attack_target);
+        // DebugDrawLine(position, target.position, vec3(0.0, 1.0, 0.0), _delete_on_update);
+
+        vec3 velocity_direction = normalize(velocity);
+
+        col.CheckRayCollisionCharacters(position, position + (velocity_direction * 0.25f));
+
+        for(int i = 0; i < sphere_col.NumContacts(); i++){
+            CollisionPoint contact = sphere_col.GetContact(i);
+
+            MovementObject@ stab_victim = ReadCharacterID(contact.id);
+            stab_victim.rigged_object().Stab(contact.position, velocity_direction, 2, 0);
+
+            velocity *= 0.1;
+            current_state = Follow;
+
+            vec3 force = velocity_direction * 1200.0f;
+            vec3 hit_pos = contact.position;
+            stab_victim.Execute("vec3 impulse = vec3(" + force.x + ", " + force.y + ", " + force.z + ");" +
+                                "vec3 pos = vec3(" + hit_pos.x + ", " + hit_pos.y + ", " + hit_pos.z + ");" +
+                                "HandleRagdollImpactImpulse(impulse, pos, 0.03f);");
+        }
+
+        if(strike_timer > 0.5){
+            current_state = Follow;
+        }
+
+        movement_direction = vec3(0.0);
+    }
+
+    void UpdateAttacking(const Timestep &in ts){
+        RandomNoise(ts);
+        movement_speed = 75.0f;
+
+        MovementObject@ target = ReadCharacterID(attack_target);
+
+        if(target.GetIntVar("knocked_out") != _awake){
+            current_state = Follow;
+            return;
+        }
+
+        if(on_ground){
+            float interpolate_speed = 15.0;
+            vec3 target_position;
+
+            if(follow_use_nav){
+                GetNavPath(target.position);
+                vec3 nav_target = GetNextPathPoint();
+                target_position = vec3(nav_target.x, position.y, nav_target.z);
+            }else{
+                target_position = vec3(target.position.x, position.y, target.position.z);
+            }
+
+            float dist = xz_distance(target_position, position);
+            nav_target_direction = normalize(target_position - position) * min(1.0, dist);
+
+            // DebugDrawLine(position, nav_target, vec3(1.0, 0.0, 0.0), _delete_on_update);
+            movement_direction = mix(movement_direction, nav_target_direction, ts.step() * interpolate_speed);
+
+            if(xz_distance(target.position, position) < 2.5){
+                current_state = Strike;
+
+                vec3 target_pos = vec3(0.0, 0.5, 0.0);
+
+                switch(rand() % 5){
+                    case 0:
+                        target_pos += target.rigged_object().GetAvgIKChainPos("head");
+                        break;
+                    case 1:
+                        target_pos += target.rigged_object().GetAvgIKChainPos("torso");
+                        break;
+                    case 2:
+                        target_pos += target.rigged_object().GetAvgIKChainPos("leftarm");
+                        break;
+                    case 3:
+                        target_pos += target.rigged_object().GetAvgIKChainPos("rightarm");
+                        break;
+                }
+
+                vec3 target_dir = normalize(target_pos - position);
+                // current_animation = Flail;
+                velocity += target_dir * 10.0f;
+                int sound_id = PlaySoundGroup("Data/Sounds/voice/animal3/voice_rat_attack.xml", position, _sound_priority_med);
+                SetSoundPitch(sound_id, RangedRandomFloat(0.9, 1.2));
+                strike_timer = 0.0f;
+            }
         }
     }
 
@@ -686,8 +795,8 @@ class Rat{
         random_noise_timer -= ts.step();
 
         if(random_noise_timer <= 0.0){
-            PlaySoundGroup("Data/Sounds/voice/animal3/voice_rat_idle.xml", position, 0.75f);
-            random_noise_timer = RangedRandomFloat(10.0f, 50.0f);
+            PlaySoundGroup("Data/Sounds/voice/animal3/voice_rat_idle.xml", position, _sound_priority_low);
+            random_noise_timer = RangedRandomFloat(50.0f, 100.0f);
         }
     }
 
@@ -731,7 +840,6 @@ class Rat{
                 vec3 nav_target = GetNextPathPoint();
                 target_position = vec3(nav_target.x, position.y, nav_target.z);
             }else{
-                vec3 next_point = path.GetPoint(current_path_point);
                 target_position = vec3(follow_position.x, position.y, follow_position.z);
             }
 
@@ -830,28 +938,10 @@ class Rat{
         }
 
         if(animation_progress > 1.0){
-            string sound_path;
-            
-            switch(rand() % 7) {
-                case 0:
-                    sound_path = "Data/Sounds/Footsteps-Rock1.wav"; break;
-                case 1:
-                    sound_path = "Data/Sounds/Footsteps-Rock2.wav"; break;
-                case 2:
-                    sound_path = "Data/Sounds/Footsteps-Rock3.wav"; break;
-                case 3:
-                    sound_path = "Data/Sounds/Footsteps-Rock4.wav"; break;
-                case 4:
-                    sound_path = "Data/Sounds/Footsteps-Rock5.wav"; break;
-                case 5:
-                    sound_path = "Data/Sounds/Footsteps-Rock6.wav"; break;
-                case 6:
-                    sound_path = "Data/Sounds/Footsteps-Rock7.wav"; break;
-            }
 
-            int sound_id = PlaySound(sound_path, position);
-            SetSoundGain(sound_id, 0.5);
-            SetSoundPitch(sound_id, RangedRandomFloat(1.05, 1.2));
+            int sound_id = PlaySoundGroup("Data/Sounds/hit/hit_block.xml", position, _sound_priority_low);
+            SetSoundGain(sound_id, 0.02);
+            SetSoundPitch(sound_id, RangedRandomFloat(1.75, 2.0));
 
             animation_progress -= 1.0;
         }
@@ -1102,34 +1192,118 @@ void Update(int num_frames) {
     }
 
     this_mo.position = ReadObjectFromID(this_mo.GetID()).GetTranslation();
-    vec3 last_position = rat_king.position;
 
-    UpdateSpiralOffset(ts);
-
-    for(uint i = 0; i < rats.size(); i++){
-        rats[i].Update(ts);
-
-        vec2 spiral_offset = GetSpiralOffset(i);
-
-        rats[i].follow_position = rat_king.position;
-        rats[i].follow_position.y = rats[i].position.y;
-        rats[i].follow_position += vec3(spiral_offset.x, 0.0, spiral_offset.y);
-        
-        // DebugDrawLine(last_position, rats[i].follow_position, vec3(1.0, 0.0, 0.0), _delete_on_update);
-        // last_position = rats[i].follow_position;
-    }
-
-    UpdatePushRat(ts);
-
-    UpdatePushCharacter(ts);
+    UpdateRatKing(ts);
+    UpdateRats(ts);
 
     if(rats.size() < rat_amount){
         rats.insertLast(Rat());
     }else if(rats.size() > rat_amount){
         rats.removeAt(rats.size() - 1);
     }
+}
 
+void UpdateRats(const Timestep &in ts){
+    for(uint i = 0; i < rats.size(); i++){
+        rats[i].Update(ts);
+        
+        // DebugDrawLine(last_position, rats[i].follow_position, vec3(1.0, 0.0, 0.0), _delete_on_update);
+        // last_position = rats[i].follow_position;
+    }
+
+    UpdatePushRat(ts);
+    UpdatePushCharacter(ts);
+}
+
+enum RatKingStates{
+    Lead,
+    OrderAttack,
+    AttackEnemy
+}
+
+int rat_king_state = Lead;
+ItemObject@ rat_king_weapon = null;
+
+void UpdateRatKing(const Timestep &in ts){
+    switch(rat_king_state){
+        case Lead:
+            UpdateLeading(ts);
+            break;
+        case OrderAttack:
+            UpdateOrderAttack(ts);
+            break;
+        case AttackEnemy:
+            UpdateAttackEnemy(ts);
+            break;
+    }
+}
+
+void UpdateLeading(const Timestep &in ts){
+
+    int primary_weapon_id = rat_king.GetArrayIntVar("weapon_slots", rat_king.GetIntVar("primary_weapon_slot"));
+
+    if(primary_weapon_id != -1){
+        @rat_king_weapon = ReadItemID(primary_weapon_id);
+    }
+
+    if(rat_king_weapon !is null && !rat_king_weapon.CheckThrownSafe()){
+        rat_king_state = OrderAttack;
+    }
+
+    for(uint i = 0; i < rats.size(); i++){
+        vec2 spiral_offset = GetSpiralOffset(i);
+
+        rats[i].follow_position = rat_king.position;
+        rats[i].follow_position.y = rats[i].position.y;
+        rats[i].follow_position += vec3(spiral_offset.x, 0.0, spiral_offset.y);
+    }
+
+    UpdateSpiralOffset(ts);
     UpdateCircling(ts);
+}
+
+void UpdateOrderAttack(const Timestep &in ts){
+
+    vec3 last_pos = rat_king.position;
+
+    for(uint i = 0; i < rats.size(); i++){
+
+        vec2 spiral_offset = GetSpiralOffset(i);
+
+        rats[i].follow_position = rat_king_weapon.GetPhysicsPosition();
+        rats[i].follow_position.y = rats[i].position.y;
+        rats[i].follow_position += vec3(spiral_offset.x, 0.0, spiral_offset.y);
+
+        // DebugDrawLine(last_pos, rats[i].follow_position, vec3(1.0, 0.0, 0.0), _delete_on_update);
+        last_pos = rats[i].follow_position;
+    }
+
+    array<int> character_ids;
+    GetCharactersInSphere(rat_king_weapon.GetPhysicsPosition(), 0.75, character_ids);
+
+    for(uint i = 0; i < character_ids.size(); i++){
+        MovementObject@ char = ReadCharacterID(character_ids[i]);
+
+        if(char.GetID() != this_mo.GetID() && !rat_king.OnSameTeam(char)){
+
+            rat_king_state = AttackEnemy;
+            rat_king_weapon.SetSafe();
+            rat_king.Execute("AttachWeapon(" + rat_king_weapon.GetID() + ");");
+
+            for(uint j = 0; j < rats.size(); j++){
+                rats[j].attack_target = character_ids[i];
+                rats[j].current_state = Attack;
+            }
+        }
+    }
+}
+
+void UpdateAttackEnemy(const Timestep &in ts){
+    int primary_weapon_id = rat_king.GetArrayIntVar("weapon_slots", rat_king.GetIntVar("primary_weapon_slot"));
+
+    if(primary_weapon_id != -1){
+        rat_king_state = Lead;
+    }
 }
 
 const float SPIRAL_OFFSET_BASE = 0.05f;
