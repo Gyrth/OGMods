@@ -545,6 +545,7 @@ bool push_rat = false;
 float max_random_nav = 15.0;
 int rat_king_id = -1;
 MovementObject@ rat_king;
+bool follow_use_nav = false;
 
 const float PI = 3.141592653589;
 
@@ -709,12 +710,21 @@ class Rat{
 
         if(on_ground){
             float interpolate_speed = 15.0;
+            vec3 target_position;
 
-            // DebugDrawLine(position, nav_target, vec3(1.0, 0.0, 0.0), _delete_on_update);
-            vec3 target_position = vec3(follow_position.x, position.y, follow_position.z);
+            if(follow_use_nav){
+                GetNavPath(follow_position);
+                vec3 nav_target = GetNextPathPoint();
+                target_position = vec3(nav_target.x, position.y, nav_target.z);
+            }else{
+                vec3 next_point = path.GetPoint(current_path_point);
+                target_position = vec3(follow_position.x, position.y, follow_position.z);
+            }
+
             float dist = xz_distance(target_position, position);
             nav_target_direction = normalize(target_position - position) * min(1.0, dist);
 
+            // DebugDrawLine(position, nav_target, vec3(1.0, 0.0, 0.0), _delete_on_update);
             movement_direction = mix(movement_direction, nav_target_direction, ts.step() * interpolate_speed);
         }
     }
@@ -847,7 +857,6 @@ class Rat{
             rotation = mix(rotation, quaternion(vec4(0.0, 1.0, 0.0, target_rotation)), ts.step() * 10.0);
         }
 
-        
         if(update_aabb_timer >= UPDATE_AABB_INTERVAL){
             model.SetRotation(rotation);
             model.SetTranslation(position);
@@ -892,7 +901,7 @@ class Rat{
         //     DebugDrawLine(path.GetPoint(i),
         //                   path.GetPoint(i + 1),
         //                   vec3(1.0f, 1.0f, 1.0f),
-        //                   _persistent);
+        //                   _delete_on_update);
         // }
     }
 
@@ -904,10 +913,16 @@ class Rat{
             return position;
         }
 
-        vec3 next_point = path.GetPoint(current_path_point);
+        vec3 next_point;
 
-        if(xz_distance_squared(position, next_point) < 1.0f){
-            current_path_point += 1;
+        while(current_path_point < num_points){
+            next_point = path.GetPoint(current_path_point);
+
+            if(xz_distance_squared(position, next_point) < 1.0f){
+                current_path_point += 1;
+            }else{
+                break;
+            }
         }
 
         return next_point;
@@ -1067,13 +1082,9 @@ void Update(int num_frames) {
         // last_position = rats[i].follow_position;
     }
 
-    if(push_rat){
-        UpdatePushRat(ts);
-    }
+    UpdatePushRat(ts);
 
-    if(push_character){
-        UpdatePushCharacter(ts);
-    }
+    UpdatePushCharacter(ts);
 
     if(rats.size() < rat_amount){
         rats.insertLast(Rat());
@@ -1144,6 +1155,8 @@ void PostInit(){
 }
 
 void UpdatePushRat(const Timestep &in ts){
+    if(!push_rat){return;}
+
     array<Rat@> push_queue;
     push_queue.insertAt(0, rats);
 
@@ -1156,6 +1169,8 @@ void UpdatePushRat(const Timestep &in ts){
 }
 
 void UpdatePushCharacter(const Timestep &in ts){
+    if(!push_character){return;}
+
     for(int i = 0; i < GetNumCharacters(); i++){
         MovementObject@ char = ReadCharacter(i);
 
@@ -1187,6 +1202,9 @@ void SetParameters() {
 
     params.AddIntCheckbox("Push Character", false);
     push_character = params.GetInt("Push Character") == 1;
+
+    params.AddIntCheckbox("Follow Use Nav", false);
+    follow_use_nav = params.GetInt("Follow Use Nav") == 1;
 
     params.AddFloatSlider("Max Random Nav", 15.0, "min:1.0,max:50.0,step:1.0,text_mult:1");
     max_random_nav = params.GetFloat("Max Random Nav");
