@@ -1104,6 +1104,8 @@ void Update(int num_frames) {
     this_mo.position = ReadObjectFromID(this_mo.GetID()).GetTranslation();
     vec3 last_position = rat_king.position;
 
+    UpdateSpiralOffset(ts);
+
     for(uint i = 0; i < rats.size(); i++){
         rats[i].Update(ts);
 
@@ -1128,6 +1130,23 @@ void Update(int num_frames) {
     }
 
     UpdateCircling(ts);
+}
+
+const float SPIRAL_OFFSET_BASE = 0.05f;
+const float SPIRAL_OFFSET_DUCK = 0.015f;
+const float SPIRAL_OFFSET_VELOCITY = 0.005f;
+const float SPIRAL_OFFSET_INTERPOLATION = 1.0f;
+
+void UpdateSpiralOffset(const Timestep &in ts){
+    float spiral_A_target = SPIRAL_OFFSET_BASE;
+
+    if(rat_king.GetFloatVar("duck_amount") > 0.25f){
+        spiral_A_target -= SPIRAL_OFFSET_DUCK;
+    }
+
+    spiral_A_target += length(rat_king.velocity) * SPIRAL_OFFSET_VELOCITY;
+
+    spiral_A = mix(spiral_A, max(0.01f, min(1.0f, spiral_A_target)), ts.step() * SPIRAL_OFFSET_INTERPOLATION);
 }
 
 const float CIRCLE_THRESHOLD = 15.0f;
