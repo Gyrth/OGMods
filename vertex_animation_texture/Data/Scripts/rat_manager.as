@@ -603,6 +603,7 @@ class Rat{
     float look_around_timer = RangedRandomFloat(0.5, 5.0);
     bool at_nav_target = false;
     vec3 follow_position;
+    float random_noise_timer = RangedRandomFloat(10.0, 50.0);
 
     NavPath path;
     int current_path_point = 0;
@@ -681,7 +682,17 @@ class Rat{
         }
     }
 
+    void RandomNoise(const Timestep &in ts){
+        random_noise_timer -= ts.step();
+
+        if(random_noise_timer <= 0.0){
+            PlaySoundGroup("Data/Sounds/voice/animal3/voice_rat_idle.xml", position, 0.75f);
+            random_noise_timer = RangedRandomFloat(10.0f, 50.0f);
+        }
+    }
+
     void UpdateRoaming(const Timestep &in ts){
+        RandomNoise(ts);
         vec3 nav_target = GetNextPathPoint();
         movement_speed = 50.0f;
 
@@ -706,6 +717,7 @@ class Rat{
     }
 
     void UpdateFollowing(const Timestep &in ts){
+        RandomNoise(ts);
         movement_speed = 75.0f;
 
         LookAroundWhenIdle(ts);
