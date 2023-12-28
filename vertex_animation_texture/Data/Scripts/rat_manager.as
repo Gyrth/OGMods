@@ -593,6 +593,7 @@ class Rat{
     bool on_wall = false;
     vec3 push_force = vec3(0.0, 0.0, 0.0);
     float movement_speed = 50.0f;
+    float random_size;
 
     vec3 last_col_pos;
     float flat_movement_velocity = 0.0f;
@@ -616,7 +617,7 @@ class Rat{
 
     Rat(){
         position = this_mo.position;
-        float random_size = RangedRandomFloat(0.75, 1.25);
+        random_size = RangedRandomFloat(0.75, 1.25);
         size *= random_size;
 
         update_aabb_timer = RangedRandomFloat(0.0, UPDATE_AABB_INTERVAL);
@@ -715,11 +716,13 @@ class Rat{
             MovementObject@ stab_victim = ReadCharacterID(contact.id);
             stab_victim.rigged_object().Stab(contact.position, velocity_direction, 2, 0);
 
-            velocity *= 0.1;
+            velocity *= 0.5;
             current_state = Follow;
 
-            vec3 force = velocity_direction * 1200.0f;
+            vec3 force = velocity_direction * 1800.0f;
             vec3 hit_pos = contact.position;
+            int sound_id = PlaySoundGroup("Data/Sounds/weapon_foley/cut/flesh_hit.xml", hit_pos, _sound_priority_med);
+            SetSoundPitch(sound_id, RangedRandomFloat(0.9, 1.2));
             stab_victim.Execute("vec3 impulse = vec3(" + force.x + ", " + force.y + ", " + force.z + ");" +
                                 "vec3 pos = vec3(" + hit_pos.x + ", " + hit_pos.y + ", " + hit_pos.z + ");" +
                                 "HandleRagdollImpactImpulse(impulse, pos, 0.03f);");
@@ -761,12 +764,12 @@ class Rat{
             // DebugDrawLine(position, nav_target, vec3(1.0, 0.0, 0.0), _delete_on_update);
             movement_direction = mix(movement_direction, nav_target_direction, ts.step() * interpolate_speed);
 
-            if(xz_distance(target.position, position) < 2.5){
+            if(xz_distance(target.position, position) < 2.0 * random_size){
                 current_state = Strike;
 
-                vec3 target_pos = vec3(0.0, 0.5, 0.0);
+                vec3 target_pos = vec3(0.0, 0.0, 0.0);
 
-                switch(rand() % 5){
+                switch(rand() % 4){
                     case 0:
                         target_pos += target.rigged_object().GetAvgIKChainPos("head");
                         break;
@@ -782,8 +785,8 @@ class Rat{
                 }
 
                 vec3 target_dir = normalize(target_pos - position);
-                // current_animation = Flail;
-                velocity += target_dir * 10.0f;
+                current_animation = LookAround;
+                velocity = target_dir * 10.0f;
                 int sound_id = PlaySoundGroup("Data/Sounds/voice/animal3/voice_rat_attack.xml", position, _sound_priority_med);
                 SetSoundPitch(sound_id, RangedRandomFloat(0.9, 1.2));
                 strike_timer = 0.0f;
@@ -795,7 +798,8 @@ class Rat{
         random_noise_timer -= ts.step();
 
         if(random_noise_timer <= 0.0){
-            PlaySoundGroup("Data/Sounds/voice/animal3/voice_rat_idle.xml", position, _sound_priority_low);
+            int sound_id = PlaySoundGroup("Data/Sounds/voice/animal3/voice_rat_idle.xml", position, _sound_priority_low);
+            SetSoundPitch(sound_id, RangedRandomFloat(0.9, 1.2));
             random_noise_timer = RangedRandomFloat(50.0f, 100.0f);
         }
     }
@@ -1117,7 +1121,7 @@ class Rat{
             if(length(wall_normal) > 0.1){on_wall = true;}
 
             in_air_timer += ts.step();
-            if(in_air_timer > 0.15){
+            if(in_air_timer > 0.15 && current_state != Strike){
                 current_animation = Flail;
             }
 
@@ -1131,7 +1135,8 @@ class Rat{
     void Land(){
         // Create a landing sound effect at the feet of the character.
         vec3 sound_position = position + vec3(0.0f, 0.0f, 0.0);
-        PlaySound("Data/Sounds/fps_gun_land.wav", sound_position);
+        int sound_id = PlaySound("Data/Sounds/fps_gun_land.wav", sound_position);
+        SetSoundPitch(sound_id, RangedRandomFloat(0.9, 1.2));
         // DebugDrawWireSphere(position + vec3(0.0f, -1.0f, 0.0), 0.5, vec3(1.0), _fade);
     }
 
@@ -1244,9 +1249,7 @@ void UpdateLeading(const Timestep &in ts){
 
     if(primary_weapon_id != -1){
         @rat_king_weapon = ReadItemID(primary_weapon_id);
-    }
-
-    if(rat_king_weapon !is null && !rat_king_weapon.CheckThrownSafe()){
+    }else if(rat_king_weapon !is null && !rat_king_weapon.IsHeld() && length(rat_king_weapon.GetLinearVelocity()) > 15.0){
         rat_king_state = OrderAttack;
     }
 
@@ -1287,7 +1290,6 @@ void UpdateOrderAttack(const Timestep &in ts){
         if(char.GetID() != this_mo.GetID() && !rat_king.OnSameTeam(char)){
 
             rat_king_state = AttackEnemy;
-            rat_king_weapon.SetSafe();
             rat_king.Execute("AttachWeapon(" + rat_king_weapon.GetID() + ");");
 
             for(uint j = 0; j < rats.size(); j++){
