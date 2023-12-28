@@ -579,6 +579,7 @@ class Rat{
     vec3 offset = vec3(0.0, 0.0, 0.0);
     vec3 scale = vec3(1.0);
     float size = 0.125f;
+    int id = -1;
 
     vec3 position;
     vec3 velocity;
@@ -943,9 +944,11 @@ class Rat{
 
         if(animation_progress > 1.0){
 
-            int sound_id = PlaySoundGroup("Data/Sounds/hit/hit_block.xml", position, _sound_priority_low);
-            SetSoundGain(sound_id, 0.02);
-            SetSoundPitch(sound_id, RangedRandomFloat(1.75, 2.0));
+            if(id % 4 == 0){
+                int sound_id = PlaySoundGroup("Data/Sounds/hit/hit_block.xml", position, _sound_priority_low);
+                SetSoundGain(sound_id, 0.02);
+                SetSoundPitch(sound_id, RangedRandomFloat(1.75, 2.0));
+            }
 
             animation_progress -= 1.0;
         }
@@ -1135,7 +1138,7 @@ class Rat{
     void Land(){
         // Create a landing sound effect at the feet of the character.
         vec3 sound_position = position + vec3(0.0f, 0.0f, 0.0);
-        int sound_id = PlaySound("Data/Sounds/fps_gun_land.wav", sound_position);
+        int sound_id = PlaySound("Data/Sounds/Footsteps-Rock5.wav", sound_position);
         SetSoundPitch(sound_id, RangedRandomFloat(0.9, 1.2));
         // DebugDrawWireSphere(position + vec3(0.0f, -1.0f, 0.0), 0.5, vec3(1.0), _fade);
     }
@@ -1161,7 +1164,6 @@ class Rat{
     }
 
     void AvoidCharacter(MovementObject@ char, const Timestep &in ts){
-        if(current_state != Roam){return;}
 
         vec3 difference = char.position - position;
         vec3 character_direction = normalize(difference);
@@ -1175,9 +1177,9 @@ class Rat{
         // DebugDrawLine(position, position + movement_direction, vec3(1.0, 0.0, 0.0), _delete_on_update);
 
         float dist = length(difference);
-        float push_length = max(0.0, 4.0 - dist);
+        float push_length = max(0.0, 2.0 - dist);
 
-        push_force += push_length * 4.0 * push_direction * ts.step();
+        push_force += push_length * 3.0 * push_direction * ts.step();
     }
 
 }
@@ -1202,7 +1204,9 @@ void Update(int num_frames) {
     UpdateRats(ts);
 
     if(rats.size() < rat_amount){
-        rats.insertLast(Rat());
+        Rat rat();
+        rats.insertLast(rat);
+        rat.id = rats.size();
     }else if(rats.size() > rat_amount){
         rats.removeAt(rats.size() - 1);
     }
