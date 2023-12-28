@@ -56,7 +56,7 @@
             <parameter name="Max Random Nav" type="int" val="20" />
             <parameter name="Push Character" type="int" val="0" />
             <parameter name="Push Rat" type="int" val="0" />
-            <parameter name="Rat Amount" type="int" val="100" />
+            <parameter name="Rat Amount" type="int" val="25" />
             <parameter name="Spiral A" type="float" val="0.05" />
             <parameter name="Spiral Angle Offset" type="float" val="66.667" />
             <parameter name="Spiral Degrees" type="float" val="25" />
@@ -210,7 +210,7 @@
             <Color label="Skin" channel="3" red="0.0431373" green="0.0431368" blue="0.0431368" />
         </Palette>
     </ActorObject>
-    <CameraObject t0="46.4687" t1="7.12306" t2="-134.149" s0="1" s1="1" s2="1" q0="0.207833" q1="0.632373" q2="-0.181571" q3="0.723838" euler_x="0.559211" euler_y="1.43612" euler_z="0" id="271">
+    <CameraObject t0="45.5814" t1="7.17879" t2="-132.27" s0="1" s1="1" s2="1" q0="0.257765" q1="0.58952" q2="-0.206114" q3="0.737251" euler_x="0.672691" euler_y="1.34902" euler_z="0" id="271">
         <parameters />
     </CameraObject>
     <EnvObject t0="49.998" t1="4.94749" t2="-136.19" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="335" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Weapons/rat_weapons/rat_machete.xml">

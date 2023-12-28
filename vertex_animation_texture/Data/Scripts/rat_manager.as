@@ -534,7 +534,8 @@ enum RatStates{
     Look,
     Follow,
     Attack,
-    Strike
+    Strike,
+    Attached
 }
 
 bool post_init = true;
@@ -610,6 +611,7 @@ class Rat{
     bool at_nav_target = false;
     vec3 follow_position;
     float random_noise_timer;
+    int attached_bone = 0;
 
     NavPath path;
     int current_path_point = 0;
@@ -695,6 +697,28 @@ class Rat{
             case Strike:
                 UpdateStriking(ts);
                 break;
+            case Attached:
+                UpdateAttached(ts);
+                break;
+        }
+    }
+
+    float attached_timer = 0.0f;
+
+    void UpdateAttached(const Timestep &in ts){
+        attached_timer -= ts.step();
+
+        MovementObject@ target = ReadCharacterID(attack_target);
+        Skeleton @skeleton = target.rigged_object().skeleton();
+
+        vec3 target_pos = skeleton.GetBoneTransform(attached_bone).GetTranslationPart();
+
+        velocity *= pow(0.95f, ts.frames());
+        position += velocity * ts.step();
+        position = mix(position, target_pos, time_step * 50.0);
+        
+        if(attached_timer <= 0.0){
+            current_state = Follow;
         }
     }
 
@@ -717,8 +741,10 @@ class Rat{
             MovementObject@ stab_victim = ReadCharacterID(contact.id);
             stab_victim.rigged_object().Stab(contact.position, velocity_direction, 2, 0);
 
-            velocity *= 0.5;
-            current_state = Follow;
+            velocity *= 0.1;
+            current_state = Attached;
+            current_animation = Run;
+            attached_timer = RangedRandomFloat(1.0, 2.0);
 
             vec3 force = velocity_direction * 1800.0f;
             vec3 hit_pos = contact.position;
@@ -768,22 +794,19 @@ class Rat{
             if(xz_distance(target.position, position) < 2.0 * random_size){
                 current_state = Strike;
 
-                vec3 target_pos = vec3(0.0, 0.0, 0.0);
+                Skeleton @skeleton = target.rigged_object().skeleton();
 
-                switch(rand() % 4){
-                    case 0:
-                        target_pos += target.rigged_object().GetAvgIKChainPos("head");
+                while(true){
+                    int rand_bone = rand() % skeleton.NumBones();
+
+                    if(skeleton.HasPhysics(rand_bone)) {
+                        attached_bone = rand_bone;
                         break;
-                    case 1:
-                        target_pos += target.rigged_object().GetAvgIKChainPos("torso");
-                        break;
-                    case 2:
-                        target_pos += target.rigged_object().GetAvgIKChainPos("leftarm");
-                        break;
-                    case 3:
-                        target_pos += target.rigged_object().GetAvgIKChainPos("rightarm");
-                        break;
+                    }
                 }
+
+                vec3 target_pos = skeleton.GetBoneTransform(attached_bone).GetTranslationPart();
+                target_pos += target.velocity * 0.1;
 
                 vec3 target_dir = normalize(target_pos - position);
                 current_animation = LookAround;
@@ -1068,6 +1091,7 @@ class Rat{
     }
 
     void ApplyPhysics(const Timestep &in ts) {
+        if(current_state == Attached){return;}
         bool collision_below = false;
 
         vec3 flat_current_position = position;
