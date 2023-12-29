@@ -52,7 +52,7 @@
     <ActorObject t0="43.0109" t1="7.21523" t2="-127.536" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" type_file="Data/Characters/rat_manager.xml" is_player="0">
         <parameters>
             <parameter name="Character Scale" type="float" val="1" />
-            <parameter name="Follow Use Nav" type="int" val="0" />
+            <parameter name="Follow Use Nav" type="int" val="1" />
             <parameter name="Max Random Nav" type="int" val="20" />
             <parameter name="Push Character" type="int" val="0" />
             <parameter name="Push Rat" type="int" val="0" />

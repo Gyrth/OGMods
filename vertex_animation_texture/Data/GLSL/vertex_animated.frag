@@ -249,7 +249,7 @@ void main() {
 	colormap *= tint.r + 0.2;
 
 	if(step(texture(tex1, frag_tex_coords), (0.48 + (tint.b / 10.0)) )){
-		colormap.rgb = vec3(0.1, 0.0, 0.0);
+		colormap.rgb = vec3(0.08, 0.0, 0.0);
 	}
 
 	float spec_amount = 0.1;
@@ -291,8 +291,6 @@ void main() {
 		
 		vec3 spec_color = vec3(1.0);
 		CalculateLightContrib(diffuse_color, spec_color, ws_vertex, world_vert, ws_normal, roughness, light_val, ambient_mult);
-
-		
 		
 		out_color.rgb = diffuse_color;
 

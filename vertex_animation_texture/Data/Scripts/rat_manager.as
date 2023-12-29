@@ -524,6 +524,7 @@ void UpdatePaused(){}
 
 enum RatAnimations{
     Idle,
+    Walk,
     Run,
     Flail,
     LookAround
@@ -569,8 +570,13 @@ const int RUN_ANIMATION_START = 75;
 const int RUN_ANIMATION_END = 99;
 const float RUN_ANIMATION_SPEED = 1.0;
 
-const float IDLE_THRESHOLD = 0.25;
-const float RUN_THRESHOLD = 0.3;
+const int WALK_ANIMATION_START = 100;
+const int WALK_ANIMATION_END = 124;
+const float WALK_ANIMATION_SPEED = 2.0;
+
+const float IDLE_THRESHOLD = 0.08;
+const float WALK_THRESHOLD = 3.0;
+const float RUN_THRESHOLD = 3.1;
 
 class Rat{
 
@@ -768,6 +774,7 @@ class Rat{
     void UpdateAttacking(const Timestep &in ts){
         RandomNoise(ts);
         movement_speed = 75.0f;
+        float interpolate_speed = 50.0;
 
         MovementObject@ target = ReadCharacterID(attack_target);
 
@@ -777,7 +784,6 @@ class Rat{
         }
 
         if(on_ground){
-            float interpolate_speed = 15.0;
             vec3 target_position;
 
             if(follow_use_nav){
@@ -835,9 +841,9 @@ class Rat{
         RandomNoise(ts);
         vec3 nav_target = GetNextPathPoint();
         movement_speed = 50.0f;
+        float interpolate_speed = 50.0;
 
         if(on_ground){
-            float interpolate_speed = 15.0;
 
             // DebugDrawLine(position, nav_target, vec3(1.0, 0.0, 0.0), _delete_on_update);
             float dist = xz_distance(nav_target, position);
@@ -859,11 +865,11 @@ class Rat{
     void UpdateFollowing(const Timestep &in ts){
         RandomNoise(ts);
         movement_speed = 75.0f;
+        float interpolate_speed = 50.0;
 
         LookAroundWhenIdle(ts);
 
         if(on_ground){
-            float interpolate_speed = 15.0;
             vec3 target_position;
 
             if(follow_use_nav){
@@ -898,7 +904,7 @@ class Rat{
             look_around_timer -= ts.step();
 
             if(velocity_length > IDLE_THRESHOLD || look_around_timer <= 0.0){
-                current_animation = Idle;
+                current_animation = Walk;
             }
         }
     }
@@ -920,6 +926,9 @@ class Rat{
             case Idle:
                 UpdateIdleAnimation(ts);
                 break;
+            case Walk:
+                UpdateWalkAnimation(ts);
+                break;
             case Run:
                 UpdateRunAnimation(ts);
                 break;
@@ -930,6 +939,31 @@ class Rat{
                 UpdateLookAroundAnimation(ts);
                 break;
         }
+    }
+
+    void UpdateWalkAnimation(const Timestep &in ts){
+        float velocity_length = length(velocity);
+        animation_progress += ts.step() * velocity_length * WALK_ANIMATION_SPEED;
+
+        if(velocity_length < IDLE_THRESHOLD){
+            current_animation = Idle;
+        }else if(velocity_length > RUN_THRESHOLD){
+            current_animation = Run;
+        }
+
+        if(animation_progress > 1.0){
+
+            if(id % max(1, (rats.size() / 50)) == 0){
+                int sound_id = PlaySoundGroup("Data/Sounds/hit/hit_block.xml", position, _sound_priority_low);
+                SetSoundGain(sound_id, 0.022);
+                SetSoundPitch(sound_id, RangedRandomFloat(1.75, 2.0));
+            }
+
+            animation_progress -= 1.0;
+        }
+
+        float current_frame = mix(WALK_ANIMATION_START, WALK_ANIMATION_END, animation_progress);
+        model.SetTint(vec3(random_tint_value, current_frame / 1000.0, blood_amount));
     }
 
     void UpdateLookAroundAnimation(const Timestep &in ts){
@@ -964,8 +998,8 @@ class Rat{
         float velocity_length = length(velocity);
         animation_progress += ts.step() * velocity_length * RUN_ANIMATION_SPEED;
 
-        if(velocity_length < IDLE_THRESHOLD){
-            current_animation = Idle;
+        if(velocity_length < RUN_THRESHOLD){
+            current_animation = Walk;
         }
 
         if(animation_progress > 1.0){
@@ -988,8 +1022,8 @@ class Rat{
         float velocity_length = length(velocity);
         animation_progress += ts.step() * IDLE_ANIMATION_SPEED;
 
-        if(velocity_length > RUN_THRESHOLD){
-            current_animation = Run;
+        if(velocity_length > IDLE_THRESHOLD){
+            current_animation = Walk;
         }
 
         if(animation_progress > 1.0){
@@ -1007,12 +1041,12 @@ class Rat{
 
         // DebugDrawLine(position, position + flat_vel, vec3(1.0, 0.0, 0.0), _delete_on_update);
 
-        if(length(flat_vel) > 0.25){
+        if(length(flat_vel) > IDLE_THRESHOLD){
             flat_vel = normalize(flat_vel);
             float target_rotation = atan2(-flat_vel.z, flat_vel.x);
             target_rotation += 3.1417f * 0.5f;
 
-            rotation = mix(rotation, quaternion(vec4(0.0, 1.0, 0.0, target_rotation)), ts.step() * 10.0);
+            rotation = mix(rotation, quaternion(vec4(ground_normal, target_rotation)), ts.step() * 5.0);
         }
 
         if(update_aabb_timer >= UPDATE_AABB_INTERVAL){
@@ -1140,7 +1174,7 @@ class Rat{
             in_air_timer = 0.0f;
 
             vec3 push_adjusted_movement_direction = mix(movement_direction, push_force, min(1.0, length(push_force)));
-            push_force *= pow(0.95f, ts.frames());
+            push_force *= pow(0.8f, ts.frames());
 
             velocity += push_adjusted_movement_direction * ts.step() * movement_speed;
             // Reduce the velocity when standing on the ground, as if affected by friction.
