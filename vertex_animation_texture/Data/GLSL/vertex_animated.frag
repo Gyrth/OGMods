@@ -93,9 +93,10 @@ vec4 GetInstancedColorTint(int instance_id) {
 
 		#define tan_to_obj tan_to_obj_fs
 	#else
-		in mat3 tan_to_obj;
 	#endif
 #endif
+
+in mat3 tan_to_obj;
 
 #if defined(USE_GEOM_SHADER)
 	in vec2 frag_tex_coords_fs;
@@ -163,6 +164,64 @@ mat3 cotangent_frame( vec3 N, vec3 p, vec2 uv )
     return mat3( T * invmax, B * invmax, N );
 }
 
+bool step(vec4 color, float x) {
+	if(length(color) / 3.0 <= x){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+vec3 GetAmbientColor(vec3 world_vert, vec3 ws_normal) {
+	vec3 ambient_color = vec3(0.0);
+
+	#if defined(CAN_USE_3D_TEX) && !defined(DETAIL_OBJECT)
+		bool use_3d_tex = Query3DTexture(ambient_color, world_vert, ws_normal);
+	#else
+		bool use_3d_tex = false;
+	#endif
+
+	if(!use_3d_tex){
+		bool use_amb_cube = false;
+		vec3 ambient_cube_color[6];
+
+		for(int i=0; i<6; ++i){
+			ambient_cube_color[i] = vec3(0.0);
+		}
+
+		#if defined(CAN_USE_LIGHT_PROBES)
+			uint guess = 0u;
+			int grid_coord[3];
+			bool in_grid = true;
+
+			for(int i=0; i<3; ++i){
+				if(world_vert[i] > grid_bounds_max[i] || world_vert[i] < grid_bounds_min[i]){
+					in_grid = false;
+					break;
+				}
+			}
+
+			if(in_grid){
+				grid_coord[0] = int((world_vert[0] - grid_bounds_min[0]) / (grid_bounds_max[0] - grid_bounds_min[0]) * float(subdivisions_x));
+				grid_coord[1] = int((world_vert[1] - grid_bounds_min[1]) / (grid_bounds_max[1] - grid_bounds_min[1]) * float(subdivisions_y));
+				grid_coord[2] = int((world_vert[2] - grid_bounds_min[2]) / (grid_bounds_max[2] - grid_bounds_min[2]) * float(subdivisions_z));
+				int cell_id = ((grid_coord[0] * subdivisions_y) + grid_coord[1])*subdivisions_z + grid_coord[2];
+				uvec4 data = texelFetch(ambient_grid_data, cell_id/4);
+				guess = data[cell_id%4];
+				use_amb_cube = GetAmbientCube(world_vert, num_tetrahedra, ambient_color_buffer, ambient_cube_color, guess);
+			}
+		#endif
+
+		if(!use_amb_cube){
+			ambient_color = LookupCubemapSimpleLod(ws_normal, spec_cubemap, 5.0);
+		} else {
+			ambient_color = SampleAmbientCube(ambient_cube_color, ws_normal);
+		}
+	}
+
+	return ambient_color;
+}
+
 void main() {
 	#ifdef NO_INSTANCE_ID
 		int instance_id;
@@ -170,19 +229,15 @@ void main() {
 	#endif
 
 	vec4 colormap;
-
+	vec3 ws_normal;
 	vec4 normalmap = texture(tex1, tc0);
 	vec3 unpacked_normal = UnpackTanNormal(normalmap);
-	vec3 ws_normal = quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), frag_normal);
-	mat3 cotangent_frame = cotangent_frame(ws_normal, normalize(world_vert - cam_pos), tc0);
-	ws_normal = cotangent_frame * unpacked_normal;
+	ws_normal = normalize(quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), tan_to_obj * unpacked_normal));
 
 	#if defined(VERTEX_COLOR)
-		out_color = vertex_color;
-		colormap = out_color;
+		colormap = vertex_color;
 	#else
 		colormap = texture(tex5, vec2(frag_tex_coords));
-		out_color = colormap;
 	#endif
 
 	vec4 ndcPos;
@@ -213,6 +268,7 @@ void main() {
 
 	float spec_amount = colormap.a;
 	float ambient_mult = 1.0;
+	float env_ambient_mult = 1.0;
 
 	#if defined(INSTANCED_MESH)
 		vec4 old_colormap = colormap;
@@ -228,38 +284,52 @@ void main() {
 	vec3 ws_vertex = world_vert - cam_pos;
 
 	#if !defined(DEPTH_ONLY) && !defined(NO_DECALS)
-		
-		vec3 spec_color = vec3(0.0);
-		vec3 light_contrib = out_color.xyz;
-		CalculateLightContrib(light_contrib, spec_color, ws_vertex, world_vert, ws_normal, roughness, light_val, ambient_mult);
-		out_color.xyz = light_contrib;
 
-	#endif
+		vec3 shadow_tex = vec3(1.0);
+		vec4 shadow_coords[4];
 
-	vec4 tint = GetInstancedColorTint(instance_id);
-	out_color.xyz *= tint.r + 0.2;
-
-	vec4 shadow_coords[4];
-
-	#if !defined(DEPTH_ONLY)
 		shadow_coords[0] = shadow_matrix[0] * vec4(world_vert, 1.0);
 		shadow_coords[1] = shadow_matrix[1] * vec4(world_vert, 1.0);
 		shadow_coords[2] = shadow_matrix[2] * vec4(world_vert, 1.0);
 		shadow_coords[3] = shadow_matrix[3] * vec4(world_vert, 1.0);
-	#endif
 
-	#ifdef NO_INSTANCE_ID
-		// out_color = texture(tex1, vec2(frag_tex_coords));
-		// out_color.xyz = vec3(1.0, 0.0, 0.0);
-		// out_color.xyz = world_vert;
-		// discard;
-	#else
-		vec3 shadow_tex = vec3(1.0);
-		shadow_tex.r = GetCascadeShadow(tex4, shadow_coords, length(ws_vertex));
+		#if defined(SIMPLE_SHADOW)
+			{
+				vec3 X = dFdx(world_vert);
+				vec3 Y = dFdy(world_vert);
+				vec3 norm = normalize(cross(X, Y));
+				float slope_dot = dot(norm, ws_light);
+				slope_dot = min(slope_dot, 1);
+				shadow_tex.r = GetCascadeShadow(tex4, shadow_coords, length(ws_vertex), slope_dot);
+			}
+			shadow_tex.r *= ambient_mult;
+		#else
+			shadow_tex.r = GetCascadeShadow(tex4, shadow_coords, length(ws_vertex));
+		#endif
 
 		CALC_DIRECT_DIFFUSE_COLOR
 
-		float shadow = GetCascadeShadow(shadow_sampler, shadow_coords, distance(cam_pos, world_vert));
-		out_color.xyz *= mix(0.2,1.0,shadow);
+		vec3 ambient_color = GetAmbientColor(world_vert, cam_pos - world_vert);
+		diffuse_color += ambient_color * GetAmbientContrib(shadow_tex.g) * ambient_mult * env_ambient_mult;
+		diffuse_color *= colormap.xyz;
+		
+		vec3 spec_color = vec3(0.0);
+		CalculateLightContrib(diffuse_color, spec_color, ws_vertex, world_vert, ws_normal, roughness, light_val, ambient_mult);
+
+	#endif
+
+	#if !defined(NO_INSTANCE_ID)
+
+		vec4 tint = GetInstancedColorTint(instance_id);
+		diffuse_color *= tint.r + 0.2;
+
+		if(step(texture(tex1, frag_tex_coords), (0.45 + (tint.b / 10.0)) )){
+			diffuse_color = vec3(0.4, 0.0, 0.0);
+		}
+		
+		float shadow = GetCascadeShadow(tex4, shadow_coords, length(ws_vertex));
+		diffuse_color *= mix(0.2,1.0, shadow);
+		
+		out_color.rgb = diffuse_color;
 	#endif
 }

@@ -79,6 +79,7 @@ out vec2 tex_coords;
 out mat3 tangent_to_world;
 out vec3 orig_vert;
 out vec3 world_vert;
+out mat3 tan_to_obj;
 
 flat out int instance_id;
 
@@ -204,6 +205,8 @@ void main() {
 
 	frag_tex_coords = tex_coord_attrib;
 	frag_tex_coords[1] = 1.0 - frag_tex_coords[1];
+
+	tan_to_obj = mat3(tangent_attrib, bitangent_attrib, normal_attrib);
 
 	vertex_color = texture(tex5, frag_tex_coords);
 	vec4 normal_color = texture(tex1, frag_tex_coords);
