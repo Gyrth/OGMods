@@ -744,7 +744,7 @@ class Rat{
             velocity *= 0.1;
             current_state = Attached;
             current_animation = Run;
-            attached_timer = RangedRandomFloat(1.0, 2.0);
+            attached_timer = RangedRandomFloat(1.5, 2.5);
 
             vec3 force = velocity_direction * 1800.0f;
             vec3 hit_pos = contact.position;
@@ -1262,9 +1262,6 @@ void UpdateRatKing(const Timestep &in ts){
         case Lead:
             UpdateLeading(ts);
             break;
-        case OrderAttack:
-            UpdateOrderAttack(ts);
-            break;
         case AttackEnemy:
             UpdateAttackEnemy(ts);
             break;
@@ -1273,12 +1270,55 @@ void UpdateRatKing(const Timestep &in ts){
 
 void UpdateLeading(const Timestep &in ts){
 
-    int primary_weapon_id = rat_king.GetArrayIntVar("weapon_slots", rat_king.GetIntVar("primary_weapon_slot"));
+    if(GetInputPressed(rat_king.controller_id, "attack")){
+        int target_id = -1;
+        float last_dot = -1.0f;
+        vec3 camera_direction = camera.GetFacing();
 
-    if(primary_weapon_id != -1){
-        @rat_king_weapon = ReadItemID(primary_weapon_id);
-    }else if(rat_king_weapon !is null && !rat_king_weapon.IsHeld() && length(rat_king_weapon.GetLinearVelocity()) > 15.0){
-        rat_king_state = OrderAttack;
+        for(int i = 0; i < GetNumCharacters(); i++){
+            MovementObject@ char = ReadCharacter(i);
+
+            if(char.GetID() != this_mo.GetID() && !rat_king.OnSameTeam(char) && char.GetIntVar("knocked_out") == _awake){
+
+                vec3 torso_pos = char.rigged_object().GetAvgIKChainPos("torso");
+
+                if(xz_distance(torso_pos, camera.GetPos()) > 20.0f){
+                    continue;
+                }
+
+                col.GetObjRayCollision(camera.GetPos(), torso_pos);
+                if(sphere_col.NumContacts() != 0){
+                    continue;
+                }
+
+                vec3 target_dir = normalize(torso_pos - camera.GetPos());
+                float dot_product = dot(target_dir, camera_direction);
+                
+                if(dot_product > max(0.75, last_dot)){
+                    last_dot = dot_product;
+                    target_id = char.GetID();
+                }
+            }
+        }
+
+        if(target_id != -1){
+            rat_king_state = AttackEnemy;
+            order_cooldown = 3.0f;
+
+            string animation = "Data/Animations/r_knifethrowlayer.anm";
+            int8 flags = _ANM_MOBILE | _ANM_FROM_START;
+            rat_king.rigged_object().anim_client().AddLayer(animation, 2.5f, flags);
+            rat_king.Execute("resting_mouth_pose[3] = 5.0f;");
+
+            vec3 head_pos = rat_king.rigged_object().GetAvgIKChainPos("head");
+            int sound_id = PlaySoundGroup("Data/Sounds/voice/animal3/voice_rat_attack.xml", head_pos, _sound_priority_med);
+            SetSoundPitch(sound_id, 0.75f);
+
+            for(uint i = 0; i < rats.size(); i++){
+                rats[i].attack_target = target_id;
+                rats[i].current_state = Attack;
+            }
+        }
     }
 
     for(uint i = 0; i < rats.size(); i++){
@@ -1293,45 +1333,13 @@ void UpdateLeading(const Timestep &in ts){
     UpdateCircling(ts);
 }
 
-void UpdateOrderAttack(const Timestep &in ts){
-
-    vec3 last_pos = rat_king.position;
-
-    for(uint i = 0; i < rats.size(); i++){
-
-        vec2 spiral_offset = GetSpiralOffset(i);
-
-        rats[i].follow_position = rat_king_weapon.GetPhysicsPosition();
-        rats[i].follow_position.y = rats[i].position.y;
-        rats[i].follow_position += vec3(spiral_offset.x, 0.0, spiral_offset.y);
-
-        // DebugDrawLine(last_pos, rats[i].follow_position, vec3(1.0, 0.0, 0.0), _delete_on_update);
-        last_pos = rats[i].follow_position;
-    }
-
-    array<int> character_ids;
-    GetCharactersInSphere(rat_king_weapon.GetPhysicsPosition(), 0.75, character_ids);
-
-    for(uint i = 0; i < character_ids.size(); i++){
-        MovementObject@ char = ReadCharacterID(character_ids[i]);
-
-        if(char.GetID() != this_mo.GetID() && !rat_king.OnSameTeam(char)){
-
-            rat_king_state = AttackEnemy;
-            rat_king.Execute("AttachWeapon(" + rat_king_weapon.GetID() + ");");
-
-            for(uint j = 0; j < rats.size(); j++){
-                rats[j].attack_target = character_ids[i];
-                rats[j].current_state = Attack;
-            }
-        }
-    }
-}
+float order_cooldown;
 
 void UpdateAttackEnemy(const Timestep &in ts){
-    int primary_weapon_id = rat_king.GetArrayIntVar("weapon_slots", rat_king.GetIntVar("primary_weapon_slot"));
 
-    if(primary_weapon_id != -1){
+    order_cooldown -= ts.step();
+
+    if(order_cooldown <= 0.0){
         rat_king_state = Lead;
     }
 }
