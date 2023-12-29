@@ -580,7 +580,6 @@ const float RUN_THRESHOLD = 3.1;
 
 class Rat{
 
-    float UPDATE_AABB_INTERVAL = 0.15;
     bool ENABLE_SHADOW = true;
 
     vec3 offset = vec3(0.0, 0.0, 0.0);
@@ -593,7 +592,6 @@ class Rat{
     quaternion rotation = quaternion(0.0, 0.0, 0.0, 1.0);
     Object@ model;
     Object@ blob_model;
-    float update_aabb_timer;
     vec3 movement_direction = vec3(1.0, 0.0, 0.0);
     vec3 nav_target_direction = vec3(1.0, 0.0, 0.0);
     vec3 ground_normal(0.0, 1.0, 0.0);
@@ -602,6 +600,7 @@ class Rat{
     vec3 push_force = vec3(0.0, 0.0, 0.0);
     float movement_speed = 50.0f;
     float random_size;
+    int aabb_counter = 0;
 
     vec3 last_col_pos;
     float flat_movement_velocity = 0.0f;
@@ -630,7 +629,6 @@ class Rat{
         random_size = RangedRandomFloat(0.75, 1.25);
         size *= random_size;
 
-        update_aabb_timer = RangedRandomFloat(0.0, UPDATE_AABB_INTERVAL);
         animation_progress = RangedRandomFloat(0.0, 1.0);
         random_tint_value = RangedRandomFloat(0.0, 1.0);
         look_around_timer = RangedRandomFloat(0.5, 5.0);
@@ -1035,7 +1033,6 @@ class Rat{
     }
 
     void UpdateModelTransform(const Timestep &in ts){
-        update_aabb_timer += ts.step();
 
         vec3 flat_vel = vec3(velocity.x, 0, velocity.z);
 
@@ -1049,13 +1046,14 @@ class Rat{
             rotation = mix(rotation, quaternion(vec4(ground_normal, target_rotation)), ts.step() * 5.0);
         }
 
-        if(update_aabb_timer >= UPDATE_AABB_INTERVAL){
+        if(aabb_counter % max(1, (rats.size() / 20)) == 0){
+            aabb_counter = 1;
+
             model.SetRotation(rotation);
             model.SetTranslation(position);
-
-            update_aabb_timer = 0.0f;
         }else{
             model.SetTranslationRotationFast(position, rotation);
+            aabb_counter += 1;
 
             if(ENABLE_SHADOW){
                 blob_model.SetTranslation(position);
