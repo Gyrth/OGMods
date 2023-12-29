@@ -144,26 +144,6 @@ vec3 quat_mul_vec3(vec4 q, vec3 v) {
     return v + ((uv * q.w) + uuv) * 2;
 }
 
-// From http://www.thetenthplanet.de/archives/1180
-mat3 cotangent_frame( vec3 N, vec3 p, vec2 uv )
-{
-    // get edge vectors of the pixel triangle
-    vec3 dp1 = dFdx( p );
-    vec3 dp2 = dFdy( p );
-    vec2 duv1 = dFdx( uv );
-    vec2 duv2 = dFdy( uv );
-
-    // solve the linear system
-    vec3 dp2perp = cross( dp2, N );
-    vec3 dp1perp = cross( N, dp1 );
-    vec3 T = dp2perp * duv1.x + dp1perp * duv2.x;
-    vec3 B = dp2perp * duv1.y + dp1perp * duv2.y;
-
-    // construct a scale-invariant frame
-    float invmax = inversesqrt( max( dot(T,T), dot(B,B) ) );
-    return mat3( T * invmax, B * invmax, N );
-}
-
 bool step(vec4 color, float x) {
 	if(length(color) / 3.0 <= x){
 		return true;
@@ -229,10 +209,10 @@ void main() {
 	#endif
 
 	vec4 colormap;
-	vec3 ws_normal;
+	vec4 tint = GetInstancedColorTint(instance_id);
 	vec4 normalmap = texture(tex1, tc0);
 	vec3 unpacked_normal = UnpackTanNormal(normalmap);
-	ws_normal = normalize(quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), tan_to_obj * unpacked_normal));
+	vec3 ws_normal = normalize(quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), tan_to_obj * unpacked_normal));
 
 	#if defined(VERTEX_COLOR)
 		colormap = vertex_color;
@@ -266,21 +246,17 @@ void main() {
 		uint light_val = texelFetch(cluster_buffer, int(light_cluster_index)).x;
 	#endif
 
-	float spec_amount = colormap.a;
+	colormap *= tint.r + 0.2;
+
+	if(step(texture(tex1, frag_tex_coords), (0.48 + (tint.b / 10.0)) )){
+		colormap.rgb = vec3(0.1, 0.0, 0.0);
+	}
+
+	float spec_amount = 0.1;
 	float ambient_mult = 1.0;
 	float env_ambient_mult = 1.0;
-
-	#if defined(INSTANCED_MESH)
-		vec4 old_colormap = colormap;
-		float old_spec_amount = spec_amount;
-	#endif
-
-	#if defined(KEEP_SPEC)
-		float roughness = (1.0 - normalmap.a);
-	#else
-		float roughness = mix(0.7, 1.0, pow((colormap.x + colormap.y + colormap.z) / 3.0, 0.01));
-	#endif
-
+	float roughness = mix(0.7, 1.0, pow((colormap.x + colormap.y + colormap.z) / 3.0, 0.01));
+	roughness = 0.0;
 	vec3 ws_vertex = world_vert - cam_pos;
 
 	#if !defined(DEPTH_ONLY) && !defined(NO_DECALS)
@@ -313,23 +289,12 @@ void main() {
 		diffuse_color += ambient_color * GetAmbientContrib(shadow_tex.g) * ambient_mult * env_ambient_mult;
 		diffuse_color *= colormap.xyz;
 		
-		vec3 spec_color = vec3(0.0);
+		vec3 spec_color = vec3(1.0);
 		CalculateLightContrib(diffuse_color, spec_color, ws_vertex, world_vert, ws_normal, roughness, light_val, ambient_mult);
 
-	#endif
-
-	#if !defined(NO_INSTANCE_ID)
-
-		vec4 tint = GetInstancedColorTint(instance_id);
-		diffuse_color *= tint.r + 0.2;
-
-		if(step(texture(tex1, frag_tex_coords), (0.45 + (tint.b / 10.0)) )){
-			diffuse_color = vec3(0.4, 0.0, 0.0);
-		}
 		
-		float shadow = GetCascadeShadow(tex4, shadow_coords, length(ws_vertex));
-		diffuse_color *= mix(0.2,1.0, shadow);
 		
 		out_color.rgb = diffuse_color;
+
 	#endif
 }

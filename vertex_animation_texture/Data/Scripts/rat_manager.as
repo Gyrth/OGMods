@@ -612,6 +612,7 @@ class Rat{
     vec3 follow_position;
     float random_noise_timer;
     int attached_bone = 0;
+    float blood_amount = 0.0f;
 
     NavPath path;
     int current_path_point = 0;
@@ -648,6 +649,7 @@ class Rat{
     ~Rat(){
         deleted = true;
         QueueDeleteObjectID(model.GetID());
+        QueueDeleteObjectID(blob_model.GetID());
     }
 
     void Update(const Timestep &in ts){
@@ -745,6 +747,7 @@ class Rat{
             current_state = Attached;
             current_animation = Run;
             attached_timer = RangedRandomFloat(1.5, 2.5);
+            blood_amount = min(0.482352941, blood_amount + RangedRandomFloat(0.05, 0.1));
 
             vec3 force = velocity_direction * 1800.0f;
             vec3 hit_pos = contact.position;
@@ -937,7 +940,7 @@ class Rat{
         }
 
         float current_frame = mix(LOOK_ANIMATION_START, LOOK_ANIMATION_END, animation_progress);
-        model.SetTint(vec3(random_tint_value, current_frame / 1000.0, 0.0));
+        model.SetTint(vec3(random_tint_value, current_frame / 1000.0, blood_amount));
     }
 
     void UpdateFlailAnimation(const Timestep &in ts){
@@ -953,7 +956,7 @@ class Rat{
         }
 
         float current_frame = mix(FLAIL_ANIMATION_START, FLAIL_ANIMATION_END, animation_progress);
-        model.SetTint(vec3(random_tint_value, current_frame / 1000.0, 0.0));
+        model.SetTint(vec3(random_tint_value, current_frame / 1000.0, blood_amount));
     }
     
     void UpdateRunAnimation(const Timestep &in ts){
@@ -967,7 +970,7 @@ class Rat{
 
         if(animation_progress > 1.0){
 
-            if(id % 4 == 0){
+            if(id % max(1, (rats.size() / 50)) == 0){
                 int sound_id = PlaySoundGroup("Data/Sounds/hit/hit_block.xml", position, _sound_priority_low);
                 SetSoundGain(sound_id, 0.02);
                 SetSoundPitch(sound_id, RangedRandomFloat(1.75, 2.0));
@@ -977,7 +980,7 @@ class Rat{
         }
 
         float current_frame = mix(RUN_ANIMATION_START, RUN_ANIMATION_END, animation_progress);
-        model.SetTint(vec3(random_tint_value, current_frame / 1000.0, 0.0));
+        model.SetTint(vec3(random_tint_value, current_frame / 1000.0, blood_amount));
     }
 
     void UpdateIdleAnimation(const Timestep &in ts){
@@ -994,7 +997,7 @@ class Rat{
         }
 
         float current_frame = mix(IDLE_ANIMATION_START, IDLE_ANIMATION_END, animation_progress);
-        model.SetTint(vec3(random_tint_value, current_frame / 1000.0, 0.0));
+        model.SetTint(vec3(random_tint_value, current_frame / 1000.0, blood_amount));
     }
 
     void UpdateModelTransform(const Timestep &in ts){

@@ -221,7 +221,6 @@ void main() {
 	float animation_length = 48.0;
 
 	vec4 tint = GetInstancedColorTint(instance_id);
-	float range = animation_length / texture_size.y;
 	float y_pos = tint.g * 1000.0 * one_pixel_offset;
 
 	// Use half a pixel to get the center of the pixel.
