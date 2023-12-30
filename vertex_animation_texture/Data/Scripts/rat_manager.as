@@ -539,6 +539,8 @@ enum RatStates{
     Attached
 }
 
+// Rat model released by AIUM2 under the CC Attribution License.
+
 bool post_init = true;
 array<Rat@> rats;
 uint rat_amount = 0;
@@ -820,6 +822,7 @@ class Rat{
                 velocity = target_dir * 10.0f;
                 int sound_id = PlaySoundGroup("Data/Sounds/voice/animal3/voice_rat_attack.xml", position, _sound_priority_med);
                 SetSoundPitch(sound_id, RangedRandomFloat(0.9, 1.2));
+                SetSoundGain(sound_id, 0.75);
                 strike_timer = 0.0f;
             }
         }
@@ -1046,7 +1049,7 @@ class Rat{
             rotation = mix(rotation, quaternion(vec4(ground_normal, target_rotation)), ts.step() * 5.0);
         }
 
-        if(aabb_counter % max(1, (rats.size() / 20)) == 0){
+        if(aabb_counter % max(1, (rats.size() / 50)) == 0){
             aabb_counter = 1;
 
             model.SetRotation(rotation);
@@ -1317,7 +1320,7 @@ void UpdateLeading(const Timestep &in ts){
 
                 vec3 torso_pos = char.rigged_object().GetAvgIKChainPos("torso");
 
-                if(xz_distance(torso_pos, camera.GetPos()) > 20.0f){
+                if(xz_distance(torso_pos, camera.GetPos()) > 25.0f){
                     continue;
                 }
 
@@ -1340,14 +1343,11 @@ void UpdateLeading(const Timestep &in ts){
             rat_king_state = AttackEnemy;
             order_cooldown = 3.0f;
 
-            string animation = "Data/Animations/r_knifethrowlayer.anm";
+            string animation = "Data/Animations/rat_king_charge.anm";
             int8 flags = _ANM_MOBILE | _ANM_FROM_START;
-            rat_king.rigged_object().anim_client().AddLayer(animation, 2.5f, flags);
-            rat_king.Execute("resting_mouth_pose[3] = 5.0f;");
+            rat_king.rigged_object().anim_client().AddLayer(animation, 8.0f, flags);
 
-            vec3 head_pos = rat_king.rigged_object().GetAvgIKChainPos("head");
-            int sound_id = PlaySoundGroup("Data/Sounds/voice/animal3/voice_rat_attack.xml", head_pos, _sound_priority_med);
-            SetSoundPitch(sound_id, 0.75f);
+            shouted = false;
 
             for(uint i = 0; i < rats.size(); i++){
                 rats[i].attack_target = target_id;
@@ -1369,10 +1369,21 @@ void UpdateLeading(const Timestep &in ts){
 }
 
 float order_cooldown;
+bool shouted = false;
 
 void UpdateAttackEnemy(const Timestep &in ts){
 
     order_cooldown -= ts.step();
+
+    if(!shouted && order_cooldown <= 2.75){
+        rat_king.Execute("resting_mouth_pose[3] = 5.0f;");
+                
+        vec3 head_pos = rat_king.rigged_object().GetAvgIKChainPos("head");
+        int sound_id = PlaySoundGroup("Data/Sounds/voice/animal3/voice_rat_attack.xml", head_pos, _sound_priority_med);
+        SetSoundPitch(sound_id, 0.75f);
+
+        shouted = true;
+    }
 
     if(order_cooldown <= 0.0){
         rat_king_state = Lead;
