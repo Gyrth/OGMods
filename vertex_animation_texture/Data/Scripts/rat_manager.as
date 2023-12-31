@@ -528,7 +528,8 @@ enum RatAnimations{
     Run,
     Flail,
     Look,
-    Attack
+    Attack,
+    Jump
 }
 
 enum RatStates{
@@ -559,7 +560,7 @@ const float PI = 3.141592653589;
 
 const int ATTACK_ANIMATION_START = 0;
 const int ATTACK_ANIMATION_END = 24;
-const float ATTACK_ANIMATION_SPEED = 2.0;
+const float ATTACK_ANIMATION_SPEED = 1.0;
 
 const int FLAIL_ANIMATION_START = 25;
 const int FLAIL_ANIMATION_END = 49;
@@ -569,16 +570,20 @@ const int IDLE_ANIMATION_START = 50;
 const int IDLE_ANIMATION_END = 74;
 const float IDLE_ANIMATION_SPEED = 1.0;
 
-const int LOOK_ANIMATION_START = 75;
-const int LOOK_ANIMATION_END = 99;
+const int JUMP_ANIMATION_START = 75;
+const int JUMP_ANIMATION_END = 99;
+const float JUMP_ANIMATION_SPEED = 1.0;
+
+const int LOOK_ANIMATION_START = 100;
+const int LOOK_ANIMATION_END = 124;
 const float LOOK_ANIMATION_SPEED = 1.0;
 
-const int RUN_ANIMATION_START = 100;
-const int RUN_ANIMATION_END = 124;
+const int RUN_ANIMATION_START = 125;
+const int RUN_ANIMATION_END = 149;
 const float RUN_ANIMATION_SPEED = 1.0;
 
-const int WALK_ANIMATION_START = 125;
-const int WALK_ANIMATION_END = 149;
+const int WALK_ANIMATION_START = 150;
+const int WALK_ANIMATION_END = 174;
 const float WALK_ANIMATION_SPEED = 2.0;
 
 const float IDLE_THRESHOLD = 0.08;
@@ -772,6 +777,7 @@ class Rat{
 
         if(strike_timer > 0.5 || (strike_timer > 0.15 && on_ground)){
             current_state = Follow;
+            current_animation = Idle;
         }
 
         movement_direction = vec3(0.0);
@@ -824,7 +830,7 @@ class Rat{
                 target_pos += target.velocity * 0.1;
 
                 vec3 target_dir = normalize(target_pos - position);
-                current_animation = Look;
+                current_animation = Jump;
                 velocity = target_dir * 10.0f;
                 int sound_id = PlaySoundGroup("Data/Sounds/voice/animal3/voice_rat_attack.xml", position, _sound_priority_med);
                 SetSoundPitch(sound_id, RangedRandomFloat(0.9, 1.2));
@@ -948,7 +954,21 @@ class Rat{
             case Attack:
                 UpdateAttackAnimation(ts);
                 break;
+            case Jump:
+                UpdateJumpingAnimation(ts);
+                break;
         }
+    }
+
+    void UpdateJumpingAnimation(const Timestep &in ts){
+        animation_progress += ts.step() * JUMP_ANIMATION_SPEED;
+
+        if(animation_progress > 1.0){
+            animation_progress -= 1.0;
+        }
+
+        float current_frame = mix(JUMP_ANIMATION_START, JUMP_ANIMATION_END, animation_progress);
+        model.SetTint(vec3(random_tint_value, current_frame / 1000.0, blood_amount));
     }
 
     void UpdateAttackAnimation(const Timestep &in ts){
@@ -958,9 +978,11 @@ class Rat{
 
             if(id % max(1, (rats.size() / 50)) == 0){
                 int sound_id = PlaySoundGroup("Data/Sounds/voice/animal3/voice_rat_attack.xml", position, _sound_priority_low);
-                SetSoundGain(sound_id, 0.022);
+                SetSoundGain(sound_id, 0.2);
                 SetSoundPitch(sound_id, RangedRandomFloat(1.75, 2.0));
             }
+
+            MakeParticle("Data/Particles/bloodcloud.xml", position, velocity, GetBloodTint());
 
             animation_progress -= 1.0;
         }
