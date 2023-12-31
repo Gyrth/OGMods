@@ -527,14 +527,15 @@ enum RatAnimations{
     Walk,
     Run,
     Flail,
-    LookAround
+    Look,
+    Attack
 }
 
 enum RatStates{
     Roam,
-    Look,
+    Lookout,
     Follow,
-    Attack,
+    Charge,
     Strike,
     Attached
 }
@@ -556,24 +557,28 @@ bool follow_use_nav = false;
 
 const float PI = 3.141592653589;
 
-const int FLAIL_ANIMATION_START = 0;
-const int FLAIL_ANIMATION_END = 24;
+const int ATTACK_ANIMATION_START = 0;
+const int ATTACK_ANIMATION_END = 24;
+const float ATTACK_ANIMATION_SPEED = 2.0;
+
+const int FLAIL_ANIMATION_START = 25;
+const int FLAIL_ANIMATION_END = 49;
 const float FLAIL_ANIMATION_SPEED = 1.0;
 
-const int IDLE_ANIMATION_START = 25;
-const int IDLE_ANIMATION_END = 49;
+const int IDLE_ANIMATION_START = 50;
+const int IDLE_ANIMATION_END = 74;
 const float IDLE_ANIMATION_SPEED = 1.0;
 
-const int LOOK_ANIMATION_START = 50;
-const int LOOK_ANIMATION_END = 74;
+const int LOOK_ANIMATION_START = 75;
+const int LOOK_ANIMATION_END = 99;
 const float LOOK_ANIMATION_SPEED = 1.0;
 
-const int RUN_ANIMATION_START = 75;
-const int RUN_ANIMATION_END = 99;
+const int RUN_ANIMATION_START = 100;
+const int RUN_ANIMATION_END = 124;
 const float RUN_ANIMATION_SPEED = 1.0;
 
-const int WALK_ANIMATION_START = 100;
-const int WALK_ANIMATION_END = 124;
+const int WALK_ANIMATION_START = 125;
+const int WALK_ANIMATION_END = 149;
 const float WALK_ANIMATION_SPEED = 2.0;
 
 const float IDLE_THRESHOLD = 0.08;
@@ -614,7 +619,7 @@ class Rat{
     int attack_target = -1;
     float animation_progress;
     float random_tint_value;
-    float look_around_timer;
+    float lookout_timer;
     bool at_nav_target = false;
     vec3 follow_position;
     float random_noise_timer;
@@ -633,7 +638,7 @@ class Rat{
 
         animation_progress = RangedRandomFloat(0.0, 1.0);
         random_tint_value = RangedRandomFloat(0.0, 1.0);
-        look_around_timer = RangedRandomFloat(0.5, 5.0);
+        lookout_timer = RangedRandomFloat(0.5, 5.0);
         random_noise_timer = RangedRandomFloat(0.0, 100.0);
 
         if(ENABLE_SHADOW){
@@ -693,14 +698,14 @@ class Rat{
             case Roam:
                 UpdateRoaming(ts);
                 break;
-            case Look:
-                UpdateLooking(ts);
+            case Lookout:
+                UpdateLookout(ts);
                 break;
             case Follow:
                 UpdateFollowing(ts);
                 break;
-            case Attack:
-                UpdateAttacking(ts);
+            case Charge:
+                UpdateCharging(ts);
                 break;
             case Strike:
                 UpdateStriking(ts);
@@ -727,6 +732,7 @@ class Rat{
         
         if(attached_timer <= 0.0){
             current_state = Follow;
+            current_animation = Idle;
         }
     }
 
@@ -751,7 +757,7 @@ class Rat{
 
             velocity *= 0.1;
             current_state = Attached;
-            current_animation = Run;
+            current_animation = Attack;
             attached_timer = RangedRandomFloat(1.5, 2.5);
             blood_amount = min(0.482352941, blood_amount + RangedRandomFloat(0.05, 0.1));
 
@@ -764,14 +770,14 @@ class Rat{
                                 "HandleRagdollImpactImpulse(impulse, pos, 0.03f);");
         }
 
-        if(strike_timer > 0.5){
+        if(strike_timer > 0.5 || (strike_timer > 0.15 && on_ground)){
             current_state = Follow;
         }
 
         movement_direction = vec3(0.0);
     }
 
-    void UpdateAttacking(const Timestep &in ts){
+    void UpdateCharging(const Timestep &in ts){
         RandomNoise(ts);
         movement_speed = 75.0f;
         float interpolate_speed = 50.0;
@@ -818,7 +824,7 @@ class Rat{
                 target_pos += target.velocity * 0.1;
 
                 vec3 target_dir = normalize(target_pos - position);
-                current_animation = LookAround;
+                current_animation = Look;
                 velocity = target_dir * 10.0f;
                 int sound_id = PlaySoundGroup("Data/Sounds/voice/animal3/voice_rat_attack.xml", position, _sound_priority_med);
                 SetSoundPitch(sound_id, RangedRandomFloat(0.9, 1.2));
@@ -854,9 +860,9 @@ class Rat{
 
         if(at_nav_target){
             if(rand() % 30 == 0){
-                current_state = Look;
-                current_animation = LookAround;
-                look_around_timer = RangedRandomFloat(0.5, 5.0);
+                current_state = Lookout;
+                current_animation = Look;
+                lookout_timer = RangedRandomFloat(0.5, 5.0);
             }else{
                 GetRandomNavTarget();
             }
@@ -868,7 +874,7 @@ class Rat{
         movement_speed = 75.0f;
         float interpolate_speed = 50.0;
 
-        LookAroundWhenIdle(ts);
+        LookWhenIdle(ts);
 
         if(on_ground){
             vec3 target_position;
@@ -889,31 +895,31 @@ class Rat{
         }
     }
 
-    void LookAroundWhenIdle(const Timestep &in ts){
+    void LookWhenIdle(const Timestep &in ts){
         if(current_animation == Idle){
-            look_around_timer -= ts.step();
+            lookout_timer -= ts.step();
             
-            if(look_around_timer <= 0.0){
-                look_around_timer = RangedRandomFloat(0.5, 5.0);
+            if(lookout_timer <= 0.0){
+                lookout_timer = RangedRandomFloat(0.5, 5.0);
 
                 if(rand() % 60 == 0){
-                    current_animation = LookAround;
+                    current_animation = Look;
                 }
             }
-        }else if(current_animation == LookAround){
+        }else if(current_animation == Look){
             float velocity_length = length(velocity);
-            look_around_timer -= ts.step();
+            lookout_timer -= ts.step();
 
-            if(velocity_length > IDLE_THRESHOLD || look_around_timer <= 0.0){
+            if(velocity_length > IDLE_THRESHOLD || lookout_timer <= 0.0){
                 current_animation = Walk;
             }
         }
     }
 
-    void UpdateLooking(const Timestep &in ts){
-        look_around_timer -= time_step;
+    void UpdateLookout(const Timestep &in ts){
+        lookout_timer -= time_step;
 
-        if(look_around_timer <= 0.0){
+        if(lookout_timer <= 0.0){
             current_state = Roam;
             current_animation = Idle;
         }
@@ -936,11 +942,33 @@ class Rat{
             case Flail:
                 UpdateFlailAnimation(ts);
                 break;
-            case LookAround:
-                UpdateLookAroundAnimation(ts);
+            case Look:
+                UpdateLookAnimation(ts);
+                break;
+            case Attack:
+                UpdateAttackAnimation(ts);
                 break;
         }
     }
+
+    void UpdateAttackAnimation(const Timestep &in ts){
+        animation_progress += ts.step() * ATTACK_ANIMATION_SPEED;
+
+        if(animation_progress > 1.0){
+
+            if(id % max(1, (rats.size() / 50)) == 0){
+                int sound_id = PlaySoundGroup("Data/Sounds/voice/animal3/voice_rat_attack.xml", position, _sound_priority_low);
+                SetSoundGain(sound_id, 0.022);
+                SetSoundPitch(sound_id, RangedRandomFloat(1.75, 2.0));
+            }
+
+            animation_progress -= 1.0;
+        }
+
+        float current_frame = mix(ATTACK_ANIMATION_START, ATTACK_ANIMATION_END, animation_progress);
+        model.SetTint(vec3(random_tint_value, current_frame / 1000.0, blood_amount));
+    }
+
 
     void UpdateWalkAnimation(const Timestep &in ts){
         float velocity_length = length(velocity);
@@ -967,7 +995,7 @@ class Rat{
         model.SetTint(vec3(random_tint_value, current_frame / 1000.0, blood_amount));
     }
 
-    void UpdateLookAroundAnimation(const Timestep &in ts){
+    void UpdateLookAnimation(const Timestep &in ts){
         animation_progress += ts.step() * LOOK_ANIMATION_SPEED;
 
         if(animation_progress > 1.0){
@@ -1351,7 +1379,7 @@ void UpdateLeading(const Timestep &in ts){
 
             for(uint i = 0; i < rats.size(); i++){
                 rats[i].attack_target = target_id;
-                rats[i].current_state = Attack;
+                rats[i].current_state = Charge;
             }
         }
     }
