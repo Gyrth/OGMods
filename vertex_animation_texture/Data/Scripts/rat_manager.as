@@ -545,7 +545,8 @@ enum RatStates{
 
 bool post_init = true;
 array<Rat@> rats;
-uint rat_amount = 0;
+int rat_amount = 0;
+int spawned_amount = 0;
 int rat_manager_id = -1;
 bool super_speed = false;
 int update_frequency = 1;
@@ -1002,9 +1003,7 @@ class Rat{
 
             }
 
-            MovementObject@ char = ReadCharacterID(attack_target);
-            char.rigged_object().ApplyForceToBone(normalize(velocity) * 100.0 , attached_bone);
-            MakeParticle("Data/Particles/bloodcloud.xml", position, velocity, GetBloodTint());
+            MakeParticle("Data/Particles/bloodcloud.xml", position, normalize(velocity) * 2.0, GetBloodTint());
 
             animation_progress -= 1.0;
         }
@@ -1338,12 +1337,14 @@ void Update(int num_frames) {
     UpdateRats(ts);
     UpdateKilledCharacters(ts);
 
-    if(rats.size() < rat_amount){
+    if(spawned_amount < rat_amount){
         Rat rat();
         rats.insertLast(rat);
         rat.id = rats.size();
-    }else if(rats.size() > rat_amount){
+        spawned_amount += 1;
+    }else if(spawned_amount > rat_amount){
         rats.removeAt(rats.size() - 1);
+        spawned_amount -= 1;
     }
 }
 
@@ -1585,7 +1586,7 @@ void AddKilledCharacter(int char_id){
         }
     }
 
-    DebugDrawWireSphere(ReadCharacterID(char_id).position, 1.0, vec3(1.0), _fade);
+    // DebugDrawWireSphere(ReadCharacterID(char_id).position, 1.0, vec3(1.0), _fade);
     killed_characters.insertLast(KilledCharacter(char_id));
 }
 
@@ -1634,9 +1635,20 @@ class KilledCharacter{
                         SetSoundGain(sound_id, 1.5);
                         ApplyImpulse(char);
 
-                        for(int i = 0; i < 100; ++i) {
+                        for(int i = 0; i < 5; ++i){
+                            Rat rat();
 
-                            vec3 mist_vel = vec3(RangedRandomFloat(-1.0f, 1.0f), RangedRandomFloat(0.0f, 2.0f), RangedRandomFloat(-1.0f, 1.0f)) * 2.0f;
+                            vec3 rand_vel = vec3(RangedRandomFloat(-0.5f, 0.5f), RangedRandomFloat(1.0f, 2.0f), RangedRandomFloat(-0.5f, 0.5f)) * 3.0f;
+                            rat.position = torso_pos;
+                            rat.velocity = rand_vel;
+
+                            rats.insertLast(rat);
+                            rat.id = rats.size();
+                        }
+
+                        for(int i = 0; i < 50; ++i){
+
+                            vec3 mist_vel = vec3(RangedRandomFloat(-0.5f, 0.5f), RangedRandomFloat(0.0f, 2.0f), RangedRandomFloat(-0.5f, 0.5f)) * 2.0f;
                             MakeParticle("Data/Particles/bloodcloud.xml", torso_pos, (mist_vel + this_mo.velocity), GetBloodTint());
                             if(rand() % 5 == 0)MakeParticle("Data/Particles/bloodsplat.xml", torso_pos, (mist_vel + this_mo.velocity), GetBloodTint());
 
