@@ -678,8 +678,6 @@ class Rat{
         ApplyPhysics(ts);
 
         if(!super_speed){
-            ApplyControl(ts);
-
             UpdateModelTransform(ts);
             UpdateAnimations(ts);
             UpdateStates(ts);
@@ -692,8 +690,6 @@ class Rat{
         if(deleted){return;}
 
         if(super_speed){
-            ApplyControl(ts);
-
             UpdateModelTransform(ts);
             UpdateAnimations(ts);
             UpdateStates(ts);
@@ -913,11 +909,16 @@ class Rat{
                 target_position = vec3(follow_position.x, position.y, follow_position.z);
             }
 
-            float dist = xz_distance(target_position, position);
+            // DebugDrawLine(position, target_position, vec3(1.0), _delete_on_update);
+            float dist = length(target_position - position);
             nav_target_direction = normalize(target_position - position) * min(1.0, dist);
 
-            // DebugDrawLine(position, nav_target, vec3(1.0, 0.0, 0.0), _delete_on_update);
+            if(on_wall){
+                nav_target_direction = mix(nav_target_direction, vec3(0.0, 1.0, 0.0), 0.98f);
+            }
+
             movement_direction = mix(movement_direction, nav_target_direction, ts.step() * interpolate_speed);
+            // DebugDrawLine(position, position + movement_direction, vec3(1.0, 0.0, 0.0), _delete_on_update);
         }
     }
 
@@ -1203,9 +1204,12 @@ class Rat{
         if(current_state == Attached){return;}
         bool collision_below = false;
 
+        on_ground = false;
+        on_wall = false;
+
         vec3 flat_current_position = position;
         vec3 flat_last_position = last_col_pos;
-        vec3 last_normal = vec3(0.0f, 1.0f, 0.0f);
+        vec3 last_normal = ground_normal;
         vec3 last_wall_normal = vec3(0.0f, 0.0f, 0.0f);
         flat_current_position.y = 0.0;
         flat_last_position.y = 0.0;
@@ -1225,14 +1229,15 @@ class Rat{
             if(dot_product > 0.9){
                 collision_below = true;
                 last_normal = sphere_col.GetContact(i).normal;
-                break;
-            }else{
+                on_ground = true;
+            }else if(dot_product < 0.5){
                 wall_normal = sphere_col.GetContact(i).normal;
                 on_wall = true;
             }
         }
 
         ground_normal = mix(ground_normal, last_normal, ts.step() * 20.0f);
+        // DebugDrawLine(position, position + ground_normal, vec3(0.0, 1.0, 0.0), _delete_on_update);
         wall_normal = mix(wall_normal, last_wall_normal, ts.step() * 20.0f);
 
         if(collision_below){
@@ -1241,22 +1246,18 @@ class Rat{
             if(!on_ground && in_air_timer > 0.5){
                 Land();
             }
-            on_ground = true;
-            on_wall = false;
-            in_air_timer = 0.0f;
 
             vec3 push_adjusted_movement_direction = mix(movement_direction, push_force, min(1.0, length(push_force)));
             push_force *= pow(0.8f, ts.frames());
+            in_air_timer = 0.0f;
 
             velocity += push_adjusted_movement_direction * ts.step() * movement_speed;
             // Reduce the velocity when standing on the ground, as if affected by friction.
             velocity *= pow(0.9f, ts.frames());
 
         }else{
-            on_ground = false;
-            if(length(wall_normal) > 0.1){on_wall = true;}
-
             in_air_timer += ts.step();
+            
             if(in_air_timer > 0.15 && current_state != Strike){
                 current_animation = Flail;
             }
@@ -1274,13 +1275,6 @@ class Rat{
         int sound_id = PlaySound("Data/Sounds/Footsteps-Rock5.wav", sound_position);
         SetSoundPitch(sound_id, RangedRandomFloat(0.9, 1.2));
         // DebugDrawWireSphere(position + vec3(0.0f, -1.0f, 0.0), 0.5, vec3(1.0), _fade);
-    }
-
-    void ApplyControl(const Timestep &in ts){
-
-        // DebugDrawLine(position, position + ground_normal, vec3(0.0, 1.0, 0.0), _delete_on_update);
-        // DebugDrawLine(position, position + wall_normal, vec3(1.0, 1.0, 0.0), _delete_on_update);
-
     }
 
     void AvoidRat(Rat@ rat, const Timestep &in ts){
@@ -1380,9 +1374,20 @@ void UpdateRatKing(const Timestep &in ts){
     }
 }
 
+float attack_timer = 0.0f;
+
 void UpdateLeading(const Timestep &in ts){
 
-    if(GetInputPressed(rat_king.controller_id, "attack")){
+    if(!EditorModeActive() && GetInputDown(rat_king.controller_id, "attack")){
+        attack_timer += time_step;
+    }else{
+        attack_timer = 0.0f;
+    }
+
+    if(attack_timer > 0.15){
+        attack_timer = 0.0f;
+        if(rat_king.GetIntVar("state") == _attack_state){return;}
+
         int target_id = -1;
         float last_dot = -1.0f;
         vec3 camera_direction = camera.GetFacing();
@@ -1675,7 +1680,7 @@ class KilledCharacter{
 void SetParameters() {
     params.AddString("Teams","turner");
 
-    params.AddIntSlider("Rat Amount", 100, "min:0,max:10");
+    params.AddIntSlider("Rat Amount", 100, "min:0,max:25");
     rat_amount = max(0, params.GetInt("Rat Amount"));
 
     params.AddIntSlider("Update Frequency", 1, "min:1,max:10");

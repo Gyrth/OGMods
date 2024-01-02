@@ -290,6 +290,7 @@ void main() {
 		diffuse_color *= colormap.xyz;
 		
 		vec3 spec_color = vec3(1.0);
+		ambient_mult *= 0.0;
 		CalculateLightContrib(diffuse_color, spec_color, ws_vertex, world_vert, ws_normal, roughness, light_val, ambient_mult);
 		
 		out_color.rgb = diffuse_color;
