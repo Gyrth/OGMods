@@ -545,7 +545,8 @@ enum RatStates{
 
 bool post_init = true;
 array<Rat@> rats;
-int rat_amount = 0;
+int rat_amount_initial = 0;
+int rat_amount_kill = 0;
 int spawned_amount = 0;
 int rat_manager_id = -1;
 bool super_speed = false;
@@ -558,6 +559,7 @@ MovementObject@ rat_king;
 bool follow_use_nav = false;
 array<KilledCharacter@> killed_characters;
 float last_attack_time = 0;
+float rat_damage;
 
 const float PI = 3.141592653589;
 
@@ -734,7 +736,7 @@ class Rat{
         if(target_alive_before && check_killed_timer < 1.0f){
             check_killed_timer += ts.step();
 
-            bool target_alive_after = victim.GetIntVar("knocked_out") == _awake;
+            bool target_alive_after = victim.GetIntVar("knocked_out") == _awake && victim.GetFloatVar("blood_health") > 0.0f;
 
             if(!target_alive_after){
                 AddKilledCharacter(victim.GetID());
@@ -761,16 +763,33 @@ class Rat{
         MovementObject@ target = ReadCharacterID(attack_target);
         // DebugDrawLine(position, target.position, vec3(0.0, 1.0, 0.0), _delete_on_update);
 
-        vec3 velocity_direction = normalize(velocity);
-        col.CheckRayCollisionCharacters(position, position + (velocity_direction * 0.25f));
+        vec3 target_pos = target.rigged_object().skeleton().GetBoneTransform(attached_bone).GetTranslationPart();
+        vec3 target_dir = normalize(target_pos - position);
+
+        col.CheckRayCollisionCharacters(position, position + (target_dir * 0.25f));
 
         for(int i = 0; i < sphere_col.NumContacts(); i++){
             CollisionPoint contact = sphere_col.GetContact(i);
 
             MovementObject@ victim = ReadCharacterID(contact.id);
-            target_alive_before = victim.GetIntVar("knocked_out") == _awake;
+
+            vec3 force = target_dir * 1800.0f;
+            vec3 hit_pos = contact.position;
+            victim.Execute( "vec3 impulse = vec3(" + force.x + ", " + force.y + ", " + force.z + ");" +
+                            "vec3 pos = vec3(" + hit_pos.x + ", " + hit_pos.y + ", " + hit_pos.z + ");" +
+                            "TakeBloodDamage(" + rat_damage + ");" +
+                            "this_mo.static_char = false;" +
+                            "GoLimp();" +
+                            "this_mo.rigged_object().ApplyForceToRagdoll(impulse, pos);" +
+                            "ko_shield = 0;" +
+                            "block_health = 0.0f;" +
+                            "ragdoll_limp_stun = 1.0f;" +
+                            "roll_recovery_time = 0.2f;" +
+                            "recovery_time = 0.5f;");
+
+            target_alive_before = victim.GetIntVar("knocked_out") == _awake && victim.GetFloatVar("blood_health") > 0.0f;
             check_killed_timer = 0.0f;
-            victim.rigged_object().Stab(contact.position, velocity_direction, 2, 0);
+            victim.rigged_object().Stab(contact.position, target_dir, 2, 0);
 
             velocity *= 0.1;
             current_state = Attached;
@@ -778,15 +797,8 @@ class Rat{
             attached_timer = RangedRandomFloat(1.5, 2.5);
             blood_amount = min(0.482352941, blood_amount + RangedRandomFloat(0.05, 0.1));
 
-            vec3 force = velocity_direction * 1800.0f;
-            vec3 hit_pos = contact.position;
             int sound_id = PlaySoundGroup("Data/Sounds/weapon_foley/cut/flesh_hit.xml", hit_pos, _sound_priority_med);
             SetSoundPitch(sound_id, RangedRandomFloat(0.9, 1.2));
-
-            victim.Execute( "vec3 impulse = vec3(" + force.x + ", " + force.y + ", " + force.z + ");" +
-                            "vec3 pos = vec3(" + hit_pos.x + ", " + hit_pos.y + ", " + hit_pos.z + ");" +
-                            "HandleRagdollImpactImpulse(impulse, pos, 0.0f);" +
-                            "TakeDamage(0.03);");
             
             return;
         }
@@ -806,10 +818,10 @@ class Rat{
 
         MovementObject@ target = ReadCharacterID(attack_target);
 
-        if(target.GetIntVar("knocked_out") != _awake){
-            current_state = Follow;
-            return;
-        }
+        // if(target.GetIntVar("knocked_out") == _dead){
+        //     current_state = Follow;
+        //     return;
+        // }
 
         if(on_ground){
             vec3 target_position;
@@ -828,7 +840,7 @@ class Rat{
             // DebugDrawLine(position, nav_target, vec3(1.0, 0.0, 0.0), _delete_on_update);
             movement_direction = mix(movement_direction, nav_target_direction, ts.step() * interpolate_speed);
 
-            if(xz_distance(target.position, position) < 2.0 * random_size){
+            if(xz_distance(target.position, position) < 1.5 * random_size * abs(target.position.y - position.y)){
                 current_state = Strike;
 
                 Skeleton @skeleton = target.rigged_object().skeleton();
@@ -912,10 +924,6 @@ class Rat{
             // DebugDrawLine(position, target_position, vec3(1.0), _delete_on_update);
             float dist = length(target_position - position);
             nav_target_direction = normalize(target_position - position) * min(1.0, dist);
-
-            if(on_wall){
-                nav_target_direction = mix(nav_target_direction, vec3(0.0, 1.0, 0.0), 0.98f);
-            }
 
             movement_direction = mix(movement_direction, nav_target_direction, ts.step() * interpolate_speed);
             // DebugDrawLine(position, position + movement_direction, vec3(1.0, 0.0, 0.0), _delete_on_update);
@@ -1026,7 +1034,7 @@ class Rat{
 
         if(animation_progress > 1.0){
 
-            if(id % max(1, (rats.size() / 50)) == 0){
+            if(id % max(1, (rats.size() / 25)) == 0){
                 int sound_id = PlaySoundGroup("Data/Sounds/hit/hit_block.xml", position, _sound_priority_low);
                 SetSoundGain(sound_id, 0.022);
                 SetSoundPitch(sound_id, RangedRandomFloat(1.75, 2.0));
@@ -1077,9 +1085,9 @@ class Rat{
 
         if(animation_progress > 1.0){
 
-            if(id % max(1, (rats.size() / 50)) == 0){
+            if(id % max(1, (rats.size() / 25)) == 0){
                 int sound_id = PlaySoundGroup("Data/Sounds/hit/hit_block.xml", position, _sound_priority_low);
-                SetSoundGain(sound_id, 0.02);
+                SetSoundGain(sound_id, 0.022);
                 SetSoundPitch(sound_id, RangedRandomFloat(1.75, 2.0));
             }
 
@@ -1111,14 +1119,19 @@ class Rat{
 
         vec3 flat_vel = vec3(velocity.x, 0, velocity.z);
 
-        // DebugDrawLine(position, position + flat_vel, vec3(1.0, 0.0, 0.0), _delete_on_update);
+        // DebugDrawLine(position, position + ground_normal, vec3(1.0, 0.0, 0.0), _delete_on_update);
 
         if(length(flat_vel) > IDLE_THRESHOLD){
-            flat_vel = normalize(flat_vel);
-            float target_rotation = atan2(-flat_vel.z, flat_vel.x);
-            target_rotation += 3.1417f * 0.5f;
+            vec3 right = cross(vec3(0.0, 1.0, 0.0), normalize(movement_direction));
+            vec3 ground_adjusted = cross(right, ground_normal);
 
-            rotation = mix(rotation, quaternion(vec4(ground_normal, target_rotation)), ts.step() * 5.0);
+            // DebugDrawLine(position, position + ground_adjusted, vec3(0.0, 1.0, 0.0), _delete_on_update);
+
+            float rot1 = atan2(ground_adjusted.z, -ground_adjusted.x);
+            float rot2 = asin(-ground_adjusted.y);
+            quaternion target_rot = quaternion(vec4(0, 1, 0, rot1 - PI * 0.5)) * quaternion(vec4(1, 0, 0, rot2));
+
+            rotation = mix(rotation, target_rot, ts.step() * 5.0);
         }
 
         if(aabb_counter % max(1, (rats.size() / 50)) == 0){
@@ -1226,7 +1239,7 @@ class Rat{
             vec3 collision_direction = normalize(collision_point - position);
             float dot_product = dot(collision_direction, vec3(0.0, -1.0, 0.0));
             // But to allow some margin of error, a higher value than 0.9 should be enough.
-            if(dot_product > 0.9){
+            if(dot_product > 0.5){
                 collision_below = true;
                 last_normal = sphere_col.GetContact(i).normal;
                 on_ground = true;
@@ -1250,6 +1263,11 @@ class Rat{
             vec3 push_adjusted_movement_direction = mix(movement_direction, push_force, min(1.0, length(push_force)));
             push_force *= pow(0.8f, ts.frames());
             in_air_timer = 0.0f;
+
+            if(on_wall){
+                // DebugDrawLine(position, position + ground_normal, vec3(0.0, 1.0, 0.0), _delete_on_update);
+                velocity += vec3(0.0, 1.0, 0.0) * ts.step() * 225.0f;
+            }
 
             velocity += push_adjusted_movement_direction * ts.step() * movement_speed;
             // Reduce the velocity when standing on the ground, as if affected by friction.
@@ -1331,12 +1349,12 @@ void Update(int num_frames) {
     UpdateRats(ts);
     UpdateKilledCharacters(ts);
 
-    if(spawned_amount < rat_amount){
+    if(spawned_amount < rat_amount_initial){
         Rat rat();
         rats.insertLast(rat);
         rat.id = rats.size();
         spawned_amount += 1;
-    }else if(spawned_amount > rat_amount){
+    }else if(spawned_amount > rat_amount_initial){
         rats.removeAt(rats.size() - 1);
         spawned_amount -= 1;
     }
@@ -1395,7 +1413,7 @@ void UpdateLeading(const Timestep &in ts){
         for(int i = 0; i < GetNumCharacters(); i++){
             MovementObject@ char = ReadCharacter(i);
 
-            if(char.GetID() != this_mo.GetID() && !rat_king.OnSameTeam(char) && char.GetIntVar("knocked_out") == _awake){
+            if(char.GetID() != this_mo.GetID() && !rat_king.OnSameTeam(char) && char.GetIntVar("knocked_out") == _awake && char.GetFloatVar("blood_health") > 0.0f){
 
                 vec3 torso_pos = char.rigged_object().GetAvgIKChainPos("torso");
 
@@ -1640,7 +1658,7 @@ class KilledCharacter{
                         SetSoundGain(sound_id, 1.5);
                         ApplyImpulse(char);
 
-                        for(int i = 0; i < 5; ++i){
+                        for(int i = 0; i < rat_amount_kill; ++i){
                             Rat rat();
 
                             vec3 rand_vel = vec3(RangedRandomFloat(-0.5f, 0.5f), RangedRandomFloat(1.0f, 2.0f), RangedRandomFloat(-0.5f, 0.5f)) * 3.0f;
@@ -1673,15 +1691,18 @@ class KilledCharacter{
 
         char.Execute(   "vec3 impulse = vec3(" + random_force.x + ", " + random_force.y + ", " + random_force.z + ");" +
                         "vec3 pos = vec3(" + torso_pos.x + ", " + torso_pos.y + ", " + torso_pos.z + ");" +
-                        "HandleRagdollImpactImpulse(impulse, pos, 0.0f);");
+                        "this_mo.rigged_object().ApplyForceToRagdoll(impulse, pos);");
     }
 }
 
 void SetParameters() {
     params.AddString("Teams","turner");
 
-    params.AddIntSlider("Rat Amount", 100, "min:0,max:25");
-    rat_amount = max(0, params.GetInt("Rat Amount"));
+    params.AddIntSlider("Rat Amount Initial", 15, "min:0,max:100");
+    rat_amount_initial = max(0, params.GetInt("Rat Amount Initial"));
+
+    params.AddIntSlider("Rat Amount Kill", 5, "min:0,max:20");
+    rat_amount_kill = max(0, params.GetInt("Rat Amount Kill"));
 
     params.AddIntSlider("Update Frequency", 1, "min:1,max:10");
     if(update_frequency != max(1, params.GetInt("Update Frequency"))){
@@ -1711,6 +1732,9 @@ void SetParameters() {
     spiral_angle_offset = params.GetFloat("Spiral Angle Offset");
 
     params.AddFloatSlider("Spiral Degrees", 5.0, "min:0.1, max:90.0,step:0.1,text_mult:1");
+    spiral_degrees = params.GetFloat("Spiral Degrees");
+
+    params.AddFloatSlider("Rat Damage", 0.05, "min:0.01, max:1.0,step:0.01,text_mult:1");
     spiral_degrees = params.GetFloat("Spiral Degrees");
 
     params.AddFloatSlider("Character Scale", 1, "min:0.6,max:1.4,step:0.02,text_mult:100");
