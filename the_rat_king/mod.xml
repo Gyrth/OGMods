@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<Mod>
+	<Id>the-rat-king</Id>
+	<Name>The Rat King</Name>
+	<Category>Scripting</Category>
+	<Version>0.1.0</Version>
+	<Author>Gyrth McMulin</Author>
+	<Thumbnail>Data/Images/the_rat_king_thumb.jpg</Thumbnail>
+	<PreviewImage>Data/Images/the_rat_king_full.jpg</PreviewImage>
+	<Description>The Rat King.</Description>
+	<Tag>scripting</Tag>
+	<SupportedVersion>*</SupportedVersion>
+	<NeedsRestart>false</NeedsRestart>
+	<Level title="The Rat King" thumbnail="Images/the_rat_king_full.jpg">the_rat_king.xml</Level>
+</Mod>

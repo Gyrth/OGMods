@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/vat_rat.obj</Model>
+	<ColorMap>Data/Textures/vat_rat_sorted.png</ColorMap>
+	<NormalMap>Data/Textures/vat_rat_n.png</NormalMap>
+	<WeightMap>Data/Textures/vat_rat_c.png</WeightMap>
+	<DetailMaps>
+		<DetailMap colorpath="Data/Prototypes/DetailTextures/Rock_Color.tga" normalpath="Data/Prototypes/DetailTextures/Rock_Norm.tga" materialpath="Data/Materials/default.xml" />
+		<DetailMap colorpath="Data/Prototypes/DetailTextures/Blank_Color.tga" normalpath="Data/Prototypes/DetailTextures/Blank_Norm.tga" materialpath="Data/Materials/default.xml" />
+		<DetailMap colorpath="Data/Prototypes/DetailTextures/Blank_Color.tga" normalpath="Data/Prototypes/DetailTextures/Blank_Norm.tga" materialpath="Data/Materials/default.xml" />
+		<DetailMap colorpath="Data/Prototypes/DetailTextures/Blank_Color.tga" normalpath="Data/Prototypes/DetailTextures/Blank_Norm.tga" materialpath="Data/Materials/default.xml" />
+	</DetailMaps>
+	<ShaderName>the_rat_king</ShaderName>
+	<flags no_collision = "true" transparent = "false" double_sided = "false" dynamic = "true"/>
+</Object>
