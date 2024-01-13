@@ -659,7 +659,10 @@ class Rat{
             blob_model.SetScale(vec3(size * 5.0 * random_size));
         }
 
-        int model_id = CreateObject("Data/objects/vat_rat.xml");
+        string build_version_short = GetBuildVersionShort();
+        string rat_path = (build_version_short == "1.4.0") ? "Data/Objects/vat_rat_stable.xml" : "Data/Objects/vat_rat.xml";
+        int model_id = CreateObject(rat_path);
+
         @model = ReadObjectFromID(model_id);
         model.SetTranslation(position);
         model.SetRotation(rotation);

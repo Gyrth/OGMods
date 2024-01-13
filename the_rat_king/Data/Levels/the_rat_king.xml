@@ -1,6 +1,6 @@
 <?xml version="2.0" ?>
 <Type>saved</Type>
-<Name>vat_mouse_testing</Name>
+<Name>the_rat_king</Name>
 <Description></Description>
 <Shader>post</Shader>
 <Shadows>true</Shadows>
@@ -20,7 +20,7 @@
         <DetailMap colorpath="Data/Textures/Terrain/DetailTextures/dirt_rubble.tga" normalpath="Data/Textures/Terrain/DetailTextures/dirt_rubble_normal.tga" materialpath="Data/Materials/dirtyrock.xml" />
     </DetailMaps>
     <DetailObjects>
-        <DetailObject density="7" jitter_degrees="10" max_embed="0.4" max_scale="2" min_embed="0.2" min_scale="0.7" normal_conform="1" obj_path="Data/Objects/Plants/Groundcover/Grass/WildGrass.xml" overbright="0" tint_weight="1" view_distance="30" weight_path="Data/Prototypes/Lugaru/Village/Village_GrassWeights.tga" />
+        <DetailObject obj_path="Data/Objects/Plants/Groundcover/Grass/WildGrass.xml" weight_path="Data/Prototypes/Lugaru/Village/Village_GrassWeights.tga" normal_conform="1" density="7" min_embed="0.2" max_embed="0.4" min_scale="0.7" max_scale="2" view_distance="30" jitter_degrees="10" overbright="0" tint_weight="1" />
     </DetailObjects>
 </Terrain>
 <OutOfDate NavMesh="true" NavMeshParamHash="2127235361" />
@@ -353,6 +353,21 @@
     <NavmeshRegionObject t0="69.748" t1="11.625" t2="-255.056" s0="156.56" s1="64.9722" s2="176.951" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="103">
         <parameters />
     </NavmeshRegionObject>
+    <EnvObject t0="97.5305" t1="7.18408" t2="-324.847" s0="2.41557" s1="2.41557" s2="2.41557" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="116" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/CourtyardGrass_1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="75.174" t1="7.31239" t2="-319.727" s0="2.37634" s1="2.37634" s2="2.37634" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="117" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/CourtyardGrass_2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="128.129" t1="7.31251" t2="-333.408" s0="2.37634" s1="2.37634" s2="2.37634" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="0" euler_y="1.57045" euler_z="0" id="118" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/CourtyardGrass_2.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="116.542" t1="7.28137" t2="-310.283" s0="2.41557" s1="2.41557" s2="2.41557" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="0" euler_y="1.57045" euler_z="0" id="119" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/CourtyardGrass_1.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="43.8611" t1="7.21745" t2="-316.117" s0="2.37634" s1="2.37634" s2="2.37634" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="0" euler_y="1.57045" euler_z="0" id="120" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/CourtyardGrass_2.xml">
+        <parameters />
+    </EnvObject>
     <PathPointObject t0="31.327" t1="9.04067" t2="-233.851" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="200" type_file="">
         <parameters>
             <parameter name="Type" type="string" val="Stand" />
@@ -431,9 +446,12 @@
             <Color label="Skin" channel="3" red="0.0431373" green="0.0431368" blue="0.0431368" />
         </Palette>
     </ActorObject>
-    <CameraObject t0="42.0015" t1="12.9944" t2="-233.495" s0="1" s1="1" s2="1" q0="0.0163761" q1="-0.979811" q2="0.0903509" q3="0.177591" euler_x="-2.95769" euler_y="-0.358607" euler_z="-3.14159" id="271">
+    <CameraObject t0="62.2336" t1="17.3446" t2="-311.112" s0="1" s1="1" s2="1" q0="-0.153046" q1="-0.535641" q2="0.0994289" q3="-0.824488" euler_x="0.367074" euler_y="1.15228" euler_z="0" id="271">
         <parameters />
     </CameraObject>
+    <EnvObject t0="55.3571" t1="8.33626" t2="-339.294" s0="8.39572" s1="8.39572" s2="8.39572" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="292" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Cliffs/CliffRock_01.xml">
+        <parameters />
+    </EnvObject>
     <EnvObject t0="79.8135" t1="8.37558" t2="-294.236" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="311" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/CreteBlockBase.xml">
         <parameters />
     </EnvObject>
@@ -443,10 +461,10 @@
     <EnvObject t0="100.78" t1="8.67389" t2="-280.325" s0="1" s1="1" s2="1" q0="0.707107" q1="0" q2="0" q3="0.707107" euler_x="1.5708" euler_y="0" euler_z="0" id="313" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/CreteBlockCorner.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="85.7231" t1="8.36577" t2="-301.899" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="314" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/CreteBlockInterior.xml">
+    <EnvObject t0="88.369" t1="11.4359" t2="-296.473" s0="4.45915" s1="4.45915" s2="4.45915" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="314" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/CreteBlockInterior.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="97.7877" t1="8.10612" t2="-296.888" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="315" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/CreteBlockShard.xml">
+    <EnvObject t0="97.7327" t1="9.06033" t2="-296.888" s0="2.67111" s1="2.67111" s2="2.67111" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="315" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/CreteBlockShard.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="63.992" t1="4.56385" t2="-278.965" s0="6.87244" s1="1" s2="5.43073" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="316" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/CreteBlockStandard.xml">
@@ -513,9 +531,6 @@
         <parameters />
     </EnvObject>
     <EnvObject t0="92.0847" t1="22.4443" t2="-309.893" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="325" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A.xml">
-        <parameters />
-    </EnvObject>
-    <EnvObject t0="94.1869" t1="7.25017" t2="-318.465" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="326" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Cliffs/GroundBase_02_shortgrass.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="109.372" t1="7.21359" t2="-293.266" s0="3.13038" s1="3.13038" s2="3.13038" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="327" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/CreteBlockBroken.xml">
@@ -737,7 +752,7 @@
             <Color label="Fur patches" channel="3" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <PathPointObject t0="97.8918" t1="7.56383" t2="-276.283" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="341" type_file="">
+    <PathPointObject t0="95.5282" t1="7.56383" t2="-278.88" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="341" type_file="">
         <parameters>
             <parameter name="Type" type="string" val="Stand" />
             <parameter name="Wait" type="float" val="0" />
@@ -746,7 +761,7 @@
             <Connection id="342" />
         </Connections>
     </PathPointObject>
-    <PathPointObject t0="91.9945" t1="7.56383" t2="-300.891" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="342" type_file="">
+    <PathPointObject t0="92.6691" t1="7.56383" t2="-305.626" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="342" type_file="">
         <parameters>
             <parameter name="Type" type="string" val="Stand" />
             <parameter name="Wait" type="float" val="0" />
@@ -755,7 +770,7 @@
             <Connection id="341" />
         </Connections>
     </PathPointObject>
-    <PathPointObject t0="73.553" t1="8.52087" t2="-332.114" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="343" type_file="">
+    <PathPointObject t0="75.5722" t1="7.98629" t2="-330.877" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="343" type_file="">
         <parameters>
             <parameter name="Type" type="string" val="Stand" />
             <parameter name="Wait" type="float" val="0" />
@@ -765,7 +780,7 @@
             <Connection id="344" />
         </Connections>
     </PathPointObject>
-    <PathPointObject t0="64.1911" t1="7.33357" t2="-314.818" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="344" type_file="">
+    <PathPointObject t0="64.2477" t1="8.07168" t2="-314.797" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="344" type_file="">
         <parameters>
             <parameter name="Type" type="string" val="Stand" />
             <parameter name="Wait" type="float" val="0" />
@@ -775,7 +790,7 @@
             <Connection id="345" />
         </Connections>
     </PathPointObject>
-    <PathPointObject t0="83.8556" t1="8.03209" t2="-319.587" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="345" type_file="">
+    <PathPointObject t0="83.8983" t1="7.96931" t2="-319.615" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="345" type_file="">
         <parameters>
             <parameter name="Type" type="string" val="Stand" />
             <parameter name="Wait" type="float" val="0" />
@@ -785,7 +800,7 @@
             <Connection id="343" />
         </Connections>
     </PathPointObject>
-    <PathPointObject t0="117.583" t1="8.47139" t2="-302.698" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="346" type_file="">
+    <PathPointObject t0="117.999" t1="7.89708" t2="-305.146" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="346" type_file="">
         <parameters>
             <parameter name="Type" type="string" val="Stand" />
             <parameter name="Wait" type="float" val="0" />
@@ -845,6 +860,42 @@
     <NavmeshHintObject t0="79.9806" t1="8.91373" t2="-294.23" s0="4.22313" s1="3.96901" s2="4.39033" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1105">
         <parameters />
     </NavmeshHintObject>
+    <EnvObject t0="35.192" t1="11.937" t2="-303.954" s0="4.7748" s1="4.7748" s2="4.7748" q0="0.0037092" q1="-0.0640768" q2="-0.0472803" q3="0.996817" euler_x="0.0135649" euler_y="-0.127742" euler_z="-0.095659" id="1245" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Cliffs/CliffRock_02.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="100.769" t1="13.128" t2="-346.965" s0="6.88553" s1="6.88553" s2="6.88553" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1246" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Cliffs/CliffRock_03.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="127.12" t1="11.729" t2="-347.331" s0="2.3914" s1="2.3914" s2="2.3914" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1247" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Cliffs/CliffTrim_01.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="147.669" t1="11.2378" t2="-333.611" s0="2.47079" s1="2.47079" s2="2.47079" q0="0" q1="-0.508457" q2="0" q3="0.861088" euler_x="0" euler_y="-1.06678" euler_z="0" id="1248" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Cliffs/CliffTrim_02.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="137.062" t1="8.33916" t2="-314.344" s0="8.39572" s1="8.39572" s2="8.39572" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1249" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Cliffs/CliffRock_01.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="111.41" t1="8.33625" t2="-285.293" s0="8.39572" s1="8.39572" s2="8.39572" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1250" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Cliffs/CliffRock_01.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="94.4329" t1="5.80694" t2="-263.324" s0="4.7748" s1="4.7748" s2="4.7748" q0="0.0037092" q1="-0.0640768" q2="-0.0472803" q3="0.996817" euler_x="0.0135649" euler_y="-0.127742" euler_z="-0.095659" id="1251" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Cliffs/CliffRock_02.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="79.7194" t1="11.729" t2="-342.332" s0="2.3914" s1="2.3914" s2="2.3914" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1252" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Cliffs/CliffTrim_01.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="43.8897" t1="11.729" t2="-323.674" s0="2.3914" s1="2.3914" s2="2.3914" q0="0" q1="0.300762" q2="0" q3="0.953699" euler_x="0" euler_y="0.610983" euler_z="0" id="1253" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Cliffs/CliffTrim_01.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="125.126" t1="11.1203" t2="-299.962" s0="2.47079" s1="2.47079" s2="2.47079" q0="0" q1="-0.86114" q2="0" q3="0.508368" euler_x="-3.14159" euler_y="-1.06658" euler_z="3.14159" id="1254" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Cliffs/CliffTrim_02.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="138.839" t1="7.48985" t2="-334.502" s0="1" s1="1" s2="1" q0="0" q1="-0.704609" q2="0" q3="0.709596" euler_x="-1.1996e-05" euler_y="-1.56375" euler_z="1.19117e-05" id="1255" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/burrow/burrow_hut.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="51.4199" t1="8.76144" t2="-316.964" s0="1" s1="1" s2="1" q0="0" q1="0.600376" q2="0" q3="0.799718" euler_x="0" euler_y="1.28794" euler_z="0" id="1256" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/rabbit_village/rabbit_hut_whole.xml">
+        <parameters />
+    </EnvObject>
 </ActorObjects>
 <RecentItems>
     <SpawnerItem display_name="vat_mouse.xml" path="Data/Objects/vat_mouse.xml" thumbnail_path="empty_placeholder.png" />
@@ -881,4 +932,13 @@
     <SpawnerItem display_name="Plant Short Bush" path="Data/Objects/Plants/Trees/temperate/short_bush.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/short_bush.png" />
     <SpawnerItem display_name="Plant Thick Bush" path="Data/Objects/Plants/Trees/temperate/thick_bush.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/thick_bush.png" />
     <SpawnerItem display_name="Plant Short Green Bush" path="Data/Objects/Plants/Trees/temperate/short_green_bush.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/short_green_bush.png" />
+    <SpawnerItem display_name="Courtyard Grass 1" path="Data/Prototypes/OG/CourtyardGrass_1.xml" thumbnail_path="" />
+    <SpawnerItem display_name="Courtyard Grass 1" path="Data/Prototypes/OG/CourtyardGrass_2.xml" thumbnail_path="" />
+    <SpawnerItem display_name="Cliff Rock 01" path="Data/Objects/Environment/Cliffs/CliffRock_01.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/Cliff_Rock_01.png" />
+    <SpawnerItem display_name="Cliff Rock 02" path="Data/Objects/Environment/Cliffs/CliffRock_02.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/Cliff_Rock_02.png" />
+    <SpawnerItem display_name="Cliff Rock 03" path="Data/Objects/Environment/Cliffs/CliffRock_03.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/Cliff_Rock_03.png" />
+    <SpawnerItem display_name="Cliff Rock Trim 01" path="Data/Objects/Environment/Cliffs/CliffTrim_01.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/Cliff_Trim_01.png" />
+    <SpawnerItem display_name="Cliff Rock Trim 02" path="Data/Objects/Environment/Cliffs/CliffTrim_02.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/Cliff_Trim_02.png" />
+    <SpawnerItem display_name="Burrow Hut" path="Data/Objects/therium/burrow/burrow_hut.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/empty_placeholder.png" />
+    <SpawnerItem display_name="Rabbit Hut Whole" path="Data/Objects/Buildings/rabbit_village/rabbit_hut_whole.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/rabbit_hut_whole.png" />
 </RecentItems>
