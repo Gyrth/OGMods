@@ -19,6 +19,7 @@ uniform sampler2D base_normal_tex;
 // uniform sampler2D tex2;
 uniform sampler2D tex3; // Diffuse cubemap
 // uniform sampler2D tex4;
+// uniform sampler2D tex5;
 // uniform sampler2D tex8;
 // uniform sampler2D tex9;
 // uniform sampler2D tex10;
@@ -139,6 +140,9 @@ in vec3 frag_normal;
 
 uniform float overbright;
 const float cloud_speed = 0.1;
+const float PI = 3.141592653589793;
+
+uniform int stipple[64];
 
 #include "decals.glsl"
 
@@ -178,6 +182,23 @@ float normalIndicator(vec3 normalEdgeBias, vec3 baseNormal, vec3 newNormal, floa
 	return (1.0 - dot(baseNormal, newNormal)) * depthIndicator * normalIndicator;
 }
 
+float pattern(vec2 uv_in, vec2 res) {
+
+	vec2 center = vec2(0.0, 0.0);
+	float angle = 45.0;
+	float scale = 5.0;
+
+	float s = sin(angle);
+	float c = cos(angle);
+	vec2 uv = uv_in * res - center;
+	vec2 point = vec2(
+		c * uv.x - s * uv.y,
+		s * uv.x + c * uv.y
+	) * PI/scale;
+
+	return (sin(point.x) * sin(point.y)) * 4.0;
+}
+
 void main() {
 
     vec3 ws_normal = frag_normal;
@@ -211,45 +232,9 @@ void main() {
 	#endif
 
 	//----------------------------------------------------------------------------------
-	//Add edges-------------------------------------------------------------------------
-
-	float line_size = 1.0;
-	vec2 texture_size = textureSize(tex1, 0);
-	vec2 pixel_size = vec2(1.0 / texture_size) * line_size;
-
-	vec2 base_tex_coords = tex_coord;
-	vec2 pixelated_coord;
-	float pixels = texture_size.y;
-
-	pixelated_coord.x = (floor(base_tex_coords.x * pixels) / pixels + ceil(base_tex_coords.x * pixels) / pixels) / 2.0;
-	pixelated_coord.y = (floor(base_tex_coords.y * pixels) / pixels + ceil(base_tex_coords.y * pixels) / pixels) / 2.0;
-
-	vec4 colormap = vec4(0.99, 0.99, 0.99, 1.0);
-	vec3 highlight_color = vec3(0.025);
-
-	float normal_diff = 0.0;
-	float depth_diff = 0.0;
-	vec3 normal = texture(tex1, pixelated_coord).rgb * 2.0 - 1.0;
-
-	vec3 nu = texture(tex1, pixelated_coord + vec2(0., -1.) * pixel_size).rgb * 2.0 - 1.0;
-	vec3 nr = texture(tex1, pixelated_coord + vec2(1., 0.) * pixel_size).rgb * 2.0 - 1.0;
-	vec3 nd = texture(tex1, pixelated_coord + vec2(0., 1.) * pixel_size).rgb * 2.0 - 1.0;
-	vec3 nl = texture(tex1, pixelated_coord + vec2(-1., 0.) * pixel_size).rgb * 2.0 - 1.0;
-
-	vec3 normal_edge_bias = (vec3(1., 1., 1.));
-
-	normal_diff += normalIndicator(normal_edge_bias, normal, nu, depth_diff);
-	normal_diff += normalIndicator(normal_edge_bias, normal, nr, depth_diff);
-	normal_diff += normalIndicator(normal_edge_bias, normal, nd, depth_diff);
-	normal_diff += normalIndicator(normal_edge_bias, normal, nl, depth_diff);
-	normal_diff = smoothstep(0.2, 0.8, normal_diff);
-	normal_diff = clamp(normal_diff, 0.0, 1.0);
-
-	colormap /= 2.0;
-
-	colormap.rgb = mix(colormap.rgb, highlight_color, normal_diff);
-	
+	vec4 colormap = vec4(0.3);
 	out_color = colormap;
+	vec3 highlight_color = vec3(0.005);
 
 	//----------------------------------------------------------------------------------
 	//Apply lighting--------------------------------------------------------------------
@@ -295,24 +280,81 @@ void main() {
 
 	//----------------------------------------------------------------------------------
 	// Apply the sketchy lines based on how dark the scene is.--------------------------
-	float texture_scale = 5.0;
-	float red_weight = 0.5;
-	float green_weight = 0.5;
-	float blue_weight = 0.5;
+	//----------------------------------------------------------------------------------
+	float texture_scale = 0.5;
+	vec2 viewport_size = textureSize(tex5, 0);
+	vec2 texture_size = textureSize(tex0, 0);
 
-	vec4 lines_tex = textureLod(tex0, tex_coord * texture_scale, 0.0);
+	vec2 scaled_uv = gl_FragCoord.xy / (viewport_size / texture_scale);
+	scaled_uv = fract(scaled_uv);
 	
 	if(out_color.r < 0.01){
-		out_color.rgb += vec3(lines_tex.r * -red_weight);
+		// As dark as possible when it's darkest.
+		out_color.rgb = highlight_color;
+	}else if(out_color.r < 0.1){
+		vec4 lines_tex = textureLod(tex0, fract(tex_coord * 5.0), 0.0) * 100.0;
+		// Vertical lines when it's little bit darker.
+		out_color.rgb = mix(vec3(1.0), highlight_color, lines_tex.g);
+	}else if(out_color.r < 0.6){
+		// Stipple when it's a little bit dark.
+		float average = (out_color.r + out_color.g + out_color.b) / 3.0;
+		// out_color = vec4( vec3(average) * 10.0 - 5.0 + pattern(gl_FragCoord.xy, vec2(8)), 1.0);
+
+		float dot_size = 2.0;
+		float value_multiplier = 1.0;
+		bool invert = false;
+
+		float fSize = float(64);
+		vec2 TEXTURE_PIXEL_SIZE = vec2(1.0 / texture_size);
+
+		vec2 ratio = vec2(1.0, TEXTURE_PIXEL_SIZE.x / TEXTURE_PIXEL_SIZE.y);
+		vec2 pixelated_uv = floor(scaled_uv * fSize * ratio) / (fSize * ratio);
+		float dots = length(fract(scaled_uv * fSize * ratio) - vec2(0.5)) * dot_size;
+		float value = out_color.r;
+
+		dots = mix(dots, 1.0 - dots, float(invert));
+		dots += value * value_multiplier;
+		dots = pow(dots, 5.0);
+		dots = clamp(dots, 0.0, 1.0);
+		out_color.rgb = vec3(dots);
 	}
 
-	if(out_color.r < 0.1){
-		out_color.rgb += vec3(lines_tex.g * -green_weight);
-	}
+	//----------------------------------------------------------------------------------
+	// Add edges-------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------
+	float line_size = 1.0;
+	vec2 pixel_size = vec2(1.0 / texture_size) * line_size;
 
-	if(out_color.r < 0.25){
-		out_color.rgb += vec3(lines_tex.b * -blue_weight);
-	}
+	vec2 base_tex_coords = tex_coord;
+	vec2 pixelated_coord;
+	float pixels = texture_size.y;
 
+	pixelated_coord.x = (floor(base_tex_coords.x * pixels) / pixels + ceil(base_tex_coords.x * pixels) / pixels) / 2.0;
+	pixelated_coord.y = (floor(base_tex_coords.y * pixels) / pixels + ceil(base_tex_coords.y * pixels) / pixels) / 2.0;
+
+	float normal_diff = 0.0;
+	float depth_diff = 0.0;
+	float lod = 0.0;
+	// vec3 normal = texture(tex1, pixelated_coord).rgb * 2.0 - 1.0;
+	vec3 normal = textureLod(tex1, pixelated_coord, lod).rgb * 2.0 - 1.0;
+
+	vec3 nu = textureLod(tex1, pixelated_coord + vec2(0., -1.) * pixel_size, lod).rgb * 2.0 - 1.0;
+	vec3 nr = textureLod(tex1, pixelated_coord + vec2(1., 0.) * pixel_size, lod).rgb * 2.0 - 1.0;
+	vec3 nd = textureLod(tex1, pixelated_coord + vec2(0., 1.) * pixel_size, lod).rgb * 2.0 - 1.0;
+	vec3 nl = textureLod(tex1, pixelated_coord + vec2(-1., 0.) * pixel_size, lod).rgb * 2.0 - 1.0;
+
+	vec3 normal_edge_bias = (vec3(1., 1., 1.));
+
+	normal_diff += normalIndicator(normal_edge_bias, normal, nu, depth_diff);
+	normal_diff += normalIndicator(normal_edge_bias, normal, nr, depth_diff);
+	normal_diff += normalIndicator(normal_edge_bias, normal, nd, depth_diff);
+	normal_diff += normalIndicator(normal_edge_bias, normal, nl, depth_diff);
+	normal_diff = smoothstep(0.2, 0.8, normal_diff);
+	normal_diff = clamp(normal_diff, 0.0, 1.0);
+
+	out_color.rgb = mix(out_color.rgb, highlight_color, normal_diff);
+
+	// out_color.rgb = highlight_color;
+	
 	//----------------------------------------------------------------------------------
 }

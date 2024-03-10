@@ -460,8 +460,8 @@ void main(void)
     float line_size = 5.0;
     vec2 texture_size = textureSize(DEPTH_TEXTURE, 0);
     vec2 pixel_size = vec2(1.0 / texture_size) * line_size;
-    vec3 final_highlight_color = vec3(0.2);
-    // vec3 final_highlight_color = vec3(1.0, 0.0, 0.0);
+    vec3 highlight_color = vec3(0.3);
+    // vec3 highlight_color = vec3(1.0, 0.0, 0.0);
 	
     //	Add a line based on a sudden change in depth.
 	float depth_diff = 0.0;
@@ -480,7 +480,7 @@ void main(void)
 
     depth_diff = smoothstep(0.0, 1.0, depth_diff);
 
-    color.rgb = mix(color.rgb, final_highlight_color, depth_diff);
+    color.rgb = mix(color.rgb, highlight_color, depth_diff);
 
     // color = texture(tex0, gl_FragCoord.xy);
         

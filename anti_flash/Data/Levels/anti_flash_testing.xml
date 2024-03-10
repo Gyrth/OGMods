@@ -104,25 +104,28 @@
     <NavmeshRegionObject t0="47.1837" t1="-5.30423" t2="-130.836" s0="110.025" s1="41.2204" s2="103.136" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5">
         <parameters />
     </NavmeshRegionObject>
-    <EnvObject t0="43.4222" t1="2.40486" t2="-122.038" s0="7.28675" s1="1.62055" s2="9.89087" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/anti_flash_block.xml">
+    <EnvObject t0="43.4222" t1="2.40486" t2="-122.038" s0="7.28675" s1="1.62055" s2="9.89087" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="0.4" color_g="0.399996" color_b="0.399996" overbright="0" type_file="Data/Objects/anti_flash_block.xml">
         <parameters />
     </EnvObject>
     <EnvObject t0="45.4964" t1="5.40347" t2="-121.974" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/anti_flash_block.xml">
         <parameters />
     </EnvObject>
-    <EnvObject t0="36.4672" t1="6.54182" t2="-122.038" s0="0.304703" s1="2.59023" s2="9.89087" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/anti_flash_block.xml">
+    <EnvObject t0="36.4314" t1="2.79415" t2="-122.102" s0="0.340507" s1="9.74546" s2="6.1432" q0="-0.707107" q1="0" q2="0" q3="0.707107" euler_x="-1.5708" euler_y="0" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/anti_flash_block.xml">
         <parameters />
     </EnvObject>
     <Decal t0="45.7799" t1="3.25557" t2="-123.174" s0="6.5165" s1="6.5165" s2="6.5165" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" type_file="Data/Objects/Decals/WolfireLogo.xml" color_r="1" color_g="1" color_b="1" overbright="0">
         <parameters />
     </Decal>
-    <DynamicLightObject t0="45.0349" t1="5.17802" t2="-123.303" s0="14.1721" s1="14.1721" s2="14.1721" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" color_r="11.5" color_g="11.5" color_b="11.5" overbright="1">
+    <DynamicLightObject t0="43.3477" t1="5.02284" t2="-124.903" s0="14.1721" s1="14.1721" s2="14.1721" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" color_r="11.5" color_g="11.5" color_b="11.5" overbright="1">
         <parameters />
     </DynamicLightObject>
-    <DynamicLightObject t0="37.4865" t1="5.86544" t2="-124.043" s0="26.086" s1="26.086" s2="26.086" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
+    <DynamicLightObject t0="34.3944" t1="5.30046" t2="-121.137" s0="26.086" s1="26.086" s2="26.086" q0="-0.00376076" q1="-0.00826824" q2="-0.00874938" q3="0.99992" euler_x="-0.00737731" euler_y="-0.0166017" euler_z="-0.0174385" id="11" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
         <parameters />
     </DynamicLightObject>
-    <CameraObject t0="51.8158" t1="12.1913" t2="-134.85" s0="1" s1="1" s2="1" q0="-0.0833372" q1="0.913838" q2="-0.240952" q3="-0.316066" euler_x="-2.62599" euler_y="-0.665976" euler_z="-3.14159" id="271">
+    <DynamicLightObject t0="37.1199" t1="3.84008" t2="-119.018" s0="26.086" s1="26.086" s2="26.086" q0="-0.00376076" q1="-0.00826824" q2="-0.00874938" q3="0.99992" euler_x="-0.00737731" euler_y="-0.0166017" euler_z="-0.0174385" id="12" color_r="11.5" color_g="11.5" color_b="11.5" overbright="50">
+        <parameters />
+    </DynamicLightObject>
+    <CameraObject t0="50.4313" t1="8.47943" t2="-131.315" s0="1" s1="1" s2="1" q0="-0.111517" q1="0.873943" q2="-0.238584" q3="-0.408492" euler_x="-2.60859" euler_y="-0.874479" euler_z="3.14159" id="271">
         <parameters />
     </CameraObject>
 </ActorObjects>
@@ -132,4 +135,6 @@
     <SpawnerItem display_name="Nav Region" path="Data/Objects/navmesh/navmesh_region.xml" thumbnail_path="Data/UI/spawner/thumbs/Utility/empty_placeholder.png" />
     <SpawnerItem display_name="Wolfire Logo" path="Data/Objects/Decals/WolfireLogo.xml" thumbnail_path="Data/UI/spawner/thumbs/Decal/WolfireLogo.png" />
     <SpawnerItem display_name="Dynamic Light" path="Data/Objects/default_light.xml" thumbnail_path="" />
+    <SpawnerItem display_name="Ambient Shadow (round)" path="Data/Objects/default_env_blob_shadow_decal.xml" thumbnail_path="" />
+    <SpawnerItem display_name="Blob Shadow" path="Data/Objects/Decals/blob_shadow.xml" thumbnail_path="" />
 </RecentItems>
