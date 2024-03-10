@@ -140,6 +140,8 @@ in vec3 frag_normal;
 uniform float overbright;
 const float cloud_speed = 0.1;
 
+#include "decals.glsl"
+
 // From http://www.thetenthplanet.de/archives/1180
 mat3 cotangent_frame( vec3 N, vec3 p, vec2 uv )
 {
@@ -178,6 +180,39 @@ float normalIndicator(vec3 normalEdgeBias, vec3 baseNormal, vec3 newNormal, floa
 
 void main() {
 
+    vec3 ws_normal = frag_normal;
+
+	vec4 ndcPos;
+	ndcPos.xy = ((2.0 * gl_FragCoord.xy) - (2.0 * viewport.xy)) / (viewport.zw) - 1;
+	ndcPos.z = 2.0 * gl_FragCoord.z - 1; // this assumes gl_DepthRange is not changed
+	ndcPos.w = 1.0;
+	vec4 clipPos = ndcPos / gl_FragCoord.w;
+	vec4 eyePos = inv_proj_mat * clipPos;
+	float zVal = ZCLUSTERFUNC(eyePos.z);
+	zVal = max(0u, min(zVal, grid_size.z - 1u));
+	uvec3 g = uvec3(uvec2(gl_FragCoord.xy) / cluster_width, zVal);
+
+	// decal/light cluster stuff
+	#if !(defined(NO_DECALS) || defined(DEPTH_ONLY))
+		uint decal_cluster_index = NUM_GRID_COMPONENTS * ((g.y * grid_size.x + g.x) * grid_size.z + g.z);
+		uint decal_val = texelFetch(cluster_buffer, int(decal_cluster_index)).x;
+	#endif
+
+	uint light_cluster_index = NUM_GRID_COMPONENTS * ((g.y * grid_size.x + g.x) * grid_size.z + g.z) + 1u;
+
+	#if defined(DEPTH_ONLY)
+		uint light_val = 0U;
+	#else
+		uint light_val = texelFetch(cluster_buffer, int(light_cluster_index)).x;
+	#endif
+
+	#if defined(NO_INSTANCE_ID)
+		int instance_id = 0;
+	#endif
+
+	//----------------------------------------------------------------------------------
+	//Add edges-------------------------------------------------------------------------
+
 	float line_size = 1.0;
 	vec2 texture_size = textureSize(tex1, 0);
 	vec2 pixel_size = vec2(1.0 / texture_size) * line_size;
@@ -210,20 +245,53 @@ void main() {
 	normal_diff = smoothstep(0.2, 0.8, normal_diff);
 	normal_diff = clamp(normal_diff, 0.0, 1.0);
 
+	colormap /= 2.0;
+
+	colormap.rgb = mix(colormap.rgb, highlight_color, normal_diff);
+	
 	out_color = colormap;
-	out_color /= 2.0;
 
 	//----------------------------------------------------------------------------------
 	//Apply lighting--------------------------------------------------------------------
 
+	vec3 ws_vertex = world_vert - cam_pos;
+	float roughness = mix(0.7, 1.0, pow((colormap.x + colormap.y + colormap.z) / 3.0, 0.01));
+	float spec_amount = colormap.a;
+	float preserve_wetness = 1.0;
+	float ambient_mult = 1.0;
+	float env_ambient_mult = 1.0;
+	vec3 flame_final_color = vec3(0.0, 0.0, 0.0);
+	float flame_final_contrib = 0.0;
+
+	#if !defined(DEPTH_ONLY) && !defined(NO_DECALS)
+
+		vec3 decal_diffuse_color = vec3(0.0);
+
+		{
+			CalculateDecals(out_color, ws_normal, spec_amount, roughness, preserve_wetness, ambient_mult, env_ambient_mult, decal_diffuse_color, world_vert, time, decal_val, flame_final_color, flame_final_contrib);
+		}
+
+		vec3 spec_color = vec3(0.0);
+		vec3 light_contrib = out_color.xyz;
+		CalculateLightContrib(light_contrib, spec_color, ws_vertex, world_vert, ws_normal, roughness, light_val, ambient_mult);
+		out_color.rgb = light_contrib;
+	#endif
+
 	vec4 shadow_coords[4];
-	shadow_coords[0] = shadow_matrix[0] * vec4(world_vert, 1.0);
-	shadow_coords[1] = shadow_matrix[1] * vec4(world_vert, 1.0);
-	shadow_coords[2] = shadow_matrix[2] * vec4(world_vert, 1.0);
-	shadow_coords[3] = shadow_matrix[3] * vec4(world_vert, 1.0);
-	float shadow = GetCascadeShadow(shadow_sampler, shadow_coords, distance(cam_pos,world_vert));
-	shadow *= CloudShadow(world_vert);
-	out_color.rgb *= mix(0.015, 1.0, shadow);
+
+	#if !defined(DEPTH_ONLY)
+		shadow_coords[0] = shadow_matrix[0] * vec4(world_vert, 1.0);
+		shadow_coords[1] = shadow_matrix[1] * vec4(world_vert, 1.0);
+		shadow_coords[2] = shadow_matrix[2] * vec4(world_vert, 1.0);
+		shadow_coords[3] = shadow_matrix[3] * vec4(world_vert, 1.0);
+	#endif
+
+	vec3 shadow_tex = vec3(0.0);
+
+	CALC_DIRECT_DIFFUSE_COLOR
+
+	float shadow = GetCascadeShadow(shadow_sampler, shadow_coords, distance(cam_pos, world_vert));
+	out_color.xyz *= mix(0.015, 1.0, shadow);
 
 	//----------------------------------------------------------------------------------
 	// Apply the sketchy lines based on how dark the scene is.--------------------------
@@ -234,22 +302,17 @@ void main() {
 
 	vec4 lines_tex = textureLod(tex0, tex_coord * texture_scale, 0.0);
 	
-	// if(out_color.r < 0.01){
-	// 	out_color.rgb += vec3(lines_tex.r * -red_weight);
-	// }
+	if(out_color.r < 0.01){
+		out_color.rgb += vec3(lines_tex.r * -red_weight);
+	}
 
-	// if(out_color.r < 0.1){
-	// 	out_color.rgb += vec3(lines_tex.g * -green_weight);
-	// }
+	if(out_color.r < 0.1){
+		out_color.rgb += vec3(lines_tex.g * -green_weight);
+	}
 
 	if(out_color.r < 0.25){
 		out_color.rgb += vec3(lines_tex.b * -blue_weight);
 	}
 
 	//----------------------------------------------------------------------------------
-	//Add edges-------------------------------------------------------------------------
-
-	vec3 final = mix(out_color.rgb, highlight_color, normal_diff);
-	out_color.rgb = final;
-	
 }
