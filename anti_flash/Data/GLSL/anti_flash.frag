@@ -179,41 +179,49 @@ float normalIndicator(vec3 normalEdgeBias, vec3 baseNormal, vec3 newNormal, floa
 void main() {
 
 	float line_size = 1.0;
-	vec2 pixel_size = vec2(1.0 / vec2(1024, 1024)) * line_size;
-	vec4 colormap = texture(tex1, tex_coord);
-	vec3 final_highlight_color = vec3(1.0, 1.0, 1.0);
+	vec2 texture_size = textureSize(tex0, 0);
+	vec2 pixel_size = vec2(1.0 / texture_size) * line_size;
+
+	vec2 base_tex_coords = tex_coord;
+	vec2 pixelated_coord;
+	float pixels = texture_size.y;
+
+	pixelated_coord.x = (floor(base_tex_coords.x * pixels) / pixels + ceil(base_tex_coords.x * pixels) / pixels) / 2.0;
+	pixelated_coord.y = (floor(base_tex_coords.y * pixels) / pixels + ceil(base_tex_coords.y * pixels) / pixels) / 2.0;
+
+	vec4 colormap = vec4(0.99, 0.99, 0.99, 1.0);
+	vec3 final_highlight_color = vec3(0.02);
 
 	float normal_diff = 0.0;
 	float depth_diff = 0.0;
-	float neg_depth_diff = 0.5;
+	vec3 normal = texture(tex1, pixelated_coord).rgb;
 
-	vec3 normal = texture(tex1, tex_coord).rgb * 2.0 - 1.0;
-	vec3 nu = texture(tex1, tex_coord + vec2(0., -1.) * pixel_size).rgb * 2.0 - 1.0;
-	vec3 nr = texture(tex1, tex_coord + vec2(1., 0.) * pixel_size).rgb * 2.0 - 1.0;
-	vec3 nd = texture(tex1, tex_coord + vec2(0., 1.) * pixel_size).rgb * 2.0 - 1.0;
-	vec3 nl = texture(tex1, tex_coord + vec2(-1., 0.) * pixel_size).rgb * 2.0 - 1.0;
+	vec3 nu = texture(tex1, pixelated_coord + vec2(0., -1.) * pixel_size).rgb * 2.0 - 1.0;
+	vec3 nr = texture(tex1, pixelated_coord + vec2(1., 0.) * pixel_size).rgb * 2.0 - 1.0;
+	vec3 nd = texture(tex1, pixelated_coord + vec2(0., 1.) * pixel_size).rgb * 2.0 - 1.0;
+	vec3 nl = texture(tex1, pixelated_coord + vec2(-1., 0.) * pixel_size).rgb * 2.0 - 1.0;
+
 	vec3 normal_edge_bias = (vec3(1., 1., 1.));
+
 	normal_diff += normalIndicator(normal_edge_bias, normal, nu, depth_diff);
 	normal_diff += normalIndicator(normal_edge_bias, normal, nr, depth_diff);
 	normal_diff += normalIndicator(normal_edge_bias, normal, nd, depth_diff);
 	normal_diff += normalIndicator(normal_edge_bias, normal, nl, depth_diff);
 	normal_diff = smoothstep(0.2, 0.8, normal_diff);
-	normal_diff = clamp(normal_diff-neg_depth_diff, 0.0, 1.0);
+	normal_diff = clamp(normal_diff, 0.0, 1.0);
 
 	vec3 final = colormap.rgb;
 	final = mix(final, final_highlight_color, normal_diff);
 	out_color.rgb = final;
 
-	// out_color = colormap * 1.0;
-
 	//----------------------------------------------------------------------------------
 
-	// vec4 shadow_coords[4];
-	// shadow_coords[0] = shadow_matrix[0] * vec4(world_vert, 1.0);
-	// shadow_coords[1] = shadow_matrix[1] * vec4(world_vert, 1.0);
-	// shadow_coords[2] = shadow_matrix[2] * vec4(world_vert, 1.0);
-	// shadow_coords[3] = shadow_matrix[3] * vec4(world_vert, 1.0);
-	// float shadow = GetCascadeShadow(shadow_sampler, shadow_coords, distance(cam_pos,world_vert));
-	// shadow *= CloudShadow(world_vert);
-	// out_color.xyz *= mix(0.2,1.0,shadow);
+	vec4 shadow_coords[4];
+	shadow_coords[0] = shadow_matrix[0] * vec4(world_vert, 1.0);
+	shadow_coords[1] = shadow_matrix[1] * vec4(world_vert, 1.0);
+	shadow_coords[2] = shadow_matrix[2] * vec4(world_vert, 1.0);
+	shadow_coords[3] = shadow_matrix[3] * vec4(world_vert, 1.0);
+	float shadow = GetCascadeShadow(shadow_sampler, shadow_coords, distance(cam_pos,world_vert));
+	shadow *= CloudShadow(world_vert);
+	out_color.xyz *= mix(0.2,1.0,shadow);
 }
