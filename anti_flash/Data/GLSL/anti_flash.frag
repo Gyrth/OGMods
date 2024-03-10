@@ -179,7 +179,7 @@ float normalIndicator(vec3 normalEdgeBias, vec3 baseNormal, vec3 newNormal, floa
 void main() {
 
 	float line_size = 1.0;
-	vec2 texture_size = textureSize(tex0, 0);
+	vec2 texture_size = textureSize(tex1, 0);
 	vec2 pixel_size = vec2(1.0 / texture_size) * line_size;
 
 	vec2 base_tex_coords = tex_coord;
@@ -190,11 +190,11 @@ void main() {
 	pixelated_coord.y = (floor(base_tex_coords.y * pixels) / pixels + ceil(base_tex_coords.y * pixels) / pixels) / 2.0;
 
 	vec4 colormap = vec4(0.99, 0.99, 0.99, 1.0);
-	vec3 final_highlight_color = vec3(0.02);
+	vec3 highlight_color = vec3(0.025);
 
 	float normal_diff = 0.0;
 	float depth_diff = 0.0;
-	vec3 normal = texture(tex1, pixelated_coord).rgb;
+	vec3 normal = texture(tex1, pixelated_coord).rgb * 2.0 - 1.0;
 
 	vec3 nu = texture(tex1, pixelated_coord + vec2(0., -1.) * pixel_size).rgb * 2.0 - 1.0;
 	vec3 nr = texture(tex1, pixelated_coord + vec2(1., 0.) * pixel_size).rgb * 2.0 - 1.0;
@@ -210,11 +210,11 @@ void main() {
 	normal_diff = smoothstep(0.2, 0.8, normal_diff);
 	normal_diff = clamp(normal_diff, 0.0, 1.0);
 
-	vec3 final = colormap.rgb;
-	final = mix(final, final_highlight_color, normal_diff);
-	out_color.rgb = final;
+	out_color = colormap;
+	out_color /= 2.0;
 
 	//----------------------------------------------------------------------------------
+	//Apply lighting--------------------------------------------------------------------
 
 	vec4 shadow_coords[4];
 	shadow_coords[0] = shadow_matrix[0] * vec4(world_vert, 1.0);
@@ -223,5 +223,33 @@ void main() {
 	shadow_coords[3] = shadow_matrix[3] * vec4(world_vert, 1.0);
 	float shadow = GetCascadeShadow(shadow_sampler, shadow_coords, distance(cam_pos,world_vert));
 	shadow *= CloudShadow(world_vert);
-	out_color.xyz *= mix(0.2,1.0,shadow);
+	out_color.rgb *= mix(0.015, 1.0, shadow);
+
+	//----------------------------------------------------------------------------------
+	// Apply the sketchy lines based on how dark the scene is.--------------------------
+	float texture_scale = 5.0;
+	float red_weight = 0.5;
+	float green_weight = 0.5;
+	float blue_weight = 0.5;
+
+	vec4 lines_tex = textureLod(tex0, tex_coord * texture_scale, 0.0);
+	
+	// if(out_color.r < 0.01){
+	// 	out_color.rgb += vec3(lines_tex.r * -red_weight);
+	// }
+
+	// if(out_color.r < 0.1){
+	// 	out_color.rgb += vec3(lines_tex.g * -green_weight);
+	// }
+
+	if(out_color.r < 0.25){
+		out_color.rgb += vec3(lines_tex.b * -blue_weight);
+	}
+
+	//----------------------------------------------------------------------------------
+	//Add edges-------------------------------------------------------------------------
+
+	vec3 final = mix(out_color.rgb, highlight_color, normal_diff);
+	out_color.rgb = final;
+	
 }

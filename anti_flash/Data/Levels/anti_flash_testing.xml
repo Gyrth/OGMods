@@ -43,7 +43,7 @@
     <DomeTexture>Data/Textures/skies/blue3.tga</DomeTexture>
     <SunAngularRad>0.112145</SunAngularRad>
     <SunColorAngle>6.8534</SunColorAngle>
-    <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
+    <RayToSun r0="0.430304" r1="0.599412" r2="0.67494" />
 </Sky>
 <ActorObjects>
     <ActorObject t0="46.4803" t1="5.35252" t2="-135.773" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" type_file="Data/Objects/IGF_Characters/pale_turner_actor.xml" is_player="1">
@@ -101,13 +101,19 @@
             <Color label="Spots" channel="3" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
-    <NavmeshRegionObject t0="45.0314" t1="-4.3229" t2="-130.333" s0="110.025" s1="41.2204" s2="103.136" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5">
+    <NavmeshRegionObject t0="47.2241" t1="-5.31337" t2="-130.816" s0="110.025" s1="41.2204" s2="103.136" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5">
         <parameters />
     </NavmeshRegionObject>
-    <EnvObject t0="46.0938" t1="4.96887" t2="-130.929" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/anti_flash_block.xml">
+    <EnvObject t0="43.4222" t1="2.40486" t2="-122.038" s0="7.28675" s1="1.62055" s2="9.89087" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/anti_flash_block.xml">
         <parameters />
     </EnvObject>
-    <CameraObject t0="50.7843" t1="7.17474" t2="-136.468" s0="1" s1="1" s2="1" q0="0.0646681" q1="-0.877469" q2="0.123657" q3="0.458884" euler_x="-2.86159" euler_y="-0.963698" euler_z="3.14159" id="271">
+    <EnvObject t0="45.4964" t1="5.40347" t2="-121.974" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/anti_flash_block.xml">
+        <parameters />
+    </EnvObject>
+    <EnvObject t0="36.4672" t1="6.54182" t2="-122.038" s0="0.304703" s1="2.59023" s2="9.89087" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/anti_flash_block.xml">
+        <parameters />
+    </EnvObject>
+    <CameraObject t0="48.1991" t1="7.1887" t2="-125.294" s0="1" s1="1" s2="1" q0="-0.111977" q1="0.857015" q2="-0.209964" q3="-0.457058" euler_x="-2.66107" euler_y="-0.979884" euler_z="-3.14159" id="271">
         <parameters />
     </CameraObject>
 </ActorObjects>

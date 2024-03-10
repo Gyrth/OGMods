@@ -74,15 +74,6 @@ vec4 ScreenCoordFromDepth(vec2 tex_uv, vec2 offset, out float distance) {
                 1.0);
 }
 
-float getDepth(vec2 screen_uv, sampler2D depth_texture, mat4 inv_projection_matrix){
-//	Credit: https://godotshaders.com/shader/depth-modulated-pixel-outline-in-screen-space/
-	float raw_depth = texture(depth_texture, screen_uv)[0];
-	vec3 normalized_device_coordinates = vec3(screen_uv * 2.0 - 1.0, raw_depth);
-    vec4 view_space = inv_projection_matrix * vec4(normalized_device_coordinates, 1.0);	
-	view_space.xyz /= view_space.w;	
-	return -view_space.z;
-}
-
 vec4 FXAA(sampler2D buf0, vec2 texCoords, vec2 frameBufSize) {
     float FXAA_SPAN_MAX = 8.0;
     float FXAA_REDUCE_MUL = 1.0/8.0;
@@ -469,20 +460,13 @@ void main(void)
     float line_size = 5.0;
     vec2 texture_size = textureSize(DEPTH_TEXTURE, 0);
     vec2 pixel_size = vec2(1.0 / texture_size) * line_size;
-    vec3 final_highlight_color = vec3(0.4);
+    vec3 final_highlight_color = vec3(0.2);
     // vec3 final_highlight_color = vec3(1.0, 0.0, 0.0);
 	
     //	Add a line based on a sudden change in depth.
 	float depth_diff = 0.0;
-	float neg_depth_diff = 0.5;
-	
-    // float depth = getDepth(gl_FragCoord.xy, DEPTH_TEXTURE, INV_PROJECTION_MATRIX);
+	float neg_depth_diff = 0.0;
     float depth = DistFromDepth(texture( tex1, tex).r);
-
-    // float du = getDepth(gl_FragCoord.xy + vec2(0., -1.) * pixel_size, DEPTH_TEXTURE, INV_PROJECTION_MATRIX);
-    // float dr = getDepth(gl_FragCoord.xy + vec2(1., 0.) * pixel_size, DEPTH_TEXTURE, INV_PROJECTION_MATRIX);
-    // float dd = getDepth(gl_FragCoord.xy + vec2(0., 1.) * pixel_size, DEPTH_TEXTURE, INV_PROJECTION_MATRIX);
-    // float dl = getDepth(gl_FragCoord.xy + vec2(-1., 0.) * pixel_size, DEPTH_TEXTURE, INV_PROJECTION_MATRIX);
 
     float du = DistFromDepth(texture(tex1, tex + vec2(0., -1.) * pixel_size).r);
     float dr = DistFromDepth(texture(tex1, tex + vec2(1., 0.) * pixel_size).r);
