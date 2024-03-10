@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/manga_cube.obj</Model>
+	<ColorMap>Data/Textures/noise.png</ColorMap>
+	<NormalMap>Data/Textures/cube_normal.png</NormalMap>
+	<WeightMap>Data/Textures/noise.png</WeightMap>
+	<ShaderName>anti_flash</ShaderName>
+	<flags no_collision = "false"/>
+</Object>
