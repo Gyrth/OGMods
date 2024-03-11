@@ -232,21 +232,36 @@ void main() {
 	#endif
 
 	//----------------------------------------------------------------------------------
-	vec4 colormap = vec4(0.3);
-	out_color = colormap;
+
+	vec4 colormap = vec4(0.0);
+	vec4 instance_color_tint = GetInstancedColorTint(instance_id);
+	out_color = instance_color_tint;
 	vec3 highlight_color = vec3(0.005);
 
 	//----------------------------------------------------------------------------------
 	//Apply lighting--------------------------------------------------------------------
+	//----------------------------------------------------------------------------------
 
 	vec3 ws_vertex = world_vert - cam_pos;
-	float roughness = mix(0.7, 1.0, pow((colormap.x + colormap.y + colormap.z) / 3.0, 0.01));
-	float spec_amount = colormap.a;
+	float roughness = mix(0.7, 1.0, pow((out_color.x + out_color.y + out_color.z) / 3.0, 0.01));
+	float spec_amount = out_color.a;
 	float preserve_wetness = 1.0;
 	float ambient_mult = 1.0;
 	float env_ambient_mult = 1.0;
 	vec3 flame_final_color = vec3(0.0, 0.0, 0.0);
 	float flame_final_contrib = 0.0;
+
+	vec4 shadow_coords[4];
+
+	#if !defined(DEPTH_ONLY)
+		shadow_coords[0] = shadow_matrix[0] * vec4(world_vert, 1.0);
+		shadow_coords[1] = shadow_matrix[1] * vec4(world_vert, 1.0);
+		shadow_coords[2] = shadow_matrix[2] * vec4(world_vert, 1.0);
+		shadow_coords[3] = shadow_matrix[3] * vec4(world_vert, 1.0);
+	#endif
+
+	float shadow = GetCascadeShadow(shadow_sampler, shadow_coords, distance(cam_pos, world_vert));
+	out_color.xyz *= mix(0.015, 1.0, shadow);
 
 	#if !defined(DEPTH_ONLY) && !defined(NO_DECALS)
 
@@ -262,21 +277,8 @@ void main() {
 		out_color.rgb = light_contrib;
 	#endif
 
-	vec4 shadow_coords[4];
-
-	#if !defined(DEPTH_ONLY)
-		shadow_coords[0] = shadow_matrix[0] * vec4(world_vert, 1.0);
-		shadow_coords[1] = shadow_matrix[1] * vec4(world_vert, 1.0);
-		shadow_coords[2] = shadow_matrix[2] * vec4(world_vert, 1.0);
-		shadow_coords[3] = shadow_matrix[3] * vec4(world_vert, 1.0);
-	#endif
-
-	vec3 shadow_tex = vec3(0.0);
-
-	CALC_DIRECT_DIFFUSE_COLOR
-
-	float shadow = GetCascadeShadow(shadow_sampler, shadow_coords, distance(cam_pos, world_vert));
-	out_color.xyz *= mix(0.015, 1.0, shadow);
+	// vec3 shadow_tex = vec3(0.0);
+	// CALC_DIRECT_DIFFUSE_COLOR
 
 	//----------------------------------------------------------------------------------
 	// Apply the sketchy lines based on how dark the scene is.--------------------------
@@ -288,14 +290,10 @@ void main() {
 	vec2 scaled_uv = gl_FragCoord.xy / (viewport_size / texture_scale);
 	scaled_uv = fract(scaled_uv);
 	
-	if(out_color.r < 0.01){
+	if(out_color.r < 0.1){
 		// As dark as possible when it's darkest.
 		out_color.rgb = highlight_color;
-	}else if(out_color.r < 0.1){
-		vec4 lines_tex = textureLod(tex0, fract(tex_coord * 5.0), 0.0) * 100.0;
-		// Vertical lines when it's little bit darker.
-		out_color.rgb = mix(vec3(1.0), highlight_color, lines_tex.g);
-	}else if(out_color.r < 0.6){
+	}else if(out_color.r < 0.25){
 		// Stipple when it's a little bit dark.
 		float average = (out_color.r + out_color.g + out_color.b) / 3.0;
 		// out_color = vec4( vec3(average) * 10.0 - 5.0 + pattern(gl_FragCoord.xy, vec2(8)), 1.0);
@@ -317,6 +315,10 @@ void main() {
 		dots = pow(dots, 5.0);
 		dots = clamp(dots, 0.0, 1.0);
 		out_color.rgb = vec3(dots);
+	}else if(out_color.r < 0.6){
+		vec4 lines_tex = textureLod(tex0, fract(tex_coord * 5.0), 0.0) * 20.0;
+		// Vertical lines when it's little bit darker.
+		out_color.rgb = mix(vec3(1.0), highlight_color, lines_tex.g * (out_color.r * 2.0));
 	}
 
 	//----------------------------------------------------------------------------------
