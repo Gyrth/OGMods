@@ -601,10 +601,14 @@ bool LoadCharacter(string character_path){
 	bool success = character_getter.Load(this_mo.char_path);
 
 	if(success){
+        
 		this_mo.RecreateRiggedObject(this_mo.char_path);	
         this_mo.SetAnimation("Data/Animations/r_actionidle.anm", 10.0f, _ANM_FROM_START);
         this_mo.SetScriptUpdatePeriod(1);
+		this_mo.rigged_object().SetAnimUpdatePeriod(1);
+        
         CacheSkeletonInfo();
+
 		return true;
 	}else{
 		return false;
