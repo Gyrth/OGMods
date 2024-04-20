@@ -86,6 +86,7 @@ out vec3 orig_vert;
 out vec2 tex_coord;
 out vec3 world_vert;
 out vec3 frag_normal;
+out vec3 model_position;
 flat out int instance_id;
 
 in vec3 vertex_attrib;
@@ -102,6 +103,7 @@ void main() {
 	tex_coord[1] = 1.0 - tex_coord[1];
 
     vec3 transformed_vertex = transform_vec3(GetInstancedModelScale(instance_id), GetInstancedModelRotationQuat(instance_id), model_translation_attrib, vertex_attrib);
+	model_position = model_translation_attrib;
 
     world_vert = transformed_vertex;
 	frag_normal = normal_attrib;

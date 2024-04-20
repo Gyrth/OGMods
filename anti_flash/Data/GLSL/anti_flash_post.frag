@@ -445,12 +445,12 @@ void main(void)
     color = textureLod( tex0, tex, 0.0 );
 #endif
 #ifdef BRIGHTNESS
-    for(int i=0; i<3; ++i){
-        color[i] = pow(color[i], 1.7 - brightness * 0.7);
+    // for(int i=0; i<3; ++i){
+    //     color[i] = pow(color[i], 1.7 - brightness * 0.7);
 #ifdef GAMMA_CORRECT_OUTPUT
-        color[i] = pow(color[i], 1/2.2);
+        // color[i] = pow(color[i], 1/2.2);
 #endif
-    }
+    // }
     
 #endif
     // 0.2 to 1.8
@@ -460,12 +460,11 @@ void main(void)
     float line_size = 5.0;
     vec2 texture_size = textureSize(DEPTH_TEXTURE, 0);
     vec2 pixel_size = vec2(1.0 / texture_size) * line_size;
-    vec3 highlight_color = vec3(0.3);
+    vec3 highlight_color = vec3(0.0);
     // vec3 highlight_color = vec3(1.0, 0.0, 0.0);
 	
     //	Add a line based on a sudden change in depth.
 	float depth_diff = 0.0;
-	float neg_depth_diff = 0.0;
     float depth = DistFromDepth(texture( tex1, tex).r);
 
     float du = DistFromDepth(texture(tex1, tex + vec2(0., -1.) * pixel_size).r);

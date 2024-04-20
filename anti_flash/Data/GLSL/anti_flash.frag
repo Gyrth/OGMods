@@ -14,6 +14,7 @@ UNIFORM_LIGHT_DIR
 
 uniform sampler2D base_normal_tex;
 #define base_color_tex tex6
+in vec3 model_position;
 
 // uniform sampler2D tex1;
 // uniform sampler2D tex2;
@@ -236,7 +237,7 @@ void main() {
 	vec4 colormap = vec4(0.0);
 	vec4 instance_color_tint = GetInstancedColorTint(instance_id);
 	out_color = instance_color_tint;
-	vec3 highlight_color = vec3(0.005);
+	vec3 highlight_color = vec3(0.00);
 
 	//----------------------------------------------------------------------------------
 	//Apply lighting--------------------------------------------------------------------
@@ -261,7 +262,7 @@ void main() {
 	#endif
 
 	float shadow = GetCascadeShadow(shadow_sampler, shadow_coords, distance(cam_pos, world_vert));
-	out_color.xyz *= mix(0.015, 1.0, shadow);
+	out_color.xyz *= mix(0.1, 1.0, shadow);
 
 	#if !defined(DEPTH_ONLY) && !defined(NO_DECALS)
 
@@ -324,8 +325,10 @@ void main() {
 	//----------------------------------------------------------------------------------
 	// Add edges-------------------------------------------------------------------------
 	//----------------------------------------------------------------------------------
-	float line_size = 1.0;
-	vec2 pixel_size = vec2(1.0 / texture_size) * line_size;
+	vec3 model_scale = GetInstancedModelScale(instance_id);
+	float highest_scale = max(model_scale.x, max(model_scale.y, model_scale.z));
+	float line_size = distance(cam_pos, model_position);
+	vec2 pixel_size = vec2(1.0 / texture_size) * line_size / highest_scale;
 
 	vec2 base_tex_coords = tex_coord;
 	vec2 pixelated_coord;
@@ -337,8 +340,8 @@ void main() {
 	float normal_diff = 0.0;
 	float depth_diff = 0.0;
 	float lod = 0.0;
-	// vec3 normal = texture(tex1, pixelated_coord).rgb * 2.0 - 1.0;
-	vec3 normal = textureLod(tex1, pixelated_coord, lod).rgb * 2.0 - 1.0;
+	vec3 normal = texture(tex1, pixelated_coord).rgb * 2.0 - 1.0;
+	// vec3 normal = textureLod(tex1, pixelated_coord, lod).rgb * 2.0 - 1.0;
 
 	vec3 nu = textureLod(tex1, pixelated_coord + vec2(0., -1.) * pixel_size, lod).rgb * 2.0 - 1.0;
 	vec3 nr = textureLod(tex1, pixelated_coord + vec2(1., 0.) * pixel_size, lod).rgb * 2.0 - 1.0;
