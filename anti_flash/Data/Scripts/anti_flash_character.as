@@ -3,7 +3,7 @@
 // Configurable variables for the character.
 float aiming_camera_fov = 80.0f;
 float default_camera_fov = 110.0f;
-float footstep_camera_shake = 0.075f;
+float footstep_camera_shake = 0.045f;
 float land_camera_shake = 0.1f;
 float hit_camera_shake = 0.75f;
 float camera_shake_multiplier = 3.0f;
@@ -363,6 +363,7 @@ void Update(int num_frames) {
 		UpdateAiming();
 		UpdateFootsteps();
 		UpdateDebugKeys();
+		UpdateAttackPosition();
 	}else{
 		this_mo.velocity = vec3(0.0f);
 	}
@@ -377,6 +378,24 @@ void UpdateDebugKeys(){
 	if(GetInputPressed(this_mo.controller_id, "1")){
 		
 	}
+}
+
+void UpdateAttackPosition(){
+	if(aiming_amount < 0.5){return;}
+	vec3 forward = camera.GetFacing();
+	vec3 cam_pos = camera.GetPos();
+
+	vec3 ray_collision = col.GetRayCollision(cam_pos, cam_pos + (forward * 50.0f));
+	// Keep setting the dof strength while this function is called.
+	// The script will slowly reduce this value in the UpdateCamera function when the player isn't aiming.
+	// If the player is aiming at the sky, or somewhere very far away, then just skip this to make the DOF clear.
+	if(distance(cam_pos, ray_collision) < 49.0f){
+		dof_far = dof_strength;
+	}
+
+	dof_distance = distance(cam_pos, ray_collision);
+	// Log(warning, "dof_distance " + dof_distance);
+	// DebugDrawWireSphere(cam_pos, 0.15, vec3(1.0), _fade);
 }
 
 void UpdateFootsteps(){
@@ -402,7 +421,7 @@ void UpdateFootsteps(){
         
 		// Place the sound underneath the character at ground level.
 		vec3 sound_position = this_mo.position + vec3(0.0, character_height_offset - 0.5, 0.0);
-        DebugDrawWireSphere(sound_position, 0.4f, vec3(1.0, 1.0, 1.0), _fade);
+        // DebugDrawWireSphere(sound_position, 0.4f, vec3(1.0, 1.0, 1.0), _fade);
         this_mo.MaterialEvent(event, sound_position, 3.0f);
 		// Notify any AI that are nearby that a step has been taken.
 		AISound(sound_position, QUIET_SOUND_RADIUS, _sound_type_loud_foley);
@@ -666,7 +685,7 @@ void FinalAnimationMatrixUpdate(int num_frames){
 	// While in aschar the origin is at the feet of the character, we use the camera
 	// as the center of the character. So add an offset to the model to make everything
 	// line up again.
-	local_to_world.origin = location + vec3(0.0f, -100.25f, 0.0);
+	local_to_world.origin = location + vec3(0.0f, -10.25f, 0.0);
 	rigged_object.TransformAllFrameMats(local_to_world);
 }
 
