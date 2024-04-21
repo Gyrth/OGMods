@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/anti_flash_key.obj</Model>
+	<ColorMap>Data/Textures/lines.png</ColorMap>
+	<NormalMap>Data/Textures/key.png</NormalMap>
+	<WeightMap>Data/Textures/noise.png</WeightMap>
+	<DetailMaps>
+		<DetailMap colorpath="Data/Prototypes/DetailTextures/Rock_Color.tga" normalpath="Data/Prototypes/DetailTextures/Rock_Norm.tga" materialpath="Data/Materials/default.xml" />
+		<DetailMap colorpath="Data/Prototypes/DetailTextures/Blank_Color.tga" normalpath="Data/Prototypes/DetailTextures/Blank_Norm.tga" materialpath="Data/Materials/default.xml" />
+		<DetailMap colorpath="Data/Prototypes/DetailTextures/Blank_Color.tga" normalpath="Data/Prototypes/DetailTextures/Blank_Norm.tga" materialpath="Data/Materials/default.xml" />
+		<DetailMap colorpath="Data/Prototypes/DetailTextures/Blank_Color.tga" normalpath="Data/Prototypes/DetailTextures/Blank_Norm.tga" materialpath="Data/Materials/default.xml" />
+	</DetailMaps>
+	<ShaderName>anti_flash #KEY</ShaderName>
+	<flags no_collision = "false"/>
+</Object>

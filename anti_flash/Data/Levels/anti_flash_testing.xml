@@ -20,7 +20,7 @@
     </DetailMaps>
     <DetailObjects />
 </Terrain>
-<OutOfDate NavMesh="false" NavMeshParamHash="-1674835251" />
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
 <AmbientSounds />
 <Script>anti_flash_level.as</Script>
 <LevelScriptParameters>
@@ -153,7 +153,7 @@
             <parameters />
         </EnvObject>
     </Group>
-    <CameraObject t0="46.9534" t1="6.06081" t2="-133.989" s0="1" s1="1" s2="1" q0="-0.00482145" q1="0.975908" q2="-0.0216788" q3="-0.217047" euler_x="-3.09717" euler_y="-0.437687" euler_z="3.14159" id="271">
+    <CameraObject t0="56.9655" t1="6.02475" t2="-116.129" s0="1" s1="1" s2="1" q0="0.0539671" q1="-0.91738" q2="0.371082" q3="0.133416" euler_x="-2.37283" euler_y="-0.288839" euler_z="3.14159" id="271">
         <parameters />
     </CameraObject>
 </ActorObjects>
@@ -166,4 +166,6 @@
     <SpawnerItem display_name="Ambient Shadow (round)" path="Data/Objects/default_env_blob_shadow_decal.xml" thumbnail_path="" />
     <SpawnerItem display_name="Blob Shadow" path="Data/Objects/Decals/blob_shadow.xml" thumbnail_path="" />
     <SpawnerItem display_name="anti_flash_character_actor.xml" path="Data/Characters/anti_flash_character_actor.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="anti_flash_door.xml" path="Data/Objects/anti_flash_door.xml" thumbnail_path="empty_placeholder.png" />
+    <SpawnerItem display_name="Invisible Block" path="Data/Objects/invisibleblock.xml" thumbnail_path="Data/UI/spawner/thumbs/Static Objects/invisibleblock.png" />
 </RecentItems>

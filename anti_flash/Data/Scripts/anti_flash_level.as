@@ -9,6 +9,7 @@ const string TABLE_PATH = "Data/Objects/anti_flash_table.xml";
 const string SMALL_TABLE_PATH = "Data/Objects/anti_flash_small_table.xml";
 const string DOOR_PATH = "Data/Objects/anti_flash_door.xml";
 const string DYNAMIC_LIGHT_PATH = "Data/Objects/lights/dynamic_light.xml";
+const string KEY_PATH = "Data/Objects/anti_flash_key_collectable.xml";
 
 array<int> object_ids;
 array<int> refresh_children;
@@ -19,53 +20,126 @@ float black_vignette_added = 0.0f;
 float red_vignette_amount = 0.0f;
 float red_fade_start;
 float red_fade_end = -1.0f;
+bool show_pickup_ui = false;
+bool show_door_ui = false;
+int creation_stage = REMOVE_PLAYER;
+vec2 room_scale;
+int key_id = -1;
+
+enum CreationStages{
+    REMOVE_PLAYER,
+    BUILD_ROOM,
+    PLACE_KEY,
+    PLACE_PLAYER,
+    DONE
+}
 
 void Init(string level_name){
 
 }
 
 void Update(){
-    RefreshChildren();
     PostInit();
+
+    // RefreshChildren();
 
     if(GetInputPressed(0, "b")){
         DeleteLevel();
+        creation_stage = REMOVE_PLAYER;
+    }else{
+        UpdateCreationStage();
     }
 
     red_vignette_amount = 0.0;
-    black_vignette_added = -1.0;
+    black_vignette_added = 0.0;
+}
+
+void UpdateCreationStage(){
+
+    switch(creation_stage){
+        case REMOVE_PLAYER:
+            RemovePlayer();
+            creation_stage++;
+            break;
+        case BUILD_ROOM:
+            BuildRoom();
+            creation_stage++;
+            break;
+        case PLACE_KEY:
+            RefreshChildren();
+            PlaceKey();
+            creation_stage++;
+            break;
+        case PLACE_PLAYER:
+            RefreshChildren();
+            PlacePlayer();
+            creation_stage++;
+            break;
+    }
 }
 
 void PostInit(){
     if(post_init_done)return;
 
-    BuildLevel();
-    MovePlayer();
-
     post_init_done = true;
 }
 
-void RefreshChildren(){
-    if(refresh_counter > 0){
-        refresh_counter -= 1;
-    }else if(refresh_children.size() > 0){
+void RemovePlayer(){
+    for(int i = 0; i < GetNumCharacters(); i++){
+        MovementObject@ char = ReadCharacter(i);
 
-        if(ObjectExists(refresh_children[0])){
-            Object@ child = ReadObjectFromID(refresh_children[0]);
-            child.SetTranslation(child.GetTranslation());
+        if(char.is_player){
+            char.position = vec3(0.0, 10000.0, 0.0);
+            char.velocity = vec3(0.0, 0.0, 0.0);
         }
-
-        refresh_children.removeAt(0);
     }
 }
 
-void BuildLevel(){
-    vec2 random_level_scale = vec2(RangedRandomFloat(5.0, 10.0), RangedRandomFloat(5.0, 10.0));
+void PlacePlayer(){
+    float offset =  2.0;
+    vec3 random_key_position = vec3(RangedRandomFloat(-room_scale.x + offset, room_scale.x - offset), 4.5, RangedRandomFloat(-room_scale.y + offset, room_scale.y - offset));
+    vec3 ray_collision = col.GetRayCollision(random_key_position, random_key_position - vec3(0.0, 10.0, 0.0));
+
+    for(int i = 0; i < GetNumCharacters(); i++){
+        MovementObject@ char = ReadCharacter(i);
+
+        if(char.is_player){
+            char.position = ray_collision + vec3(0.0, 2.0, 0.0);
+            char.velocity = vec3(0.0, 0.0, 0.0);
+        }
+    }
+}
+
+void RefreshChildren(){
+    // if(refresh_children.size() > 0){
+
+    //     if(ObjectExists(refresh_children[0])){
+    //         Object@ child = ReadObjectFromID(refresh_children[0]);
+    //         child.SetTranslation(child.GetTranslation());
+    //     }
+
+    //     refresh_children.removeAt(0);
+    // }
+
+    for(uint i = 0; i < refresh_children.size(); i++){
+
+        if(ObjectExists(refresh_children[i])){
+            Object@ child = ReadObjectFromID(refresh_children[i]);
+            child.SetTranslation(child.GetTranslation());
+        }
+
+    }
+
+    refresh_children.resize(0);
+}
+
+void BuildRoom(){
+    room_scale = vec2(RangedRandomFloat(5.0, 15.0), RangedRandomFloat(5.0, 15.0));
 
     //Create floor.
     int floor_id = CreateObject(BLOCK_PATH);
     Object@ floor = ReadObjectFromID(floor_id);
-    floor.SetScale(vec3(random_level_scale.x, 1.0, random_level_scale.y));
+    floor.SetScale(vec3(room_scale.x, 1.0, room_scale.y));
     floor.SetTranslation(vec3(0.0, -1.0, 0.0));
     object_ids.insertLast(floor_id);
 
@@ -88,11 +162,11 @@ void BuildLevel(){
         int wall_id = CreateObject(BLOCK_PATH);
         Object@ wall = ReadObjectFromID(wall_id);
 
-        vec3 wall_scale = vec3(random_level_scale.x * abs(direction.y), 2.5, random_level_scale.y * abs(direction.x));
+        vec3 wall_scale = vec3(room_scale.x * abs(direction.y), 2.5, room_scale.y * abs(direction.x));
         wall_scale.x = max(wall_thickness, wall_scale.x);
         wall_scale.z = max(wall_thickness, wall_scale.z);
         wall.SetScale(wall_scale);
-        wall.SetTranslation(vec3((random_level_scale.x + wall_thickness) * direction.x, 2.5, (random_level_scale.y + wall_thickness) * direction.y));
+        wall.SetTranslation(vec3((room_scale.x + wall_thickness) * direction.x, 2.5, (room_scale.y + wall_thickness) * direction.y));
 
         if(door_wall == i){
             vec3 position = wall.GetTranslation() + vec3(0.0, -1.5, 0.0);
@@ -100,7 +174,7 @@ void BuildLevel(){
             position -= vec3(wall_thickness * direction.x, 0.0, wall_thickness * direction.y) * 0.9;
 
             float wall_offset = 0.5;
-            position += vec3(direction.y * RangedRandomFloat(-random_level_scale.x + wall_offset, random_level_scale.x - wall_offset), 0.0, direction.x * RangedRandomFloat(-random_level_scale.y + wall_offset, random_level_scale.y - wall_offset));
+            position += vec3(direction.y * RangedRandomFloat(-room_scale.x + wall_offset, room_scale.x - wall_offset), 0.0, direction.x * RangedRandomFloat(-room_scale.y + wall_offset, room_scale.y - wall_offset));
 
             //Create door.
             int door_id = CreateObject(DOOR_PATH);
@@ -126,8 +200,8 @@ void BuildLevel(){
     }
 
     //Create tables.
-    for(uint i = 0; i < 5; i++){
-        vec3 position = vec3(RangedRandomFloat(-random_level_scale.x, random_level_scale.x), 0.4, RangedRandomFloat(-random_level_scale.y, random_level_scale.y));
+    for(uint i = 0; i < 50; i++){
+        vec3 position = vec3(RangedRandomFloat(-room_scale.x, room_scale.x), 0.4, RangedRandomFloat(-room_scale.y, room_scale.y));
         string path;
 
         switch(rand() % 2){
@@ -179,22 +253,57 @@ void BuildLevel(){
     }
 
     //Create lights.
-    for(uint i = 0; i < 25; i++){
-        vec3 position = vec3(RangedRandomFloat(-random_level_scale.x, random_level_scale.x), RangedRandomFloat(0.0, 5.0), RangedRandomFloat(-random_level_scale.y, random_level_scale.y));
+    for(uint i = 0; i < 50; i++){
+        vec3 position = vec3(RangedRandomFloat(-room_scale.x, room_scale.x), RangedRandomFloat(0.0, 5.0), RangedRandomFloat(-room_scale.y, room_scale.y));
 
         int light_id = CreateObject(DYNAMIC_LIGHT_PATH);
         Object@ light = ReadObjectFromID(light_id);
         light.SetTranslation(position);
-        light.SetScale(vec3(RangedRandomFloat(1.0, 15.0)));
+        light.SetScale(vec3(RangedRandomFloat(5.0, 25.0)));
         // light.SetTint(vec3(RangedRandomFloat(-10.0, 25.0)));
-        // light.SetTint(vec3(RangedRandomFloat(-5.0, 5.0)));
-        light.SetTint(vec3(RangedRandomFloat(0.0, 5.0)));
+        light.SetTint(vec3(RangedRandomFloat(-5.0, 10.0)));
+        // light.SetTint(vec3(RangedRandomFloat(2.0, 10.0)));
 
         object_ids.insertLast(light_id);
     }
+}
 
-    refresh_counter = 5;
+void PlaceKey(){
+    //Create key.
+    key_id = CreateObject(KEY_PATH);
+    Object@ key = ReadObjectFromID(key_id);
 
+    float offset =  1.0;
+    vec3 random_key_position = vec3(RangedRandomFloat(-room_scale.x + offset, room_scale.x - offset), 4.5, RangedRandomFloat(-room_scale.y + offset, room_scale.y - offset));
+    vec3 ray_collision = col.GetRayCollision(random_key_position, random_key_position - vec3(0.0, 10.0, 0.0));
+    key.SetTranslation(ray_collision + vec3(0.0, 0.5, 0.0));
+    key.SetScale(key.GetScale() + vec3(2.0));
+    object_ids.insertLast(key_id);
+
+    array<int> children = key.GetChildren();
+    for(uint j = 0; j < children.size(); j++){
+        refresh_children.insertLast(children[j]);
+    }
+}
+
+void ReceiveMessage(string msg) {
+    TokenIterator token_iter;
+    token_iter.Init();
+    if(!token_iter.FindNextToken(msg)){
+        return;
+    }
+    string token = token_iter.GetToken(msg);
+    if(token == "show_pickup_ui"){
+        token_iter.FindNextToken(msg);
+        show_pickup_ui = token_iter.GetToken(msg) == "true";
+    }else if(token == "pickup_key"){
+        QueueDeleteObjectID(key_id);
+    }else if(token == "show_door_ui"){
+        token_iter.FindNextToken(msg);
+        show_door_ui = token_iter.GetToken(msg) == "true";
+    }else if(token == "open_door"){
+        
+    }
 }
 
 void MovePlayer(){
@@ -214,13 +323,52 @@ void DeleteLevel(){
     }
 
     object_ids.resize(0);
-    post_init_done = false;
+
+    for(int i = 0; i < GetNumCharacters(); i++){
+        MovementObject@ char = ReadCharacter(i);
+
+        if(char.is_player){
+            char.Execute("has_key = false;");
+        }
+    }
 }
 
 void DrawGUI(){
 	if(EditorModeActive()){
 		return;
 	}
+
+    bool use_keyboard = (max(last_mouse_event_time, last_keyboard_event_time) > last_controller_event_time);
+
+    if(show_pickup_ui){
+        int font_size = 200;
+        string font_path = "Data/Fonts/Lato-Regular.ttf";
+
+        string display_text = "Press " + GetStringDescriptionForBinding(use_keyboard ? "key" : "gamepad_0", "item") + " to\nPickup Key";
+
+        vec2 pos(GetScreenWidth() *0.5, GetScreenHeight() *0.3);
+        TextMetrics metrics = GetTextAtlasMetrics(font_path, font_size, 0, display_text);
+        pos.x -= metrics.bounds_x * 0.5;
+        DrawTextAtlas(font_path, font_size + 5, 0, display_text,
+                        int(pos.x-6), int(pos.y-4), vec4(vec3(0.0f), 0.75));
+        DrawTextAtlas(font_path, font_size, 0, display_text,
+                        int(pos.x), int(pos.y), vec4(vec3(1.0f), 1.0));
+    }
+
+    if(show_door_ui){
+        int font_size = 200;
+        string font_path = "Data/Fonts/Lato-Regular.ttf";
+
+        string display_text = "Press " + GetStringDescriptionForBinding(use_keyboard ? "key" : "gamepad_0", "item") + " to\nOpen door";
+
+        vec2 pos(GetScreenWidth() *0.5, GetScreenHeight() *0.3);
+        TextMetrics metrics = GetTextAtlasMetrics(font_path, font_size, 0, display_text);
+        pos.x -= metrics.bounds_x * 0.5;
+        DrawTextAtlas(font_path, font_size + 5, 0, display_text,
+                        int(pos.x-6), int(pos.y-4), vec4(vec3(0.0f), 0.75));
+        DrawTextAtlas(font_path, font_size, 0, display_text,
+                        int(pos.x), int(pos.y), vec4(vec3(1.0f), 1.0));
+    }
 
 	float width = GetScreenWidth();
 	float height = GetScreenHeight();

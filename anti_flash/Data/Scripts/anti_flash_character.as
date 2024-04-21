@@ -347,6 +347,8 @@ bool g_is_throw_trainer;
 float g_throw_counter_probability;
 int group_leader = -1;
 int last_num_frames = 1;
+int key_id = -1;
+bool has_key = false;
 
 void Update(int num_frames) {
 	Timestep ts(time_step, num_frames);
@@ -364,6 +366,7 @@ void Update(int num_frames) {
 		UpdateFootsteps();
 		UpdateDebugKeys();
 		UpdateAttackPosition();
+		UpdateKeyPickup();
 	}else{
 		this_mo.velocity = vec3(0.0f);
 	}
@@ -380,7 +383,40 @@ void UpdateDebugKeys(){
 	}
 }
 
+void UpdateKeyPickup(){
+	col.GetObjRayCollision(camera.GetPos(), camera.GetPos() + (camera.GetFacing() * 2.5f));
+
+	for(int i = 0; i < sphere_col.NumContacts(); i++){
+		CollisionPoint contact = sphere_col.GetContact(i);
+
+		if(ObjectExists(contact.id)){
+			Object@ obj = ReadObjectFromID(contact.id);
+			ScriptParams@ params = obj.GetScriptParams();
+
+			if(params.HasParam("Key Collider")){
+				level.SendMessage("show_pickup_ui true");
+				if(GetInputPressed(0, "e")){
+					has_key = true;
+					level.SendMessage("pickup_key");
+				}
+				return;
+			}else if(has_key && params.HasParam("Door Collider")){
+				level.SendMessage("show_door_ui true");
+				if(GetInputPressed(0, "e")){
+					level.SendMessage("open_door");
+				}
+				return;
+			}
+		}
+	}
+
+	level.SendMessage("show_pickup_ui false");
+	level.SendMessage("show_door_ui false");
+}
+
 void UpdateAttackPosition(){
+	// dof_distance = 0.0;
+	// dof_far = 0.5;
 	if(aiming_amount < 0.5){return;}
 	vec3 forward = camera.GetFacing();
 	vec3 cam_pos = camera.GetPos();

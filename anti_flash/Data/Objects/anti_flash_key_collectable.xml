@@ -1,0 +1,22 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="43.1978" t1="4.59203" t2="-127.276" s0="2.01" s1="2.01" s2="2.00999" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="415" version="1">
+        <parameters />
+        <DynamicLightObject t0="43.1978" t1="4.59203" t2="-127.276" s0="2" s1="2" s2="2" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" color_r="1" color_g="0.99999" color_b="0.99999" overbright="4.155">
+            <parameters>
+                <parameter name="Key Light" type="string" val="" />
+            </parameters>
+        </DynamicLightObject>
+        <EnvObject t0="43.1921" t1="4.47542" t2="-127.329" s0="0.1" s1="0.1" s2="0.1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="414" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/anti_flash_key.xml">
+            <parameters>
+                <parameter name="Key Model" type="string" val="" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="43.2012" t1="4.48573" t2="-127.285" s0="0.263625" s1="0.263625" s2="0.263625" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="416" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/invisibleblock.xml">
+            <parameters>
+                <parameter name="Key Collider" type="string" val="" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

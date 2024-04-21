@@ -237,7 +237,7 @@ void main() {
 	vec4 colormap = vec4(0.0);
 	vec4 instance_color_tint = GetInstancedColorTint(instance_id);
 	out_color = instance_color_tint;
-	vec3 highlight_color = vec3(0.00);
+	vec3 highlight_color = vec3(0.0);
 
 	//----------------------------------------------------------------------------------
 	//Apply lighting--------------------------------------------------------------------
@@ -322,6 +322,10 @@ void main() {
 		out_color.rgb = mix(vec3(1.0), highlight_color, lines_tex.g * (out_color.r * 2.0));
 	}
 
+	#if defined(KEY)
+		out_color.rgb = vec3(1.0, 0.0, 0.0);
+	#endif
+
 	//----------------------------------------------------------------------------------
 	// Add edges-------------------------------------------------------------------------
 	//----------------------------------------------------------------------------------
@@ -358,6 +362,10 @@ void main() {
 	normal_diff = clamp(normal_diff, 0.0, 1.0);
 
 	out_color.rgb = mix(out_color.rgb, highlight_color, normal_diff);
+
+	#if defined(KEY)
+		out_color.rgb = vec3(1.0, 0.0, 0.0);
+	#endif
 
 	// out_color.rgb = highlight_color;
 	
