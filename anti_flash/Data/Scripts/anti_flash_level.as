@@ -25,10 +25,63 @@ bool show_door_ui = false;
 int creation_stage = REMOVE_PLAYER;
 vec2 room_scale;
 int key_id = -1;
+float blackout_amount = 1.0;
+bool blackout = true;
+int preset_index = 0;
+
+class Preset{
+    float room_size_y_min;
+    float room_size_y_max;
+    float room_size_x_min;
+    float room_size_x_max;
+
+    int light_amount;
+    float light_min;
+    float light_max;
+
+    int furniture_amount;
+
+    Preset( float room_size_y_min, 
+            float room_size_y_max,
+            float room_size_x_min,
+            float room_size_x_max,
+
+            int light_amount,
+            float light_min,
+            float light_max,
+
+            int furniture_amount){
+
+
+        this.room_size_y_min = room_size_y_min;
+        this.room_size_y_max = room_size_y_max;
+        this.room_size_x_min = room_size_x_min;
+        this.room_size_x_max = room_size_x_max;
+
+        this.light_amount = light_amount;
+        this.light_min = light_min;
+        this.light_max = light_max;
+
+        this.furniture_amount = furniture_amount;
+    }
+}
+
+array<Preset@> presets = {  Preset(5.0,    15.0,   5.0,     15.0,   15,  1.0,   5.0,    25),
+                            Preset(5.0,    10.0,   5.0,     10.0,   20,  1.0,   10.0,   10),
+                            Preset(7.0,    10.0,   7.0,     10.0,   20, -1.0,   10.0,   10),
+                            Preset(5.0,    6.0,    9.0,     10.0,   20, -1.0,   10.0,   15),
+                            Preset(10.0,   20.0,   2.0,     5.0,    20, -1.0,   10.0,   15),
+                            Preset(15.0,   25.0,   15.0,    25.0,   30,  1.0,   15.0,   20),
+                            Preset(15.0,   25.0,   15.0,    25.0,   30, -5.0,   10.0,   30),
+                            Preset(25.0,   35.0,   25.0,    35.0,   35, -5.0,   5.0,    40),
+                            Preset(35.0,   45.0,   35.0,    45.0,   50, -5.0,   15.0,   45)
+                        };
 
 enum CreationStages{
+    NEXT_ROOM,
     REMOVE_PLAYER,
     BUILD_ROOM,
+    WAIT,
     PLACE_KEY,
     PLACE_PLAYER,
     DONE
@@ -40,12 +93,12 @@ void Init(string level_name){
 
 void Update(){
     PostInit();
-
-    // RefreshChildren();
+    UpdateBlackout();
 
     if(GetInputPressed(0, "b")){
-        DeleteLevel();
-        creation_stage = REMOVE_PLAYER;
+        blackout = true;
+        PlaySong("silence");
+        creation_stage = NEXT_ROOM;
     }else{
         UpdateCreationStage();
     }
@@ -57,6 +110,9 @@ void Update(){
 void UpdateCreationStage(){
 
     switch(creation_stage){
+        case NEXT_ROOM:
+            NextRoom();
+            break;
         case REMOVE_PLAYER:
             RemovePlayer();
             creation_stage++;
@@ -65,21 +121,46 @@ void UpdateCreationStage(){
             BuildRoom();
             creation_stage++;
             break;
+        case WAIT:
+            RefreshAllChildren();
+            creation_stage++;
+            break;
         case PLACE_KEY:
-            RefreshChildren();
             PlaceKey();
             creation_stage++;
             break;
         case PLACE_PLAYER:
-            RefreshChildren();
             PlacePlayer();
+            blackout = false;
+            PlaySong("anti_flash");
             creation_stage++;
+            break;
+        case DONE:
+            RefreshChildren();
             break;
     }
 }
 
+void NextRoom(){
+    if(blackout_amount > 0.99){
+        if(preset_index >= int(presets.size())){
+            DeleteRoom();
+            creation_stage = PLACE_PLAYER;
+        }else{
+            DeleteRoom();
+            creation_stage++;
+        }
+    }
+}
+
+void UpdateBlackout(){
+    blackout_amount = mix(blackout_amount, blackout ? 1.0 : 0.0, time_step * 5.0);
+}
+
 void PostInit(){
     if(post_init_done)return;
+
+    AddMusic("Data/Music/anti_flash.xml");
 
     post_init_done = true;
 }
@@ -110,17 +191,8 @@ void PlacePlayer(){
     }
 }
 
-void RefreshChildren(){
-    // if(refresh_children.size() > 0){
-
-    //     if(ObjectExists(refresh_children[0])){
-    //         Object@ child = ReadObjectFromID(refresh_children[0]);
-    //         child.SetTranslation(child.GetTranslation());
-    //     }
-
-    //     refresh_children.removeAt(0);
-    // }
-
+void RefreshAllChildren(){
+   
     for(uint i = 0; i < refresh_children.size(); i++){
 
         if(ObjectExists(refresh_children[i])){
@@ -130,11 +202,24 @@ void RefreshChildren(){
 
     }
 
-    refresh_children.resize(0);
+    // refresh_children.resize(0);
+}
+
+void RefreshChildren(){
+    if(refresh_children.size() > 0){
+
+        if(ObjectExists(refresh_children[0])){
+            Object@ child = ReadObjectFromID(refresh_children[0]);
+            child.SetTranslation(child.GetTranslation());
+        }
+
+        refresh_children.removeAt(0);
+    }
 }
 
 void BuildRoom(){
-    room_scale = vec2(RangedRandomFloat(5.0, 15.0), RangedRandomFloat(5.0, 15.0));
+    Preset@ preset = presets[preset_index];
+    room_scale = vec2(RangedRandomFloat(preset.room_size_x_min, preset.room_size_x_max), RangedRandomFloat(preset.room_size_y_min, preset.room_size_y_max));
 
     //Create floor.
     int floor_id = CreateObject(BLOCK_PATH);
@@ -200,7 +285,7 @@ void BuildRoom(){
     }
 
     //Create tables.
-    for(uint i = 0; i < 50; i++){
+    for(int i = 0; i < preset.furniture_amount; i++){
         vec3 position = vec3(RangedRandomFloat(-room_scale.x, room_scale.x), 0.4, RangedRandomFloat(-room_scale.y, room_scale.y));
         string path;
 
@@ -253,16 +338,14 @@ void BuildRoom(){
     }
 
     //Create lights.
-    for(uint i = 0; i < 50; i++){
+    for(int i = 0; i < preset.light_amount; i++){
         vec3 position = vec3(RangedRandomFloat(-room_scale.x, room_scale.x), RangedRandomFloat(0.0, 5.0), RangedRandomFloat(-room_scale.y, room_scale.y));
 
         int light_id = CreateObject(DYNAMIC_LIGHT_PATH);
         Object@ light = ReadObjectFromID(light_id);
         light.SetTranslation(position);
         light.SetScale(vec3(RangedRandomFloat(5.0, 25.0)));
-        // light.SetTint(vec3(RangedRandomFloat(-10.0, 25.0)));
-        light.SetTint(vec3(RangedRandomFloat(-5.0, 10.0)));
-        // light.SetTint(vec3(RangedRandomFloat(2.0, 10.0)));
+        light.SetTint(vec3(RangedRandomFloat(preset.light_min, preset.light_max)));
 
         object_ids.insertLast(light_id);
     }
@@ -276,14 +359,18 @@ void PlaceKey(){
     float offset =  1.0;
     vec3 random_key_position = vec3(RangedRandomFloat(-room_scale.x + offset, room_scale.x - offset), 4.5, RangedRandomFloat(-room_scale.y + offset, room_scale.y - offset));
     vec3 ray_collision = col.GetRayCollision(random_key_position, random_key_position - vec3(0.0, 10.0, 0.0));
+
     key.SetTranslation(ray_collision + vec3(0.0, 0.5, 0.0));
-    key.SetScale(key.GetScale() + vec3(2.0));
-    object_ids.insertLast(key_id);
+
+    vec3 base_scale = key.GetScale();
+    key.SetScale(base_scale + vec3(2.00 + RangedRandomFloat(0.0, 0.001)));
 
     array<int> children = key.GetChildren();
     for(uint j = 0; j < children.size(); j++){
         refresh_children.insertLast(children[j]);
     }
+
+    object_ids.insertLast(key_id);
 }
 
 void ReceiveMessage(string msg) {
@@ -302,7 +389,12 @@ void ReceiveMessage(string msg) {
         token_iter.FindNextToken(msg);
         show_door_ui = token_iter.GetToken(msg) == "true";
     }else if(token == "open_door"){
-        
+        blackout = true;
+        preset_index++;
+        creation_stage = NEXT_ROOM;
+    }else if(token == "reset"){
+        blackout = true;
+        creation_stage = NEXT_ROOM;
     }
 }
 
@@ -316,10 +408,10 @@ void MovePlayer(){
     }
 }
 
-void DeleteLevel(){
+void DeleteRoom(){
 
     for(uint i = 0; i < object_ids.size(); i++){
-        QueueDeleteObjectID(object_ids[i]);
+        DeleteObjectID(object_ids[i]);
     }
 
     object_ids.resize(0);
@@ -390,7 +482,7 @@ void DrawGUI(){
 	float black_vignette_amount = black_vignette_base + black_vignette_added;
 
 	HUDImage @black_vignette_image = hud.AddImage();
-	black_vignette_image.SetImageFromPath("Data/Textures/fps_vignette_black.tga");
+	black_vignette_image.SetImageFromPath("Data/Textures/anti_flash_vignette_black.tga");
 	black_vignette_image.position.y = 0.0f;
 	black_vignette_image.position.x = 0.0f;
 	black_vignette_image.position.z = -5.0f;
@@ -398,10 +490,18 @@ void DrawGUI(){
 	black_vignette_image.color = vec4(0.0f, 0.0f, 0.0f, black_vignette_amount);
 
 	HUDImage @red_vignette_image = hud.AddImage();
-	red_vignette_image.SetImageFromPath("Data/Textures/fps_vignette_white.tga");
+	red_vignette_image.SetImageFromPath("Data/Textures/anti_flash_vignette_white.tga");
 	red_vignette_image.position.y = 0.0f;
 	red_vignette_image.position.x = 0.0f;
 	red_vignette_image.position.z = -4.0f;
 	red_vignette_image.scale = vec3(width / red_vignette_image.GetWidth(), height / red_vignette_image.GetHeight(), 1.0);
 	red_vignette_image.color = vec4(1.0f, 0.0f, 0.0f, red_vignette_amount);
+
+    HUDImage @blackout_image = hud.AddImage();
+    blackout_image.SetImageFromPath("Data/Textures/diffuse.tga");
+    blackout_image.position.y = (GetScreenWidth() + GetScreenHeight())*-1.0f;
+    blackout_image.position.x = (GetScreenWidth() + GetScreenHeight())*-1.0f;
+    blackout_image.position.z = -2.0f;
+    blackout_image.scale = vec3(GetScreenWidth() + GetScreenHeight())*2.0f;
+    blackout_image.color = vec4(0.0f,0.0f,0.0f,blackout_amount);
 }

@@ -395,14 +395,18 @@ void UpdateKeyPickup(){
 
 			if(params.HasParam("Key Collider")){
 				level.SendMessage("show_pickup_ui true");
-				if(GetInputPressed(0, "e")){
+				if(GetInputPressed(0, "item")){
 					has_key = true;
+					int sound_id = PlaySound("Data/Sounds/shell3.wav");
+					SetSoundGain(sound_id, 5.0);
 					level.SendMessage("pickup_key");
 				}
 				return;
 			}else if(has_key && params.HasParam("Door Collider")){
 				level.SendMessage("show_door_ui true");
-				if(GetInputPressed(0, "e")){
+				if(GetInputPressed(0, "item")){
+					int sound_id = PlaySoundGroup("Data/Sounds/ambient/boat_creak.xml");
+					SetSoundGain(sound_id, 15.0);
 					level.SendMessage("open_door");
 				}
 				return;
