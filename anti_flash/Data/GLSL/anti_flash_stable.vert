@@ -64,19 +64,20 @@ void main() {
 	tex_coord[1] = 1.0 - tex_coord[1];
 
 	// vec4 instance_rotation = GetInstancedModelRotationQuat(instance_id);
-	vec3 instance_translation = model_translation_attrib;
+	mat4 model_mat = instances[gl_InstanceID].model_mat;
 	vec3 instance_vertex = vertex_attrib;
 
 	#if defined(KEY)
-		// instance_rotation.x += sin(time) * 0.2;
-		// instance_rotation.y += sin(time * 0.96) * 0.2;
-		// instance_rotation.z += sin(time * 0.98) * 0.2;
+		model_mat[0][0] += sin(time) * 0.1;
+		model_mat[0][1] += sin(time * 0.96) * 0.1;
+		model_mat[0][2] += sin(time * 0.98) * 0.1;
+		model_mat[1][0] += sin(time * 0.98) * 0.1;
+		model_mat[1][2] += sin(time * 0.98) * 0.1;
 		instance_vertex.y += sin(time) / 2.0;
 	#endif
 
-	vec3 transformed_vertex = (instances[gl_InstanceID].model_mat * vec4(instance_vertex, 1.0)).xyz;
+	vec3 transformed_vertex = (model_mat * vec4(instance_vertex, 1.0)).xyz;
 
-    // vec3 transformed_vertex = transform_vec3(GetInstancedModelScale(instance_id), instance_rotation, instance_translation, instance_vertex);
 	model_position = model_translation_attrib;
 
     world_vert = transformed_vertex;

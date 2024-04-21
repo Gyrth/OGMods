@@ -295,7 +295,14 @@ void main() {
 	//----------------------------------------------------------------------------------
 	// Add edges-------------------------------------------------------------------------
 	//----------------------------------------------------------------------------------
-	vec3 model_scale = vec3(1.0);
+	vec3 model_scale;
+
+	mat4 model_mat = instances[instance_id].model_mat;
+	model_scale.x = length(model_mat[0]);
+	model_scale.y = length(model_mat[1]);
+	model_scale.z = length(model_mat[2]);
+	model_scale *= 10.0;
+
 	float highest_scale = max(model_scale.x, max(model_scale.y, model_scale.z));
 	float line_size = distance(cam_pos, model_position);
 	vec2 pixel_size = vec2(1.0 / texture_size) * line_size / highest_scale;
