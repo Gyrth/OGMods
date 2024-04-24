@@ -218,19 +218,17 @@ void main() {
 	vec3 flame_final_color = vec3(0.0, 0.0, 0.0);
 	float flame_final_contrib = 0.0;
 
-	vec4 shadow_coords[4];
+	#if !defined(DEPTH_ONLY) && !defined(NO_DECALS)
+		vec4 shadow_coords[4];
 
-	#if !defined(DEPTH_ONLY)
 		shadow_coords[0] = shadow_matrix[0] * vec4(world_vert, 1.0);
 		shadow_coords[1] = shadow_matrix[1] * vec4(world_vert, 1.0);
 		shadow_coords[2] = shadow_matrix[2] * vec4(world_vert, 1.0);
 		shadow_coords[3] = shadow_matrix[3] * vec4(world_vert, 1.0);
-	#endif
 
-	float shadow = GetCascadeShadow(shadow_sampler, shadow_coords, distance(cam_pos, world_vert));
-	out_color.xyz *= mix(0.1, 1.0, shadow);
+		float shadow = GetCascadeShadow(shadow_sampler, shadow_coords, distance(cam_pos, world_vert));
+		out_color.xyz *= mix(0.1, 1.0, shadow);
 
-	#if !defined(DEPTH_ONLY) && !defined(NO_DECALS)
 
 		vec3 decal_diffuse_color = vec3(0.0);
 
