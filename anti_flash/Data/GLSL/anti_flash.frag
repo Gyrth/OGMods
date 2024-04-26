@@ -191,7 +191,7 @@ void main() {
 	//----------------------------------------------------------------------------------
 
 	vec4 instance_color_tint = GetInstancedColorTint(instance_id);
-	out_color = instance_color_tint;
+	out_color = vec4(instance_color_tint.rgb, 1.0);
 	vec3 highlight_color = vec3(0.0);
 
 	//----------------------------------------------------------------------------------
