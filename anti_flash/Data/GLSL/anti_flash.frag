@@ -1,6 +1,9 @@
 #version 150
 #extension GL_ARB_shading_language_420pack : enable
 
+#og_version_major 1
+#og_version_minor 5
+
 uniform float time;
 uniform vec3 cam_pos;
 
@@ -16,16 +19,7 @@ uniform sampler2D base_normal_tex;
 #define base_color_tex tex6
 in vec3 model_position;
 
-// uniform sampler2D tex1;
-// uniform sampler2D tex2;
 uniform sampler2D tex3; // Diffuse cubemap
-// uniform sampler2D tex4;
-// uniform sampler2D tex5;
-// uniform sampler2D tex8;
-// uniform sampler2D tex9;
-// uniform sampler2D tex10;
-
-// uniform sampler2D base_color_tex;
 
 UNIFORM_DETAIL4_TEXTURES
 
@@ -88,26 +82,16 @@ vec4 GetInstancedColorTint(int instance_id) {
 	#endif
 }
 
-#if defined(DETAILMAP4)
-	vec4 GetInstancedDetailScale(int instance_id) {
-		#if defined(ATTRIB_ENVOBJ_INSTANCING)
-			return detail_scale_frag;
-		#else
-			return instances[instance_id].detail_scale;
-		#endif
-	}
-#endif
-
 #if defined(TANGENT)
 	#if defined(USE_GEOM_SHADER)
 		in mat3 tan_to_obj_fs;
 
 		#define tan_to_obj tan_to_obj_fs
 	#else
+		in mat3 tan_to_obj;
 	#endif
 #endif
 
-in mat3 tan_to_obj;
 
 #if defined(USE_GEOM_SHADER)
 	in vec2 frag_tex_coords_fs;
@@ -146,34 +130,6 @@ const float PI = 3.141592653589793;
 uniform int stipple[64];
 
 #include "decals.glsl"
-
-// From http://www.thetenthplanet.de/archives/1180
-mat3 cotangent_frame( vec3 N, vec3 p, vec2 uv )
-{
-	// get edge vectors of the pixel triangle
-	vec3 dp1 = dFdx( p );
-	vec3 dp2 = dFdy( p );
-	vec2 duv1 = dFdx( uv );
-	vec2 duv2 = dFdy( uv );
-
-	// solve the linear system
-	vec3 dp2perp = cross( dp2, N );
-	vec3 dp1perp = cross( N, dp1 );
-	vec3 T = dp2perp * duv1.x + dp1perp * duv2.x;
-	vec3 B = dp2perp * duv1.y + dp1perp * duv2.y;
-
-	// construct a scale-invariant frame
-	float invmax = inversesqrt( max( dot(T,T), dot(B,B) ) );
-	return mat3( T * invmax, B * invmax, N );
-}
-
-float CloudShadow(vec3 pos){
-	#if defined(TEST_CLOUDS_2) && !defined(DEPTH_ONLY) && !defined(CLOUDS_DO_NOT_CAST_SHADOWS)
-		return max(0.0, fractal(pos.zx*0.05+vec2(0.0,time*cloud_speed))*2.0+1.0);
-	#else
-		return 1.0;
-	#endif
-}
 
 float normalIndicator(vec3 normalEdgeBias, vec3 baseNormal, vec3 newNormal, float depth_diff){
 	// Credit: https://threejs.org/examples/webgl_postprocessing_pixel.html
@@ -234,7 +190,6 @@ void main() {
 
 	//----------------------------------------------------------------------------------
 
-	vec4 colormap = vec4(0.0);
 	vec4 instance_color_tint = GetInstancedColorTint(instance_id);
 	out_color = instance_color_tint;
 	vec3 highlight_color = vec3(0.0);
@@ -252,30 +207,31 @@ void main() {
 	vec3 flame_final_color = vec3(0.0, 0.0, 0.0);
 	float flame_final_contrib = 0.0;
 
-	vec4 shadow_coords[4];
-
 	#if !defined(DEPTH_ONLY)
+		vec4 shadow_coords[4];
+
 		shadow_coords[0] = shadow_matrix[0] * vec4(world_vert, 1.0);
 		shadow_coords[1] = shadow_matrix[1] * vec4(world_vert, 1.0);
 		shadow_coords[2] = shadow_matrix[2] * vec4(world_vert, 1.0);
 		shadow_coords[3] = shadow_matrix[3] * vec4(world_vert, 1.0);
-	#endif
 
-	float shadow = GetCascadeShadow(shadow_sampler, shadow_coords, distance(cam_pos, world_vert));
-	out_color.xyz *= mix(0.1, 1.0, shadow);
+		float shadow = GetCascadeShadow(shadow_sampler, shadow_coords, distance(cam_pos, world_vert));
+		out_color.xyz *= mix(0.1, 1.0, shadow);
+	#endif
 
 	#if !defined(DEPTH_ONLY) && !defined(NO_DECALS)
 
 		vec3 decal_diffuse_color = vec3(0.0);
 
 		{
-			CalculateDecals(out_color, ws_normal, spec_amount, roughness, preserve_wetness, ambient_mult, env_ambient_mult, decal_diffuse_color, world_vert, time, decal_val, flame_final_color, flame_final_contrib);
+			// CalculateDecals(out_color, ws_normal, spec_amount, roughness, preserve_wetness, ambient_mult, env_ambient_mult, decal_diffuse_color, world_vert, time, decal_val, flame_final_color, flame_final_contrib);
 		}
 
 		vec3 spec_color = vec3(0.0);
 		vec3 light_contrib = out_color.xyz;
 		CalculateLightContrib(light_contrib, spec_color, ws_vertex, world_vert, ws_normal, roughness, light_val, ambient_mult);
 		out_color.rgb = light_contrib;
+		
 	#endif
 
 	// vec3 shadow_tex = vec3(0.0);

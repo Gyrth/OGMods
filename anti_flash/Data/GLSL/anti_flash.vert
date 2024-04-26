@@ -1,22 +1,13 @@
 #version 150
 #extension GL_ARB_shading_language_420pack : enable
+
+#og_version_major 1
+#og_version_minor 5
+
 #include "lighting150.glsl"
 
-vec3 quat_mul_vec3(vec4 q, vec3 v) {
-	// Adapted from https://github.com/g-truc/glm/blob/master/glm/detail/type_quat.inl
-	// Also from Fabien Giesen, according to - https://blog.molecular-matters.com/2013/05/24/a-faster-quaternion-vector-multiplication/
-	vec3 quat_vector = q.xyz;
-	vec3 uv = cross(quat_vector, v);
-	vec3 uuv = cross(quat_vector, uv);
-	return v + ((uv * q.w) + uuv) * 2;
-}
-
-vec3 transform_vec3(vec3 scale, vec4 rotation_quat, vec3 translation, vec3 value) {
-	vec3 result = scale * value;
-	result = quat_mul_vec3(rotation_quat, result);
-	result += translation;
-	return result;
-}
+in vec3 vertex_attrib;
+in vec2 tex_coord_attrib;
 
 in vec3 model_translation_attrib;  // set per-instance. separate from rest because it's not needed in the fragment shader, so is not slow on low-end GPUs
 
@@ -80,27 +71,43 @@ uniform mat4 shadow_matrix[4];
 uniform float time;
 uniform mat4 mvp;
 
-out vec2 frag_tex_coords;
 out mat3 tangent_to_world;
 out vec3 orig_vert;
 out vec2 tex_coord;
 out vec3 world_vert;
 out vec3 frag_normal;
 out vec3 model_position;
+out mat3 tan_to_obj;
+in vec3 tangent_attrib;
+in vec3 bitangent_attrib;
 flat out int instance_id;
 
-in vec3 vertex_attrib;
-in vec2 tex_coord_attrib;
 in vec3 normal_attrib;
+
+vec3 quat_mul_vec3(vec4 q, vec3 v) {
+	// Adapted from https://github.com/g-truc/glm/blob/master/glm/detail/type_quat.inl
+	// Also from Fabien Giesen, according to - https://blog.molecular-matters.com/2013/05/24/a-faster-quaternion-vector-multiplication/
+	vec3 quat_vector = q.xyz;
+	vec3 uv = cross(quat_vector, v);
+	vec3 uuv = cross(quat_vector, uv);
+	return v + ((uv * q.w) + uuv) * 2;
+}
+
+vec3 transform_vec3(vec3 scale, vec4 rotation_quat, vec3 translation, vec3 value) {
+	vec3 result = scale * value;
+	result = quat_mul_vec3(rotation_quat, result);
+	result += translation;
+	return result;
+}
 
 void main() {
     instance_id = gl_InstanceID;
 	int index = gl_VertexID;
 
-	frag_tex_coords = tex_coord_attrib;
-
 	tex_coord = tex_coord_attrib;
 	tex_coord[1] = 1.0 - tex_coord[1];
+
+	tan_to_obj = mat3(tangent_attrib, bitangent_attrib, normal_attrib);
 
 	vec4 instance_rotation = GetInstancedModelRotationQuat(instance_id);
 	vec3 instance_translation = model_translation_attrib;
