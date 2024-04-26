@@ -104,8 +104,7 @@ void main() {
 	vertex_color = texture(tex5, frag_tex_coords);
 	vec4 normal_color = texture(tex1, frag_tex_coords);
 
-	vec2 texture_size = textureSize(tex0, 0);
-	float target_resolution = int(texture_size.y);
+	float target_resolution = 4096.0;
 	float one_pixel_offset = (1.0 / target_resolution);
 	float half_pixel_offset = (1.0 / target_resolution) / 2.0;
 
