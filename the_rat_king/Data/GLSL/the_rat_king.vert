@@ -1,22 +1,12 @@
 #version 450 core
 
+#og_version_major 1
+#og_version_minor 5
+
 #include "lighting150.glsl"
 
-vec3 quat_mul_vec3(vec4 q, vec3 v) {
-	// Adapted from https://github.com/g-truc/glm/blob/master/glm/detail/type_quat.inl
-	// Also from Fabien Giesen, according to - https://blog.molecular-matters.com/2013/05/24/a-faster-quaternion-vector-multiplication/
-	vec3 quat_vector = q.xyz;
-	vec3 uv = cross(quat_vector, v);
-	vec3 uuv = cross(quat_vector, uv);
-	return v + ((uv * q.w) + uuv) * 2;
-}
-
-vec3 transform_vec3(vec3 scale, vec4 rotation_quat, vec3 translation, vec3 value) {
-	vec3 result = scale * value;
-	result = quat_mul_vec3(rotation_quat, result);
-	result += translation;
-	return result;
-}
+in vec3 vertex_attrib;
+in vec2 tex_coord_attrib;
 
 in vec3 model_translation_attrib;  // set per-instance. separate from rest because it's not needed in the fragment shader, so is not slow on low-end GPUs
 
@@ -93,8 +83,6 @@ uniform float time;
 
 in vec3 tangent_attrib;
 in vec3 bitangent_attrib;
-in vec3 vertex_attrib;
-in vec2 tex_coord_attrib;
 in vec3 normal_attrib;
 in vec3 plant_stability_attrib;
 
@@ -118,65 +106,9 @@ uniform vec4 detail_normal_indices;
 
 const vec3 bounds = vec3(2.0, 2.0, 2.0);
 
-const float SRGB_GAMMA = 1.0 / 2.2;
-const float SRGB_INVERSE_GAMMA = 2.2;
-const float SRGB_ALPHA = 0.055;
-
 float DecodeFloatRG(vec2 enc){
 	vec2 kDecodeDot = vec2(1.0, 1.0 / 256.0);
 	return dot(enc, kDecodeDot);
-}
-
-vec2 EncodeFloatRG(float v){
-	vec2 kEncodeMul = vec2(1.0, 255.0);
-	float kEncodeBit = 1.0 / 255.0;
-	vec2 enc = kEncodeMul * v;
-
-	enc.x = mod(enc.x, 1.0);
-	enc.y = mod(enc.y, 1.0);
-
-	enc.x -= enc.y * kEncodeBit;
-
-	return enc;
-}
-
-// Converts a single linear channel to srgb
-float linear_to_srgb(float channel) {
-    if(channel <= 0.0031308)
-        return 12.92 * channel;
-    else
-        return (1.0 + SRGB_ALPHA) * pow(channel, 1.0/2.4) - SRGB_ALPHA;
-}
-
-// Converts a linear rgb color to a srgb color (exact, not approximated)
-vec4 rgba_to_srgb(vec4 rgba) {
-    return vec4(
-        linear_to_srgb(rgba.r),
-        linear_to_srgb(rgba.g),
-        linear_to_srgb(rgba.b),
-		rgba.a
-    );
-}
-
-// Converts a linear rgb color to a srgb color (approximated, but fast)
-vec4 rgba_to_srgb_approx(vec4 rgba) {
-    return vec4(pow(rgba.rgb, vec3(SRGB_GAMMA)), rgba.a);
-}
-
-vec4 NormalizeColor(in vec4 value){
-  vec4 denorm = value * 255.0;
-  vec4 rounded = round(denorm);
-  return rounded / 255.0;
-}
-
-vec4 GammaCorrect(vec4 value){
-	float gamma = 2.2;
-    return vec4(pow(value.rgb, vec3(1.0 / gamma)), value.a);
-}
-
-vec4 GammaUnCorrect(vec4 value){
-	float gamma = 1.0 / 2.2;
-	return vec4(255 * pow(value.r / 255, gamma), 255 * pow(value.g / 255, gamma), 255 * pow(value.b / 255, gamma), value.a);
 }
 
 // Converts a color from linear light gamma to sRGB gamma
@@ -189,14 +121,20 @@ vec4 fromLinear(vec4 linearRGB)
     return mix(higher, lower, cutoff);
 }
 
-// Converts a color from sRGB gamma to linear light gamma
-vec4 toLinear(vec4 sRGB)
-{
-    bvec4 cutoff = lessThan(sRGB, vec4(0.04045));
-    vec4 higher = pow((sRGB + vec4(0.055))/vec4(1.055), vec4(2.4));
-    vec4 lower = sRGB/vec4(12.92);
+vec3 quat_mul_vec3(vec4 q, vec3 v) {
+	// Adapted from https://github.com/g-truc/glm/blob/master/glm/detail/type_quat.inl
+	// Also from Fabien Giesen, according to - https://blog.molecular-matters.com/2013/05/24/a-faster-quaternion-vector-multiplication/
+	vec3 quat_vector = q.xyz;
+	vec3 uv = cross(quat_vector, v);
+	vec3 uuv = cross(quat_vector, uv);
+	return v + ((uv * q.w) + uuv) * 2;
+}
 
-    return mix(higher, lower, cutoff);
+vec3 transform_vec3(vec3 scale, vec4 rotation_quat, vec3 translation, vec3 value) {
+	vec3 result = scale * value;
+	result = quat_mul_vec3(rotation_quat, result);
+	result += translation;
+	return result;
 }
 
 void main() {
@@ -240,6 +178,6 @@ void main() {
 	vec3 animated_vertex_position = vertex_attrib - vertex_position;
 	vec3 transformed_vertex = transform_vec3(GetInstancedModelScale(instance_id), GetInstancedModelRotationQuat(instance_id), model_translation_attrib, animated_vertex_position);
 
-	gl_Position = projection_view_mat * vec4(transformed_vertex, 1.0);
 	world_vert = transformed_vertex;
+	gl_Position = projection_view_mat * vec4(transformed_vertex, 1.0);
 }

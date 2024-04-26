@@ -1,5 +1,8 @@
 #version 450 core
 
+#og_version_major 1
+#og_version_minor 5
+
 uniform float time;
 uniform vec3 cam_pos;
 
@@ -203,9 +206,8 @@ vec3 GetAmbientColor(vec3 world_vert, vec3 ws_normal) {
 }
 
 void main() {
-	#ifdef NO_INSTANCE_ID
-		int instance_id;
-		return;
+	#if defined(NO_INSTANCE_ID)
+		int instance_id = 0;
 	#endif
 
 	vec4 colormap;
