@@ -235,6 +235,7 @@ class DrikaElement{
 
 	DrikaElement(){
 		node_position = vec2(125.0, 125.0 + (100.0f * drika_elements.size()));
+		@placeholder.parent = this;
 	}
 
 	~DrikaElement(){
@@ -564,6 +565,12 @@ class DrikaElement{
 	void RelativeTransform(vec3 origin, vec3 translation_offset, mat4 before_mat, mat4 after_mat){
 		placeholder.RelativeTranslate(translation_offset);
 		placeholder.RelativeRotate(origin, before_mat, after_mat);
+	}
+
+	// By default the placeholder object is disabled.
+	// Functions can override this function to return true when needed.
+	bool UsesPlaceholderObject(){
+		return false;
 	}
 }
 
