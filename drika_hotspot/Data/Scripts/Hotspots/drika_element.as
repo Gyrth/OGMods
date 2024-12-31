@@ -35,7 +35,8 @@ enum drika_element_types { 	none = 0,
 							drika_comment = 34,
 							drika_ai_control = 35,
 							drika_user_interface = 36,
-							drika_checkpoint = 37
+							drika_checkpoint = 37,
+							drika_campaign_control = 38
 						};
 
 array<string> drika_element_names = {	"None",
@@ -75,7 +76,8 @@ array<string> drika_element_names = {	"None",
 										"Comment",
 										"AI Control",
 										"User Interface",
-										"Checkpoint"
+										"Checkpoint",
+										"Campaign Control"
 									};
 
 array<string> sorted_element_names;
