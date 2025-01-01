@@ -22,8 +22,6 @@ class DrikaCampaignControl : DrikaElement{
 	array<string> level_titles = {};
 	array<string> level_ids = {};
 
-	bool campaign_supports_online;
-	bool campaign_requires_online;
 	string campaign_thumbnail_path;
 	TextureAssetRef campaign_thumbnail;
 	string campaign_main_script;
@@ -31,8 +29,6 @@ class DrikaCampaignControl : DrikaElement{
 
 	string level_thumbnail_path;
 	TextureAssetRef level_thumbnail;
-	bool level_supports_online;
-	bool level_requires_online;
 	string level_path;
 	bool level_completion_optional;
 
@@ -102,8 +98,6 @@ class DrikaCampaignControl : DrikaElement{
 	void GetCampaignInfo(){
 		Campaign campaign = GetCampaign(campaign_id);
 
-		campaign_supports_online = campaign.GetSupportsOnline();
-		campaign_requires_online = campaign.GetRequiresOnline();
 		campaign_thumbnail_path = campaign.GetThumbnail();
 
 		Log(warning, "Path : "+ campaign_thumbnail_path);
@@ -135,8 +129,6 @@ class DrikaCampaignControl : DrikaElement{
 			level_thumbnail = LoadTexture("Data/Textures/ui/main_menu/overgrowth.png", TextureLoadFlags_NoMipmap | TextureLoadFlags_NoConvert |TextureLoadFlags_NoReduce);
 		}
 
-		level_supports_online = level.GetSupportsOnline();
-		level_requires_online = level.GetRequiresOnline();
 		level_path = level.GetPath();
 		level_completion_optional = level.CompletionOptional();
 	}
@@ -187,8 +179,6 @@ class DrikaCampaignControl : DrikaElement{
 		ImGui_SetColumnWidth(0.0, second_column_width / 2.0);
 
 		ImGui_Text("ID : " + campaign_id);
-		ImGui_Text("Supports online : " + campaign_supports_online);
-		ImGui_Text("Requires online : " + campaign_requires_online);
 		ImGui_Text("Main script : " + campaign_main_script);
 		ImGui_Text("Menu script : " + campaign_menu_script);
 		ImGui_NextColumn();
@@ -225,8 +215,6 @@ class DrikaCampaignControl : DrikaElement{
 		ImGui_SetColumnWidth(0.0, second_column_width / 2.0);
 
 		ImGui_Text("ID : " + level_id);
-		ImGui_Text("Supports online : " + level_supports_online);
-		ImGui_Text("Requires online : " + level_requires_online);
 		ImGui_Text("Path : " + level_path);
 		ImGui_Text("Completion optional : " + level_completion_optional);
 		ImGui_NextColumn();
