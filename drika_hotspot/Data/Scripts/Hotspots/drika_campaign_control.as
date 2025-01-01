@@ -59,7 +59,6 @@ class DrikaCampaignControl : DrikaElement{
 		array<Campaign> campaigns = GetCampaigns();
 
 		string current_level = join(GetCurrLevelRelPath().split("Data/Levels/"), "");
-		Log(warning, "current_level " + current_level);
 
 		for(uint i = 0; i < campaigns.size(); i++){
 			array<ModLevel> campaign_levels = campaigns[i].GetLevels();
@@ -125,9 +124,7 @@ class DrikaCampaignControl : DrikaElement{
 		ImGui_Text("Campaign info");
 		ImGui_NextColumn();
 
-		bool skip = true;
-
-		if(!skip){
+		if(campaign_id == ""){
 			ImGui_PushStyleColor(ImGuiCol_Text, vec4(1.0, 0.0, 0.0, 1.0));
 			ImGui_Text("Could not find current campaign.");
 			ImGui_PopStyleColor();
@@ -152,7 +149,7 @@ class DrikaCampaignControl : DrikaElement{
 		ImGui_Text("Level info");
 		ImGui_NextColumn();
 
-		if(!skip){
+		if(level_id == ""){
 			ImGui_PushStyleColor(ImGuiCol_Text, vec4(1.0, 0.0, 0.0, 1.0));
 			ImGui_Text("This level is not part of any campaign.");
 			ImGui_PopStyleColor();
@@ -181,7 +178,6 @@ class DrikaCampaignControl : DrikaElement{
 				level.SendMessage("go_to_main_menu");
 			} else {
 				string next_level_id = GetFollowingLevel(level_id);
-				Log(warning, "Next level id " + next_level_id);
 				if(next_level_id != ""){
 					UnlockLevel(next_level_id); 
 					// LoadLevelID(next_level_id);
