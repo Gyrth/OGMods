@@ -6,6 +6,9 @@ class BowAndArrow {
 	int aimAnimationID = -1;
 	bool shortDrawAnim = false;
 	int bowUpDownAnim;
+	int aim_up_layer;
+	int aim_forward_layer;
+	int aim_down_layer;
 	float start_throwing_time = 0.0f;
 	uint32 aimingParticle;
 	uint32 miscParticleID;
@@ -16,6 +19,7 @@ class BowAndArrow {
 	float orig_sensitivity = -1.0f;
 	float aim_sensitivity = 0.1f;
 	bool init_done = Init();
+	bool following_arrow = false;
 
 	bool Init(){
 		orig_sensitivity = GetConfigValueFloat("mouse_sensitivity");
@@ -111,21 +115,29 @@ class BowAndArrow {
 				}
 			}
 			aimingParticle = MakeParticle("Data/Particles/bow_and_arrow_aim.xml", throw_target_pos, vec3(0));
-			fov = max(fov - ((time - start_throwing_time)), 40.0f);
+			fov = max(fov - ((time - start_throwing_time) * 10.0), 40.0f);
 
 			cam_pos_offset = vec3(cameraFacing.z * -0.5, 0, cameraFacing.x * 0.5);
-			int8 flags = _ANM_FROM_START;
+			int8 flags = _ANM_MOBILE;
 
 			if(floor(length(this_mo.velocity)) < 2.0f && on_ground){
-				this_mo.SetAnimation("Data/Animations/r_draw_bow_stance.anm", 20.0f, flags);
-				this_mo.rigged_object().anim_client().RemoveLayer(bowUpDownAnim, 20.0f);
-				if(this_mo.GetFacing().y > 0){
-					bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_draw_bow_stance_aim_up.anm",(60*cameraFacing.y),flags);
-				}else{
-					bowUpDownAnim = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_draw_bow_stance_aim_down.anm",-(60*cameraFacing.y),flags);
-				}
-				if(cameraFacing.y > -1.0f){
-					this_mo.SetRotationFromFacing(normalize(cameraFacing + vec3(cameraFacing.z * -0.5, 0, cameraFacing.x * 0.5)));
+
+				aim_up_layer = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_draw_bow_stance_aim_up.anm", 20.0, flags);
+				aim_forward_layer = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/bow_and_arrow_aim_neutral.anm", 20.0, flags);
+				aim_down_layer = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_draw_bow_stance_aim_down.anm", 20.0, flags);
+
+				this_mo.rigged_object().anim_client().SetLayerOpacity(aim_up_layer, max(0.0, cameraFacing.y * 2.0));
+				this_mo.rigged_object().anim_client().SetLayerOpacity(aim_forward_layer, abs((abs(cameraFacing.y) - 1.0)));
+				this_mo.rigged_object().anim_client().SetLayerOpacity(aim_down_layer, max(0.0, -cameraFacing.y));
+
+				// Log( warning, " amount " + cameraFacing.y );
+
+				if(cameraFacing.y > -1.0){
+					vec3 dir = normalize(normalize(this_mo.position - throw_target_pos) - vec3(cameraFacing.z * -1.0, 0, cameraFacing.x * 1.0));
+
+					vec3 flat_dir(dir.x, 0.0f, dir.z);
+					flat_dir = normalize(flat_dir) * -1;
+					this_mo.SetRotationFromFacing(flat_dir);
 				}
 			}
 		}
@@ -208,11 +220,29 @@ class BowAndArrow {
 	}
 
 	void HandleArrows(){
+		following_arrow = false;
 		for(uint32 i = 0; i < arrows.size(); i++){
 			Arrow @current_arrow = arrows[i];
 			if(inSlowMo && current_arrow.arrow_id != -1){
 				ItemObject@ arrow_item = ReadItemID(current_arrow.arrow_id);
 				cam_pos_offset = (arrow_item.GetPhysicsPosition() - this_mo.position);
+
+				vec3 linear_velocity = arrow_item.GetLinearVelocity();
+
+				vec3 right;
+
+				{
+					right = camera.GetFlatFacing();
+					float side = right.x;
+					right.x = -right .z;
+					right.z = side;
+				}
+
+				linear_velocity += GetMoveXAxis(this_mo.controller_id) * right;
+				linear_velocity += GetMoveYAxis(this_mo.controller_id) * camera.GetUpVector();
+
+				arrow_item.SetLinearVelocity(linear_velocity);
+				following_arrow = true;
 			}
 			current_arrow.Update();
 			if(current_arrow.remove){

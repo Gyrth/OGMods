@@ -3705,6 +3705,9 @@ void HandleSpecialKeyPresses() {
 
             // CheckPossibleAttacks();
         }
+        // if(GetInputPressed(this_mo.controller_id, "slow")){
+        //     inSlowMo = !inSlowMo;
+        // }
     }
 
     if(GetInputPressed(this_mo.controller_id, "debug_path") && target_id != -1) {
@@ -3859,10 +3862,10 @@ void UpdateState(const Timestep &in ts) {
     if((bowAndArrow.arrows.length < 1 || length_squared(this_mo.velocity) > 1.0f) && !bowAndArrow.isAiming){
         //Slowly change the fov back to 90.
         if(fov < 90){
-        	fov += 0.75;
+        	fov += 1.0;
         }
         if(length(cam_pos_offset) > 0.1f){
-    		cam_pos_offset *= 0.90f;
+    		cam_pos_offset *= 0.5f;
         }
     }
 	bowAndArrow.HandleArrows();
@@ -4223,6 +4226,8 @@ void UpdateEyeLookTarget() {
 
         if(ai_look_override_time > time) {
             eye_look_target = ai_look_target;
+        }else if(bowAndArrow.isAiming){
+            eye_look_target = throw_target_pos;
         } else if(force_look_target_id != -1) {
             vec3 target_pos = ReadCharacterID(force_look_target_id).rigged_object().GetAvgIKChainPos("head");
             eye_look_target = target_pos;
@@ -4346,7 +4351,7 @@ void UpdateHeadLook(const Timestep &in ts) {
     torso_control = mix(torso_control, 0.5f, layer_throwing_fade);
 
     // Only have torso control at all when in move state on the ground
-    if(ledge_info.on_ledge || !on_ground || state != _movement_state) {
+    if(ledge_info.on_ledge || !on_ground || state != _movement_state || bowAndArrow.isAiming) {
         torso_control = 0.0f;
     }
 
@@ -11396,6 +11401,7 @@ void Reset() {
     fixed_bone_ids.resize(0);
     fixed_bone_pos.resize(0);
     this_mo.static_char = (params.GetInt("Static") != 0);
+    inSlowMo = false;
 }
 
 void SetCameraFromFacing() {
