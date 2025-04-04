@@ -35,8 +35,7 @@ class BowAndArrow {
 			@bow_item = ReadItemID(weapon_slots[secondary_weapon_slot]);
 		}
 		if(bow_item !is null){
-			if( isAiming && floor(length(this_mo.velocity)) < 1.0f && on_ground ||
-			throw_anim){
+			if( isAiming && floor(length(this_mo.velocity)) < 1.0f && on_ground || throw_anim){
 				DrawDoubleSting(bow_item);
 				vec3 direction = normalize(throw_target_pos - this_mo.position);
 				if(!on_ground){
@@ -73,7 +72,7 @@ class BowAndArrow {
 		}
 	}
 
-	void BowAiming(){
+	void BowAiming(const Timestep &in ts){
 		if(!isAiming && sheathe_layer_id == -1 && allowAiming){
 			start_throwing_time = time;
 			PlaySound("Data/Sounds/draw.wav", this_mo.position);
@@ -135,9 +134,9 @@ class BowAndArrow {
 				if(cameraFacing.y > -1.0){
 					vec3 dir = normalize(normalize(this_mo.position - throw_target_pos) - vec3(cameraFacing.z * -1.0, 0, cameraFacing.x * 1.0));
 
-					vec3 flat_dir(dir.x, 0.0f, dir.z);
-					flat_dir = normalize(flat_dir) * -1;
-					this_mo.SetRotationFromFacing(flat_dir);
+					this_mo.SetRotationFromFacing(InterpDirections(this_mo.GetFacing(),
+													dir * -1.0,
+                                                    1.0 - pow(0.8, ts.frames())));
 				}
 			}
 		}
@@ -193,7 +192,7 @@ class BowAndArrow {
 
 	void BowShootAnim(){
 		int8 flags = 0;
-		SetState(_attack_state);
+		// SetState(_attack_state);
 		string draw_type = "empty";
 		if(shortDrawAnim){
 			draw_type = "Data/Animations/r_draw_bow_short.anm";

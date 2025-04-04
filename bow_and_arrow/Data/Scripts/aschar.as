@@ -3944,7 +3944,7 @@ void UpdateState(const Timestep &in ts) {
             UpdateAnimation(ts);
             ApplyPhysics(ts);
             HandlePickUp();
-            HandleThrow();
+            HandleThrow(ts);
 
             if(GetIdleOverride() == "") {
                 HandleCollisions(ts);
@@ -3978,7 +3978,7 @@ void UpdateState(const Timestep &in ts) {
             }
 
             UpdateHitReaction(ts);
-            HandleThrow();
+            HandleThrow(ts);
             HandleAccelTilt(ts);
             HandleCollisions(ts);
             LeaveTelemetryZone();
@@ -4226,7 +4226,7 @@ void UpdateEyeLookTarget() {
 
         if(ai_look_override_time > time) {
             eye_look_target = ai_look_target;
-        }else if(bowAndArrow.isAiming){
+        }else if(bowAndArrow.isAiming || throw_anim && bowAndArrow.longDrawAnim){
             eye_look_target = throw_target_pos;
         } else if(force_look_target_id != -1) {
             vec3 target_pos = ReadCharacterID(force_look_target_id).rigged_object().GetAvgIKChainPos("head");
@@ -9390,7 +9390,12 @@ bool LoadAppropriateAttack(bool mirrored, AttackScriptGetter& temp_attack_getter
 vec3 GetAttackDirection() {
     vec3 direction;
 
-    if(target_id != -1 && ReadCharacterID(target_id).QueryIntFunction("int IsDodging()") == 0) {
+    if(weapon_slots[secondary_weapon_slot] != -1 &&
+        weapon_slots[primary_weapon_slot] != -1 &&
+        ReadItemID(weapon_slots[secondary_weapon_slot]).GetLabel() == "bow" &&
+        ReadItemID(weapon_slots[primary_weapon_slot]).GetLabel() == "arrow"){
+        direction = normalize(throw_target_pos - this_mo.position);
+    }else if(target_id != -1 && ReadCharacterID(target_id).QueryIntFunction("int IsDodging()") == 0) {
         direction = ReadCharacterID(target_id).position - this_mo.position;
     } else {
         direction = this_mo.GetFacing();
@@ -10422,12 +10427,12 @@ int GetAttackTarget(float range, uint16 flags) {
     }
 }
 
-void HandleThrow() {
+void HandleThrow(const Timestep &in ts) {
 	if(WantsToThrowItem() && weapon_slots[primary_weapon_slot] != -1 && throw_knife_layer_id == -1){
         if(weapon_slots[secondary_weapon_slot] != -1 &&
             ReadItemID(weapon_slots[secondary_weapon_slot]).GetLabel() == "bow" &&
             ReadItemID(weapon_slots[primary_weapon_slot]).GetLabel() == "arrow"){
-            bowAndArrow.BowAiming();
+            bowAndArrow.BowAiming(ts);
 
         }else{
             int best_target = GetThrowTarget();
