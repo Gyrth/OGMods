@@ -107,11 +107,7 @@ def get_from_object_xml(xml_path, og_path, cache_path, workshop_path, tag, info)
             
             content = content.replace("\\", "/")
             content = content.replace("no_collision=true", "no_collision=\"true\"")
-            content = content.replace("scale=1", "scale=\"1\"")
-            content = content.replace("scale=2", "scale=\"2\"")
-            content = content.replace("scale=3", "scale=\"3\"")
-            content = content.replace("scale=4", "scale=\"4\"")
-            content = content.replace("scale=2.6", "scale=\"2.6\"")
+            content = re.sub(r'scale=([0-9.]+)', r'scale="\1"', content)
             
             result = re.findall('(?s)<Object>.+?</Object>', content)
             root = ET.fromstring('\n'.join(result))
@@ -210,7 +206,8 @@ def create_material(og_path, cache_path, workshop_path, color_map, model, color,
     material = bpy.data.materials.new(name=color_map)
     material.use_nodes = True
     bsdf = material.node_tree.nodes["Principled BSDF"]
-    bsdf.inputs['Specular'].default_value = 0.0
+    
+    bsdf.inputs['Specular IOR Level'].default_value = 0.0
     
     color_texture = material.node_tree.nodes.new('ShaderNodeTexImage')
     color_texture.image = color_image
@@ -285,7 +282,9 @@ def load_model(og_path, cache_path, workshop_path, model_path, xml_path, positio
             
 #            return None
         else:
-            imported_object = bpy.ops.import_scene.obj(filepath=resolved_path)
+            
+            imported_object = bpy.ops.wm.obj_import(filepath=resolved_path)
+            
             obj_objects = bpy.context.selected_objects[:]
             cached_object_names.append(xml_path)
             cached_object_meshes.append(obj_objects[0])
