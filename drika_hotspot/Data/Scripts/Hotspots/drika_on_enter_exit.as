@@ -738,17 +738,13 @@ class DrikaOnEnterExit : DrikaElement{
 		}
 
 		mat4 hotspot_transform = hotspot_obj.GetTransform();
-		vec3 hotspot_scale = hotspot_obj.GetScale();
 		vec3 char_translation = char.position;
 		vec3 local_space_translation = invert(hotspot_transform) * char_translation;
 		float character_radius = 0.5;
 
-		// DebugDrawWireBox(hotspot_obj.GetTranslation(), hotspot_obj.GetScale() * 4.0, vec3(1.0, 0.0, 0.0), _fade);
-		// Log(warning, "x " + hotspot_scale.x + " y " + hotspot_scale.y + " z " + hotspot_scale.z);
-
-		bool is_inside = (	local_space_translation.x >= (-2 * hotspot_scale.x) - character_radius && local_space_translation.x <= (2 * hotspot_scale.x) + character_radius &&
-							local_space_translation.y >= (-2 * hotspot_scale.y) - character_radius && local_space_translation.y <= (2 * hotspot_scale.y) + character_radius &&
-							local_space_translation.z >= (-2 * hotspot_scale.z) - character_radius && local_space_translation.z <= (2 * hotspot_scale.z) + character_radius);
+		bool is_inside = (	local_space_translation.x >= -2.0 - character_radius && local_space_translation.x <= 2.0 + character_radius &&
+							local_space_translation.y >= -2.0 - character_radius && local_space_translation.y <= 2.0 + character_radius &&
+							local_space_translation.z >= -2.0 - character_radius && local_space_translation.z <= 2.0 + character_radius);
 
 		if(is_inside){
 			characters_inside_ids.insertLast(char.GetID());
@@ -759,7 +755,6 @@ class DrikaOnEnterExit : DrikaElement{
 		Object@ target_hotspot = external_hotspot?external_hotspot_obj:this_hotspot;
 		array<int> object_ids = GetObjectIDsType(_item_object);
 		mat4 hotspot_transform = target_hotspot.GetTransform();
-		vec3 hotspot_scale = target_hotspot.GetScale();
 		array<int> inside_ids;
 
 		for(uint i = 0; i < object_ids.size(); i++){
@@ -768,9 +763,9 @@ class DrikaOnEnterExit : DrikaElement{
 			vec3 io_translation = io.GetPhysicsPosition();
 			vec3 local_space_translation = invert(hotspot_transform) * io_translation;
 
-			if(local_space_translation.x >= -2 * hotspot_scale.x && local_space_translation.x <= 2 * hotspot_scale.x &&
-				local_space_translation.y >= -2 * hotspot_scale.y && local_space_translation.y <= 2 * hotspot_scale.y &&
-				local_space_translation.z >= -2 * hotspot_scale.z && local_space_translation.z <= 2 * hotspot_scale.z){
+			if(local_space_translation.x >= -2 && local_space_translation.x <= 2 &&
+				local_space_translation.y >= -2 && local_space_translation.y <= 2 &&
+				local_space_translation.z >= -2 && local_space_translation.z <= 2){
 				inside_ids.insertLast(object_ids[i]);
 			}
 		}
@@ -781,7 +776,6 @@ class DrikaOnEnterExit : DrikaElement{
 		Object@ target_hotspot = external_hotspot?external_hotspot_obj:this_hotspot;
 		array<int> object_ids = GetObjectIDsType(_env_object);
 		mat4 hotspot_transform = target_hotspot.GetTransform();
-		vec3 hotspot_scale = target_hotspot.GetScale();
 		array<int> inside_ids;
 
 		for(uint i = 0; i < object_ids.size(); i++){
@@ -789,9 +783,9 @@ class DrikaOnEnterExit : DrikaElement{
 			vec3 obj_translation = obj.GetTranslation();
 			vec3 local_space_translation = invert(hotspot_transform) * obj_translation;
 
-			if(local_space_translation.x >= -2 * hotspot_scale.x && local_space_translation.x <= 2 * hotspot_scale.x &&
-				local_space_translation.y >= -2 * hotspot_scale.y && local_space_translation.y <= 2 * hotspot_scale.y &&
-				local_space_translation.z >= -2 * hotspot_scale.z && local_space_translation.z <= 2 * hotspot_scale.z){
+			if(local_space_translation.x >= -2.0 && local_space_translation.x <= 2.0 &&
+				local_space_translation.y >= -2.0 && local_space_translation.y <= 2.0 &&
+				local_space_translation.z >= -2.0 && local_space_translation.z <= 2.0){
 				inside_ids.insertLast(object_ids[i]);
 			}
 		}
