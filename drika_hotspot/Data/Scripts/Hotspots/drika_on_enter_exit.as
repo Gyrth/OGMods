@@ -43,6 +43,7 @@ class DrikaOnEnterExit : DrikaElement{
 	bool check_all;
 	bool view_obstruction_check;
 	float camera_fov;
+	array<int> characters_inside_ids;
 
 	vec3 external_hotspot_translation;
 	quaternion external_hotspot_rotation;
@@ -453,6 +454,15 @@ class DrikaOnEnterExit : DrikaElement{
 
 	void CheckEvent(string event, int char_id){
 		if(hotspot_trigger_type == while_character_inside || hotspot_trigger_type == while_character_outside){
+			if(event == "enter"){
+				if(characters_inside_ids.find(char_id) == -1){
+					characters_inside_ids.insertLast(char_id);
+				}
+			}else if(event == "exit"){
+				if(characters_inside_ids.find(char_id) != -1){
+					characters_inside_ids.removeAt(characters_inside_ids.find(char_id));
+				}
+			}
 			return;
 		}
 		if(!ObjectExists(char_id)){
@@ -476,6 +486,7 @@ class DrikaOnEnterExit : DrikaElement{
 		triggered = false;
 		got_objects_inside = false;
 		initial_setup_done = false;
+		characters_inside_ids.resize(0);
 	}
 
 	bool Trigger(){
@@ -631,14 +642,14 @@ class DrikaOnEnterExit : DrikaElement{
 	}
 
 	bool InsideCheck(){
-		Object@ target_hotspot = external_hotspot?external_hotspot_obj:this_hotspot;
 		reference_ids.resize(0);
 		bool all_inside = true;
 		bool one_inside = false;
 
 		array<MovementObject@> chars = target_select.GetTargetMovementObjects();
 		for(uint i = 0; i < chars.size(); i++){
-			if(CharacterInside(chars[i], target_hotspot)){
+
+			if(characters_inside_ids.find(chars[i].GetID()) != -1){
 				if(hotspot_trigger_type == while_character_inside){
 					reference_ids.insertLast(chars[i].GetID());
 				}
@@ -710,22 +721,6 @@ class DrikaOnEnterExit : DrikaElement{
 		}else{
 			return one_inside;
 		}
-	}
-
-	bool CharacterInside(MovementObject@ char, Object@ hotspot_obj){
-		if(hotspot_obj is null){
-			return false;
-		}
-
-		mat4 hotspot_transform = hotspot_obj.GetTransform();
-		vec3 char_translation = char.position;
-		vec3 local_space_translation = invert(hotspot_transform) * char_translation;
-
-		bool is_inside = (	local_space_translation.x >= -2 && local_space_translation.x <= 2 &&
-							local_space_translation.y >= -2 && local_space_translation.y <= 2 &&
-							local_space_translation.z >= -2 && local_space_translation.z <= 2);
-
-		return is_inside;
 	}
 
 	array<int> GetItemsInside(){
