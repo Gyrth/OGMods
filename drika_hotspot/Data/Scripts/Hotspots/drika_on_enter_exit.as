@@ -741,10 +741,14 @@ class DrikaOnEnterExit : DrikaElement{
 		vec3 hotspot_scale = hotspot_obj.GetScale();
 		vec3 char_translation = char.position;
 		vec3 local_space_translation = invert(hotspot_transform) * char_translation;
+		float character_radius = 0.5;
 
-		bool is_inside = (	local_space_translation.x >= -2 * hotspot_scale.x && local_space_translation.x <= 2 * hotspot_scale.x &&
-							local_space_translation.y >= -2 * hotspot_scale.y && local_space_translation.y <= 2 * hotspot_scale.y &&
-							local_space_translation.z >= -2 * hotspot_scale.z && local_space_translation.z <= 2 * hotspot_scale.z);
+		// DebugDrawWireBox(hotspot_obj.GetTranslation(), hotspot_obj.GetScale() * 4.0, vec3(1.0, 0.0, 0.0), _fade);
+		// Log(warning, "x " + hotspot_scale.x + " y " + hotspot_scale.y + " z " + hotspot_scale.z);
+
+		bool is_inside = (	local_space_translation.x >= (-2 * hotspot_scale.x) - character_radius && local_space_translation.x <= (2 * hotspot_scale.x) + character_radius &&
+							local_space_translation.y >= (-2 * hotspot_scale.y) - character_radius && local_space_translation.y <= (2 * hotspot_scale.y) + character_radius &&
+							local_space_translation.z >= (-2 * hotspot_scale.z) - character_radius && local_space_translation.z <= (2 * hotspot_scale.z) + character_radius);
 
 		if(is_inside){
 			characters_inside_ids.insertLast(char.GetID());
