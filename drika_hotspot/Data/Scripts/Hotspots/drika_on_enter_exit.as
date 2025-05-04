@@ -740,7 +740,7 @@ class DrikaOnEnterExit : DrikaElement{
 		mat4 hotspot_transform = hotspot_obj.GetTransform();
 		vec3 char_translation = char.position;
 		vec3 local_space_translation = invert(hotspot_transform) * char_translation;
-		float character_radius = 0.5;
+		float character_radius = 0.75;
 
 		bool is_inside = (	local_space_translation.x >= -2.0 - character_radius && local_space_translation.x <= 2.0 + character_radius &&
 							local_space_translation.y >= -2.0 - character_radius && local_space_translation.y <= 2.0 + character_radius &&
