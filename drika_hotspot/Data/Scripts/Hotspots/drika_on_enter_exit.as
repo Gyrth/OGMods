@@ -45,6 +45,8 @@ class DrikaOnEnterExit : DrikaElement{
 	float camera_fov;
 	array<int> characters_inside_ids;
 	bool first_characters_inside_check = true;
+	bool continue_if_false = false;
+	DrikaGoToLineSelect@ continue_element;
 
 	vec3 external_hotspot_translation;
 	quaternion external_hotspot_rotation;
@@ -66,6 +68,8 @@ class DrikaOnEnterExit : DrikaElement{
 		external_hotspot_id = GetJSONInt(params, "external_hotspot_id", -1);
 		reset_when_false = GetJSONBool(params, "reset_when_false", false);
 		check_all = GetJSONBool(params, "check_all", false);
+		continue_if_false = GetJSONBool(params, "continue_if_false", false);
+		@continue_element = DrikaGoToLineSelect("continue_line", params);
 
 		//Converting old savedata into new, to be removed later on.
 		drika_element_types function_type = drika_element_types(params["function"].asInt());
@@ -195,6 +199,11 @@ class DrikaOnEnterExit : DrikaElement{
 			data["view_obstruction_check"] = JSONValue(view_obstruction_check);
 		}
 
+		data["continue_if_false"] = JSONValue(continue_if_false);
+		if(continue_if_false){
+			continue_element.SaveGoToLine(data);
+		}
+
 		target_select.SaveIdentifier(data);
 		return data;
 	}
@@ -232,6 +241,7 @@ class DrikaOnEnterExit : DrikaElement{
 			}
 		}
 		target_select.PostInit();
+		continue_element.PostInit();
 	}
 
 	void Update(){
@@ -293,10 +303,13 @@ class DrikaOnEnterExit : DrikaElement{
 	}
 
 	string GetDisplayString(){
+		continue_element.CheckLineAvailable();
+
 		string display_string = "";
 
 		display_string += hotspot_trigger_choices[hotspot_trigger_type] + " ";
 		display_string += target_select.GetTargetDisplayText();
+		display_string += (continue_if_false?" else line " + continue_element.GetTargetLineIndex():"");
 
 		return display_string;
 	}
@@ -379,6 +392,18 @@ class DrikaOnEnterExit : DrikaElement{
 		ImGui_NextColumn();
 
 		DrawSetReferenceUI();
+
+		if(IsWhileFunction()){
+			ImGui_AlignTextToFramePadding();
+			ImGui_Text("If not, go to line");
+			ImGui_NextColumn();
+
+			ImGui_Checkbox("###If not, go to line", continue_if_false);
+			ImGui_NextColumn();
+			if(continue_if_false){
+				continue_element.DrawGoToLineUI();
+			}
+		}
 	}
 
 	void DrawEditing(){
@@ -516,14 +541,19 @@ class DrikaOnEnterExit : DrikaElement{
 			}else{
 				//If the while has been triggered, but the next function is not then be able to reset.
 				if(triggered && reset_when_false){
+					triggered = false;
 					//At the end of the script so can't reset the next function.
 					if(current_line == int(drika_indexes.size() - 1)){
 						Reset();
 						return true;
 					}
-					triggered = false;
 					DrikaElement@ next_element = drika_elements[drika_indexes[index + 1]];
 					next_element.Reset();
+				}else if(continue_if_false){
+					triggered = false;
+					Reset();
+					current_line = continue_element.GetTargetLineIndex();
+					display_index = drika_indexes[continue_element.GetTargetLineIndex()];
 				}
 			}
 			return false;
