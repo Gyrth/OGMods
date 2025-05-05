@@ -738,9 +738,11 @@ class DrikaOnEnterExit : DrikaElement{
 		}
 
 		mat4 hotspot_transform = hotspot_obj.GetTransform();
-		vec3 char_translation = char.position;
+		vec3 char_translation = char.position + vec3(0.0, 0.25, 0.0);
 		vec3 local_space_translation = invert(hotspot_transform) * char_translation;
-		float character_radius = 0.75;
+		float character_radius = 1.0;
+
+		// DebugDrawWireSphere(char_translation, character_radius, vec3(1.0, 1.0, 0.0), _persistent);
 
 		bool is_inside = (	local_space_translation.x >= -2.0 - character_radius && local_space_translation.x <= 2.0 + character_radius &&
 							local_space_translation.y >= -2.0 - character_radius && local_space_translation.y <= 2.0 + character_radius &&
