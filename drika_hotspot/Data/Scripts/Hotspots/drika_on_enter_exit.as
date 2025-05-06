@@ -770,14 +770,18 @@ class DrikaOnEnterExit : DrikaElement{
 		mat4 hotspot_transform = hotspot_obj.GetTransform();
 		vec3 char_translation = char.position + vec3(0.0, 0.25, 0.0);
 		vec3 local_space_translation = invert(hotspot_transform) * char_translation;
-		float character_radius = 1.0;
+		vec3 local_radius_offset = invert(hotspot_transform) * vec3(0.25);
 
-		// DebugDrawWireSphere(char_translation, character_radius, vec3(1.0, 1.0, 0.0), _persistent);
-
-		bool is_inside = (	local_space_translation.x >= -2.0 - character_radius && local_space_translation.x <= 2.0 + character_radius &&
-							local_space_translation.y >= -2.0 - character_radius && local_space_translation.y <= 2.0 + character_radius &&
-							local_space_translation.z >= -2.0 - character_radius && local_space_translation.z <= 2.0 + character_radius);
-
+		// DebugDrawWireSphere(hotspot_obj.GetTranslation(), character_radius, vec3(1.0, 1.0, 0.0), _fade);
+		// DebugDrawWireBox(hotspot_obj.GetTranslation(), vec3(2.0 + character_radius), vec3(1.0, 1.0, 0.0), _fade);
+		// DebugDrawWireBox(vec3(0.0), vec3(5.0), vec3(1.0, 1.0, 0.0), _persistent);
+		
+		bool is_inside = (	local_space_translation.x >= -2.0 - local_radius_offset.x && local_space_translation.x <= 2.0 + local_radius_offset.x &&
+							local_space_translation.y >= -2.0 - local_radius_offset.y && local_space_translation.y <= 2.0 + local_radius_offset.y &&
+							local_space_translation.z >= -2.0 - local_radius_offset.z && local_space_translation.z <= 2.0 + local_radius_offset.z);
+			
+		// DebugDrawLine(local_space_translation, vec3(0.0), !is_inside?vec3(1.0, 0.0, 0.0):vec3(0.0, 1.0, 0.0), _persistent);
+		
 		if(is_inside){
 			characters_inside_ids.insertLast(char.GetID());
 		}
