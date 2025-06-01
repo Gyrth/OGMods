@@ -25,7 +25,7 @@ bpy.types.Scene.model_name = StringProperty(subtype='FILE_NAME', name="Model Nam
 bpy.types.Scene.cache_path = StringProperty(subtype='FILE_PATH', name="Cache Path")
 
 # This is the max the vertex can move out of it's own rest pose. 5 units each way.
-bounds = Vector([2.0, 2.0, 2.0])
+bounds = Vector([20.0, 20.0, 20.0])
 
 SUPPORTED_CACHE_FILE_VERSION = 41
 
@@ -117,44 +117,48 @@ def CreateAnimationTextures(export_path, model_name, info):
     ctx = bpy.context.copy()
     ctx['active_object'] = joined_object
     ctx['selected_editable_objects'] = copied_objects
-    bpy.ops.object.join(ctx)
     
-    bpy.context.view_layer.update()
+    with bpy.context.temp_override(**ctx):
+        bpy.ops.object.join()
+        bpy.context.view_layer.update()
     
-    joined_object.select_set(True)
-#    joined_object.parent = None
-#    joined_object.modifiers.clear()
+        joined_object.select_set(True)
 
-    if joined_object.data.shape_keys != None and len(joined_object.data.shape_keys.key_blocks.keys()) > 0:
-        joined_object.active_shape_key_index = 0
-    
-    bpy.context.view_layer.objects.active = joined_object
-    
-    bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY', center='BOUNDS')
-    
-    blend_file_path = bpy.data.filepath
-    directory = os.path.dirname(blend_file_path)
-    target_folder = str(Path(directory + export_path).resolve())
-    
-    bpy.context.view_layer.update()
-    
-    obj_file = target_folder + "/Models/" + model_name + ".obj"
-    bpy.ops.export_scene.obj(filepath=obj_file, check_existing=True, axis_forward='-Z', axis_up='Y', filter_glob="*.obj;*.mtl", use_selection=True, use_animation=False, use_mesh_modifiers=True, use_edges=True, use_smooth_groups=False, use_smooth_groups_bitflags=False, use_normals=True, use_uvs=True, use_materials=False, use_triangles=False, use_nurbs=False, use_vertex_groups=False, use_blen_objects=False, group_by_object=False, group_by_material=False, keep_vertex_order=True, global_scale=1, path_mode='AUTO')
-    
-    center_location = joined_object.location
-    
-    vertex_count = len(joined_object.data.vertices)
-    while(image_size < vertex_count):
-        image_size *= 2
-    
-    if not bpy.context.object.rigid_body is None:
-        bpy.ops.rigidbody.objects_remove()
+        if joined_object.data.shape_keys != None and len(joined_object.data.shape_keys.key_blocks.keys()) > 0:
+            joined_object.active_shape_key_index = 0
+        
+        bpy.context.view_layer.objects.active = joined_object
+        
+        bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY', center='BOUNDS')
+        
+        blend_file_path = bpy.data.filepath
+        directory = os.path.dirname(blend_file_path)
+        target_folder = str(Path(directory + export_path).resolve())
+        
+        bpy.context.view_layer.update()
+        
+        obj_file = target_folder + "/Models/" + model_name + ".obj"
+        bpy.ops.wm.obj_export(filepath=obj_file, check_existing=True, forward_axis='NEGATIVE_Z', up_axis='Y', filter_glob="*.obj;*.mtl", export_selected_objects=True, export_animation=False, apply_modifiers=True, export_materials=False, path_mode='AUTO')
+        
+        center_location = joined_object.location
+        
+        vertex_count = len(joined_object.data.vertices)
+        print('vertex count', vertex_count)
+        while(image_size < vertex_count):
+            image_size *= 2
+        
+        if not bpy.context.object.rigid_body is None:
+            bpy.ops.rigidbody.objects_remove()
     
     #------------------------------------------------
     
     # Remove any existing images before creating new ones.
     if bpy.data.images.get('Output') != None:
         bpy.data.images.remove(bpy.data.images['Output'])
+    
+    # Force the image to be larger to support longer animations.
+    greatest_image_size = max(image_size, 600 * 2)
+    image_size = 1 << (greatest_image_size - 1).bit_length()
     
     bpy.ops.image.new(name='Output', width=image_size, height=image_size, alpha=False)
     output_image = bpy.data.images['Output']
@@ -179,56 +183,54 @@ def CreateAnimationTextures(export_path, model_name, info):
     
     #-------------------------------------------
     
+    position_y = image_size
+    frame_counter = 0
+    
     if not armature is None:
         armature.data.pose_position = 'POSE'
-    
-    position_y = image_size
-    
-    for animation in bpy.data.actions:
-        frame_counter = 0
+        animation = armature.animation_data.action
+        print("Animation Name : ", animation.name, (image_size - position_y))
         
-        armature.animation_data.action = animation
+    frame_start = bpy.context.scene.frame_start
+    frame_end = bpy.context.scene.frame_end
     
-        frame_start = bpy.context.scene.frame_start
-        frame_end = bpy.context.scene.frame_end
-        
-        animation_length = frame_end - frame_start
-        print("Animation Name : ", animation.name, (image_size - position_y), (image_size - position_y + animation_length))
-        print("Animation Length : ", animation_length)
+    animation_length = frame_end - frame_start
+    
+    print("Animation Length : ", animation_length)
 
-        bpy.context.scene.frame_set(frame_start)
+    bpy.context.scene.frame_set(frame_start)
+    bpy.context.view_layer.update()
+    
+    # Each animation frame is single pixel in the x axis on the texture.
+    for frame_index in range(frame_start, frame_end + 1):
+        bpy.context.scene.frame_set(frame_index)
         bpy.context.view_layer.update()
         
-        # Each animation frame is single pixel in the x axis on the texture.
-        for frame_index in range(frame_start, frame_end + 1):
-            bpy.context.scene.frame_set(frame_index)
-            bpy.context.view_layer.update()
-            
-            depgraph = bpy.context.evaluated_depsgraph_get()
-            vertex_counter = 0
-            
-            position_y -= 1
-            frame_counter += 1
+        depgraph = bpy.context.evaluated_depsgraph_get()
+        vertex_counter = 0
+        
+        position_y -= 1
+        frame_counter += 1
 
-            for obj in selected_objects:
-                bm = bmesh.new()
-                bm.from_object(obj, depgraph)
-                bm.verts.ensure_lookup_table()
-                origin_difference = center_location - obj.location
+        for obj in selected_objects:
+            bm = bmesh.new()
+            bm.from_object(obj, depgraph)
+            bm.verts.ensure_lookup_table()
+            origin_difference = center_location - obj.location
+            
+            # Go over all the mesh's vertices in order.
+            for v in bm.verts:
+                rest_vert = rest_data[vertex_counter]
+                global_vert = obj.matrix_world @ v.co
+                vert = global_vert - center_location
                 
-                # Go over all the mesh's vertices in order.
-                for v in bm.verts:
-                    rest_vert = rest_data[vertex_counter]
-                    global_vert = obj.matrix_world @ v.co
-                    vert = global_vert - center_location
-                    
-                    difference = rest_vert - vert
-                    position_x = vertex_counter
-                    
-                    BoundedVec3ToTexture(difference, position_x, position_y, pixels, image_size, animation_length)
-                    vertex_counter += 1
+                difference = rest_vert - vert
+                position_x = vertex_counter
                 
-                bm.free()
+                BoundedVec3ToTexture(difference, position_x, position_y, pixels, image_size, animation_length)
+                vertex_counter += 1
+            
+            bm.free()
     
     output_image.pixels[:] = pixels
     # Should probably update image

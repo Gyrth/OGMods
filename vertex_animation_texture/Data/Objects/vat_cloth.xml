@@ -1,11 +1,15 @@
 <?xml version="1.0" ?>
 <Object>
 	<Model>Data/Models/vat_cloth.obj</Model>
-
-	<ColorMap>Data/Textures/ui/t2/logo.png</ColorMap>
-	<NormalMap>Data/Textures/vat_cloth_sorted_1.png</NormalMap>
-	<WeightMap>Data/Textures/vat_cloth_sorted_2.png</WeightMap>
-
+	<ColorMap>Data/Textures/vat_cloth_sorted.png</ColorMap>
+	<NormalMap>Data/Textures/blank_TS_n.tga</NormalMap>
+	<WeightMap>Data/Textures/ui/t2/logo.png</WeightMap>
+	<DetailMaps>
+		<DetailMap colorpath="Data/Prototypes/DetailTextures/Rock_Color.tga" normalpath="Data/Prototypes/DetailTextures/Rock_Norm.tga" materialpath="Data/Materials/default.xml" />
+		<DetailMap colorpath="Data/Prototypes/DetailTextures/Blank_Color.tga" normalpath="Data/Prototypes/DetailTextures/Blank_Norm.tga" materialpath="Data/Materials/default.xml" />
+		<DetailMap colorpath="Data/Prototypes/DetailTextures/Blank_Color.tga" normalpath="Data/Prototypes/DetailTextures/Blank_Norm.tga" materialpath="Data/Materials/default.xml" />
+		<DetailMap colorpath="Data/Prototypes/DetailTextures/Blank_Color.tga" normalpath="Data/Prototypes/DetailTextures/Blank_Norm.tga" materialpath="Data/Materials/default.xml" />
+	</DetailMaps>
 	<ShaderName>vertex_animated</ShaderName>
-	<flags no_collision = "true" double_sided = "true"/>
+	<flags no_collision = "true" transparent = "false" double_sided = "true" dynamic = "true"/>
 </Object>

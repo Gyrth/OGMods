@@ -1,5 +1,8 @@
 #version 450 core
 
+#og_version_major 1
+#og_version_minor 5
+
 uniform float time;
 uniform vec3 cam_pos;
 
@@ -203,9 +206,8 @@ vec3 GetAmbientColor(vec3 world_vert, vec3 ws_normal) {
 }
 
 void main() {
-	#ifdef NO_INSTANCE_ID
-		int instance_id;
-		return;
+	#if defined(NO_INSTANCE_ID)
+		int instance_id = 0;
 	#endif
 
 	vec4 colormap;
@@ -245,12 +247,6 @@ void main() {
 	#else
 		uint light_val = texelFetch(cluster_buffer, int(light_cluster_index)).x;
 	#endif
-
-	colormap *= tint.r + 0.2;
-
-	if(step(texture(tex1, frag_tex_coords), (0.48 + (tint.b / 10.0)) )){
-		colormap.rgb = vec3(0.08, 0.0, 0.0);
-	}
 
 	float spec_amount = 0.1;
 	float ambient_mult = 1.0;
