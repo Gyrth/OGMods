@@ -213,8 +213,12 @@ void main() {
 	vec4 colormap;
 	vec4 tint = GetInstancedColorTint(instance_id);
 	vec4 normalmap = texture(tex1, tc0);
-	vec3 unpacked_normal = UnpackTanNormal(normalmap);
-	vec3 ws_normal = normalize(quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), tan_to_obj * unpacked_normal));
+	// vec3 unpacked_normal = UnpackTanNormal(normalmap);
+	// vec3 ws_normal = normalize(quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), tan_to_obj * unpacked_normal));
+
+	vec4 base_normalmap = texture(tex1, frag_tex_coords);
+	vec3 base_normal = UnpackObjNormalV3(base_normalmap.xyz);
+	vec3 ws_normal = normalize(quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), base_normal));
 
 	#if defined(VERTEX_COLOR)
 		colormap = vertex_color;

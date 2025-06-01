@@ -25,7 +25,7 @@ bpy.types.Scene.model_name = StringProperty(subtype='FILE_NAME', name="Model Nam
 bpy.types.Scene.cache_path = StringProperty(subtype='FILE_PATH', name="Cache Path")
 
 # This is the max the vertex can move out of it's own rest pose. 5 units each way.
-bounds = Vector([20.0, 20.0, 20.0])
+bounds = Vector([10.0, 10.0, 10.0])
 
 SUPPORTED_CACHE_FILE_VERSION = 41
 
@@ -127,28 +127,28 @@ def CreateAnimationTextures(export_path, model_name, info):
         if joined_object.data.shape_keys != None and len(joined_object.data.shape_keys.key_blocks.keys()) > 0:
             joined_object.active_shape_key_index = 0
         
-        bpy.context.view_layer.objects.active = joined_object
-        
-        bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY', center='BOUNDS')
-        
-        blend_file_path = bpy.data.filepath
-        directory = os.path.dirname(blend_file_path)
-        target_folder = str(Path(directory + export_path).resolve())
-        
-        bpy.context.view_layer.update()
-        
-        obj_file = target_folder + "/Models/" + model_name + ".obj"
-        bpy.ops.wm.obj_export(filepath=obj_file, check_existing=True, forward_axis='NEGATIVE_Z', up_axis='Y', filter_glob="*.obj;*.mtl", export_selected_objects=True, export_animation=False, apply_modifiers=True, export_materials=False, path_mode='AUTO')
-        
-        center_location = joined_object.location
-        
-        vertex_count = len(joined_object.data.vertices)
-        print('vertex count', vertex_count)
-        while(image_size < vertex_count):
-            image_size *= 2
-        
-        if not bpy.context.object.rigid_body is None:
-            bpy.ops.rigidbody.objects_remove()
+    bpy.context.view_layer.objects.active = joined_object
+    
+    bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY', center='BOUNDS')
+    
+    blend_file_path = bpy.data.filepath
+    directory = os.path.dirname(blend_file_path)
+    target_folder = str(Path(directory + export_path).resolve())
+    
+    bpy.context.view_layer.update()
+    
+    obj_file = target_folder + "/Models/" + model_name + ".obj"
+    bpy.ops.wm.obj_export(filepath=obj_file, check_existing=True, forward_axis='NEGATIVE_Z', up_axis='Y', filter_glob="*.obj;*.mtl", export_selected_objects=True, export_animation=False, apply_modifiers=True, export_materials=False, path_mode='AUTO')
+    
+    center_location = joined_object.location
+    
+    vertex_count = len(joined_object.data.vertices)
+    print('vertex count', vertex_count)
+    while(image_size < vertex_count):
+        image_size *= 2
+    
+    if not bpy.context.object.rigid_body is None:
+        bpy.ops.rigidbody.objects_remove()
     
     #------------------------------------------------
     
@@ -156,16 +156,11 @@ def CreateAnimationTextures(export_path, model_name, info):
     if bpy.data.images.get('Output') != None:
         bpy.data.images.remove(bpy.data.images['Output'])
     
-    # Force the image to be larger to support longer animations.
-    greatest_image_size = max(image_size, 600 * 2)
-    image_size = 1 << (greatest_image_size - 1).bit_length()
-    
     bpy.ops.image.new(name='Output', width=image_size, height=image_size, alpha=False)
     output_image = bpy.data.images['Output']
     output_image.filepath_raw = target_folder + "/Textures/" + model_name + ".png"
     output_image.file_format = 'PNG'
-#    output_image.depth = 16
-
+    
     # The vertices location in rest position is used to calculate the vertex offset for the animation.
     rest_data = []
     

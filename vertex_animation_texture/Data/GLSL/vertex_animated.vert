@@ -104,7 +104,7 @@ uniform vec4 detail_color_indices;
 uniform sampler2DArray detail_normal;
 uniform vec4 detail_normal_indices;
 
-const vec3 bounds = vec3(20.0, 20.0, 20.0);
+const vec3 bounds = vec3(10.0, 10.0, 10.0);
 
 float DecodeFloatRG(vec2 enc){
 	vec2 kDecodeDot = vec2(1.0, 1.0 / 256.0);
@@ -153,9 +153,10 @@ void main() {
 	vec4 normal_color = texture(tex1, frag_tex_coords);
 
 	// float target_resolution = 128.0;
-	float target_resolution = 2048.0;
-	// vec2 texture_size = textureSize(tex0, 0);
-	// float target_resolution = int(texture_size.y);
+	// float target_resolution = 2048.0;
+	// float target_resolution = 8192.0;
+	vec2 texture_size = textureSize(tex0, 0);
+	float target_resolution = int(texture_size.y);
 
 	float one_pixel_offset = (1.0 / target_resolution);
 	float half_pixel_offset = (1.0 / target_resolution) / 2.0;
