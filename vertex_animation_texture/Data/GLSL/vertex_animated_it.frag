@@ -1,5 +1,7 @@
-#version 150
-#extension GL_ARB_shading_language_420pack : enable
+#version 450 core
+
+#og_version_major 1
+#og_version_minor 5
 
 uniform float time;
 uniform vec3 cam_pos;
@@ -22,13 +24,21 @@ UNIFORM_DETAIL4_TEXTURES
 #define INSTANCED_MESH
 
 #if !defined(ATTRIB_ENVOBJ_INSTANCING)
-	const int kMaxInstances = 100;
+	#if defined(UBO_BATCH_SIZE_8X)
+		const int kMaxInstances = 256 * 8;
+	#elif defined(UBO_BATCH_SIZE_4X)
+		const int kMaxInstances = 256 * 4;
+	#elif defined(UBO_BATCH_SIZE_2X)
+		const int kMaxInstances = 256 * 2;
+	#else
+		const int kMaxInstances = 256 * 1;
+	#endif
 
 	struct Instance {
-		mat4 model_mat;
-		mat3 model_rotation_mat;
+		vec3 model_scale;
+		vec4 model_rotation_quat;
 		vec4 color_tint;
-		vec4 detail_scale;
+		vec4 detail_scale;  // TODO: DETAILMAP4 only?
 	};
 
 	uniform InstanceInfo {
@@ -45,6 +55,22 @@ UNIFORM_DETAIL4_TEXTURES
 		flat in vec4 detail_scale_frag;
 	#endif
 #endif
+
+vec3 GetInstancedModelScale(int instance_id) {
+	#if defined(ATTRIB_ENVOBJ_INSTANCING)
+		return model_scale_frag;
+	#else
+		return instances[instance_id].model_scale;
+	#endif
+}
+
+vec4 GetInstancedModelRotationQuat(int instance_id) {
+	#if defined(ATTRIB_ENVOBJ_INSTANCING)
+		return model_rotation_quat_frag;
+	#else
+		return instances[instance_id].model_rotation_quat;
+	#endif
+}
 
 vec4 GetInstancedColorTint(int instance_id) {
 	#if defined(ATTRIB_ENVOBJ_INSTANCING)
@@ -181,8 +207,7 @@ vec3 GetAmbientColor(vec3 world_vert, vec3 ws_normal) {
 
 void main() {
 	#if defined(NO_INSTANCE_ID)
-		int instance_id;
-		return;
+		int instance_id = 0;
 	#endif
 
 	vec4 colormap;
@@ -193,7 +218,7 @@ void main() {
 
 	vec4 base_normalmap = texture(tex1, frag_tex_coords);
 	vec3 base_normal = UnpackObjNormalV3(base_normalmap.xyz);
-	vec3 ws_normal = normalize((instances[instance_id].model_rotation_mat * base_normal).xyz);
+	vec3 ws_normal = normalize(quat_mul_vec3(GetInstancedModelRotationQuat(instance_id), base_normal));
 
 	#if defined(VERTEX_COLOR)
 		colormap = vertex_color;

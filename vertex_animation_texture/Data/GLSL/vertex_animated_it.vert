@@ -1,6 +1,12 @@
-#version 150
-#extension GL_ARB_shading_language_420pack : enable
+#version 450 core
+
+#og_version_major 1
+#og_version_minor 5
+
 #include "lighting150.glsl"
+
+in vec3 vertex_attrib;
+in vec2 tex_coord_attrib;
 
 in vec3 model_translation_attrib;  // set per-instance. separate from rest because it's not needed in the fragment shader, so is not slow on low-end GPUs
 
@@ -12,20 +18,43 @@ in vec3 model_translation_attrib;  // set per-instance. separate from rest becau
 #endif
 
 #if !defined(ATTRIB_ENVOBJ_INSTANCING)
-
-	const int kMaxInstances = 100;
+	#if defined(UBO_BATCH_SIZE_8X)
+		const int kMaxInstances = 256 * 8;
+	#elif defined(UBO_BATCH_SIZE_4X)
+		const int kMaxInstances = 256 * 4;
+	#elif defined(UBO_BATCH_SIZE_2X)
+		const int kMaxInstances = 256 * 2;
+	#else
+		const int kMaxInstances = 256 * 1;
+	#endif
 
 	struct Instance {
-		mat4 model_mat;
-		mat3 model_rotation_mat;
+		vec3 model_scale;
+		vec4 model_rotation_quat;
 		vec4 color_tint;
-		vec4 detail_scale;
+		vec4 detail_scale;  // TODO: DETAILMAP4 only?
 	};
 
 	uniform InstanceInfo {
 		Instance instances[kMaxInstances];
 	};
 #endif
+
+vec3 GetInstancedModelScale(int instance_id) {
+	#if defined(ATTRIB_ENVOBJ_INSTANCING)
+		return model_scale_attrib;
+	#else
+		return instances[instance_id].model_scale;
+	#endif
+}
+
+vec4 GetInstancedModelRotationQuat(int instance_id) {
+	#if defined(ATTRIB_ENVOBJ_INSTANCING)
+		return model_rotation_quat_attrib;
+	#else
+		return instances[instance_id].model_rotation_quat;
+	#endif
+}
 
 vec4 GetInstancedColorTint(int instance_id) {
 	#if defined(ATTRIB_ENVOBJ_INSTANCING)
@@ -54,8 +83,6 @@ uniform float time;
 
 in vec3 tangent_attrib;
 in vec3 bitangent_attrib;
-in vec3 vertex_attrib;
-in vec2 tex_coord_attrib;
 in vec3 normal_attrib;
 in vec3 plant_stability_attrib;
 
@@ -68,6 +95,8 @@ uniform sampler2D tex4;
 #define weight_tex tex5
 #define detail_color tex6
 #define detail_normal tex7
+
+// uniform sampler2D tex5;// TranslucencyMap / WeightMap
 
 uniform sampler2D weight_tex;
 uniform sampler2DArray detail_color;
@@ -92,6 +121,22 @@ vec4 fromLinear(vec4 linearRGB)
     return mix(higher, lower, cutoff);
 }
 
+vec3 quat_mul_vec3(vec4 q, vec3 v) {
+	// Adapted from https://github.com/g-truc/glm/blob/master/glm/detail/type_quat.inl
+	// Also from Fabien Giesen, according to - https://blog.molecular-matters.com/2013/05/24/a-faster-quaternion-vector-multiplication/
+	vec3 quat_vector = q.xyz;
+	vec3 uv = cross(quat_vector, v);
+	vec3 uuv = cross(quat_vector, uv);
+	return v + ((uv * q.w) + uuv) * 2;
+}
+
+vec3 transform_vec3(vec3 scale, vec4 rotation_quat, vec3 translation, vec3 value) {
+	vec3 result = scale * value;
+	result = quat_mul_vec3(rotation_quat, result);
+	result += translation;
+	return result;
+}
+
 void main() {
 	instance_id = gl_InstanceID;
 	int index = gl_VertexID;
@@ -108,10 +153,10 @@ void main() {
 	vec4 normal_color = texture(tex1, frag_tex_coords);
 
 	// float target_resolution = 128.0;
-	float target_resolution = 2048.0;
+	// float target_resolution = 2048.0;
 	// float target_resolution = 8192.0;
-	// vec2 texture_size = textureSize(tex0, 0);
-	// float target_resolution = int(texture_size.y);
+	vec2 texture_size = textureSize(tex0, 0);
+	float target_resolution = int(texture_size.y);
 
 	float one_pixel_offset = (1.0 / target_resolution);
 	float half_pixel_offset = (1.0 / target_resolution) / 2.0;
@@ -123,10 +168,8 @@ void main() {
 	float animation_speed = 0.15;
 	float amount_frames = floor(tint.g * 1000);
 	float animation_length = (amount_frames / target_resolution);
-	float animation_progress = mod((time * animation_speed) * animation_length, animation_length);
+	float animation_progress = mod((time * animation_speed + (model_translation_attrib.x + model_translation_attrib.y + model_translation_attrib.z)) * animation_length, animation_length);
 	float y_pos = animation_progress;
-
-	// float y_pos = tint.g * 1000.0 * one_pixel_offset;
 	
 	// float y_pos = sin(time * 0.15) * 1000.0 * one_pixel_offset;
 
@@ -146,8 +189,8 @@ void main() {
 	vertex_position = vertex_position - (bounds / 2.0f);
 
 	vec3 animated_vertex_position = vertex_attrib - vertex_position;
-	vec3 transformed_vertex = (instances[gl_InstanceID].model_mat * vec4(animated_vertex_position, 1.0)).xyz;
+	vec3 transformed_vertex = transform_vec3(GetInstancedModelScale(instance_id), GetInstancedModelRotationQuat(instance_id), model_translation_attrib, animated_vertex_position);
 
-	gl_Position = projection_view_mat * vec4(transformed_vertex, 1.0);
 	world_vert = transformed_vertex;
+	gl_Position = projection_view_mat * vec4(transformed_vertex, 1.0);
 }
