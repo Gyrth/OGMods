@@ -48,12 +48,9 @@
     <RayToSun r0="-0.018092" r1="0.749923" r2="0.661278" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-32.7176" t1="-3.58612" t2="20.2848" s0="1" s1="1" s2="1" q0="-0.134242" q1="-0.0826927" q2="0.0112421" q3="-0.987428" euler_x="0.270246" euler_y="0.167101" euler_z="0" id="0">
+    <CameraObject t0="-28.5882" t1="-4.90427" t2="24.3102" s0="1" s1="1" s2="1" q0="0.0965554" q1="-0.00955704" q2="0.000927198" q3="0.995281" euler_x="0.193421" euler_y="-0.0192041" euler_z="0" id="0">
         <parameters />
     </CameraObject>
-    <EnvObject t0="-40.235" t1="-8.91578" t2="5.20651" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/IGF_Characters/IGF_Turner.xml">
-        <parameters />
-    </EnvObject>
     <EnvObject t0="-43.6953" t1="-9.13447" t2="6.80008" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="2" color_r="1" color_g="0.156863" color_b="1" overbright="0" type_file="Data/Objects/vat_flag.xml">
         <parameters />
     </EnvObject>
