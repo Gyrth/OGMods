@@ -107,11 +107,18 @@ void main() {
 	
 	vec4 normal_color = texture(tex1, frag_tex_coords);
 
-	// float target_resolution = 128.0;
-	float target_resolution = 2048.0;
-	// float target_resolution = 8192.0;
 	// vec2 texture_size = textureSize(tex0, 0);
 	// float target_resolution = int(texture_size.y);
+
+	#if defined(ONE_K)
+		float target_resolution = 1024.0;
+	#elif defined(TWO_K)
+		float target_resolution = 2048.0;
+	#elif defined(FOUR_K)
+		float target_resolution = 4096.0;
+	#else
+		float target_resolution = 128.0;
+	#endif
 
 	float one_pixel_offset = (1.0 / target_resolution);
 	float half_pixel_offset = (1.0 / target_resolution) / 2.0;
@@ -119,16 +126,13 @@ void main() {
 	int x_pixel = index;
 	float x_pos = 1.0 / target_resolution * x_pixel;
 	vec4 tint = GetInstancedColorTint(instance_id);
+	mat3 model_rotation_mat = instances[instance_id].model_rotation_mat;
 
 	float animation_speed = 0.15;
 	float amount_frames = floor(tint.g * 1000);
 	float animation_length = (amount_frames / target_resolution);
-	float animation_progress = mod((time * animation_speed) * animation_length, animation_length);
+	float animation_progress = mod((time * animation_speed + (model_rotation_mat[0].x + model_rotation_mat[1].y + model_rotation_mat[2].z)) * animation_length, animation_length);
 	float y_pos = animation_progress;
-
-	// float y_pos = tint.g * 1000.0 * one_pixel_offset;
-	
-	// float y_pos = sin(time * 0.15) * 1000.0 * one_pixel_offset;
 
 	// Use half a pixel to get the center of the pixel.
 	vec4 color_1 = texture(tex0, vec2(x_pos + half_pixel_offset, y_pos + half_pixel_offset));
