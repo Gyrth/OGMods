@@ -107,6 +107,7 @@ flat in int vertex_id;
 
 uniform float overbright;
 const float cloud_speed = 0.1;
+uniform float haze_mult;
 
 #include "decals.glsl"
 
@@ -263,6 +264,13 @@ void main() {
 		vec3 ambient_color = GetAmbientColor(world_vert, cam_pos - world_vert);
 		diffuse_color += ambient_color * GetAmbientContrib(shadow_tex.g) * ambient_mult * env_ambient_mult;
 		diffuse_color *= colormap.xyz;
+
+		vec3 fog_color;
+
+		float haze_amount = GetHazeAmount(ws_vertex, haze_mult);
+		float val = min(5.0, 5.0 / (length(ws_vertex)*0.01+1.0) + haze_mult * 50.0);
+		fog_color = textureLod(spec_cubemap, ws_vertex, val).xyz;
+		diffuse_color = mix(diffuse_color, fog_color, haze_amount);
 		
 		vec3 spec_color = vec3(1.0);
 		ambient_mult *= 0.0;
