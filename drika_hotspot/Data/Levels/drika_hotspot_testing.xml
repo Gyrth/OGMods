@@ -35,7 +35,7 @@
     <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
 </Sky>
 <ActorObjects>
-    <CameraObject t0="-22.237" t1="-0.877444" t2="-6.97315" s0="1" s1="1" s2="1" q0="0.0904503" q1="0.576952" q2="-0.0644911" q3="0.809189" euler_x="0.222634" euler_y="1.2388" euler_z="0" id="1">
+    <CameraObject t0="-24.9475" t1="0.105216" t2="-7.07267" s0="1" s1="1" s2="1" q0="0.155697" q1="0.543719" q2="-0.103467" q3="0.818183" euler_x="0.376098" euler_y="1.17307" euler_z="2.46218e-06" id="1">
         <parameters />
     </CameraObject>
     <EnvObject t0="2.35523" t1="-3.42134" t2="8.00964" s0="27.4551" s1="1" s2="25.2772" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
@@ -248,6 +248,9 @@
     <EnvObject t0="17.7392" t1="-2.71935" t2="-7.67985" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="49" color_r="0" color_g="1" color_b="0.0235293" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
         <parameters />
     </EnvObject>
+    <EnvObject t0="-22.2374" t1="-2.71935" t2="-8.41609" s0="1.55261" s1="0.584816" s2="1.93315" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="50" color_r="0" color_g="0.352975" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_block.xml">
+        <parameters />
+    </EnvObject>
     <ActorObject name="Burt" t0="2.44632" t1="-1.58892" t2="10.3209" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="51" type_file="Data/Objects/IGF_Characters/pale_rabbit_civ_actor.xml" is_player="0">
         <parameters>
             <parameter name="Aggression" type="float" val="0.5" />
@@ -309,6 +312,18 @@
             <Color label="Spots" channel="3" red="1" green="1" blue="1" />
         </Palette>
     </ActorObject>
+    <Hotspot t0="-22.2084" t1="-1.45358" t2="-8.33627" s0="0.444444" s1="0.444444" s2="0.444444" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="52" type_file="Data/Objects/Hotspots/drika_hotspot.xml">
+        <parameters>
+            <parameter name="Debug Current Line" type="int" val="0" />
+            <parameter name="Run in EditorMode" type="int" val="1" />
+            <parameter name="Script Data" type="string" val='{&quot;functions&quot;:[{&quot;continue_if_false&quot;:false,&quot;external_hotspot&quot;:false,&quot;function&quot;:8,&quot;hotspot_trigger_type&quot;:0,&quot;identifier&quot;:3,&quot;identifier_type&quot;:4,&quot;reference_string&quot;:&quot;&quot;},{&quot;after_color&quot;:[1,0,0],&quot;color_type&quot;:0,&quot;ease_function&quot;:0,&quot;function&quot;:17,&quot;identifier&quot;:50,&quot;identifier_type&quot;:0,&quot;overbright&quot;:0,&quot;palette_slot&quot;:0,&quot;transition&quot;:true,&quot;transition_duration&quot;:1},{&quot;after_color&quot;:[1,1,1],&quot;color_type&quot;:0,&quot;ease_function&quot;:0,&quot;function&quot;:17,&quot;identifier&quot;:50,&quot;identifier_type&quot;:0,&quot;overbright&quot;:0,&quot;palette_slot&quot;:0,&quot;transition&quot;:true,&quot;transition_duration&quot;:1},{&quot;function&quot;:7,&quot;line&quot;:1}]}&#x0A;' />
+            <parameter name="Show UI Grid" type="int" val="1" />
+            <parameter name="Transform Relative" type="int" val="0" />
+            <parameter name="UI Snap Scale" type="int" val="20" />
+        </parameters>
+        <Connections />
+        <ConnectionsFrom />
+    </Hotspot>
     <EnvObject name="Create Particle Helper" t0="17.7731" t1="-1.31963" t2="-11.5349" s0="0.964286" s1="0.964286" s2="0.964286" q0="-0.481137" q1="0.525276" q2="0.51755" q3="0.47406" euler_x="1.73845" euler_y="1.48188" euler_z="-2.97457" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters>
             <parameter name="Placeholder Tag" type="string" val="drika_hotspot_testing15853" />
@@ -352,7 +367,7 @@
     <EnvObject t0="5.8758" t1="-3.42138" t2="-184.254" s0="24.5896" s1="1" s2="30.9778" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="61" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
         <parameters />
     </EnvObject>
-    <EnvObject name="Create Particle Helper" t0="-19.1167" t1="-1.36973" t2="-8.79244" s0="0.85" s1="0.85" s2="0.85" q0="-0.21253" q1="-0.674411" q2="0.21253" q3="0.674411" euler_x="-1.5708" euler_y="-0.96023" euler_z="1.5708" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
+    <EnvObject name="Create Particle Helper" t0="-19.1167" t1="-1.36973" t2="-8.79244" s0="0.85" s1="0.85" s2="0.85" q0="-0.21253" q1="-0.674411" q2="0.21253" q3="0.674411" euler_x="-1.57079" euler_y="-0.960228" euler_z="1.57079" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/drika_hotspot_cube.xml">
         <parameters>
             <parameter name="Placeholder Tag" type="string" val="drika_hotspot_testing4272" />
         </parameters>
