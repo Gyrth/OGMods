@@ -1,0 +1,88 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="9.2871" t1="-2.58062" t2="1.47327" s0="33.4177" s1="51.4408" s2="23.7241" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" version="1">
+        <parameters />
+        <EnvObject t0="8.97965" t1="-8.61853" t2="0.512552" s0="2.33545" s1="2.41606" s2="2.66199" q0="-0.0793688" q1="0.143437" q2="-0.69881" q3="0.696266" euler_x="-0.317537" euler_y="0.0889304" euler_z="-1.58869" id="2" color_r="0.260504" color_g="0.294118" color_b="0.252595" overbright="0" type_file="Data/Objects/Environment/Cliffs/CliffRock_03_lichen.xml">
+            <parameters />
+        </EnvObject>
+        <Group t0="12.0153" t1="-2.58062" t2="1.49955" s0="26.4236" s1="51.4308" s2="23.6615" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" version="1">
+            <parameters />
+            <EnvObject t0="8.80845" t1="-18.291" t2="-0.326248" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+                <parameters>
+                    <parameter name="BlockBase" type="int" val="1" />
+                </parameters>
+            </EnvObject>
+            <EnvObject t0="15.0804" t1="7.00419" t2="3.25725" s0="1" s1="1" s2="1" q0="0" q1="0.441471" q2="0" q3="0.897276" euler_x="0" euler_y="0.914476" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree1_A.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="14.5613" t1="-6.87233" t2="5.27295" s0="1.07291" s1="1.07291" s2="1.07291" q0="0.147952" q1="0.717013" q2="-0.160232" q3="0.662064" euler_x="-2.70187" euler_y="1.49115" euler_z="-3.14158" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/green_bush.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="7.62665" t1="-8.33723" t2="-3.62495" s0="1.50835" s1="1.50835" s2="1.50835" q0="-0.0694677" q1="-0.295075" q2="0.160417" q3="0.939346" euler_x="-0.269187" euler_y="-0.56104" euler_z="0.416277" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous_winter.xml">
+                <parameters />
+            </EnvObject>
+        </Group>
+        <EnvObject t0="-0.975118" t1="-9.94473" t2="4.03045" s0="2.36883" s1="2.41606" s2="2.65385" q0="-0.0639982" q1="0.154081" q2="-0.601582" q3="0.78119" euler_x="-0.293473" euler_y="0.164473" euler_z="-1.33682" id="8" color_r="0.260504" color_g="0.294118" color_b="0.252595" overbright="0" type_file="Data/Objects/Environment/Cliffs/CliffRock_03_lichen.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="19.1934" t1="-9.4204" t2="-4.16988" s0="2.33545" s1="2.41606" s2="2.66199" q0="-0.104809" q1="0.12605" q2="-0.816762" q3="0.553192" euler_x="-0.32787" euler_y="-0.0317536" euler_z="-1.94568" id="9" color_r="0.260504" color_g="0.294118" color_b="0.252595" overbright="0" type_file="Data/Objects/Environment/Cliffs/CliffRock_03_lichen.xml">
+            <parameters />
+        </EnvObject>
+        <NavmeshConnectionObject t0="6.12173" t1="-7.45119" t2="-4.69297" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="8.21167" t1="-4.85626" t2="-1.65997" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="10.2289" t1="-5.07192" t2="2.51373" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="13" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="10.3314" t1="-8.29102" t2="5.95037" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="6.29419" t1="-4.71009" t2="2.6824" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="1.30278" t1="-4.92378" t2="2.8371" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="16" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="4.01162" t1="-8.29102" t2="2.55787" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="17" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="14.9021" t1="-8.29102" t2="-1.62505" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="18" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="12.8241" t1="-4.63165" t2="-0.315165" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="19" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="17.2065" t1="-4.02473" t2="-2.51598" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="20" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <EnvObject t0="8.80845" t1="-18.291" t2="-0.326248" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

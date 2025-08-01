@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<Object>
+    <Model>Data/Architecture/Components/Models/Building_Wall_1.obj</Model>
+    <ColorMap>Data/Architecture/Textures/Building_Color.tga</ColorMap>
+    <NormalMap>Data/Architecture/Textures/Building_Norm.tga</NormalMap>
+    <ShaderName>envobject #TANGENT #BASE_TANGENT</ShaderName>
+    <MaterialPath>Data/Materials/default.xml</MaterialPath>
+</Object>
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <EnvObject type_file="C:\Program Files (x86)\Wolfire\Overgrowth\Data\Custom\Markuss\Old_China\Architecture\Components\Building_Stairs.xml" id="187" group_id="-1" t0="288.623993" t1="-10.816890" t2="49.079670" s0="1.000000" s1="1.000000" s2="1.000000" r0="1.000000" r1="0.000000" r2="0.000000" r3="0.000000" r4="0.000000" r5="1.000000" r6="0.000000" r7="0.000000" r8="0.000000" r9="0.000000" r10="1.000000" r11="0.000000" r12="0.000000" r13="0.000000" r14="0.000000" r15="1.000000" color_r="1.000000" color_g="1.000000" color_b="1.000000" />
+</ActorObjects>

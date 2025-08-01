@@ -1,0 +1,52 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <ActorObject t0="3.00617" t1="-1.42134" t2="-0.31391" s0="1" s1="1" s2="1" q0="-0.011939" q1="0" q2="0.000411987" q3="0.999928" id="21" type_file="Data/Objects/characters/cats/fancy_striped_cat_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5" />
+            <parameter name="Attack Damage" type="float" val="0.89189" />
+            <parameter name="Attack Knockback" type="float" val="0.89189" />
+            <parameter name="Attack Speed" type="float" val="1.2027" />
+            <parameter name="Block Follow-up" type="float" val="0.62162" />
+            <parameter name="Block Skill" type="float" val="0.60811" />
+            <parameter name="Character Scale" type="float" val="0.96757" />
+            <parameter name="Damage Resistance" type="float" val="0.90541" />
+            <parameter name="Ear Size" type="float" val="1.54054" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Focus FOV distance" type="float" val="10.135" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="2" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Movement Speed" type="float" val="1" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="meatEater" />
+        </parameters>
+        <Connections>
+            <Connection id="21" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Fur" channel="0" red="0" green="0" blue="0" />
+            <Color label="Leather" channel="1" red="0.14902" green="0.0880092" blue="0.0473356" />
+            <Color label="Shirt" channel="2" red="0.12549" green="0.0713572" blue="0.0713572" />
+            <Color label="Pants" channel="3" red="0.122289" green="0.152941" blue="0.0893656" />
+        </Palette>
+        <EnvObjectAttachments>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="2" num_connections="1" m0="-0.959064" m1="-0.000197888" m2="0.283189" m3="0" m4="0.00032568" m5="0.999998" m6="0.00180175" m7="0" m8="-0.283189" m9="0.00182022" m10="-0.959063" m11="0" m12="-0.0889692" m13="0.255298" m14="0.00860882" m15="1" />
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+            </EnvObjectAttachment>
+        </EnvObjectAttachments>
+        <EnvObject s0="1.25029" s1="1.25029" s2="1.25029" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/TestBackpack.xml">
+            <parameters />
+        </EnvObject>
+    </ActorObject>
+</ActorObjects>

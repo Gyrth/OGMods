@@ -1,0 +1,41 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="3.26347" t1="55.1838" t2="42.7737" s0="33.5719" s1="60.3614" s2="24.8988" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="2.02441" t1="35.0081" t2="40.3293" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="9.90278" t1="60.1014" t2="45.1501" s0="1" s1="1" s2="1" q0="0" q1="0.441471" q2="0" q3="0.897276" euler_x="0" euler_y="0.914476" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree1_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-2.81974" t1="64.5785" t2="43.9727" s0="1.2978" s1="1.2978" s2="1.2978" q0="0" q1="-0.565118" q2="0" q3="0.82501" euler_x="0" euler_y="-1.20115" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree1_B.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="3.94594" t1="45.959" t2="38.6875" s0="1" s1="1" s2="1" q0="0" q1="0.734698" q2="0" q3="0.678394" euler_x="3.14159" euler_y="1.49114" euler_z="3.14159" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="3.94327" t1="45.9764" t2="31.9469" s0="0.727719" s1="0.727719" s2="0.727719" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-3.70544" t1="47.1165" t2="33.3832" s0="1.50835" s1="1.50835" s2="1.50835" q0="0" q1="0.415854" q2="0" q3="0.909431" euler_x="0" euler_y="0.857763" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.93642" t1="45.3628" t2="34.0266" s0="0.66564" s1="0.66564" s2="0.66564" q0="0" q1="0.734698" q2="0" q3="0.678394" euler_x="3.14159" euler_y="1.49114" euler_z="3.14159" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="3.76958" t1="47.7472" t2="44.695" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" type_file="Data/Objects/Undergrowth/Hotspots/spawnPlace.xml">
+            <parameters>
+                <parameter name="Name" type="string" val="SpawnPlace" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="2.02441" t1="35.0081" t2="40.3293" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

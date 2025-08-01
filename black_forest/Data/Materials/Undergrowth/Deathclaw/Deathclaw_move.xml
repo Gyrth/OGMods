@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<material>
+    <events>
+        <leftrunstep soundgroup="Data/Sounds/Undergrowth/Deathclaw/Deathclaw_foley/Deathclaw_run.xml" attached="true"/>
+        <rightrunstep soundgroup="Data/Sounds/Undergrowth/Deathclaw/Deathclaw_foley/Deathclaw_run.xml" attached="true"/>
+        <leftwallstep soundgroup="Data/Sounds/Undergrowth/Deathclaw/Deathclaw_foley/Deathclaw_run.xml" attached="true"/>
+        <rightwallstep soundgroup="Data/Sounds/Undergrowth/Deathclaw/Deathclaw_foley/Deathclaw_run.xml" attached="true"/>
+        <leftwalkstep soundgroup="Data/Sounds/Undergrowth/Deathclaw/Deathclaw_foley/Deathclaw_walk.xml" attached="true"/>
+        <rightwalkstep soundgroup="Data/Sounds/Undergrowth/Deathclaw/Deathclaw_foley/Deathclaw_walk.xml" attached="true"/>
+        <leftcrouchwalkstep soundgroup="Data/Sounds/Undergrowth/Deathclaw/Deathclaw_foley/Deathclaw_crouchwalk.xml" attached="true"/>
+        <rightcrouchwalkstep soundgroup="Data/Sounds/Undergrowth/Deathclaw/Deathclaw_foley/Deathclaw_crouchwalk.xml" attached="true"/>
+        <land soundgroup="Data/Sounds/Undergrowth/Deathclaw/Deathclaw_foley/Deathclaw_jump_land.xml" attached="true"/>
+        <land_soft soundgroup="Data/Sounds/Undergrowth/Deathclaw/Deathclaw_foley/Deathclaw_jump_land.xml" attached="true"/>
+        <land_slide soundgroup="Data/Sounds/Undergrowth/Deathclaw/Deathclaw_foley/Deathclaw_jump_land.xml" attached="true"/>           
+        <jump soundgroup="Data/Sounds/Undergrowth/Deathclaw/Deathclaw_foley/Deathclaw_jump.xml" attached="true"/>
+        <roll soundgroup="Data/Sounds/Undergrowth/Deathclaw/Deathclaw_foley/Deathclaw_roll.xml" attached="true"/>        
+        <edge_grab soundgroup="Data/Sounds/Undergrowth/Deathclaw/Deathclaw_foley/Deathclaw_edge_grab.xml" attached="true"/>
+        <edge_crawl soundgroup="Data/Sounds/Undergrowth/Deathclaw/Deathclaw_foley/Deathclaw_edge_crawl.xml" attached="true"/>                				
+    </events>
+</material>

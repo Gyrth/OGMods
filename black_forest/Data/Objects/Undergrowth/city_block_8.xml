@@ -1,0 +1,116 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="37.7392" t1="84.6646" t2="-97.4915" s0="20.1351" s1="31.2265" s2="20.7664" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="42.861" t1="99.1984" t2="-91.7107" s0="4.72655" s1="4.72655" s2="4.72655" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="0.169062" color_g="0.162768" color_b="0.192157" overbright="0" type_file="Data/Objects/Buildings/basics/soft_disk.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="40.2011" t1="91.6282" t2="-96.051" s0="1.42987" s1="1.64976" s2="1" q0="0" q1="0.246128" q2="0" q3="0.969237" euler_x="0" euler_y="0.497366" euler_z="0" id="4" color_r="0.169062" color_g="0.162768" color_b="0.192157" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cube.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="40.1132" t1="91.6973" t2="-97.1396" s0="0.319371" s1="0.319371" s2="0.319371" q0="0" q1="0.247932" q2="0" q3="0.968778" euler_x="0" euler_y="0.50109" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_door.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="42.8571" t1="94.8853" t2="-91.6261" s0="4.55652" s1="4.55652" s2="4.55652" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="0.169062" color_g="0.162768" color_b="0.192157" overbright="0" type_file="Data/Objects/Buildings/basics/soft_cylinder.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="39.3376" t1="91.7023" t2="-96.7148" s0="0.319371" s1="0.319371" s2="0.319371" q0="0" q1="0.247932" q2="0" q3="0.968778" euler_x="0" euler_y="0.50109" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_door.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="40.4788" t1="95.6941" t2="-95.3726" s0="1" s1="1" s2="1" q0="0" q1="-0.967824" q2="0" q3="0.251629" euler_x="3.14159" euler_y="-0.508726" euler_z="3.14159" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window_boxes/window_box_medium.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="46.0454" t1="95.6941" t2="-94.8463" s0="1" s1="1" s2="1" q0="0" q1="-0.924885" q2="0" q3="-0.380247" euler_x="-3.14159" euler_y="0.780127" euler_z="-3.14159" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window_boxes/window_box_medium.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="46.5876" t1="95.6941" t2="-88.8764" s0="1" s1="1" s2="1" q0="0" q1="-0.419782" q2="0" q3="-0.907625" euler_x="0" euler_y="0.86641" euler_z="0" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window_boxes/window_box_medium.xml">
+            <parameters />
+        </EnvObject>
+        <Group t0="37.6816" t1="78.9514" t2="-97.7964" s0="20.01" s1="19.7901" s2="20.1044" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" version="1">
+            <parameters />
+            <EnvObject t0="37.6816" t1="78.9514" t2="-97.7964" s0="1" s1="0.989007" s2="1.00472" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+                <parameters>
+                    <parameter name="BlockBase" type="int" val="1" />
+                </parameters>
+            </EnvObject>
+        </Group>
+        <EnvObject t0="37.7489" t1="89.6879" t2="-97.779" s0="5.02642" s1="0.274753" s2="5.04538" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="13" color_r="0.0689735" color_g="0.0980392" color_b="0.0495963" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="39.7691" t1="95.6941" t2="-88.3762" s0="1" s1="1" s2="1" q0="0" q1="0.375556" q2="0" q3="-0.9268" euler_x="0" euler_y="-0.769993" euler_z="0" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window_boxes/window_box_medium.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="40.4902" t1="99.9816" t2="-95.1577" s0="3.55974" s1="3.55974" s2="3.55974" q0="0" q1="-0.463301" q2="0" q3="0.886201" euler_x="0" euler_y="-0.963433" euler_z="0" id="15" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="43.0251" t1="99.9816" t2="-95.8526" s0="3.55974" s1="3.55974" s2="3.55974" q0="0" q1="-0.692441" q2="0" q3="0.721474" euler_x="0" euler_y="-1.52972" euler_z="0" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="45.5816" t1="99.9816" t2="-94.8282" s0="3.55974" s1="3.55974" s2="3.55974" q0="0" q1="-0.92019" q2="0" q3="0.391473" euler_x="3.14159" euler_y="-0.804464" euler_z="3.14159" id="17" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="47.0808" t1="99.9816" t2="-91.6744" s0="3.55974" s1="3.55974" s2="3.55974" q0="0" q1="-0.99999" q2="0" q3="0.00453975" euler_x="3.14159" euler_y="-0.00907953" euler_z="3.14159" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="45.9611" t1="99.9816" t2="-88.9265" s0="3.55974" s1="3.55974" s2="3.55974" q0="0" q1="-0.936442" q2="0" q3="-0.350823" euler_x="-3.14159" euler_y="0.7169" euler_z="-3.14159" id="19" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="42.7132" t1="99.9816" t2="-87.5502" s0="3.55974" s1="3.55974" s2="3.55974" q0="0" q1="-0.696234" q2="0" q3="-0.717815" euler_x="0" euler_y="1.54028" euler_z="0" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="39.9308" t1="99.9816" t2="-88.7573" s0="3.55974" s1="3.55974" s2="3.55974" q0="0" q1="-0.375563" q2="0" q3="-0.926797" euler_x="0" euler_y="0.770008" euler_z="0" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="38.5917" t1="99.9816" t2="-91.755" s0="3.55974" s1="3.55974" s2="3.55974" q0="0" q1="-0.00791615" q2="0" q3="-0.999969" euler_x="0" euler_y="0.0158325" euler_z="0" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+            <parameters />
+        </EnvObject>
+        <PlaceholderObject t0="43.9905" t1="91.5122" t2="-104.057" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="43" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/city_block_8_actor.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <ItemObject t0="40.0259" t1="91.9837" t2="-99.4662" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="35" type_file="Data/Items/DogHammer.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </ItemObject>
+        <PathPointObject t0="46.4211" t1="90.5122" t2="-97.0729" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="36" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="46.6068" t1="90.5122" t2="-106.028" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="37" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="29.4023" t1="90.5122" t2="-106.435" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="38" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="29.0947" t1="90.5122" t2="-88.8476" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="39" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="38.7589" t1="90.5122" t2="-97.9264" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="40" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+    </Group>
+</ActorObjects>

@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Prototypes/OG/Models/Tent.obj</Model>
+	<ColorMap>Data/Prototypes/OG/Textures/Tent_Color.tga</ColorMap>
+	<NormalMap>Data/Prototypes/OG/Textures/Tent_Norm.tga</NormalMap>
+	<PaletteMap 
+		label_red="Tent" 
+		label_green="Shirt" 
+		label_blue="Pants"
+		label_alpha="Spots">
+        	Data/Prototypes/OG/Textures/Tent_Weights.tga
+    	</PaletteMap>
+  	<ShaderName>envobject #TANGENT #BASE_TANGENT</ShaderName>
+	<MaterialPath>Data/Materials/default.xml</MaterialPath>
+</Object>

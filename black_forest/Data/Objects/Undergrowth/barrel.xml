@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/Objects/barrel/barrel.obj</Model>
+	<ColorMap>Data/Textures/Objects/barrel/barrel_color.tga</ColorMap>
+	<NormalMap>Data/Textures/Objects/barrel/barrel_Norm.tga</NormalMap>
+  	<ShaderName>envobject #TANGENT #BASE_TANGENT</ShaderName>
+	<MaterialPath>Data/Materials/wood.xml</MaterialPath>
+</Object>

@@ -1,0 +1,48 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-8.72215" t1="6.57299" t2="-1.62331" s0="20.65" s1="29.1926" s2="20.7606" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="-8.70786" t1="16.505" t2="-1.62331" s0="0.610422" s1="0.610422" s2="0.610422" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_arena_floor.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-2.51087" t1="17.2946" t2="-10.3461" s0="1" s1="0.579774" s2="0.631278" q0="0" q1="-0.70849" q2="0" q3="0.705721" euler_x="3.14159" euler_y="-1.56695" euler_z="3.14159" id="4" color_r="0.10522" color_g="0.104406" color_b="0.121569" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/tall_ruin_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-2.28027" t1="17.9384" t2="-9.1864" s0="0.785484" s1="0.785484" s2="0.785484" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Hanging2Red.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-8.62903" t1="15.5468" t2="-1.34973" s0="0.369781" s1="0.369781" s2="0.369781" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="0.10522" color_g="0.104406" color_b="0.121569" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-8.62224" t1="17.4626" t2="-1.29846" s0="1" s1="1.31242" s2="1.72246" q0="1" q1="0" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_post_h.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-9.04215" t1="1.87178" t2="-1.56794" s0="1" s1="0.989007" s2="1.00472" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-8.97485" t1="12.6083" t2="-1.5505" s0="5.02642" s1="0.274753" s2="5.04538" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" color_r="0.0689735" color_g="0.0980392" color_b="0.0495963" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-8.7885" t1="16.7386" t2="-1.27466" s0="1.12458" s1="1.38771" s2="1.39643" q0="-0.707107" q1="0" q2="0" q3="0.707107" euler_x="-1.5708" euler_y="0" euler_z="0" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-8.4444" t1="16.7386" t2="-1.27194" s0="1.12458" s1="1.38771" s2="1.39643" q0="-0.707107" q1="0" q2="0" q3="0.707107" euler_x="-1.5708" euler_y="0" euler_z="0" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-8.60767" t1="17.6274" t2="-1.30153" s0="1.71515" s1="2.72702" s2="1.45221" q0="0" q1="0" q2="-0.707107" q3="0.707107" euler_x="0" euler_y="0" euler_z="-1.5708" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/RopeBall1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-8.55574" t1="17.2795" t2="-1.20518" s0="0.678042" s1="1.19833" s2="1.16948" q0="0" q1="0" q2="0.707107" q3="0.707107" euler_x="0" euler_y="0" euler_z="1.5708" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/SmallProps/Rope/Rope_Straight_01.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="-8.62267" t1="16.459" t2="-1.1712" s0="0.614289" s1="0.614289" s2="0.614289" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" type_file="Data/Objects/Undergrowth/Hotspots/WaterSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+    </Group>
+</ActorObjects>

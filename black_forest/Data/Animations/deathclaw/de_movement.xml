@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<SyncedAnimationGroup>
+	<CoordLabel>tall_coord</CoordLabel>
+	<Animations>
+		<Animation path="Data/Animations/r_crouchmovement.xml" coord="0.0"/>
+		<Animation path="Data/Animations/deathclaw/de_standmovement.xml" coord="1.0"/>
+	</Animations>
+	<Overshoot>true</Overshoot>
+</SyncedAnimationGroup>

@@ -1,0 +1,41 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <ActorObject t0="-54.9537" t1="9.01725" t2="-12.5025" s0="1" s1="1" s2="1" q0="0" q1="-0.875357" q2="0" q3="0.483477" id="671" type_file="Data/Objects/characters/cats/male_cat_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5" />
+            <parameter name="Attack Damage" type="float" val="0.81081" />
+            <parameter name="Attack Knockback" type="float" val="0.91892" />
+            <parameter name="Attack Speed" type="float" val="1.2027" />
+            <parameter name="Block Follow-up" type="float" val="0.64865" />
+            <parameter name="Block Skill" type="float" val="0.65541" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="float" val="1" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Movement Speed" type="float" val="1" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="meatEater" />
+        </parameters>
+        <Connections>
+            <Connection id="671" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Fur" channel="0" red="0.592157" green="0.586563" blue="0.575902" />
+            <Color label="Shirt" channel="1" red="0.239216" green="0.0759861" blue="0.0759861" />
+            <Color label="Pants" channel="2" red="0.258824" green="0.18714" blue="0.0487197" />
+            <Color label="Spots" channel="3" red="0.388235" green="0.333228" blue="0.261868" />
+        </Palette>
+    </ActorObject>
+</ActorObjects>

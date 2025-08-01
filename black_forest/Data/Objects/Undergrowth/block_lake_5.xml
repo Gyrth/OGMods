@@ -1,0 +1,69 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-19.95" t1="44.1079" t2="-24.6455" s0="22.8362" s1="50.8778" s2="20.7614" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="-21.3631" t1="28.674" t2="-24.2698" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <Hotspot t0="-21.524" t1="36.005" t2="-24.9827" s0="4.07797" s1="1" s2="4.06187" q0="-0.0123102" q1="-0.0414221" q2="0.0241892" q3="0.998774" euler_x="-0.0266875" euler_y="-0.0822398" euler_z="0.0495265" id="4" type_file="Data/Objects/Hotspots/wet_cube.xml">
+            <parameters>
+                <parameter name="Water Fog" type="float" val="1" />
+                <parameter name="Wave Density" type="float" val="0.25" />
+                <parameter name="Wave Height" type="float" val="0.5" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="-22.4644" t1="34.1239" t2="-19.5002" s0="1.94648" s1="1.94648" s2="1.94648" q0="0.00839972" q1="-0.73553" q2="0.025809" q3="0.67695" euler_x="-2.82851" euler_y="-1.48437" euler_z="2.87694" id="5" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_arch.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-27.6555" t1="37.2688" t2="-21.3727" s0="1" s1="1" s2="1" q0="0.520351" q1="-0.723601" q2="-0.305037" q3="0.335528" euler_x="2.21085" euler_y="-0.168926" euler_z="-1.80973" id="6" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar_top.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.3521" t1="39.1748" t2="-30.4821" s0="1" s1="1" s2="1" q0="0.0243972" q1="-0.997915" q2="0.0118926" q3="-0.0585834" euler_x="-3.11481" euler_y="0.116606" euler_z="-3.09114" id="7" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.3956" t1="39.8591" t2="-29.8765" s0="1" s1="1" s2="1" q0="-0.0121951" q1="-0.0461718" q2="0.0242475" q3="0.998566" euler_x="-0.0267098" euler_y="-0.0917484" euler_z="0.0497814" id="8" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-21.8392" t1="33.9501" t2="-27.1385" s0="1.94648" s1="1.94648" s2="1.94648" q0="0.00839972" q1="-0.73553" q2="0.025809" q3="0.67695" euler_x="-2.82851" euler_y="-1.48437" euler_z="2.87694" id="9" color_r="0.788235" color_g="0.788235" color_b="0.788235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_arch.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-16.0635" t1="53.1585" t2="-28.1444" s0="1" s1="1" s2="1" q0="-0.0123102" q1="-0.0414221" q2="0.0241892" q3="0.998774" euler_x="-0.0266875" euler_y="-0.0822398" euler_z="0.0495265" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_B_tops.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="-21.1282" t1="38.4771" t2="-25.0913" s0="4.5559" s1="4.5559" s2="4.5559" q0="1" q1="0" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="0" id="11" type_file="Data/Objects/Hotspots/ambient_sound.xml">
+            <parameters>
+                <parameter name="Delay Max" type="float" val="10" />
+                <parameter name="Delay Min" type="float" val="3" />
+                <parameter name="Fade Distance" type="float" val="10" />
+                <parameter name="Gain" type="float" val="1" />
+                <parameter name="Global" type="int" val="0" />
+                <parameter name="Sound Path" type="string" val="Data/Sounds/ambient/swamp_bugs.wav" />
+                <parameter name="Wind Scale" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="-21.2489" t1="38.8574" t2="-23.996" s0="3.84183" s1="1.49496" s2="3.25178" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" type_file="Data/Objects/Undergrowth/Hotspots/BadWaterSpot.xml">
+            <parameters>
+                <parameter name="Activated" type="int" val="0" />
+                <parameter name="Open" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="-20.9143" t1="35.0461" t2="-23.4533" s0="2.0307" s1="0.864251" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" type_file="Data/Objects/Undergrowth/Hotspots/quest15Spot.xml">
+            <parameters>
+                <parameter name="quest15Go" type="int" val="0" />
+                <parameter name="tracked" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="-21.3631" t1="28.674" t2="-24.2698" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

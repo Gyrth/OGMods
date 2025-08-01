@@ -1,0 +1,40 @@
+
+<?xml version="1.0" ?>
+<item>
+    <type>weapon</type>
+    <appearance obj_path = "Data/jims_weapon_pack/rat_weapons/03_scripts/jims_rat_sword_object.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_dogweapongrip.anm"
+      hands = "1"/>
+    <sheathe ik_attach = "hip"
+          anim = "Data/Animations/r_dogweaponsheathed.anm"/>
+    <points>
+        <pommel x="0.0033" y="-0.13" z="0.0046"/>
+        <guard x="0.04" y="0.14" z="-0.016"/>
+        <tip x="0.43" y="0.8" z="0.0156"/>
+    </points>
+    <lines>
+        <wood start="pommel" end="guard"/>
+        <metal start="guard" end="tip"/>
+    </lines>  
+  <label>rat_sword</label>
+    <attack_override stationary = "Data/Attacks/smallswordslashleft.xml"
+                     moving = "Data/Attacks/smallswordslashright.xml"
+                     low = "Data/Attacks/smallswordslashleft.xml"
+                     moving_close = "Data/Attacks/smallswordslashleft.xml"
+                     stationary_close = "Data/Attacks/knifeslash.xml"/>
+    <anim_override idle = "Data/Animations/r_smallswordstancefront.xml"
+                   movement = "Data/Animations/r_movement_sword.xml"
+                   medleftblock = "Data/Animations/r_smallswordparryleft.anm"
+                   medrightblock = "Data/Animations/r_smallswordparryright.anm"
+                   highleftblock = "Data/Animations/r_smallswordparryhileft.anm"
+                   highrightblock = "Data/Animations/r_smallswordparryhiright.anm"
+                   lowleftblock = "Data/Animations/r_activeblocklowright.anm"
+                   lowrightblock = "Data/Animations/r_activeblocklowleft.anm"
+                   blockflinch = "Data/Animations/r_activeblockflinchknives.anm"/>
+    <anim_override_flags
+                   lowleftblock = "mirror"
+                   lowrightblock = "mirror"/>
+    <physics mass = "1 kg"/>
+    <range extend = "0.2"/>
+</item>

@@ -1,0 +1,614 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="9.47998" t1="-0.936013" t2="0.46416" s0="21.0027" s1="30.676" s2="21.0277" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="171" version="1">
+        <parameters />
+        <Decal t0="15.0131" t1="4.68408" t2="3.34179" s0="1.49646" s1="1" s2="1.33262" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="2" type_file="Data/Objects/Undergrowth/Decals/undergrowthMap.xml" color_r="1" color_g="1" color_b="1" overbright="25">
+            <parameters />
+        </Decal>
+        <EnvObject t0="15.0689" t1="4.10629" t2="3.35405" s0="2.09305" s1="1.86291" s2="3.59656" q0="0" q1="0.00507349" q2="0" q3="0.999987" euler_x="0" euler_y="0.010147" euler_z="0" id="3" color_r="0.2" color_g="0.186667" color_b="0.186667" overbright="0" type_file="Data/Objects/Environment/Furniture/CatStand.xml">
+            <parameters />
+        </EnvObject>
+        <PlaceholderObject t0="14.6447" t1="4.34266" t2="6.53671" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/block_trees_27_actor_1.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="1" />
+            </Connections>
+        </PlaceholderObject>
+        <Hotspot t0="14.4745" t1="3.67767" t2="6.54634" s0="0.7258" s1="0.7258" s2="0.7258" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" type_file="Data/Objects/Undergrowth/Hotspots/taskMasterSpot.xml">
+            <parameters>
+                <parameter name="Name" type="string" val="taskMasterSpot" />
+                <parameter name="Open" type="int" val="1" />
+                <parameter name="Quested" type="int" val="0" />
+                <parameter name="questGo" type="int" val="0" />
+                <parameter name="questID" type="int" val="5" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="15.7016" t1="4.15605" t2="7.81892" s0="1" s1="1" s2="1" q0="0" q1="-0.249889" q2="0" q3="0.968275" euler_x="0" euler_y="-0.505132" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Farm/HayStack_01.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.81969" t1="-6.269" t2="-0.0447115" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="9.47999" t1="6.90605" t2="0.655688" s0="0.483345" s1="0.677537" s2="0.373904" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/BlockRuins_Sandy_OldRaiderBase.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="3.66228" t1="4.30805" t2="-3.05391" s0="2.10873" s1="2.10873" s2="2.10873" q0="0" q1="0.674549" q2="0" q3="0.73823" euler_x="0" euler_y="1.48071" euler_z="0" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/shop_bin.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="13.9075" t1="3.75626" t2="-2.75301" s0="0.653692" s1="0.653692" s2="0.653692" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" type_file="Data/Objects/Undergrowth/Hotspots/runnerMasterSpot.xml">
+            <parameters>
+                <parameter name="Name" type="string" val="runnerMasterSpot" />
+                <parameter name="Skill" type="int" val="4" />
+                <parameter name="Trained" type="int" val="0" />
+                <parameter name="trainGo" type="int" val="0" />
+                <parameter name="trainType" type="int" val="3" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="5.27899" t1="4.18195" t2="-4.83403" s0="2.10873" s1="2.10873" s2="2.10873" q0="0" q1="0.17665" q2="0" q3="0.984274" euler_x="0" euler_y="0.355164" euler_z="0" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/shop_bin.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="3.68489" t1="4.93805" t2="-3.02441" s0="2.09443" s1="2.10032" s2="2.0296" q0="0.113998" q1="0.680601" q2="-0.108428" q3="0.715563" euler_x="0.315975" euler_y="1.52073" euler_z="3.57262e-006" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/bin_fillers/bin_spice_brown.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.23409" t1="4.76005" t2="-4.84103" s0="2.09851" s1="2.35349" s2="2.34696" q0="0.146876" q1="0.153156" q2="-0.023026" q3="0.976954" euler_x="0.298446" euler_y="0.311006" euler_z="0" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/bin_fillers/bin_grain_rice.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.36609" t1="4.14605" t2="2.90131" s0="1" s1="1" s2="1" q0="0" q1="-0.0112628" q2="0" q3="0.999937" euler_x="0" euler_y="-0.0225261" euler_z="0" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/DogTools/DogToolbox.xml">
+            <parameters />
+        </EnvObject>
+        <PlaceholderObject t0="5.35827" t1="4.0638" t2="-3.22978" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/block_trees_27_actor_2.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="1" />
+            </Connections>
+        </PlaceholderObject>
+        <EnvObject t0="14.2403" t1="4.24705" t2="7.76362" s0="1" s1="1" s2="1" q0="0" q1="-0.249889" q2="0" q3="0.968275" euler_x="0" euler_y="-0.505132" euler_z="0" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_post_a.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.19549" t1="4.03205" t2="1.68429" s0="1" s1="1" s2="1" q0="-0.00826317" q1="0.095262" q2="0.0274315" q3="0.99504" euler_x="-0.0114265" euler_y="0.191195" euler_z="0.0540268" id="17" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/DogTools/DogToolHammer.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.46219" t1="4.00905" t2="1.62399" s0="3.74448" s1="3.74448" s2="3.74448" q0="0.70059" q1="-0.0698876" q2="0.0692788" q3="0.706746" euler_x="1.56205" euler_y="-0.197132" euler_z="0" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_square_plate.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.30119" t1="4.03905" t2="1.75899" s0="1" s1="1" s2="1" q0="-0.0250683" q1="-0.0951599" q2="0.253505" q3="0.962316" euler_x="-0.0980843" euler_y="-0.171274" euler_z="0.523588" id="19" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_shoulder_a.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.60229" t1="3.92605" t2="-4.41333" s0="1" s1="1" s2="1" q0="0" q1="-0.249889" q2="0" q3="0.968275" euler_x="0" euler_y="-0.505132" euler_z="0" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/baskets/basket_clothes.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.24909" t1="4.03605" t2="-4.43043" s0="1.22018" s1="1.22018" s2="1.22018" q0="-0.237269" q1="-0.104682" q2="0.886877" q3="0.382356" euler_x="-0.401175" euler_y="0.347773" euler_z="2.2561" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/baskets/basket_bowl.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.96319" t1="3.84905" t2="2.06509" s0="1" s1="1" s2="1" q0="0" q1="-0.701867" q2="0" q3="0.712309" euler_x="0" euler_y="-1.55612" euler_z="0" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/basics/soft_platform.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="10.1068" t1="4.01005" t2="1.93499" s0="1" s1="1" s2="1" q0="0" q1="-0.0984064" q2="0" q3="0.995146" euler_x="0" euler_y="-0.197132" euler_z="0" id="23" type_file="Data/Objects/Decals/dark_rubble.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="10.0572" t1="4.39198" t2="2.10821" s0="1.70696" s1="1.65757" s2="1.86509" q0="0" q1="-0.560376" q2="0" q3="0.828238" euler_x="0" euler_y="-1.18968" euler_z="0" id="24" type_file="Data/Objects/Decals/dark_rubble.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <EnvObject t0="10.138" t1="4.01005" t2="1.99159" s0="1.17232" s1="1.17232" s2="1.17232" q0="0" q1="-0.0984064" q2="0" q3="0.995146" euler_x="0" euler_y="-0.197132" euler_z="0" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_pit.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="9.85085" t1="4.29567" t2="1.99171" s0="0.828359" s1="0.703362" s2="0.863864" q0="0" q1="-0.46954" q2="0" q3="0.882912" euler_x="0" euler_y="-0.977541" euler_z="0" id="26" type_file="Data/Objects/Undergrowth/Hotspots/FireSpot.xml">
+            <parameters />
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="11.1657" t1="4.04095" t2="1.20419" s0="5.04996" s1="5.04985" s2="5.04996" q0="0" q1="-0.0984064" q2="0" q3="0.995146" euler_x="0" euler_y="-0.197132" euler_z="0" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/RatJunk/RatJunkPouch.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="10.2425" t1="4.16703" t2="2.13481" s0="0.337279" s1="0.0657331" s2="0.285583" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="28" type_file="Data/Objects/Hotspots/fire_test.xml">
+            <parameters>
+                <parameter name="Fire Ribbons" type="int" val="7" />
+                <parameter name="Ignite Characters" type="int" val="1" />
+                <parameter name="Light Amplify" type="float" val="1" />
+                <parameter name="Light Distance" type="float" val="2" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="10.1391" t1="3.84695" t2="2.05649" s0="0.56148" s1="0.108313" s2="0.547384" q0="-0.0148355" q1="-0.0568164" q2="0.0304081" q3="0.997816" euler_x="-0.0332789" euler_y="-0.112721" euler_z="0.0628088" id="29" color_r="0.0235294" color_g="0.0235292" color_b="0.0235292" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="10.1904" t1="3.94495" t2="2.05319" s0="0.896495" s1="1.1189" s2="0.885573" q0="-0.0148355" q1="-0.0568164" q2="0.0304081" q3="0.997816" euler_x="-0.0332789" euler_y="-0.112721" euler_z="0.0628088" id="30" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <PlaceholderObject t0="3.00188" t1="4.16695" t2="2.01029" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/block_trees_27_actor_3.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="1" />
+            </Connections>
+        </PlaceholderObject>
+        <Hotspot t0="9.60429" t1="8.62805" t2="8.48682" s0="3.44011" s1="2.88446" s2="0.651911" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="32" type_file="Data/Objects/Undergrowth/Hotspots/saveSpot.xml">
+            <parameters>
+                <parameter name="Namezz" type="string" val="saveSpot" />
+                <parameter name="Open" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="3.66908" t1="4.03905" t2="2.01109" s0="0.530958" s1="0.530958" s2="0.530958" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="33" type_file="Data/Objects/Undergrowth/Hotspots/healMerchantSpot.xml">
+            <parameters>
+                <parameter name="healGo" type="int" val="0" />
+                <parameter name="healPrice" type="int" val="2" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="5.3998" t1="4.28405" t2="-2.8245" s0="0.588725" s1="0.588725" s2="0.588725" q0="0" q1="-0.249889" q2="0" q3="0.968275" euler_x="0" euler_y="-0.505132" euler_z="0" id="34" type_file="Data/Objects/Undergrowth/Hotspots/foodMerchantSpot.xml">
+            <parameters>
+                <parameter name="foodGo" type="int" val="0" />
+                <parameter name="foodPrice" type="int" val="2" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="2.43129" t1="5.89705" t2="2.03419" s0="0.414589" s1="1" s2="0.416501" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="35" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/shop_tarp.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="4.16847" t1="3.73105" t2="2.0169" s0="2.24548" s1="1" s2="1.08949" q0="0" q1="-0.699229" q2="0" q3="0.714898" euler_x="-3.84631e-006" euler_y="-1.54864" euler_z="3.76201e-006" id="36" type_file="Data/Objects/Decals/rugs/red_trim_rug.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Hotspot t0="9.92269" t1="7.69205" t2="-6.81303" s0="3.41473" s1="2.41663" s2="0.599881" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="37" type_file="Data/Objects/Undergrowth/Hotspots/saveSpot.xml">
+            <parameters>
+                <parameter name="Namezz" type="string" val="saveSpot" />
+                <parameter name="Open" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="17.6919" t1="11.7369" t2="0.418588" s0="4.49126" s1="1.19228" s2="0.398472" q0="0" q1="-0.717271" q2="0" q3="0.696795" euler_x="3.14159" euler_y="-1.54187" euler_z="3.14159" id="38" type_file="Data/Objects/Undergrowth/Hotspots/saveSpot.xml">
+            <parameters>
+                <parameter name="Namezz" type="string" val="saveSpot" />
+                <parameter name="Open" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="1.54579" t1="11.76" t2="1.30689" s0="3.91387" s1="1.29003" s2="0.518257" q0="0" q1="-0.717271" q2="0" q3="0.696795" euler_x="3.14159" euler_y="-1.54187" euler_z="3.14159" id="39" type_file="Data/Objects/Undergrowth/Hotspots/saveSpot.xml">
+            <parameters>
+                <parameter name="Namezz" type="string" val="saveSpot" />
+                <parameter name="Open" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Group t0="14.2568" t1="4.29705" t2="0.761588" s0="2.57412" s1="3.88346" s2="2.787" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="40" version="1">
+            <parameters />
+            <EnvObject t0="14.783" t1="4.10705" t2="0.804888" s0="2.13009" s1="1.77966" s2="2.0174" q0="0" q1="-0.696609" q2="0" q3="0.717451" euler_x="0" euler_y="-1.54132" euler_z="0" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/DogGrave/DogGraveBase.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="14.8371" t1="4.60505" t2="1.29179" s0="0.968365" s1="0.968365" s2="0.968365" q0="0" q1="-0.696609" q2="0" q3="0.717451" euler_x="0" euler_y="-1.54132" euler_z="0" id="42" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="14.8371" t1="4.60505" t2="1.29179" s0="0.968365" s1="0.968365" s2="0.968365" q0="0" q1="-0.696609" q2="0" q3="0.717451" euler_x="0" euler_y="-1.54132" euler_z="0" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="14.8085" t1="4.59205" t2="0.320889" s0="0.968365" s1="0.968365" s2="0.968365" q0="0" q1="-0.696609" q2="0" q3="0.717451" euler_x="0" euler_y="-1.54132" euler_z="0" id="44" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="14.8199" t1="5.84505" t2="0.707089" s0="0.968365" s1="0.968365" s2="0.968365" q0="0.490161" q1="-0.494981" q2="-0.504826" q3="0.509791" euler_x="1.54132" euler_y="-0.00978184" euler_z="-1.57051" id="45" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="14.8508" t1="5.86905" t2="0.799888" s0="2.40082" s1="1.04183" s2="2.49594" q0="0.484417" q1="-0.500604" q2="-0.49891" q3="0.515582" euler_x="1.5413" euler_y="-0.0328498" euler_z="-1.56983" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/RopeBall1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="14.6953" t1="5.16105" t2="0.839888" s0="0.968365" s1="0.968365" s2="0.968365" q0="0.494706" q1="-0.490439" q2="-0.509507" q3="0.505113" euler_x="1.54132" euler_y="0.00865825" euler_z="-1.57105" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/SmallProps/Rope/Rope_Straight_01.xml">
+                <parameters />
+            </EnvObject>
+            <Hotspot t0="14.2568" t1="4.29705" t2="0.761588" s0="0.67623" s1="0.968365" s2="0.62137" q0="0" q1="-0.696609" q2="0" q3="0.717451" euler_x="0" euler_y="-1.54132" euler_z="0" id="48" type_file="Data/Objects/Undergrowth/Hotspots/WaterSpot.xml">
+                <parameters>
+                    <parameter name="Open" type="int" val="0" />
+                </parameters>
+                <Connections />
+            </Hotspot>
+        </Group>
+        <Group t0="5.46802" t1="4.08804" t2="7.07631" s0="2.39607" s1="1.63112" s2="1.19365" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="49" version="1">
+            <parameters />
+            <EnvObject t0="4.95739" t1="4.54805" t2="7.32442" s0="0.700515" s1="1" s2="0.383366" q0="0" q1="0.917323" q2="0" q3="0.398143" euler_x="3.14159" euler_y="0.818983" euler_z="3.14159" id="50" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/RatJunk/RatJunkBirdSkull.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="5.74449" t1="3.89705" t2="7.13522" s0="2.09305" s1="1.86291" s2="3.59656" q0="0" q1="0.710685" q2="0" q3="0.70351" euler_x="3.14159" euler_y="1.5606" euler_z="3.14159" id="51" color_r="0.2" color_g="0.186667" color_b="0.186667" overbright="0" type_file="Data/Objects/Environment/Furniture/CatStand.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="6.41449" t1="4.64105" t2="7.41972" s0="1" s1="1" s2="1" q0="0" q1="0.335637" q2="0" q3="0.941991" euler_x="0" euler_y="0.684562" euler_z="0" id="52" color_r="0.254763" color_g="0.258824" color_b="0.145144" overbright="0" type_file="Data/Objects/Environment/LitterLoads/SmallGourd.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="6.22479" t1="4.56505" t2="7.39262" s0="0.513739" s1="0.513739" s2="0.513739" q0="0" q1="0.335637" q2="0" q3="0.941991" euler_x="0" euler_y="0.684562" euler_z="0" id="53" color_r="0.815686" color_g="0.300684" color_b="0.300684" overbright="0" type_file="Data/Objects/Environment/LitterLoads/SmallGourd.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="6.28849" t1="4.72095" t2="7.43802" s0="0.489029" s1="1.0166" s2="0.513739" q0="0" q1="0.335637" q2="0" q3="0.941991" euler_x="0" euler_y="0.684562" euler_z="0" id="54" color_r="0.112664" color_g="0.719065" color_b="0.870588" overbright="0" type_file="Data/Objects/Environment/LitterLoads/SmallGourd.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="5.09499" t1="4.50405" t2="7.28751" s0="1" s1="1" s2="1" q0="0.00278044" q1="0.932511" q2="-0.0137097" q3="0.360873" euler_x="-3.10973" euler_y="0.738409" euler_z="-3.13522" id="55" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/SmallProps/Rope/Rope_Clamp.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.95569" t1="4.64205" t2="7.34241" s0="0.0730575" s1="0.0730575" s2="0.0730575" q0="0" q1="0.335637" q2="0" q3="0.941991" euler_x="0" euler_y="0.684562" euler_z="0" id="56" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/world_map/flagpole.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.92719" t1="4.62105" t2="7.31992" s0="0.0730575" s1="0.0730575" s2="0.0730575" q0="-0.252138" q1="0.323391" q2="0.0898384" q3="0.90762" euler_x="-0.541938" euler_y="0.684564" euler_z="0" id="57" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/world_map/flagpole.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.96959" t1="4.62705" t2="7.33552" s0="0.0730575" s1="0.0730575" s2="0.0730575" q0="-0.216951" q1="0.161702" q2="-0.12059" q3="0.955114" euler_x="-0.488303" euler_y="0.259465" euler_z="-0.316166" id="58" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/world_map/flagpole.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="5.76079" t1="4.50095" t2="6.85502" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.708257" q1="-0.0101118" q2="0.0103933" q3="0.705806" euler_x="1.57426" euler_y="-0.0290003" euler_z="0.000347946" id="59" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="5.78719" t1="4.52505" t2="6.85271" s0="2.99176" s1="1.61808" s2="1.00002" q0="0.739982" q1="0.0434294" q2="0.0425709" q3="0.669872" euler_x="1.66988" euler_y="-0.00481914" euler_z="0.121609" id="60" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="5.93219" t1="4.58295" t2="6.85641" s0="2.99176" s1="1.61808" s2="1.00002" q0="0.704884" q1="0.215745" q2="0.22831" q3="0.635977" euler_x="1.65782" euler_y="-0.0474642" euler_z="0.63754" id="61" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="5.78629" t1="4.51705" t2="6.84821" s0="2.99176" s1="1.61808" s2="1.00002" q0="0.740188" q1="0.0397587" q2="0.0458946" q3="0.669652" euler_x="1.66989" euler_y="-0.0146928" euler_z="0.12063" id="62" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="5.95389" t1="4.53905" t2="6.84991" s0="2.99176" s1="1.61808" s2="1.00002" q0="0.740372" q1="0.0354884" q2="0.0289265" q3="0.670637" euler_x="1.66978" euler_y="0.00476695" euler_z="0.0914762" id="63" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="5.96189" t1="4.51195" t2="6.86162" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.708257" q1="-0.0101118" q2="0.0103933" q3="0.705806" euler_x="1.57426" euler_y="-0.0290003" euler_z="0.000347946" id="64" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.48019" t1="3.66105" t2="6.64452" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.65752" q1="0.26276" q2="-0.263445" q3="0.655149" euler_x="1.5746" euler_y="0.762505" euler_z="0.000481918" id="65" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.48709" t1="3.61805" t2="6.64561" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.65752" q1="0.26276" q2="-0.263445" q3="0.655149" euler_x="1.5746" euler_y="0.762505" euler_z="0.000481918" id="66" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.49679" t1="3.63405" t2="6.63841" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.671532" q1="0.273937" q2="-0.239076" q3="0.645636" euler_x="1.64131" euler_y="0.740723" euler_z="0.0803089" id="67" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.49649" t1="3.62805" t2="6.63261" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.672883" q1="0.270602" q2="-0.235871" q3="0.646814" euler_x="1.64068" euler_y="0.730827" euler_z="0.0793686" id="68" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.49449" t1="3.65095" t2="6.64322" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.671532" q1="0.273937" q2="-0.239076" q3="0.645636" euler_x="1.64131" euler_y="0.740723" euler_z="0.0803089" id="69" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.49419" t1="3.64605" t2="6.63752" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.672883" q1="0.270602" q2="-0.235871" q3="0.646814" euler_x="1.64068" euler_y="0.730827" euler_z="0.0793686" id="70" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.52159" t1="3.60605" t2="6.63972" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.708257" q1="-0.0101118" q2="0.0103933" q3="0.705806" euler_x="1.57426" euler_y="-0.0290003" euler_z="0.000347946" id="71" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.52559" t1="3.56305" t2="6.64552" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.708257" q1="-0.0101118" q2="0.0103933" q3="0.705806" euler_x="1.57426" euler_y="-0.0290003" euler_z="0.000347946" id="72" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.53759" t1="3.57805" t2="6.64732" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711792" q1="0.00386899" q2="0.0382808" q3="0.701336" euler_x="1.58414" euler_y="-0.0490887" euler_z="0.0593094" id="73" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.54149" t1="3.57305" t2="6.64301" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711803" q1="0.000337254" q2="0.0417589" q3="0.701137" euler_x="1.58415" euler_y="-0.0590095" euler_z="0.059175" id="74" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.53249" t1="3.59505" t2="6.64901" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711792" q1="0.00386899" q2="0.0382808" q3="0.701336" euler_x="1.58414" euler_y="-0.0490887" euler_z="0.0593094" id="75" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.53649" t1="3.59005" t2="6.6447" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711803" q1="0.000337254" q2="0.0417589" q3="0.701137" euler_x="1.58415" euler_y="-0.0590095" euler_z="0.059175" id="76" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.46939" t1="3.69905" t2="6.65762" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.647706" q1="-0.285509" q2="0.286727" q3="0.645561" euler_x="1.57388" euler_y="-0.833154" euler_z="0.000517086" id="77" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.46819" t1="3.65605" t2="6.66462" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.647706" q1="-0.285509" q2="0.286727" q3="0.645561" euler_x="1.57388" euler_y="-0.833154" euler_z="0.000517086" id="78" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.47509" t1="3.67105" t2="6.6745" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.640046" q1="-0.270894" q2="0.313774" q3="0.646918" euler_x="1.51931" euler_y="-0.851322" euler_z="0.0899601" id="79" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.48089" t1="3.66595" t2="6.67432" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.638695" q1="-0.274066" q2="0.316979" q3="0.645354" euler_x="1.51872" euler_y="-0.861231" euler_z="0.0907426" id="80" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.47029" t1="3.68805" t2="6.67202" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.640046" q1="-0.270894" q2="0.313774" q3="0.646918" euler_x="1.51931" euler_y="-0.851322" euler_z="0.0899601" id="81" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.47619" t1="3.68305" t2="6.67191" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.638695" q1="-0.274066" q2="0.316979" q3="0.645354" euler_x="1.51872" euler_y="-0.861231" euler_z="0.0907426" id="82" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.46419" t1="3.74805" t2="6.65852" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.705268" q1="0.0658437" q2="-0.0658277" q3="0.702801" euler_x="1.57433" euler_y="0.186481" euler_z="0.000353505" id="83" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.46939" t1="3.70505" t2="6.6633" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.705268" q1="0.0658437" q2="-0.0658277" q3="0.702801" euler_x="1.57433" euler_y="0.186481" euler_z="0.000353505" id="84" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.48149" t1="3.72005" t2="6.66251" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711781" q1="0.0792628" q2="-0.0384828" q3="0.696853" euler_x="1.59699" euler_y="0.166013" euler_z="0.0600632" id="85" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.48439" t1="3.71505" t2="6.65741" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.712165" q1="0.0757301" q2="-0.0350251" q3="0.697035" euler_x="1.59695" euler_y="0.156093" euler_z="0.0597994" id="86" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.47699" t1="3.73805" t2="6.66531" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711781" q1="0.0792628" q2="-0.0384828" q3="0.696853" euler_x="1.59699" euler_y="0.166013" euler_z="0.0600632" id="87" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.47979" t1="3.73305" t2="6.66021" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.712165" q1="0.0757301" q2="-0.0350251" q3="0.697035" euler_x="1.59695" euler_y="0.156093" euler_z="0.0597994" id="88" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.45929" t1="3.85205" t2="6.67081" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.65752" q1="0.26276" q2="-0.263445" q3="0.655149" euler_x="1.5746" euler_y="0.762505" euler_z="0.000481918" id="89" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.46629" t1="3.80905" t2="6.67191" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.65752" q1="0.26276" q2="-0.263445" q3="0.655149" euler_x="1.5746" euler_y="0.762505" euler_z="0.000481918" id="90" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.47599" t1="3.82505" t2="6.66471" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.671532" q1="0.273937" q2="-0.239076" q3="0.645636" euler_x="1.64131" euler_y="0.740723" euler_z="0.0803089" id="91" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.47559" t1="3.81995" t2="6.65892" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.672883" q1="0.270602" q2="-0.235871" q3="0.646814" euler_x="1.64068" euler_y="0.730827" euler_z="0.0793686" id="92" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.47359" t1="3.84205" t2="6.66961" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.671532" q1="0.273937" q2="-0.239076" q3="0.645636" euler_x="1.64131" euler_y="0.740723" euler_z="0.0803089" id="93" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.47339" t1="3.83705" t2="6.66371" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.672883" q1="0.270602" q2="-0.235871" q3="0.646814" euler_x="1.64068" euler_y="0.730827" euler_z="0.0793686" id="94" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.50059" t1="3.79705" t2="6.66602" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.708257" q1="-0.0101118" q2="0.0103933" q3="0.705806" euler_x="1.57426" euler_y="-0.0290003" euler_z="0.000347946" id="95" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.50479" t1="3.75405" t2="6.6717" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.708257" q1="-0.0101118" q2="0.0103933" q3="0.705806" euler_x="1.57426" euler_y="-0.0290003" euler_z="0.000347946" id="96" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.51669" t1="3.76905" t2="6.6735" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711792" q1="0.00386899" q2="0.0382808" q3="0.701336" euler_x="1.58414" euler_y="-0.0490887" euler_z="0.0593094" id="97" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.52059" t1="3.76395" t2="6.66931" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711803" q1="0.000337254" q2="0.0417589" q3="0.701137" euler_x="1.58415" euler_y="-0.0590095" euler_z="0.059175" id="98" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.51169" t1="3.78705" t2="6.67531" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711792" q1="0.00386899" q2="0.0382808" q3="0.701336" euler_x="1.58414" euler_y="-0.0490887" euler_z="0.0593094" id="99" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.51559" t1="3.78205" t2="6.67101" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711803" q1="0.000337254" q2="0.0417589" q3="0.701137" euler_x="1.58415" euler_y="-0.0590095" euler_z="0.059175" id="100" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.44859" t1="3.88995" t2="6.684" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.647706" q1="-0.285509" q2="0.286727" q3="0.645561" euler_x="1.57388" euler_y="-0.833154" euler_z="0.000517086" id="101" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.44729" t1="3.84695" t2="6.69082" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.647706" q1="-0.285509" q2="0.286727" q3="0.645561" euler_x="1.57388" euler_y="-0.833154" euler_z="0.000517086" id="102" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.45429" t1="3.86195" t2="6.70071" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.640046" q1="-0.270894" q2="0.313774" q3="0.646918" euler_x="1.51931" euler_y="-0.851322" euler_z="0.0899601" id="103" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.46009" t1="3.85705" t2="6.70051" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.638695" q1="-0.274066" q2="0.316979" q3="0.645354" euler_x="1.51872" euler_y="-0.861231" euler_z="0.0907426" id="104" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.44949" t1="3.88005" t2="6.69832" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.640046" q1="-0.270894" q2="0.313774" q3="0.646918" euler_x="1.51931" euler_y="-0.851322" euler_z="0.0899601" id="105" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.45519" t1="3.87495" t2="6.69811" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.638695" q1="-0.274066" q2="0.316979" q3="0.645354" euler_x="1.51872" euler_y="-0.861231" euler_z="0.0907426" id="106" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.44339" t1="3.93905" t2="6.6848" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.705268" q1="0.0658437" q2="-0.0658277" q3="0.702801" euler_x="1.57433" euler_y="0.186481" euler_z="0.000353505" id="107" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.44869" t1="3.89605" t2="6.6896" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.705268" q1="0.0658437" q2="-0.0658277" q3="0.702801" euler_x="1.57433" euler_y="0.186481" euler_z="0.000353505" id="108" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.46069" t1="3.91205" t2="6.68882" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711781" q1="0.0792628" q2="-0.0384828" q3="0.696853" euler_x="1.59699" euler_y="0.166013" euler_z="0.0600632" id="109" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.46349" t1="3.90705" t2="6.68381" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.712165" q1="0.0757301" q2="-0.0350251" q3="0.697035" euler_x="1.59695" euler_y="0.156093" euler_z="0.0597994" id="110" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.45609" t1="3.92895" t2="6.69151" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711781" q1="0.0792628" q2="-0.0384828" q3="0.696853" euler_x="1.59699" euler_y="0.166013" euler_z="0.0600632" id="111" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.45899" t1="3.92405" t2="6.68661" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.712165" q1="0.0757301" q2="-0.0350251" q3="0.697035" euler_x="1.59695" euler_y="0.156093" euler_z="0.0597994" id="112" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.44699" t1="4.02795" t2="6.66202" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.65752" q1="0.26276" q2="-0.263445" q3="0.655149" euler_x="1.5746" euler_y="0.762505" euler_z="0.000481918" id="113" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.45389" t1="3.98495" t2="6.66322" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.65752" q1="0.26276" q2="-0.263445" q3="0.655149" euler_x="1.5746" euler_y="0.762505" euler_z="0.000481918" id="114" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.46359" t1="4.00095" t2="6.656" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.671532" q1="0.273937" q2="-0.239076" q3="0.645636" euler_x="1.64131" euler_y="0.740723" euler_z="0.0803089" id="115" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.46319" t1="3.99605" t2="6.65021" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.672883" q1="0.270602" q2="-0.235871" q3="0.646814" euler_x="1.64068" euler_y="0.730827" euler_z="0.0793686" id="116" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.46129" t1="4.01805" t2="6.66081" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.671532" q1="0.273937" q2="-0.239076" q3="0.645636" euler_x="1.64131" euler_y="0.740723" euler_z="0.0803089" id="117" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.46099" t1="4.01295" t2="6.65501" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.672883" q1="0.270602" q2="-0.235871" q3="0.646814" euler_x="1.64068" euler_y="0.730827" euler_z="0.0793686" id="118" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.48829" t1="3.97295" t2="6.65722" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.708257" q1="-0.0101118" q2="0.0103933" q3="0.705806" euler_x="1.57426" euler_y="-0.0290003" euler_z="0.000347946" id="119" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.49239" t1="3.92995" t2="6.66301" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.708257" q1="-0.0101118" q2="0.0103933" q3="0.705806" euler_x="1.57426" euler_y="-0.0290003" euler_z="0.000347946" id="120" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.50429" t1="3.94495" t2="6.66481" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711792" q1="0.00386899" q2="0.0382808" q3="0.701336" euler_x="1.58414" euler_y="-0.0490887" euler_z="0.0593094" id="121" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.50829" t1="3.94005" t2="6.6605" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711803" q1="0.000337254" q2="0.0417589" q3="0.701137" euler_x="1.58415" euler_y="-0.0590095" euler_z="0.059175" id="122" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.49929" t1="3.96205" t2="6.66651" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711792" q1="0.00386899" q2="0.0382808" q3="0.701336" euler_x="1.58414" euler_y="-0.0490887" euler_z="0.0593094" id="123" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.50319" t1="3.95695" t2="6.66221" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711803" q1="0.000337254" q2="0.0417589" q3="0.701137" euler_x="1.58415" euler_y="-0.0590095" euler_z="0.059175" id="124" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.43619" t1="4.06605" t2="6.67521" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.647706" q1="-0.285509" q2="0.286727" q3="0.645561" euler_x="1.57388" euler_y="-0.833154" euler_z="0.000517086" id="125" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.43479" t1="4.02305" t2="6.68211" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.647706" q1="-0.285509" q2="0.286727" q3="0.645561" euler_x="1.57388" euler_y="-0.833154" euler_z="0.000517086" id="126" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.44189" t1="4.03805" t2="6.69202" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.640046" q1="-0.270894" q2="0.313774" q3="0.646918" euler_x="1.51931" euler_y="-0.851322" euler_z="0.0899601" id="127" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.44759" t1="4.03305" t2="6.69181" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.638695" q1="-0.274066" q2="0.316979" q3="0.645354" euler_x="1.51872" euler_y="-0.861231" euler_z="0.0907426" id="128" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.43709" t1="4.05495" t2="6.68951" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.640046" q1="-0.270894" q2="0.313774" q3="0.646918" euler_x="1.51931" euler_y="-0.851322" euler_z="0.0899601" id="129" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="4.44289" t1="4.05005" t2="6.68931" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.638695" q1="-0.274066" q2="0.316979" q3="0.645354" euler_x="1.51872" euler_y="-0.861231" euler_z="0.0907426" id="130" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="5.42869" t1="4.56105" t2="6.92712" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.705268" q1="0.0658437" q2="-0.0658277" q3="0.702801" euler_x="1.57433" euler_y="0.186481" euler_z="0.000353505" id="131" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="5.43389" t1="4.51805" t2="6.93191" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.705268" q1="0.0658437" q2="-0.0658277" q3="0.702801" euler_x="1.57433" euler_y="0.186481" euler_z="0.000353505" id="132" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="5.44599" t1="4.53405" t2="6.93101" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711781" q1="0.0792628" q2="-0.0384828" q3="0.696853" euler_x="1.59699" euler_y="0.166013" euler_z="0.0600632" id="133" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="5.44879" t1="4.52895" t2="6.92602" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.712165" q1="0.0757301" q2="-0.0350251" q3="0.697035" euler_x="1.59695" euler_y="0.156093" euler_z="0.0597994" id="134" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="5.44139" t1="4.55105" t2="6.93391" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.711781" q1="0.0792628" q2="-0.0384828" q3="0.696853" euler_x="1.59699" euler_y="0.166013" euler_z="0.0600632" id="135" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="5.44429" t1="4.54605" t2="6.92882" s0="3.4677" s1="1.85794" s2="1.00005" q0="0.712165" q1="0.0757301" q2="-0.0350251" q3="0.697035" euler_x="1.59695" euler_y="0.156093" euler_z="0.0597994" id="136" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="6.35169" t1="4.49705" t2="6.79172" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.592427" q1="-0.386735" q2="0.388286" q3="0.590508" euler_x="1.57347" euler_y="-1.16" euler_z="0.000870099" id="137" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="6.36499" t1="4.52005" t2="6.81461" s0="2.99176" s1="1.61808" s2="1.00002" q0="0.601971" q1="-0.322274" q2="0.432454" q3="0.588858" euler_x="1.41507" euler_y="-1.12022" euler_z="0.282296" id="138" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="6.42329" t1="4.57805" t2="6.94742" s0="2.99176" s1="1.61808" s2="1.00002" q0="0.472811" q1="-0.158622" q2="0.57047" q3="0.652574" euler_x="0.714707" euler_y="-0.842747" euler_z="1.10509" id="139" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="6.36869" t1="4.51195" t2="6.81181" s0="2.99176" s1="1.61808" s2="1.00002" q0="0.600365" q1="-0.325257" q2="0.435371" q3="0.586705" euler_x="1.41182" euler_y="-1.13003" euler_z="0.285905" id="140" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="6.43849" t1="4.53505" t2="6.96422" s0="2.99176" s1="1.61808" s2="1.00002" q0="0.609612" q1="-0.329389" q2="0.421142" q3="0.585249" euler_x="1.4799" euler_y="-1.11752" euler_z="0.210137" id="141" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_detail_rectangle_plate.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="6.43119" t1="4.50805" t2="6.97662" s0="1.98539" s1="0.949004" s2="0.999993" q0="0.592427" q1="-0.386735" q2="0.388286" q3="0.590508" euler_x="1.57347" euler_y="-1.16" euler_z="0.000870099" id="142" color_r="0.423529" color_g="0.119585" color_b="0.119585" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_wood_plate.xml">
+                <parameters />
+            </EnvObject>
+            <Hotspot t0="6.41599" t1="4.67995" t2="7.41552" s0="0.0208486" s1="0.0208486" s2="0.0208486" q0="-0.335637" q1="0.000183105" q2="-0.941991" q3="0.00051403" euler_x="-0.0008907" euler_y="-0.684562" euler_z="-3.14018" id="143" type_file="Data/Objects/Hotspots/fire_test.xml">
+                <parameters>
+                    <parameter name="Fire Ribbons" type="int" val="4" />
+                    <parameter name="Ignite Characters" type="int" val="1" />
+                    <parameter name="Light Amplify" type="float" val="1" />
+                    <parameter name="Light Distance" type="float" val="2" />
+                </parameters>
+                <Connections />
+            </Hotspot>
+            <EnvObject t0="6.40739" t1="4.66205" t2="7.41051" s0="0.0404907" s1="0.00625832" s2="0.039961" q0="0" q1="0.335637" q2="0" q3="0.941991" euler_x="0" euler_y="0.684562" euler_z="0" id="144" color_r="0.0235294" color_g="0.0235292" color_b="0.0235292" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+                <parameters />
+            </EnvObject>
+            <Decal t0="6.41029" t1="4.66695" t2="7.40752" s0="0.06465" s1="0.06465" s2="0.06465" q0="0" q1="0.335637" q2="0" q3="0.941991" euler_x="0" euler_y="0.684562" euler_z="0" id="145" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+                <parameters />
+            </Decal>
+        </Group>
+        <PlaceholderObject t0="14.2356" t1="4.28905" t2="-3.05801" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/block_trees_27_actor_4.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="1" />
+            </Connections>
+        </PlaceholderObject>
+        <EnvObject t0="12.6109" t1="4.02005" t2="-4.09981" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="147" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/baskets/basket_tall.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="5.77979" t1="3.73105" t2="6.30731" s0="0.450689" s1="1" s2="0.650718" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="148" type_file="Data/Objects/Undergrowth/Hotspots/researchSpot.xml">
+            <parameters>
+                <parameter name="ResearchGo" type="int" val="0" />
+                <parameter name="Researched" type="int" val="0" />
+                <parameter name="researchAmount" type="int" val="1" />
+                <parameter name="researchID" type="int" val="3" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="11.7631" t1="4.10605" t2="-4.41763" s0="5.02631" s1="5.02631" s2="5.02631" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="149" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/rabbit_gear/large_bag.xml">
+            <parameters />
+        </EnvObject>
+        <Group t0="8.30384" t1="4.0425" t2="2.15895" s0="1.10312" s1="0.707497" s2="1.54512" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="150" version="1">
+            <parameters />
+            <EnvObject t0="8.29789" t1="4.13205" t2="2.39729" s0="1.16163" s1="1" s2="0.399144" q0="-0.027211" q1="-0.578213" q2="-0.0257778" q3="0.815025" euler_x="-0.0440666" euler_y="-1.2343" euler_z="-0.0319626" id="151" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.23669" t1="4.21105" t2="2.16919" s0="1.16163" s1="1" s2="0.399144" q0="0.00500393" q1="-0.947818" q2="0.137188" q3="0.287742" euler_x="-2.82937" euler_y="-0.57857" euler_z="3.05853" id="152" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.18809" t1="3.80805" t2="2.76241" s0="1.16163" s1="1" s2="0.399144" q0="-0.033059" q1="-0.77315" q2="-0.0176648" q3="0.633115" euler_x="-3.06816" euler_y="-1.37124" euler_z="2.99605" id="153" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.28209" t1="3.81005" t2="2.59852" s0="1.16163" s1="1" s2="0.399144" q0="-0.033059" q1="-0.77315" q2="-0.0176648" q3="0.633115" euler_x="-3.06816" euler_y="-1.37124" euler_z="2.99605" id="154" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.19109" t1="3.81705" t2="2.45289" s0="1.16163" s1="1" s2="0.399144" q0="-0.033059" q1="-0.77315" q2="-0.0176648" q3="0.633115" euler_x="-3.06816" euler_y="-1.37124" euler_z="2.99605" id="155" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.26019" t1="3.81105" t2="2.30989" s0="1.16163" s1="1" s2="0.399144" q0="-0.033059" q1="-0.77315" q2="-0.0176648" q3="0.633115" euler_x="-3.06816" euler_y="-1.37124" euler_z="2.99605" id="156" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.35419" t1="3.81305" t2="2.14599" s0="1.16163" s1="1" s2="0.399144" q0="-0.033059" q1="-0.77315" q2="-0.0176648" q3="0.633115" euler_x="-3.06816" euler_y="-1.37124" euler_z="2.99605" id="157" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.26319" t1="3.81995" t2="2.00039" s0="1.16163" s1="1" s2="0.399144" q0="-0.033059" q1="-0.77315" q2="-0.0176648" q3="0.633115" euler_x="-3.06816" euler_y="-1.37124" euler_z="2.99605" id="158" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.33659" t1="3.79405" t2="1.86509" s0="1.16163" s1="1" s2="0.399144" q0="-0.033059" q1="-0.77315" q2="-0.0176648" q3="0.633115" euler_x="-3.06816" euler_y="-1.37124" euler_z="2.99605" id="159" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.43059" t1="3.79605" t2="1.70129" s0="1.16163" s1="1" s2="0.399144" q0="-0.033059" q1="-0.77315" q2="-0.0176648" q3="0.633115" euler_x="-3.06816" euler_y="-1.37124" euler_z="2.99605" id="160" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.33959" t1="3.80305" t2="1.55549" s0="1.16163" s1="1" s2="0.399144" q0="-0.033059" q1="-0.77315" q2="-0.0176648" q3="0.633115" euler_x="-3.06816" euler_y="-1.37124" euler_z="2.99605" id="161" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.17709" t1="3.94705" t2="2.62151" s0="1.16163" s1="1" s2="0.399144" q0="-0.033059" q1="-0.77315" q2="-0.0176648" q3="0.633115" euler_x="-3.06816" euler_y="-1.37124" euler_z="2.99605" id="162" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.34019" t1="3.94295" t2="2.31459" s0="1.16163" s1="1" s2="0.399144" q0="-0.033059" q1="-0.77315" q2="-0.0176648" q3="0.633115" euler_x="-3.06816" euler_y="-1.37124" euler_z="2.99605" id="163" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.32259" t1="3.92405" t2="2.03369" s0="1.16163" s1="1" s2="0.399144" q0="-0.033059" q1="-0.77315" q2="-0.0176648" q3="0.633115" euler_x="-3.06816" euler_y="-1.37124" euler_z="2.99605" id="164" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.41659" t1="3.92605" t2="1.86989" s0="1.16163" s1="1" s2="0.399144" q0="-0.033059" q1="-0.77315" q2="-0.0176648" q3="0.633115" euler_x="-3.06816" euler_y="-1.37124" euler_z="2.99605" id="165" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="8.32559" t1="3.93305" t2="1.72409" s0="1.16163" s1="1" s2="0.399144" q0="-0.033059" q1="-0.77315" q2="-0.0176648" q3="0.633115" euler_x="-3.06816" euler_y="-1.37124" euler_z="2.99605" id="166" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/PostRound1.xml">
+                <parameters />
+            </EnvObject>
+        </Group>
+        <Group t0="3.73358" t1="4.32205" t2="-0.478711" s0="1.08103" s1="1.82829" s2="1.37726" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="167" version="1">
+            <parameters />
+            <EnvObject t0="3.73358" t1="4.32205" t2="-0.478711" s0="2.10873" s1="2.10873" s2="2.10873" q0="0" q1="0.720927" q2="0" q3="0.693011" euler_x="3.14159" euler_y="1.53131" euler_z="3.14159" id="168" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/shop_bin.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="3.71518" t1="4.97405" t2="-0.488811" s0="2.12556" s1="2.31821" s2="2.2136" q0="0.0627645" q1="0.710476" q2="-0.0638864" q3="0.698" euler_x="-2.96224" euler_y="1.55314" euler_z="-3.14159" id="169" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/bin_fillers/bin_veg_peppers.xml">
+                <parameters />
+            </EnvObject>
+        </Group>
+        <EnvObject t0="15.5671" t1="5.96345" t2="3.33264" s0="1.3666" s1="1.12433" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="170" color_r="0.531257" color_g="0.861896" color_b="0.921569" overbright="0" type_file="Data/Objects/Undergrowth/Banner_2_Hanging.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="14.8185" t1="3.731" t2="3.38547" s0="0.799352" s1="1" s2="0.533235" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="186" type_file="Data/Objects/Undergrowth/Hotspots/researchMapSpot.xml">
+            <parameters>
+                <parameter name="ResearchGo" type="int" val="0" />
+                <parameter name="Researched" type="int" val="0" />
+                <parameter name="researchAmount" type="int" val="0" />
+                <parameter name="researchID" type="int" val="2" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="9.81969" t1="-6.269" t2="-0.0447115" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

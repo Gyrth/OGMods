@@ -1,0 +1,78 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-35.9244" t1="11.7823" t2="19.2508" s0="20.02" s1="27.1839" s2="20.02" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <Group t0="-35.9244" t1="9.43498" t2="19.2508" s0="20.01" s1="22.4792" s2="20.01" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" version="1">
+            <parameters />
+            <EnvObject t0="-35.9244" t1="8.20038" t2="19.2508" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+                <parameters>
+                    <parameter name="BlockBase" type="int" val="1" />
+                </parameters>
+            </EnvObject>
+            <Group t0="-37.0135" t1="17.9663" t2="21.0215" s0="2.98182" s1="5.40668" s2="2.96783" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" version="1">
+                <parameters />
+                <EnvObject t0="-37.0135" t1="20.0632" t2="21.0215" s0="0.120743" s1="0.0590329" s2="0.119875" q0="0.999995" q1="0" q2="0" q3="0.00313397" euler_x="3.13532" euler_y="0" euler_z="0" id="6" color_r="0.917647" color_g="0.381453" color_b="0.381453" overbright="0" type_file="Data/Objects/Crete/sphere_crete_chipped.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="-37.0015" t1="17.8636" t2="21.0497" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_pillar.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="-32.9433" t1="17.7945" t2="20.9576" s0="1.77593" s1="3.22014" s2="1.7676" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" version="1">
+                <parameters />
+                <EnvObject t0="-32.9433" t1="19.0434" t2="20.9576" s0="0.0719126" s1="0.0351592" s2="0.0713958" q0="0.999995" q1="0" q2="0" q3="0.00313397" euler_x="3.13532" euler_y="0" euler_z="0" id="9" color_r="0.917647" color_g="0.381453" color_b="0.381453" overbright="0" type_file="Data/Objects/Crete/sphere_crete_chipped.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="-32.9362" t1="17.7333" t2="20.9744" s0="0.595586" s1="0.595586" s2="0.595586" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_pillar.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="-35.3525" t1="18.2766" t2="23.2865" s0="1.5329" s1="2.85175" s2="1.7676" q0="0.052063" q1="-0.259789" q2="0.105954" q3="0.958422" euler_x="0.0520068" euler_y="-0.534031" euler_z="0.205977" id="11" version="1">
+                <parameters />
+                <EnvObject t0="-35.607" t1="19.3517" t2="23.336" s0="0.0620717" s1="0.0311369" s2="0.0713958" q0="0.958581" q1="0.105139" q2="0.26012" q3="-0.0490591" euler_x="-3.09585" euler_y="-0.534032" euler_z="0.205977" id="12" color_r="0.917647" color_g="0.381453" color_b="0.381453" overbright="0" type_file="Data/Objects/Crete/sphere_crete_chipped.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="-35.343" t1="18.2224" t2="23.3017" s0="0.514083" s1="0.52745" s2="0.595586" q0="0.052063" q1="-0.259789" q2="0.105954" q3="0.958422" euler_x="0.0520068" euler_y="-0.534031" euler_z="0.205977" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_pillar.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="-34.8167" t1="18.1649" t2="19.5758" s0="1.30532" s1="2.36683" s2="1.2992" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" version="1">
+                <parameters />
+                <EnvObject t0="-34.8167" t1="19.0829" t2="19.5758" s0="0.0528564" s1="0.0258423" s2="0.0524766" q0="0.999995" q1="0" q2="0" q3="0.00313397" euler_x="3.13532" euler_y="0" euler_z="0" id="15" color_r="0.917647" color_g="0.381453" color_b="0.381453" overbright="0" type_file="Data/Objects/Crete/sphere_crete_chipped.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="-34.8115" t1="18.1199" t2="19.5882" s0="0.437761" s1="0.437761" s2="0.437761" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_pillar.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="-38.0135" t1="17.9445" t2="18.5423" s0="1.30532" s1="2.36683" s2="1.2992" q0="-0.11909" q1="0" q2="0" q3="0.992883" euler_x="-0.238747" euler_y="0" euler_z="0" id="17" version="1">
+                <parameters />
+                <EnvObject t0="-38.0135" t1="18.8365" t2="18.3253" s0="0.0528564" s1="0.0258423" s2="0.0524766" q0="0.992505" q1="0" q2="0" q3="0.122202" euler_x="2.89658" euler_y="0" euler_z="0" id="18" color_r="0.917647" color_g="0.381453" color_b="0.381453" overbright="0" type_file="Data/Objects/Crete/sphere_crete_chipped.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="-38.0083" t1="17.9038" t2="18.565" s0="0.437761" s1="0.437761" s2="0.437761" q0="-0.11909" q1="0" q2="0" q3="0.992883" euler_x="-0.238747" euler_y="0" euler_z="0" id="19" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/caves/cave_pillar.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+        </Group>
+        <Hotspot t0="-36.0504" t1="19.3298" t2="21.1245" s0="2.56807" s1="1.28645" s2="2.13833" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="20" type_file="Data/Objects/Undergrowth/HotSpots/mushroomSpot.xml">
+            <parameters>
+                <parameter name="Eaten" type="int" val="0" />
+                <parameter name="Open" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <DynamicLightObject t0="-35.3476" t1="19.3647" t2="21.4124" s0="12.0091" s1="12.0091" s2="12.0091" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="21" color_r="0.815686" color_g="0.508604" color_b="0.508604" overbright="24.885">
+            <parameters />
+        </DynamicLightObject>
+        <NavmeshHintObject t0="-34.8894" t1="18.2532" t2="20.7624" s0="8.1815" s1="8.1815" s2="8.1815" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="22">
+            <parameters />
+        </NavmeshHintObject>
+        <EnvObject t0="-35.9244" t1="8.20038" t2="19.2508" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

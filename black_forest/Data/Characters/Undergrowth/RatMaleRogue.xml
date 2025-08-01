@@ -1,0 +1,43 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <ActorObject t0="6.52932" t1="-1.42134" t2="2.4211" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="0" type_file="Data/Objects/characters/rats/hooded_rat_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5" />
+            <parameter name="Attack Damage" type="float" val="0.81081" />
+            <parameter name="Attack Knockback" type="float" val="1.21622" />
+            <parameter name="Attack Speed" type="float" val="1.21622" />
+            <parameter name="Block Follow-up" type="float" val="0.65541" />
+            <parameter name="Block Skill" type="float" val="0.5" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="float" val="0.83784" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+<parameter name="JustSpawned" type="int" val="0" />
+
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Movement Speed" type="float" val="1" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="rat" />
+        </parameters>
+        <Connections>
+            <Connection id="0" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Shirt" channel="0" red="0.121553" green="0.158384" blue="0.203922" />
+            <Color label="Fur" channel="1" red="0.231373" green="0.227743" blue="0.227743" />
+            <Color label="Pants" channel="2" red="0.160185" green="0.162825" blue="0.188235" />
+            <Color label="Skin" channel="3" red="0.239216" green="0.175177" blue="0.0628527" />
+        </Palette>
+    </ActorObject>
+</ActorObjects>

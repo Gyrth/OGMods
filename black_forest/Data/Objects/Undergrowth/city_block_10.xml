@@ -1,0 +1,105 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="43.4229" t1="58.4242" t2="-23.9518" s0="20.1843" s1="41.2728" s2="20.1915" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="39" version="1">
+        <parameters />
+        <EnvObject t0="43.3886" t1="58.3986" t2="-23.9518" s0="5.02642" s1="0.274753" s2="5.04538" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="0.0689735" color_g="0.0980392" color_b="0.0495963" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="43.51" t1="47.6828" t2="-23.9588" s0="1" s1="0.989007" s2="1.00472" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <Group t0="43.3715" t1="61.2897" t2="-23.8905" s0="19.6208" s1="5.13821" s2="19.6275" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="37" version="1">
+            <parameters />
+            <Group t0="34.194" t1="61.2897" t2="-24.0374" s0="0.60375" s1="5.1282" s2="19.3238" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" version="1">
+                <parameters />
+                <EnvObject t0="34.3442" t1="61.2898" t2="-31.9809" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.713759" q2="0" q3="0.700392" euler_x="-3.14159" euler_y="-1.5519" euler_z="3.14159" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="34.2841" t1="61.2897" t2="-28.8035" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.713759" q2="0" q3="0.700392" euler_x="-3.14159" euler_y="-1.5519" euler_z="3.14159" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="34.224" t1="61.2897" t2="-25.6261" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.713759" q2="0" q3="0.700392" euler_x="-3.14159" euler_y="-1.5519" euler_z="3.14159" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="34.1639" t1="61.2897" t2="-22.4487" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.713759" q2="0" q3="0.700392" euler_x="-3.14159" euler_y="-1.5519" euler_z="3.14159" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="34.1039" t1="61.2897" t2="-19.2713" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.713759" q2="0" q3="0.700392" euler_x="-3.14159" euler_y="-1.5519" euler_z="3.14159" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="34.0438" t1="61.2897" t2="-16.0939" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.713759" q2="0" q3="0.700392" euler_x="-3.14159" euler_y="-1.5519" euler_z="3.14159" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="43.228" t1="61.2897" t2="-14.411" s0="19.3238" s1="5.12821" s2="0.603746" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" version="1">
+                <parameters />
+                <EnvObject t0="35.2845" t1="61.2898" t2="-14.5611" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.00945202" q2="0" q3="0.999955" euler_x="0" euler_y="-0.0189043" euler_z="0" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="38.4619" t1="61.2897" t2="-14.5011" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.00945202" q2="0" q3="0.999955" euler_x="0" euler_y="-0.0189043" euler_z="0" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="41.6393" t1="61.2897" t2="-14.441" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.00945202" q2="0" q3="0.999955" euler_x="0" euler_y="-0.0189043" euler_z="0" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="44.8167" t1="61.2897" t2="-14.3809" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.00945202" q2="0" q3="0.999955" euler_x="0" euler_y="-0.0189043" euler_z="0" id="15" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="47.9941" t1="61.2897" t2="-14.3208" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.00945202" q2="0" q3="0.999955" euler_x="0" euler_y="-0.0189043" euler_z="0" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="51.1715" t1="61.2897" t2="-14.2608" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.00945202" q2="0" q3="0.999955" euler_x="0" euler_y="-0.0189043" euler_z="0" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="52.713" t1="61.2897" t2="-23.7436" s0="0.60375" s1="5.1282" s2="19.3238" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="23" version="1">
+                <parameters />
+                <EnvObject t0="52.5628" t1="61.2898" t2="-15.8001" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="0.700392" q2="0" q3="0.713759" euler_x="0" euler_y="1.55189" euler_z="0" id="24" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="52.6229" t1="61.2897" t2="-18.9775" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="0.700392" q2="0" q3="0.713759" euler_x="0" euler_y="1.55189" euler_z="0" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="52.6829" t1="61.2897" t2="-22.1549" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="0.700392" q2="0" q3="0.713759" euler_x="0" euler_y="1.55189" euler_z="0" id="26" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="52.743" t1="61.2897" t2="-25.3323" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="0.700392" q2="0" q3="0.713759" euler_x="0" euler_y="1.55189" euler_z="0" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="52.8031" t1="61.2897" t2="-28.5097" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="0.700392" q2="0" q3="0.713759" euler_x="0" euler_y="1.55189" euler_z="0" id="28" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="52.8632" t1="61.2897" t2="-31.6871" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="0.700392" q2="0" q3="0.713759" euler_x="0" euler_y="1.55189" euler_z="0" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="43.515" t1="61.2897" t2="-33.3406" s0="19.3238" s1="5.12821" s2="0.60375" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="30" version="1">
+                <parameters />
+                <EnvObject t0="35.5715" t1="61.2898" t2="-33.4908" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.00945202" q2="0" q3="0.999955" euler_x="0" euler_y="-0.0189043" euler_z="0" id="31" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="38.7489" t1="61.2897" t2="-33.4307" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.00945202" q2="0" q3="0.999955" euler_x="0" euler_y="-0.0189043" euler_z="0" id="32" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="41.9263" t1="61.2897" t2="-33.3706" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.00945202" q2="0" q3="0.999955" euler_x="0" euler_y="-0.0189043" euler_z="0" id="33" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="45.1037" t1="61.2897" t2="-33.3106" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.00945202" q2="0" q3="0.999955" euler_x="0" euler_y="-0.0189043" euler_z="0" id="34" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="48.2811" t1="61.2897" t2="-33.2505" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.00945202" q2="0" q3="0.999955" euler_x="0" euler_y="-0.0189043" euler_z="0" id="35" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="51.4585" t1="61.2897" t2="-33.1904" s0="1.64032" s1="1.64032" s2="1.64032" q0="0" q1="-0.00945202" q2="0" q3="0.999955" euler_x="0" euler_y="-0.0189043" euler_z="0" id="36" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+        </Group>
+        <EnvObject t0="43.3984" t1="68.1728" t2="-24.1453" s0="23.6094" s1="33.3373" s2="22.5433" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="38" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_wall_deco.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

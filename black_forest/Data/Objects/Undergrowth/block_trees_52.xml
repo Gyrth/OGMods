@@ -1,0 +1,203 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="8.85888" t1="-3.85817" t2="2.28771" s0="31.6913" s1="50.9601" s2="26.7397" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="64" version="1">
+        <parameters />
+        <PlaceholderObject t0="-0.686178" t1="-7.50461" t2="-0.11688" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/block_trees_52_actor_1.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="-0.349167" t1="-6.85811" t2="1.76258" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/block_trees_52_actor_2.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="1" />
+            </Connections>
+        </PlaceholderObject>
+        <Hotspot t0="6.85789" t1="-6.21382" t2="-5.29197" s0="0.358077" s1="0.358077" s2="0.358077" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="16" type_file="Data/Objects/Undergrowth/HotSpots/goldSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="cash" type="int" val="0" />
+                <parameter name="looted" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="10.8301" t1="-7.05602" t2="-0.329163" s0="1.62958" s1="3.06517" s2="1.58816" q0="0" q1="-0.691472" q2="0" q3="0.722404" euler_x="0" euler_y="-1.52707" euler_z="0" id="17" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/TrapDoor1.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="10.6669" t1="-6.91021" t2="-0.361073" s0="0.41288" s1="0.165091" s2="0.543526" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="18" type_file="Data/Objects/Undergrowth/Hotspots/StealSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Stealed" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="11.159" t1="-7.02129" t2="-1.34158" s0="1" s1="1" s2="1" q0="0" q1="-0.470755" q2="0" q3="0.882264" euler_x="0" euler_y="-0.980293" euler_z="0" id="19" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book6.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="10.672" t1="-6.95367" t2="-1.34292" s0="0.500333" s1="0.500333" s2="0.500333" q0="0" q1="-0.996459" q2="0" q3="-0.0840824" euler_x="-3.14159" euler_y="0.168364" euler_z="-3.14159" id="20" type_file="Data/Objects/therium/Decals/Notes/generic/note3.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="11.1271" t1="-7.03995" t2="-1.72213" s0="0.375584" s1="0.375584" s2="0.375584" q0="0" q1="-0.874598" q2="0" q3="0.484848" euler_x="3.14159" euler_y="-1.01238" euler_z="3.14159" id="21" type_file="Data/Objects/therium/Decals/Notes/generic/cinderbreathe/note2.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <EnvObject t0="5.77571" t1="-8.25896" t2="-0.411183" s0="0.218913" s1="0.271647" s2="0.204464" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/terraces/cat_patio_ramp.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.0914" t1="-2.22626" t2="6.4754" s0="0.419303" s1="0.419303" s2="0.419303" q0="0" q1="-0.0375561" q2="0" q3="0.999295" euler_x="0" euler_y="-0.0751299" euler_z="0" id="23" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/HangingLamp_3.xml">
+            <parameters />
+        </EnvObject>
+        <DynamicLightObject t0="11.3752" t1="-3.02203" t2="6.58163" s0="12.0091" s1="12.0091" s2="12.0091" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="24" color_r="0.862745" color_g="0.807717" color_b="0.585313" overbright="1">
+            <parameters />
+        </DynamicLightObject>
+        <DynamicLightObject t0="6.41909" t1="-2.97663" t2="6.22688" s0="12.0091" s1="12.0091" s2="12.0091" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="25" color_r="0.862745" color_g="0.807717" color_b="0.585313" overbright="0">
+            <parameters />
+        </DynamicLightObject>
+        <EnvObject t0="13.3555" t1="-9.01938" t2="0.778227" s0="1" s1="1" s2="1" q0="-0.657412" q1="-0.333235" q2="-0.205939" q3="0.643703" euler_x="-1.69214" euler_y="-0.775093" euler_z="0.244634" id="26" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/barrel.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.3012" t1="-8.84355" t2="-0.150823" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/barrel.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.8123" t1="-8.81713" t2="-0.923013" s0="1" s1="1" s2="1" q0="0.215677" q1="0" q2="0" q3="0.976465" euler_x="0.43477" euler_y="0" euler_z="0" id="28" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/barrel.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.3712" t1="-8.95832" t2="-0.391813" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/barrel.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.1663" t1="-8.95832" t2="0.259837" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="30" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/barrel.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="14.1294" t1="-8.45675" t2="0.0291369" s0="0.681888" s1="0.681888" s2="0.681888" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="31" type_file="Data/Objects/Undergrowth/Hotspots/SearchSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Searched" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="4.40691" t1="-4.85226" t2="-0.215883" s0="1" s1="1" s2="1" q0="0" q1="-0.657766" q2="0" q3="0.753222" euler_x="0" euler_y="-1.43569" euler_z="0" id="32" color_r="0.435294" color_g="0.317388" color_b="0.259469" overbright="0" type_file="Data/Architecture/Gateway.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.09037" t1="-19.3332" t2="-0.847913" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="33" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="1.83746" t1="3.9743" t2="6.85655" s0="1" s1="1" s2="1" q0="0" q1="-0.455528" q2="0" q3="0.890222" euler_x="0" euler_y="-0.945931" euler_z="0" id="34" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree1_B.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.5683" t1="-8.093" t2="-7.56821" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="35" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="16.0536" t1="-7.92418" t2="4.6503" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="36" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="16.3546" t1="5.65566" t2="7.18719" s0="1" s1="1" s2="1" q0="0" q1="0.493886" q2="0" q3="0.869527" euler_x="0" euler_y="1.03311" euler_z="0" id="37" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A_tops.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="0.392097" t1="-8.51772" t2="-8.1129" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="38" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="2.78181" t1="-8.86708" t2="5.6671" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="39" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.85202" t1="-6.75105" t2="-6.07892" s0="2.06676" s1="1.27748" s2="1.30614" q0="0" q1="0.0287721" q2="0" q3="0.999586" euler_x="0" euler_y="0.0575521" euler_z="0" id="40" color_r="0.447059" color_g="0.159539" color_b="0.159539" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Table.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.22125" t1="-6.6825" t2="-5.21286" s0="1.08123" s1="1.08124" s2="1.08124" q0="0" q1="0.961786" q2="0" q3="0.273804" euler_x="3.14159" euler_y="0.554692" euler_z="3.14159" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Chair.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.14334" t1="-6.10559" t2="-6.18018" s0="1.08117" s1="1.08117" s2="1.08115" q0="0" q1="-0.356876" q2="0" q3="0.934152" euler_x="0" euler_y="-0.729843" euler_z="0" id="42" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/BrassLantern_HandleDown.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.71737" t1="-6.26681" t2="-6.02441" s0="1.08127" s1="1.08125" s2="1.08128" q0="0" q1="0.833029" q2="0" q3="0.553229" euler_x="3.14159" euler_y="1.17247" euler_z="3.14159" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Scroll_RolledUp.xml">
+            <parameters />
+        </EnvObject>
+        <PlaceholderObject t0="6.94255" t1="-6.25385" t2="-5.34676" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/block_trees_52_actor_3.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="1" />
+            </Connections>
+        </PlaceholderObject>
+        <EnvObject t0="6.34179" t1="-6.28722" t2="-5.97066" s0="1" s1="1" s2="1" q0="0" q1="0.282276" q2="0" q3="0.959333" euler_x="0" euler_y="0.572331" euler_z="0" id="45" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/openbook.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.7219" t1="-6.71793" t2="5.36171" s0="1" s1="1" s2="1" q0="0" q1="-0.0577273" q2="0" q3="0.998332" euler_x="0" euler_y="-0.115519" euler_z="0" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Shelves.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.01234" t1="-5.78463" t2="5.33676" s0="1" s1="1" s2="1" q0="0" q1="-0.305431" q2="0" q3="0.952214" euler_x="0" euler_y="-0.620782" euler_z="0" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/BrassLantern_HandleDown.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.09689" t1="-6.83133" t2="5.28919" s0="1" s1="1" s2="1" q0="0" q1="0.845625" q2="0" q3="0.533778" euler_x="3.14159" euler_y="1.12612" euler_z="3.14159" id="48" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Scroll_RolledUp.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.02131" t1="-6.33503" t2="5.40753" s0="1" s1="1" s2="1" q0="0" q1="-0.0577273" q2="0" q3="0.998332" euler_x="0" euler_y="-0.115519" euler_z="0" id="49" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/ChinaBowl.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.54074" t1="-6.81653" t2="5.38297" s0="1" s1="1" s2="1" q0="0" q1="-0.326237" q2="0" q3="0.945288" euler_x="0" euler_y="-0.66464" euler_z="0" id="50" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/TeaSet_Cup.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.76436" t1="-5.75963" t2="5.39483" s0="0.806832" s1="0.806832" s2="0.806832" q0="0" q1="0.127137" q2="0" q3="0.991885" euler_x="0" euler_y="0.254964" euler_z="0" id="51" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Bottle.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.96395" t1="-7.40183" t2="5.47939" s0="1" s1="1" s2="1" q0="0" q1="-0.0577273" q2="0" q3="0.998332" euler_x="0" euler_y="-0.115519" euler_z="0" id="52" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Pillow_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.52824" t1="-7.34043" t2="5.41172" s0="1" s1="1" s2="1" q0="-0.00518107" q1="-0.0574943" q2="0.0896005" q3="0.994304" euler_x="-0.0207414" euler_y="-0.11365" euler_z="0.180922" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Pillow_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.1649" t1="-6.84903" t2="5.40808" s0="0.70232" s1="0.70232" s2="0.70232" q0="0" q1="-0.0577273" q2="0" q3="0.998332" euler_x="0" euler_y="-0.115519" euler_z="0" id="54" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/GoGame.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.32783" t1="-6.37893" t2="5.31699" s0="1" s1="1" s2="1" q0="0" q1="-0.0577273" q2="0" q3="0.998332" euler_x="0" euler_y="-0.115519" euler_z="0" id="55" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Pillow_2.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="8.80942" t1="-6.17854" t2="4.28275" s0="0.584703" s1="0.584703" s2="0.584703" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="56" type_file="Data/Objects/Undergrowth/Hotspots/SearchSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Searched" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="11.3551" t1="-6.94041" t2="0.847997" s0="1" s1="1" s2="1" q0="0" q1="0.191602" q2="0" q3="0.981473" euler_x="0" euler_y="0.385588" euler_z="0" id="57" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Furniture/CatStand.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.09795" t1="-6.29864" t2="-5.82492" s0="1" s1="1" s2="1" q0="0" q1="-0.680568" q2="0" q3="0.732684" euler_x="0" euler_y="-1.49706" euler_z="0" id="58" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.31194" t1="-6.29864" t2="-5.89003" s0="1" s1="1" s2="1" q0="0" q1="-0.986553" q2="0" q3="0.163439" euler_x="3.14159" euler_y="-0.328351" euler_z="3.14159" id="59" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.2313" t1="-6.29864" t2="-5.90036" s0="1" s1="1" s2="1" q0="0" q1="0.271994" q2="0" q3="0.962299" euler_x="0" euler_y="0.550929" euler_z="0" id="60" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.91331" t1="-6.29864" t2="-5.99168" s0="1" s1="1" s2="1" q0="0" q1="0.573128" q2="0" q3="0.819466" euler_x="0" euler_y="1.22064" euler_z="0" id="61" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.85175" t1="-6.29864" t2="-5.74051" s0="1" s1="1" s2="1" q0="0" q1="0.419677" q2="0" q3="0.907673" euler_x="0" euler_y="0.866178" euler_z="0" id="62" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/coin.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="3.50413" t1="-7.57872" t2="-1.14262" s0="2.49728" s1="0.961828" s2="2.14592" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="63" type_file="Data/Objects/Undergrowth/Hotspots/giveWeapon.xml">
+            <parameters>
+                <parameter name="Eaten" type="int" val="0" />
+                <parameter name="Open" type="int" val="1" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="8.09037" t1="-19.3332" t2="-0.847913" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

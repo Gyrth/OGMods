@@ -1,0 +1,47 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="56.2722" t1="46.4039" t2="-71.6785" s0="25.129" s1="49.8789" s2="20.01" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="58.8317" t1="31.4695" t2="-71.6785" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="51.4151" t1="55.3772" t2="-71.6637" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="66.3445" t1="42.5239" t2="-63.9061" s0="0.714088" s1="0.714088" s2="0.714088" q0="0" q1="0.595542" q2="0" q3="0.803324" euler_x="0" euler_y="1.27588" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="50.8129" t1="42.7465" t2="-64.7893" s0="2.10512" s1="2.10512" s2="2.10512" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_sapling.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="66.4338" t1="43.8175" t2="-63.7771" s0="0.714088" s1="0.714088" s2="0.714088" q0="-0.0188747" q1="0.747917" q2="-0.0648693" q3="0.660347" euler_x="-2.34588" euler_y="1.39924" euler_z="-2.41118" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="51.2782" t1="43.5773" t2="-67.0177" s0="3.28427" s1="3.28427" s2="3.28427" q0="0" q1="-0.743351" q2="0" q3="0.668902" euler_x="3.14159" euler_y="-1.46547" euler_z="3.14159" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_sapling.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="53.7162" t1="43.7489" t2="-64.2923" s0="3.81846" s1="3.81846" s2="3.81846" q0="0" q1="0.568553" q2="0" q3="0.822647" euler_x="0" euler_y="1.20949" euler_z="0" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_sapling.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="63.9751" t1="43.7809" t2="-74.7778" s0="1.39031" s1="1.39031" s2="1.39031" q0="0" q1="0.530069" q2="0" q3="0.847955" euler_x="0" euler_y="1.11736" euler_z="0" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="56.2929" t1="42.2327" t2="-80.2384" s0="1.70712" s1="1.70712" s2="1.70712" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="59.0467" t1="44.7063" t2="-69.7051" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" type_file="Data/Objects/Undergrowth/Hotspots/spawnPlace.xml">
+            <parameters>
+                <parameter name="Name" type="string" val="SpawnPlace" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="58.8317" t1="31.4695" t2="-71.6785" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

@@ -1,0 +1,84 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="8.18333" t1="-5.02425" t2="0.795632" s0="20.0158" s1="46.9905" s2="22.1813" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="23" version="1">
+        <parameters />
+        <EnvObject t0="8.18333" t1="-18.5116" t2="1.87838" s0="1.00029" s1="1.00029" s2="1.00029" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="2.47353" t1="-6.55645" t2="0.0311473" s0="1.42226" s1="1.42226" s2="1.42226" q0="0" q1="-0.554579" q2="0" q3="0.832131" euler_x="0" euler_y="-1.17571" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.9296" t1="-8.17833" t2="10.9126" s0="1.00029" s1="1.00029" s2="1.00029" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.8909" t1="-7.34283" t2="-4.33779" s0="1.00029" s1="1.00029" s2="1.00029" q0="0" q1="0.612807" q2="0" q3="0.790233" euler_x="0" euler_y="1.31922" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree4.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.11936" t1="-8.17833" t2="-1.80062" s0="1.00029" s1="1.00029" s2="1.00029" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.05163" t1="-5.57367" t2="2.53058" s0="0.548018" s1="0.548018" s2="0.548018" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_arena_floor.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.29673" t1="-4.81224" t2="2.48396" s0="1.42017" s1="1.42017" s2="1.42017" q0="0" q1="-0.258819" q2="0" q3="0.965926" euler_x="0" euler_y="-0.523599" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Gong.xml">
+            <parameters />
+        </EnvObject>
+        <Group t0="13.4112" t1="2.42001" t2="-6.31248" s0="9.0316" s1="32.092" s2="7.95506" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" version="1">
+            <parameters />
+            <EnvObject t0="14.9215" t1="-0.0113206" t2="-5.40581" s0="0.715147" s1="0.715147" s2="0.715147" q0="0.744295" q1="0.424055" q2="0.180123" q3="-0.483485" euler_x="-2.26045" euler_y="-0.74528" euler_z="0.671232" id="10" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_bleached.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="13.7636" t1="1.9467" t2="-6.11738" s0="1.52704" s1="1.52704" s2="1.52704" q0="-0.000252984" q1="-0.853086" q2="0.000413975" q3="0.521771" euler_x="-3.13946" euler_y="-1.09785" euler_z="3.1397" id="11" color_r="0.158339" color_g="0.164023" color_b="0.172549" overbright="0" type_file="Data/Objects/Plants/simple/simple_conifer_trunk.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="13.4855" t1="17.1875" t2="-6.18195" s0="0.566696" s1="0.566696" s2="0.566696" q0="0.292068" q1="-0.427625" q2="-0.544588" q3="0.65974" euler_x="1.07198" euler_y="-0.248684" euler_z="-1.52836" id="12" color_r="0.65098" color_g="0.67451" color_b="0.67451" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="13.9605" t1="8.85991" t2="-6.95098" s0="0.533055" s1="0.533055" s2="0.533055" q0="-0.392298" q1="0.272018" q2="0.438294" q3="0.761582" euler_x="-0.583249" euler_y="0.860566" euler_z="0.770605" id="13" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_bleached.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="10.8388" t1="6.21979" t2="-5.56204" s0="0.883451" s1="0.883451" s2="0.883452" q0="0" q1="0" q2="-0.230444" q3="0.973086" euler_x="0" euler_y="0" euler_z="-0.465068" id="14" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="12.6137" t1="1.66575" t2="-4.46321" s0="0.883451" s1="0.883451" s2="0.883452" q0="-0.0209625" q1="0.301915" q2="0.0660173" q3="0.950815" euler_x="0" euler_y="0.614926" euler_z="0.138642" id="15" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="13.3932" t1="7.91147" t2="-4.36608" s0="0.883451" s1="0.883452" s2="0.883452" q0="-0.0339249" q1="0.488603" q2="0.0603887" q3="0.869752" euler_x="0" euler_y="1.02367" euler_z="0.138641" id="16" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="15.5602" t1="3.86259" t2="-6.75604" s0="0.883451" s1="0.883451" s2="0.883452" q0="-0.0691808" q1="0.996381" q2="-0.00342038" q3="-0.049261" euler_x="-3.14159" euler_y="-0.0987993" euler_z="-3.00295" id="17" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="15.9649" t1="0.311885" t2="-6.25689" s0="0.883451" s1="0.883451" s2="0.883452" q0="-0.0691808" q1="0.996381" q2="-0.00342038" q3="-0.049261" euler_x="-3.14159" euler_y="-0.0987993" euler_z="-3.00295" id="18" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="13.9981" t1="2.42087" t2="-8.15918" s0="0.883451" s1="0.883452" s2="0.883451" q0="-0.588409" q1="0.672288" q2="-0.379858" q3="-0.239814" euler_x="-2.77566" euler_y="-0.878014" euler_z="-1.877" id="19" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="12.5173" t1="5.37594" t2="-5.74896" s0="0.715147" s1="0.715147" s2="0.715148" q0="0.101981" q1="0.657132" q2="0.739788" q3="0.102427" euler_x="1.45497" euler_y="-0.0162732" euler_z="2.85194" id="20" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/broken_branch_bleached.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="13.8787" t1="10.5338" t2="-7.32968" s0="0.663356" s1="0.663356" s2="0.663356" q0="-0.293864" q1="0.838541" q2="-0.17164" q3="-0.425479" euler_x="-3.07642" euler_y="-0.951765" euler_z="-2.50104" id="21" color_r="0.698039" color_g="0.682353" color_b="0.662745" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="13.8465" t1="14.8499" t2="-6.72353" s0="0.663356" s1="0.663356" s2="0.663356" q0="-0.525563" q1="0.799397" q2="0.12747" q3="-0.261724" euler_x="2.61853" euler_y="-0.288439" euler_z="-1.9007" id="22" color_r="0.65098" color_g="0.67451" color_b="0.67451" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/bleached_bough.xml">
+                <parameters />
+            </EnvObject>
+        </Group>
+        <Hotspot t0="8.15593" t1="-6.43392" t2="2.53298" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="24" type_file="Data/Objects/Undergrowth/Hotspots/gongSpot2.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Prayed" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="8.18333" t1="-18.5116" t2="1.87838" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="145" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

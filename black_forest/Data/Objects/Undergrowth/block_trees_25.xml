@@ -1,0 +1,43 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-58.1348" t1="83.0923" t2="-4.04038" s0="26.9019" s1="38.6346" s2="22.5098" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" version="1">
+        <parameters />
+        <EnvObject t0="-58.1348" t1="92.6326" t2="-4.14186" s0="0.619408" s1="0.425487" s2="0.484174" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/elm_tree_large.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="-58.7502" t1="85.711" t2="-4.63028" s0="1.77903" s1="0.842106" s2="2.16643" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="32" type_file="Data/Objects/Undergrowth/Hotspots/EatSpot.xml">
+            <parameters>
+                <parameter name="Activated" type="int" val="0" />
+                <parameter name="Eaten" type="int" val="0" />
+                <parameter name="Open" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="-58.7029" t1="73.78" t2="-2.79049" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="89" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <DynamicLightObject t0="-58.9314" t1="90.3421" t2="-6.61946" s0="25.0096" s1="18.0081" s2="16.4566" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="90" color_r="0.788235" color_g="0.16692" color_b="0.16692" overbright="50">
+            <parameters />
+        </DynamicLightObject>
+        <EnvObject t0="-59.6153" t1="83.9099" t2="-3.99484" s0="0.103771" s1="0.103771" s2="0.103771" q0="0.462816" q1="0.140156" q2="0.692697" q3="0.535097" euler_x="0.913326" euler_y="-0.513454" euler_z="1.56958" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/apple.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-57.1555" t1="83.9546" t2="-7.27633" s0="0.0752532" s1="0.0752532" s2="0.0752532" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/apple.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-58.2142" t1="83.8592" t2="-2.27346" s0="0.0520442" s1="0.0520443" s2="0.0520442" q0="0" q1="0" q2="0.546252" q3="0.837621" euler_x="0" euler_y="0" euler_z="1.15577" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/apple.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-60.8087" t1="83.947" t2="-7.16673" s0="0.0595789" s1="0.0595789" s2="0.0595789" q0="0" q1="0" q2="-0.942845" q3="0.333232" euler_x="0" euler_y="0" euler_z="-2.46213" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/apple.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-58.7029" t1="73.78" t2="-2.79049" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

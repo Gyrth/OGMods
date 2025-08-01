@@ -1,0 +1,71 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="8.29629" t1="2.32795" t2="8.54759" s0="20.01" s1="32.3249" s2="23.0646" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="13" version="1">
+        <parameters />
+        <EnvObject t0="8.29629" t1="-3.82949" t2="7.02029" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <Hotspot t0="8.50299" t1="3.68541" t2="7.08349" s0="3.814" s1="0.966606" s2="4.2382" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" type_file="Data/Objects/Hotspots/wet_cube.xml">
+            <parameters>
+                <parameter name="Water Fog" type="float" val="1" />
+                <parameter name="Wave Density" type="float" val="0.25" />
+                <parameter name="Wave Height" type="float" val="0.5" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="8.07381" t1="9.93805" t2="15.386" s0="5.56663" s1="5.56663" s2="5.56663" q0="0" q1="0.9996" q2="0" q3="0.0282823" euler_x="-3.14159" euler_y="0.0565722" euler_z="-3.14159" id="5" color_r="0.116847" color_g="0.137683" color_b="0.227451" overbright="0" type_file="Data/Objects/Buildings/arena/arena_statue_standing.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="8.08451" t1="11.4568" t2="13.3265" s0="1" s1="1" s2="1" q0="0" q1="0.735293" q2="0" q3="0.67775" euler_x="3.14159" euler_y="1.48939" euler_z="3.14159" id="6" type_file="Data/Objects/Undergrowth/Hotspots/bloodEmitter.xml">
+            <parameters>
+                <parameter name="Type" type="string" val="Falling Water" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="7.57391" t1="12.5446" t2="12.8929" s0="3.10648" s1="3.10648" s2="3.10648" q0="0.455021" q1="-0.338909" q2="-0.648953" q3="0.506909" euler_x="1.19439" euler_y="0.249565" euler_z="-1.64517" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Polearm_Spiked.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="8.23514" t1="11.838" t2="14.4218" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="0.584314" color_g="0.0641599" color_b="0.0641599" overbright="0">
+            <parameters />
+        </Decal>
+        <DynamicLightObject t0="8.15755" t1="12.4808" t2="14.0704" s0="12.0091" s1="12.0091" s2="12.0091" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" color_r="0.388235" color_g="0.0243599" color_b="0.0243599" overbright="36.294">
+            <parameters />
+        </DynamicLightObject>
+        <Hotspot t0="8.47673" t1="5.61862" t2="6.51581" s0="1.03804" s1="1.03804" s2="1.03804" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" type_file="Data/Objects/Hotspots/emitter.xml">
+            <parameters>
+                <parameter name="Type" type="string" val="Smoke" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <DynamicLightObject t0="8.15755" t1="6.46707" t2="6.665" s0="12.0091" s1="12.0091" s2="12.0091" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" color_r="0.388235" color_g="0.0243599" color_b="0.0243599" overbright="36.294">
+            <parameters />
+        </DynamicLightObject>
+        <Hotspot t0="8.2807" t1="5.61862" t2="11.328" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" type_file="Data/Objects/Hotspots/ambient_sound.xml">
+            <parameters>
+                <parameter name="Delay Max" type="float" val="10" />
+                <parameter name="Delay Min" type="float" val="3" />
+                <parameter name="Fade Distance" type="float" val="15" />
+                <parameter name="Gain" type="float" val="1" />
+                <parameter name="Global" type="int" val="0" />
+                <parameter name="Sound Path" type="string" val="Data/Sounds/caveDripLoop.wav" />
+                <parameter name="Wind Scale" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="8.25162" t1="5.57752" t2="10.0119" s0="1" s1="0.525942" s2="1.18147" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" type_file="Data/Objects/Undergrowth/Hotspots/magicWater.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Prayed" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="8.29629" t1="-3.82949" t2="7.02029" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

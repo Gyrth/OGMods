@@ -1,0 +1,65 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="75.4373" t1="78.846" t2="-65.1522" s0="22.1768" s1="29.546" s2="22.7865" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="78.6343" t1="89.4524" t2="-61.0556" s0="1" s1="1" s2="1" q0="0" q1="0.291696" q2="0" q3="0.956511" euler_x="0" euler_y="0.591999" euler_z="0" id="3" color_r="0.438915" color_g="0.43391" color_b="0.647059" overbright="0" type_file="Data/Objects/Buildings/cat_town/hut_medium.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="77.4958" t1="87.7084" t2="-62.9998" s0="1.2198" s1="1.2198" s2="1.2198" q0="0" q1="-0.918325" q2="0" q3="0.395827" euler_x="3.14159" euler_y="-0.813936" euler_z="3.14159" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Door1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="74.4068" t1="84.6841" t2="-66.4497" s0="5.02642" s1="0.274753" s2="5.04538" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="0.0689735" color_g="0.0980392" color_b="0.0495963" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="80.7677" t1="86.0765" t2="-58.1574" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/barrel.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="81.5145" t1="86.0103" t2="-58.7249" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/barrel.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="81.0887" t1="86.9308" t2="-58.7306" s0="1" s1="1" s2="1" q0="-0.227592" q1="-0.383584" q2="0.0841045" q3="0.891062" euler_x="-0.662899" euler_y="-0.701431" euler_z="0.438702" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/barrel.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="78.1903" t1="86.8888" t2="-64.5834" s0="1.95117" s1="1.00002" s2="2.07418" q0="-0.240541" q1="0.412423" q2="0.0975584" q3="0.87323" euler_x="-0.558025" euler_y="0.874486" euler_z="-0.0437118" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/bin_fillers/bin_spice_brown.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="75.5262" t1="86.7653" t2="-62.1671" s0="1.87051" s1="0.999995" s2="2.08598" q0="-0.232433" q1="0.28934" q2="0.0726476" q3="0.925732" euler_x="-0.49199" euler_y="0.605866" euler_z="0" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/bin_fillers/bin_veg_peppers.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="74.5268" t1="73.9681" t2="-66.4566" s0="1" s1="0.989007" s2="1.00472" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="75.5098" t1="86.277" t2="-62.2" s0="1.9584" s1="1.9584" s2="1.9584" q0="0" q1="-0.958762" q2="0" q3="0.284209" euler_x="3.14159" euler_y="-0.576362" euler_z="3.14159" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/shop_bin.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="78.1507" t1="86.2989" t2="-64.6109" s0="1.9584" s1="1.9584" s2="1.9584" q0="0" q1="-0.90701" q2="0" q3="0.421108" euler_x="3.14159" euler_y="-0.869333" euler_z="3.14159" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/shop_bin.xml">
+            <parameters />
+        </EnvObject>
+        <PlaceholderObject t0="76.1698" t1="86.5083" t2="-64.2793" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="43" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/city_block_11_actor.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <Hotspot t0="81.623" t1="86.591" t2="-58.0061" s0="0.554964" s1="0.554964" s2="0.554964" q0="0.643264" q1="-0.275492" q2="0.281235" q3="0.656675" euler_x="1.5409" euler_y="-0.809053" euler_z="0.0216363" id="15" type_file="Data/Objects/Undergrowth/Hotspots/SearchSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Searched" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="75.2257" t1="85.5083" t2="-64.7095" s0="0.594857" s1="1" s2="0.716827" q0="0" q1="-0.359024" q2="0" q3="0.933328" euler_x="0" euler_y="-0.734444" euler_z="0" id="16" type_file="Data/Objects/Undergrowth/Hotspots/EatSpot.xml">
+            <parameters>
+                <parameter name="Eaten" type="int" val="0" />
+                <parameter name="Open" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+    </Group>
+</ActorObjects>

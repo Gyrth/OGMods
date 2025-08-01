@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<attack>
+    <animations unblocked = "Data/Animations/r_bigdogswordattackover.anm"
+                blocked = "Data/Animations/r_bigdogswordattackoverblocked.anm"/>
+    <flags height = "medium"
+           direction = "front"
+           swap_stance = "false"
+           swap_stance_blocked = "false"
+           mobile = "true"
+		   flesh_unblockable = "true"/>
+    <reaction>Data/Attacks/reaction_medfront.xml</reaction>
+    <impact_dir x="0.0" y="0.0" z="1.0"/>
+    <block_damage min="1.0" max="1.1"/>
+    <damage min="0.1" max="0.30"/>
+    <force val="20000"/>
+    <!--
+    <sharp_damage min="0.1" max="0.2"/>
+    -->
+    <force val="2000"/>
+    <materialevent></materialevent>
+    <cut_plane type="heavy" x="1.0" y="0.0" z="0.0"/>
+</attack>

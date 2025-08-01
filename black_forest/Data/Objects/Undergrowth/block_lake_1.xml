@@ -1,0 +1,80 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="8.85811" t1="-3.35279" t2="0.110102" s0="20.01" s1="22.6509" s2="20.01" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" version="1">
+        <parameters />
+        <Hotspot t0="8.99837" t1="4.77486" t2="0.284541" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="18" type_file="Data/Objects/Hotspots/ambient_sound.xml">
+            <parameters>
+                <parameter name="Delay Max" type="float" val="10" />
+                <parameter name="Delay Min" type="float" val="3" />
+                <parameter name="Fade Distance" type="float" val="25" />
+                <parameter name="Gain" type="float" val="1" />
+                <parameter name="Global" type="int" val="0" />
+                <parameter name="Sound Path" type="string" val="Data/Sounds/pond.wav" />
+                <parameter name="Wind Scale" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="9.00801" t1="4.77486" t2="0.21476" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="19" type_file="Data/Objects/Undergrowth/Hotspots/quest15Spot.xml">
+            <parameters>
+                <parameter name="attacked" type="int" val="0" />
+                <parameter name="quest11Go" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="8.85811" t1="-4.67325" t2="0.110102" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <Hotspot t0="9.06481" t1="2.84165" t2="0.173302" s0="3.814" s1="0.966606" s2="4.2382" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" type_file="Data/Objects/Hotspots/wet_cube.xml">
+            <parameters>
+                <parameter name="Water Fog" type="float" val="1" />
+                <parameter name="Wave Density" type="float" val="0.25" />
+                <parameter name="Wave Height" type="float" val="0.5" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="14.598" t1="5.03715" t2="-2.3835" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.34211" t1="5.05195" t2="-2.2876" s0="1" s1="1" s2="1" q0="0" q1="0.476892" q2="0" q3="0.878962" euler_x="0" euler_y="0.994231" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="15.2174" t1="5.03715" t2="2.97212" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="10.3872" t1="5.03715" t2="6.31992" s0="1" s1="1" s2="1" q0="0" q1="0.762217" q2="0" q3="0.647322" euler_x="3.14159" euler_y="1.40813" euler_z="3.14159" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="2.62501" t1="5.03715" t2="1.6274" s0="1" s1="1" s2="1" q0="0" q1="0.825157" q2="0" q3="0.564903" euler_x="3.14159" euler_y="1.20063" euler_z="3.14159" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.54401" t1="5.03715" t2="-4.8363" s0="1" s1="1" s2="1" q0="0" q1="0.598793" q2="0" q3="0.800904" euler_x="0" euler_y="1.28399" euler_z="0" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="11.4939" t1="5.03715" t2="-5.8676" s0="1" s1="1" s2="1" q0="0" q1="-0.748263" q2="0" q3="0.663402" euler_x="3.14159" euler_y="-1.45071" euler_z="3.14159" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.9121" t1="5.03715" t2="0.423302" s0="1" s1="1" s2="1" q0="0" q1="-0.836027" q2="0" q3="0.548688" euler_x="3.14159" euler_y="-1.16159" euler_z="3.14159" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.29841" t1="5.05195" t2="-1.4675" s0="1" s1="1" s2="1" q0="0" q1="-0.449973" q2="0" q3="0.893042" euler_x="0" euler_y="-0.93347" euler_z="0" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.76651" t1="5.05195" t2="-1.1463" s0="1" s1="1" s2="1" q0="0" q1="0.923881" q2="0" q3="0.382681" euler_x="3.14159" euler_y="0.785393" euler_z="3.14159" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Liverwort2.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="8.21161" t1="4.48565" t2="-0.0227982" s0="4.32665" s1="1.74101" s2="3.89051" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" type_file="Data/Objects/Undergrowth/Hotspots/WaterSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="8.85811" t1="-4.67325" t2="0.110102" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

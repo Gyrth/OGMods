@@ -1,0 +1,38 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-0.702776" t1="5.50673" t2="14.766" s0="22.3227" s1="37.2742" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="389" version="1">
+        <parameters />
+        <EnvObject t0="0.453578" t1="-3.12536" t2="14.766" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="378" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="8.4168" t1="8.28365" t2="20.2642" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="380" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-4.85498" t1="7.34075" t2="21.281" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="382" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.7048" t1="11.6347" t2="13.5171" s0="0.583396" s1="0.583396" s2="0.583396" q0="7.51019e-005" q1="-0.000172846" q2="-0.0996792" q3="0.99502" id="384" color_r="0.464559" color_g="0.694118" color_b="0.193264" overbright="0" type_file="Data/Objects/plants/trees/temperate/mossy_trunk_rotting.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.50238" t1="8.18295" t2="8.58783" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="386" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-7.70709" t1="8.63318" t2="15.9803" s0="1.50907" s1="1.50907" s2="1.50907" q0="0.0122276" q1="0.566778" q2="-0.0291438" q3="0.823263" id="390" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-6.68963" t1="15.2444" t2="18.7359" s0="0.549953" s1="0.549953" s2="0.549953" q0="0" q1="0" q2="0.115687" q3="0.993286" id="388" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/large_evergreen_simple_rotting.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="3.55027" t1="7.73919" t2="19.6015" s0="1" s1="1" s2="1" q0="0" q1="0.367693" q2="0" q3="0.929947" id="391" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/small_evergreen_log_rotting.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="0.453578" t1="-3.12536" t2="14.766" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

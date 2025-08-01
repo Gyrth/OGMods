@@ -1,0 +1,88 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="5.29075" t1="-4.27153" t2="2.31081" s0="29.1376" s1="53.4868" s2="34.5715" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="20" version="1">
+        <parameters />
+        <EnvObject t0="9.63997" t1="-21.0099" t2="-0.175867" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="6.41331" t1="3.87926" t2="-4.90196" s0="1" s1="1" s2="1" q0="0" q1="0.441471" q2="0" q3="0.897276" euler_x="0" euler_y="0.914476" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree1_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.42471" t1="1.68586" t2="9.18068" s0="1.2978" s1="1.2978" s2="1.2978" q0="0" q1="-0.565118" q2="0" q3="0.82501" euler_x="0" euler_y="-1.20115" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree1_B.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.8884" t1="-10.2802" t2="0.701143" s0="1" s1="1" s2="1" q0="0" q1="0.734698" q2="0" q3="0.678394" euler_x="3.14159" euler_y="1.49114" euler_z="3.14159" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.23601" t1="-10.2629" t2="3.66458" s0="0.727719" s1="0.727719" s2="0.727719" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="17.0146" t1="-9.82844" t2="-7.80859" s0="1.50835" s1="1.50835" s2="1.50835" q0="0" q1="0.415854" q2="0" q3="0.909431" euler_x="0" euler_y="0.857763" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="16.9178" t1="-10.8765" t2="-0.982986" s0="0.724457" s1="0.66564" s2="0.51985" q0="0" q1="0.734698" q2="0" q3="0.678394" euler_x="3.14159" euler_y="1.49114" euler_z="3.14159" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="11.4025" t1="-7.45744" t2="1.94872" s0="1.06428" s1="1.69761" s2="1.03598" q0="0" q1="0" q2="-0.0928057" q3="0.995684" euler_x="0" euler_y="0" euler_z="-0.185879" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/CreteCube.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.8196" t1="-9.77044" t2="-2.70781" s0="0.803838" s1="0.972015" s2="0.811951" q0="0" q1="0" q2="-0.0928057" q3="0.995684" euler_x="0" euler_y="0" euler_z="-0.185879" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/CreteCube.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="13.8051" t1="-9.92564" t2="2.42082" s0="3.51595" s1="1" s2="4.19556" q0="-0.20783" q1="-0.206429" q2="-0.65763" q3="0.694058" euler_x="-0.0205" euler_y="-0.594263" euler_z="-1.51063" id="11" type_file="Data/Objects/Decals/lichen_rubble.xml" color_r="0.305498" color_g="0.568627" color_b="0.368146" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="14.8628" t1="-11.3003" t2="-1.24529" s0="7.10047" s1="0.999999" s2="4.04385" q0="0.686061" q1="0.164508" q2="0.163678" q3="0.689541" euler_x="1.56628" euler_y="0.00228381" euler_z="0.468392" id="12" type_file="Data/Objects/Decals/lichen_rubble.xml" color_r="0.305498" color_g="0.568627" color_b="0.368146" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="10.2087" t1="-10.5003" t2="4.21034" s0="7.10047" s1="0.999999" s2="4.04385" q0="0.705315" q1="0" q2="0" q3="0.708894" euler_x="1.56573" euler_y="0" euler_z="0" id="13" type_file="Data/Objects/Decals/lichen_rubble.xml" color_r="0.305498" color_g="0.568627" color_b="0.368146" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="8.21931" t1="-10.0265" t2="2.40005" s0="3.51595" s1="1" s2="4.19556" q0="-0.218538" q1="0.195058" q2="0.653311" q3="0.698125" euler_x="-0.0606058" euler_y="0.591849" euler_z="1.48602" id="14" type_file="Data/Objects/Decals/lichen_rubble.xml" color_r="0.305498" color_g="0.568627" color_b="0.368146" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="10.6113" t1="-10.0555" t2="0.761894" s0="7.10047" s1="0.999999" s2="4.04385" q0="0.006931" q1="-0.705281" q2="0.70886" q3="0.00696617" euler_x="-1.56573" euler_y="-0.0196537" euler_z="3.14149" id="15" type_file="Data/Objects/Decals/lichen_rubble.xml" color_r="0.305498" color_g="0.568627" color_b="0.368146" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="14.8328" t1="-11.2539" t2="-3.78988" s0="7.10047" s1="0.999999" s2="4.04385" q0="-0.157478" q1="0.687708" q2="-0.68783" q3="0.170726" euler_x="-1.56628" euler_y="0.0181841" euler_z="-2.67311" id="16" type_file="Data/Objects/Decals/lichen_rubble.xml" color_r="0.305498" color_g="0.568627" color_b="0.368146" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="16.7542" t1="-9.26304" t2="-3.07487" s0="7.10047" s1="0.999999" s2="4.04385" q0="0.539702" q1="0.475333" q2="-0.521463" q3="0.459191" euler_x="-3.13914" euler_y="1.53634" euler_z="1.4465" id="17" type_file="Data/Objects/Decals/lichen_rubble.xml" color_r="0.305498" color_g="0.568627" color_b="0.368146" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="15.3165" t1="-9.30174" t2="-4.16952" s0="7.10047" s1="0.999999" s2="4.04385" q0="0.548436" q1="0.465229" q2="-0.512846" q3="0.468795" euler_x="2.32002" euler_y="1.5202" euler_z="0.62184" id="18" type_file="Data/Objects/Decals/lichen_rubble.xml" color_r="0.305498" color_g="0.568627" color_b="0.368146" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="12.658" t1="-10.1124" t2="-3.64445" s0="7.10047" s1="0.999999" s2="4.04385" q0="-0.477537" q1="0.537728" q2="-0.486979" q3="-0.495639" euler_x="-2.16996" euler_y="-1.50978" euler_z="-2.61132" id="19" type_file="Data/Objects/Decals/lichen_rubble.xml" color_r="0.305498" color_g="0.568627" color_b="0.368146" overbright="0">
+            <parameters />
+        </Decal>
+        <NavmeshConnectionObject t0="18.5769" t1="-10.4821" t2="-2.60813" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="21" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="17.1832" t1="-5.7729" t2="-2.67342" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="22" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="13.7325" t1="-4.53272" t2="-1.41281" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="23" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="15.0097" t1="-0.152069" t2="0.243779" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="24" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <EnvObject t0="9.63997" t1="-21.0099" t2="-0.175867" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

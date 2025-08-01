@@ -1,0 +1,79 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-13.3211" t1="51.5537" t2="-12.4717" s0="24.1971" s1="26.9007" s2="24.9602" q0="0" q1="0" q2="0" q3="1" id="269" version="1">
+        <parameters />
+        <Hotspot t0="-13.2452" t1="55.6407" t2="-13.2147" s0="0.776164" s1="0.776164" s2="0.776164" q0="0" q1="0" q2="0" q3="1" id="273" type_file="Data/Objects/Undergrowth/Hotspots/FireSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="-14.7378" t1="48.1084" t2="-13.8956" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="257" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-13.3211" t1="60.4898" t2="-12.4717" s0="1.19651" s1="0.933777" s2="1.21791" q0="0.00418645" q1="-0.257427" q2="-0.12548" q3="0.958103" id="258" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_capital_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-10.8953" t1="58.4183" t2="-18.0545" s0="1" s1="1" s2="1" q0="0" q1="0.535008" q2="0" q3="0.844847" id="259" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_slope_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-16.5275" t1="58.4183" t2="-9.27498" s0="1" s1="1" s2="1" q0="0" q1="0.535008" q2="0" q3="0.844847" id="260" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_slope_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="-13.4888" t1="56.0144" t2="-14.233" s0="5.03509" s1="5.03509" s2="5.03509" q0="0" q1="0" q2="0" q3="1" id="261" type_file="Data/Objects/Decals/Hay_02.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="-13.961" t1="56.2976" t2="-12.0047" s0="5.03509" s1="5.03509" s2="5.03509" q0="-0.0189111" q1="-0.400044" q2="-0.0017451" q3="0.9163" id="262" type_file="Data/Objects/Decals/Hay_02.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Hotspot t0="-19.2033" t1="58.0693" t2="-17.0598" s0="2.47576" s1="1" s2="2.72119" q0="0" q1="0" q2="0" q3="1" id="263" type_file="Data/Objects/Hotspots/emitter.xml">
+            <parameters>
+                <parameter name="Type" type="string" val="Smoke" />
+            </parameters>
+        </Hotspot>
+        <PlaceholderObject t0="-13.2572" t1="56.7084" t2="-12.9616" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Objects/IGF_Characters/IGF_WolfActor.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="1" />
+            </Connections>
+        </PlaceholderObject>
+        <PathPointObject t0="-14.687" t1="56.3309" t2="-12.3309" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="265" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="-17.3253" t1="58.5961" t2="-23.2157" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="266" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="-23.219" t1="58.5961" t2="-16.6647" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="267" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="-22.9877" t1="58.1083" t2="-4.62638" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="268" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <EnvObject t0="-14.7378" t1="48.1084" t2="-13.8956" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

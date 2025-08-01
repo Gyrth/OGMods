@@ -249,6 +249,31 @@ void DrawGUI() {
 			this_ui.SendCallback("Data/Scripts/black_forest_editor.as");
 		}
 
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("");
+		ImGui_NextColumn();
+		ImGui_PushItemWidth(second_column_width);
+
+		if(ImGui_Button("Undergrowth Redux")){
+			SaveSettings();
+
+			string load_level = "Data/Levels/undergrowth_redux.xml";
+
+			if(weather_state == sunny){
+				load_level = "Data/Levels/undergrowth_redux_sunny.xml";
+			}else if(weather_state == evening){
+				load_level = "Data/Levels/undergrowth_redux_evening.xml";
+			}
+
+			LoadLevel(load_level);
+		}
+
+		ImGui_PopItemWidth();
+		ImGui_NextColumn();
+
 		ImGui_EndChildFrame();
 	}
 	ImGui_End();

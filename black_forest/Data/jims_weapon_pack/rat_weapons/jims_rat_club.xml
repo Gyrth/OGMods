@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<item>
+    <type>weapon</type>
+    <appearance obj_path = "Data/jims_weapon_pack/rat_weapons/03_scripts/jims_rat_club_object.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_dogweapongrip.anm"
+		  hands = "1"/>
+    <sheathe ik_attach = "hip"
+          anim = "Data/Animations/r_dogweaponsheathed.anm"/>
+    <points>
+        <pommel x="0" y="-0.166" z="0"/>
+        <guard x="0" y="0.399" z="0"/>
+        <tip x="0" y="0.683" z="0"/>
+    </points>
+    <lines>
+        <wood start="pommel" end="guard"/>
+        <metal start="guard" end="tip"/>
+    </lines>
+  <label>rat_club</label>
+	<attack_override stationary = "Data/jims_weapon_pack/kendostick_2h/03_scripts/jims_kendostick_2h_overhand.xml"
+                     moving = "Data/jims_weapon_pack/rat_weapons/03_scripts/rat_club_slashleft.xml"
+                     moving_close = "Data/jims_weapon_pack/rat_weapons/03_scripts/rat_club_slashleft.xml"
+                     stationary_close = "Data/Attacks/doghammerpush.xml"/>
+    <anim_override idle = "Data/Animations/r_smallswordstancefront.xml"
+                   movement = "Data/Animations/r_movement_sword.xml"
+                   medleftblock = "Data/Animations/r_smallswordparryleft.anm"
+                   medrightblock = "Data/Animations/r_smallswordparryright.anm"
+                   highleftblock = "Data/Animations/r_smallswordparryhileft.anm"
+                   highrightblock = "Data/Animations/r_smallswordparryhiright.anm"
+                   lowleftblock = "Data/Animations/r_activeblocklowright.anm"
+                   lowrightblock = "Data/Animations/r_activeblocklowleft.anm"
+                   blockflinch = "Data/Animations/r_dogswordflinch.anm"/>
+    <anim_override_flags
+                   lowleftblock = "mirror"
+                   lowrightblock = "mirror"/>
+    <physics mass = "4.1 kg"/>
+    <range extend = "0.5"/>
+</item>

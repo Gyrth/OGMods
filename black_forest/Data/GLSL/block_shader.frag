@@ -1,21 +1,23 @@
+//   Copyright 2022 Wolfire Games LLC
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
+//
+//-----------------------------------------------------------------------------
 #version 150
 #extension GL_ARB_shading_language_420pack : enable
 
-vec3 blendNormal(vec3 normal){
-	vec3 blending = abs(normal);
-	blending = normalize(max(blending, 0.00001));
-	blending /= vec3(blending.x + blending.y + blending.z);
-	return blending;
-}
-
-vec3 triplanarMapping (sampler2D texture, vec3 normal, vec3 position) {
-	vec3 normalBlend = blendNormal(normal);
-	vec3 xColor = texture2D(texture, position.yz).rgb;
-	vec3 yColor = texture2D(texture, position.xz).rgb;
-	vec3 zColor = texture2D(texture, position.xy).rgb;
-
-	return (xColor * normalBlend.x + yColor * normalBlend.y + zColor * normalBlend.z);
-}
+#og_version_major 1
+#og_version_minor 5
 
 /*#if defined(WATER)
 #define NO_DECALS
@@ -319,6 +321,10 @@ in vec3 world_vert;
 	in vec4 frag_tex_coords;
 #elif defined(CHARACTER)
 	in vec2 fur_tex_coord;
+
+	#if defined(TANGENT)
+		in mat3 tan_to_obj;
+	#endif
 
 	#if !defined(DEPTH_ONLY)
 		in vec3 concat_bone1;
@@ -1108,6 +1114,21 @@ vec3 quat_mul_vec3(vec4 q, vec3 v) {
 	return v + ((uv * q.w) + uuv) * 2;
 }
 
+vec3 blendNormal(vec3 normal){
+	vec3 blending = abs(normal);
+	blending = normalize(max(blending, 0.00001));
+	blending /= vec3(blending.x + blending.y + blending.z);
+	return blending;
+}
+
+vec3 triplanarMapping (sampler2D texture, vec3 normal, vec3 position) {
+	vec3 normalBlend = blendNormal(normal);
+	vec3 xColor = texture2D(texture, position.yz).rgb;
+	vec3 yColor = texture2D(texture, position.xz).rgb;
+	vec3 zColor = texture2D(texture, position.xy).rgb;
+
+	return (xColor * normalBlend.x + yColor * normalBlend.y + zColor * normalBlend.z);
+}
 
 void main() {
 	#if defined(INVISIBLE) && !defined(COLLISION)
@@ -2400,7 +2421,12 @@ void main() {
 
 					// Get world space normal
 					vec4 normalmap = texture(normal_tex, tex_coord + tex_offset);
-					vec3 unrigged_normal = UnpackObjNormal(normalmap);
+					#if defined(TANGENT)
+						vec3 unpacked_normal = UnpackTanNormal(normalmap);
+						vec3 unrigged_normal = tan_to_obj * unpacked_normal;
+					#else
+						vec3 unrigged_normal = UnpackObjNormal(normalmap);
+					#endif
 					vec3 ws_normal = normalize(concat_bone1 * unrigged_normal.x +
 						concat_bone2 * unrigged_normal.y +
 						concat_bone3 * unrigged_normal.z);
@@ -2777,7 +2803,10 @@ void main() {
 						vec3 norm = normalize(cross(X, Y));
 						float slope_dot = dot(norm, ws_light);
 						slope_dot = min(slope_dot, 1);
-						shadow_tex.r = GetCascadeShadow(tex4, shadow_coords, length(ws_vertex), slope_dot);
+						// shadow_tex.r = GetCascadeShadow(tex4, shadow_coords, length(ws_vertex), slope_dot);
+						#if !defined(SNOW_EVERYWHERE)
+							shadow_tex.r = GetCascadeShadow(tex4, shadow_coords, length(ws_vertex));
+						#endif
 					}
 					shadow_tex.r *= ambient_mult;
 				#else

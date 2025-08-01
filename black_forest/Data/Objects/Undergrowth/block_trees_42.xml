@@ -1,0 +1,47 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="94.153" t1="64.47" t2="80.4361" s0="20.01" s1="37.2168" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="2030" version="1">
+        <parameters />
+        <EnvObject t0="94.1702" t1="74.1255" t2="80.7261" s0="3.82118" s1="3.82118" s2="3.82118" q0="0" q1="0" q2="0" q3="1" id="2021" color_r="0.137947" color_g="0.180392" color_b="0.159918" overbright="0" type_file="Data/Objects/Buildings/spires/spire_top.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="94.153" t1="55.8666" t2="80.4361" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="2022" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="96.8386" t1="67.1936" t2="81.1092" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.282819" q3="0.959173" id="2023" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="92.1509" t1="67.3721" t2="80.0554" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="2024" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="93.5375" t1="66.0689" t2="82.8558" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="2025" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="95.8421" t1="78.4439" t2="80.7028" s0="1.17066" s1="1.17066" s2="1.17066" q0="0" q1="-0.639135" q2="0" q3="0.769095" id="2026" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/baskets/basket_square.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="96.122" t1="78.8997" t2="80.7154" s0="0.489061" s1="0.361247" s2="0.643606" q0="0" q1="0" q2="0" q3="1" id="2027" type_file="Data/Objects/Undergrowth/Hotspots/SearchSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Searched" type="int" val="0" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="92.6166" t1="78.4641" t2="80.8696" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="2028" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/baskets/basket_tall.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="92.2114" t1="78.9014" t2="80.7154" s0="0.489061" s1="0.361247" s2="0.643606" q0="0" q1="0" q2="0" q3="1" id="2029" type_file="Data/Objects/Undergrowth/Hotspots/SearchSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Searched" type="int" val="0" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="94.153" t1="55.8666" t2="80.4361" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

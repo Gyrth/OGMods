@@ -1,0 +1,24 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-6.00054" t1="0.321497" t2="0.565503" s0="20.1351" s1="25.4943" s2="20.1915" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <Group t0="-6.05811" t1="-2.52561" t2="0.548063" s0="20.01" s1="19.7901" s2="20.1043" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" version="1">
+            <parameters />
+            <EnvObject t0="-6.05811" t1="-2.52561" t2="0.548063" s0="1" s1="0.989007" s2="1.00472" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+                <parameters>
+                    <parameter name="BlockBase" type="int" val="1" />
+                </parameters>
+            </EnvObject>
+        </Group>
+        <EnvObject t0="-5.99081" t1="8.21089" t2="0.565503" s0="5.02642" s1="0.274753" s2="5.04538" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="0.0689735" color_g="0.0980392" color_b="0.0495963" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="-8.03154" t1="11.0637" t2="-0.119207" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" type_file="Data/Objects/Undergrowth/Hotspots/spawnPlace.xml">
+            <parameters>
+                <parameter name="Name" type="string" val="SpawnPlace" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+    </Group>
+</ActorObjects>

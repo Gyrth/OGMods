@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Models/Undergrowth/House.obj</Model>
+	<ColorMap>Data/Textures/Undergrowth/House_C.tga</ColorMap>
+	<NormalMap>Data/Textures/Undergrowth/House_N.tga</NormalMap>
+	<ShaderPath>Data/GLSL/cubemapobj</ShaderPath>
+	<ShaderName>envobject #TANGENT #BASE_TANGENT</ShaderName>
+</Object>

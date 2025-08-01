@@ -1,0 +1,47 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-40.9059" t1="26.7941" t2="-5.39158" s0="25.129" s1="49.8789" s2="21.6141" q0="0" q1="0" q2="0" q3="1" id="886" version="1">
+        <parameters />
+        <EnvObject t0="-38.3464" t1="11.8596" t2="-6.19366" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="882" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-45.7629" t1="35.7673" t2="-6.17885" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="883" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-30.8336" t1="22.914" t2="1.57874" s0="0.714088" s1="0.714088" s2="0.714088" q0="0" q1="0.595542" q2="0" q3="0.803324" id="885" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-30.7442" t1="24.2076" t2="1.70775" s0="0.714088" s1="0.714088" s2="0.714088" q0="-0.0188747" q1="0.747917" q2="-0.0648693" q3="0.660347" id="887" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-46.9626" t1="23.9674" t2="-2.68765" s0="3.28427" s1="3.28427" s2="3.28427" q0="0" q1="-0.743351" q2="0" q3="0.668902" id="894" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_sapling.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-41.9569" t1="24.139" t2="2.82187" s0="3.81846" s1="3.81846" s2="3.81846" q0="0" q1="0.568553" q2="0" q3="0.822647" id="920" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_sapling.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-33.2029" t1="24.171" t2="-9.29295" s0="1.39031" s1="1.39031" s2="1.39031" q0="0" q1="0.530069" q2="0" q3="0.847955" id="921" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-40.8852" t1="22.6228" t2="-14.7536" s0="1.70712" s1="1.70712" s2="1.70712" q0="0" q1="0" q2="0" q3="1" id="922" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-34.8099" t1="27.0022" t2="-9.23122" s0="0.935319" s1="0.947414" s2="0.603772" q0="-0.00547749" q1="-0.913118" q2="-0.00693718" q3="0.407599" id="923" color_r="0.242138" color_g="0.262745" color_b="0.249865" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/tall_ruin_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-39.0102" t1="26.3248" t2="-4.50233" s0="0.935319" s1="0.947414" s2="0.603772" q0="-0.377794" q1="-0.833397" q2="0.161636" q3="0.369581" id="924" color_r="0.242138" color_g="0.262745" color_b="0.249865" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/tall_ruin_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-41.0623" t1="21.7332" t2="1.4822" s0="0.935319" s1="0.947414" s2="0.603772" q0="-0.543346" q1="-0.432746" q2="-0.509983" q3="0.507368" id="925" color_r="0.242138" color_g="0.262745" color_b="0.249865" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/tall_ruin_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-38.3464" t1="11.8596" t2="-6.19366" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<item>
+    <type>weapon</type>
+    <label>ninjato</label>
+    <appearance obj_path = "Data/jims_weapon_pack/katana_viola/03_scripts/jims_katana_viola_object.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_dogweapongrip.anm"
+		  hands = "2"/>
+    <sheathe ik_attach = "hip"
+          anim = "Data/Animations/r_dogweaponsheathed.anm"/>
+    <points>
+        <pommel x="0" y="-0.19" z="0"/>
+        <guard x="0" y="0.12" z="0"/>
+        <tip x="0" y="0.83" z="0"/>
+    </points>
+    <lines>
+        <wood start="pommel" end="guard"/>
+        <metal start="guard" end="tip"/>
+    </lines>
+	<attack_override stationary = "Data/jims_weapon_pack/katana_viola/03_scripts/viola_thrust.xml"
+                     moving = "Data/jims_weapon_pack/katana_viola/03_scripts/viola_slashleft.xml"
+                     moving_close = "Data/jims_weapon_pack/katana_viola/03_scripts/viola_slashleft.xml"
+                     stationary_close = "Data/jims_weapon_pack/katana_viola/03_scripts/viola_thrust.xml"/>
+    <anim_override idle = "Data/Animations/r_smallswordstancefront.xml"
+                   movement = "Data/Animations/r_standmovement_sword.xml"
+                   medleftblock = "Data/Animations/r_smallswordparryleft.anm"
+                   medrightblock = "Data/Animations/r_smallswordparryright.anm"
+                   highleftblock = "Data/Animations/r_smallswordparryhileft.anm"
+                   highrightblock = "Data/Animations/r_smallswordparryhiright.anm"
+                   lowleftblock = "Data/Animations/r_activeblocklowright.anm"
+                   lowrightblock = "Data/Animations/r_activeblocklowleft.anm"
+                   blockflinch = "Data/Animations/r_dogswordflinch.anm"/>
+    <anim_override_flags
+                   lowleftblock = "mirror"
+                   lowrightblock = "mirror"/>
+    <physics mass = "1.5 kg"/>
+    <range extend = "0.4"/>
+</item>

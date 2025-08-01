@@ -1,0 +1,44 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <ActorObject t0="9.99083" t1="12.3317" t2="1.42935" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="35" type_file="Data/Objects/characters/rabbits/male_rabbit_2_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5" />
+            <parameter name="Attack Damage" type="float" val="1" />
+            <parameter name="Attack Knockback" type="float" val="1.10811" />
+            <parameter name="Attack Speed" type="float" val="1.2027" />
+            <parameter name="Block Follow-up" type="float" val="0.35811" />
+            <parameter name="Block Skill" type="float" val="0.90541" />
+            <parameter name="Cannot Be Disarmed" type="int" val="0" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="float" val="1.5" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.35135" />
+            <parameter name="Focus FOV distance" type="float" val="30.405" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="5" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Movement Speed" type="float" val="1.25405" />
+            <parameter name="Muscle" type="float" val="0.722975" />
+            <parameter name="Name" type="string" val="Ronin" />
+            <parameter name="Peripheral FOV distance" type="float" val="25" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Species" type="string" val="rabbit" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="meatEater" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Fur" channel="0" red="0.811765" green="0.786298" blue="0.786298" />
+            <Color label="Ropes" channel="1" red="0.682353" green="0.601666" blue="0.0588697" />
+            <Color label="Pants" channel="2" red="0.12549" green="0.101869" blue="0.101869" />
+            <Color label="Spots" channel="3" red="1" green="0.99999" blue="0.99999" />
+        </Palette>
+    </ActorObject>
+</ActorObjects>

@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<SyncedAnimationGroup>
+	<CoordLabel>speed_coord</CoordLabel>
+	<Animations>
+		<Animation path="Data/Animations/deathclaw/r_animalrun.anm" coord="1.2" ground_speed="1.5"/>
+		<Animation path="Data/Animations/deathclaw/r_animalrun.anm" coord="3.3" ground_speed="6.0" run_bounce = "1.4"/>
+	</Animations>
+</SyncedAnimationGroup>

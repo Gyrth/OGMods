@@ -1,0 +1,54 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="5.98949" t1="11.6913" t2="-2.82243" s0="20.1451" s1="33.6363" s2="20.2015" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="17" version="1">
+        <parameters />
+        <EnvObject t0="6.00532" t1="20.0751" t2="-2.42683" s0="0.999593" s1="2.03676" s2="1.52755" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/long_trim.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.01871" t1="25.8136" t2="-2.45215" s0="0.688253" s1="1.40238" s2="1.05177" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/long_trim.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-0.0610991" t1="19.5512" t2="1.38964" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/shutter_windows.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.76175" t1="19.5061" t2="1.44432" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/shutter_windows.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.21866" t1="19.281" t2="-6.29919" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="-3.14159" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/shutter_windows.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="11.0415" t1="19.2359" t2="-6.24451" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="-3.14159" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/shutter_windows.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-3.73411" t1="17.496" t2="-2.3475" s0="1" s1="1" s2="1" q0="-0.00983107" q1="-0.707038" q2="-0.0098311" q3="0.707038" euler_x="0.351904" euler_y="-1.5708" euler_z="-0.365602" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Door1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-3.60074" t1="21.1593" t2="-2.38473" s0="1" s1="1" s2="1" q0="-0.0115249" q1="-0.707013" q2="-0.0115249" q3="0.707013" euler_x="0.0624188" euler_y="-1.57045" euler_z="-0.0624188" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/shutter_windows.xml">
+            <parameters />
+        </EnvObject>
+        <Group t0="5.98949" t1="5.61105" t2="-2.82243" s0="20.1351" s1="21.4658" s2="20.1915" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+            <parameters />
+            <Group t0="5.93192" t1="4.7782" t2="-2.83987" s0="20.01" s1="19.7901" s2="20.1043" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" version="1">
+                <parameters />
+                <EnvObject t0="5.93192" t1="4.7782" t2="-2.83987" s0="1" s1="0.989007" s2="1.00472" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+                    <parameters>
+                        <parameter name="BlockBase" type="int" val="1" />
+                    </parameters>
+                </EnvObject>
+            </Group>
+            <EnvObject t0="5.99922" t1="15.5147" t2="-2.82243" s0="5.02642" s1="0.274753" s2="5.04538" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="0.0689735" color_g="0.0980392" color_b="0.0495963" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+                <parameters />
+            </EnvObject>
+        </Group>
+        <EnvObject t0="15.5611" t1="20.6437" t2="-2.38473" s0="1" s1="1" s2="1" q0="0.0100368" q1="-0.707035" q2="-0.0100367" q3="-0.707036" euler_x="-0.438337" euler_y="1.5708" euler_z="-0.416774" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/shutter_windows.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.6106" t1="26.4988" t2="-2.6367" s0="1" s1="1" s2="1" q0="0.0100368" q1="-0.707035" q2="-0.0100367" q3="-0.707036" euler_x="-0.438337" euler_y="1.5708" euler_z="-0.416774" id="15" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/shutter_windows.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-0.595215" t1="26.1925" t2="-2.27541" s0="1" s1="1" s2="1" q0="-0.0115249" q1="-0.707013" q2="-0.0115249" q3="0.707013" euler_x="0.0624188" euler_y="-1.57045" euler_z="-0.0624188" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/shutter_windows.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

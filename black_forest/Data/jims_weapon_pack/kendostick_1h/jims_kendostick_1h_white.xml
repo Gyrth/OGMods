@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<item>
+    <type>weapon</type>
+    <appearance obj_path = "Data/jims_weapon_pack/kendostick_1h/03_scripts/jims_kendostick_white.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_dogweapongrip.anm"
+		  hands = "1"/>
+    <sheathe ik_attach = "hip"
+          anim = "Data/Animations/r_dogweaponsheathed.anm"/>
+    <physics mass = "1 kg"/>
+    <points>
+        <pommel x="0" y="-0.164" z="0"/>
+        <guard x="0" y="0.08" z="0"/>
+        <tip x="0" y="0.86" z="0"/>
+    </points>
+    <lines>
+        <wood start="pommel" end="tip"/>
+    </lines>
+    <anim_override idle = "Data/Animations/r_knifestancerear.xml"/>
+    <attack_override moving = "Data/jims_weapon_pack/kendostick_1h/03_scripts/jims_kendostick_1h_slash.xml"
+                     moving_close = "Data/jims_weapon_pack/kendostick_1h/03_scripts/jims_kendostick_1h_slash.xml"
+                     stationary = "Data/jims_weapon_pack/kendostick_1h/03_scripts/jims_kendostick_1h_slash.xml"
+                     stationary_close = "Data/jims_weapon_pack/kendostick_1h/03_scripts/jims_kendostick_1h_thrust.xml"/>
+    <range multiply = "1.2"/>
+</item>

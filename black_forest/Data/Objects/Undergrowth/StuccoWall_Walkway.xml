@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<Object>
+
+
+<Model>Data/Prototypes/OG/Models/StuccoWall_Walkway.obj</Model>
+
+
+	<ColorMap>Data/Prototypes/OG/Textures/StuccoWall_Color.tga</ColorMap>
+	<NormalMap>Data/Prototypes/OG/Textures/StuccoWall_Norm.tga</NormalMap>
+	<WeightMap>Data/Prototypes/OG/Textures/StuccoWall_Weights.tga</WeightMap>
+    <DetailMaps>
+        <DetailMap colorpath="Data/Textures/Buildings/detail_textures/plaster_c.tga" normalpath="Data/Textures/Buildings/detail_textures/plaster_n.tga" materialpath="Data/Materials/rocks.xml" />
+	<DetailMap colorpath="Data/Textures/Buildings/detail_textures/plaster_bricks_c.tga" normalpath="Data/Textures/Buildings/detail_textures/plaster_bricks_n.tga" materialpath="Data/Materials/rocks.xml" />
+	<DetailMap colorpath="Data/Textures/Buildings/detail_textures/smooth_roof_c.tga" normalpath="Data/Textures/Buildings/detail_textures/smooth_roof_n.tga" materialpath="Data/Materials/rocks.xml" />
+	<DetailMap colorpath="Data/Textures/Buildings/detail_textures/cat_cobbles_c.tga" normalpath="Data/Textures/Buildings/detail_textures/cat_cobbles_n.tga" materialpath="Data/Materials/rocks.xml" />
+            </DetailMaps>
+	<ShaderName>detailmap4tangent</ShaderName>
+</Object>

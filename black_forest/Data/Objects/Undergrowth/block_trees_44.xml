@@ -1,0 +1,48 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="9.20704" t1="-2.27002" t2="0.2194" s0="21.0373" s1="26.7413" s2="21.5805" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" version="1">
+        <parameters />
+        <EnvObject t0="8.7845" t1="-5.63565" t2="0.44827" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="7.9099" t1="4.83525" t2="9.66327" s0="1.617" s1="1.617" s2="1.617" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="17.3903" t1="4.39425" t2="-5.04773" s0="1.33325" s1="1.33325" s2="1.33325" q0="0" q1="0.533811" q2="0" q3="0.845604" euler_x="0" euler_y="1.1262" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.9287" t1="5.74225" t2="-4.82173" s0="1.33325" s1="1.33325" s2="1.33325" q0="0" q1="0.533811" q2="0" q3="0.845604" euler_x="0" euler_y="1.1262" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.5638" t1="4.14025" t2="3.29527" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.5737" t1="6.72825" t2="-4.32173" s0="1.85788" s1="1.85788" s2="1.85788" q0="0" q1="0.99857" q2="0" q3="-0.0534657" euler_x="3.14159" euler_y="-0.106982" euler_z="3.14159" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.65833" t1="7.14125" t2="-6.49672" s0="1.22728" s1="1.22728" s2="1.22728" q0="0" q1="0.443726" q2="0" q3="0.896162" euler_x="0" euler_y="0.919503" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree2.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="6.91876" t1="3.71525" t2="2.00627" s0="8.12538" s1="8.12532" s2="8.12536" q0="0" q1="-0.917787" q2="0" q3="0.397073" euler_x="3.14159" euler_y="-0.816651" euler_z="3.14159" id="9" type_file="Data/Objects/Decals/signs/trim_box_donut.xml" color_r="0.00392157" color_g="0.00373317" color_b="0.00327566" overbright="0">
+            <parameters />
+        </Decal>
+        <Hotspot t0="7.00129" t1="3.89225" t2="1.69827" s0="1.49263" s1="1" s2="1.35028" q0="0" q1="-0.389622" q2="0" q3="0.920975" euler_x="0" euler_y="-0.800442" euler_z="0" id="10" type_file="Data/Objects/Undergrowth/HotSpots/trackSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Tracked" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <DynamicLightObject t0="7.00167" t1="5.09106" t2="1.81998" s0="12.0091" s1="12.0091" s2="12.0091" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" color_r="0.368807" color_g="0.552941" color_b="0.255871" overbright="1">
+            <parameters />
+        </DynamicLightObject>
+        <EnvObject t0="8.7845" t1="-5.63565" t2="0.44827" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<character>
+    <appearance obj_path = "Data/Objects/characters/rabbits/male_rabbit_3.xml"
+                skeleton = "Data/Skeletons/r_male_rabbit.xml"
+	            fur = "Data/Models/Characters/rabbits/male_rabbit/male_rabbit_fur_3.obj"
+                morph = "Data/Models/Characters/rabbits/male_rabbit/male_rabbit_gen_3.obj"
+                channel_0 = "fur"
+                channel_1 = "cloth"
+                channel_2 = "cloth"
+                channel_3 = "fur" />
+    <animations idle = "Data/Animations/r_idle2.xml"
+                jump = "Data/Animations/r_jump.xml"
+                roll = "Data/Animations/r_roll.xml"
+                movement = "Data/Animations/r_movement.xml"
+                wall = "Data/Animations/r_wall.xml"
+                ledge = "Data/Animations/r_ledge.anm"
+                medrightblock = "Data/Animations/r_activeblockmedright.anm"
+                medleftblock = "Data/Animations/r_activeblockmedleft.anm"
+                highrightblock = "Data/Animations/r_activeblockhighright.anm"
+                highleftblock = "Data/Animations/r_activeblockhighleft.anm"
+                lowrightblock = "Data/Animations/r_activeblocklowright.anm"
+                lowleftblock = "Data/Animations/r_activeblocklowleft.anm"
+                blockflinch = "Data/Animations/r_activeblockflinch.anm"/>
+    <attacks moving_close = "Data/Attacks/haymaker.xml"
+             stationary_close = "Data/Attacks/thrustpunch.xml"
+             moving = "Data/Attacks/spinkick.xml"
+             stationary = "Data/Attacks/frontkick.xml"
+             moving_low = "Data/Attacks/soccerkick.xml"
+             low = "Data/Attacks/sweep.xml"
+             air = "Data/Attacks/legcannon.xml" />
+    <team>cat</team>
+    <morphs>
+    <mouth_open />
+        <fist_l num_steps = "5"/>
+        <fist_r num_steps = "5"/>
+	    <wink_r />
+	    <wink_l />
+	    <look_b_r />
+        <look_d_r />
+        <look_u_r />
+        <look_f_r />
+        <look_b_l />
+        <look_d_l />
+        <look_u_l />
+        <look_f_l />
+        <oh />
+	</morphs>
+    <tags species = "rabbit"/>
+<EnvObjectAttachments>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="21" num_connections="1" m0="0.135636" m1="-0.0907068" m2="0.986598" m3="0" m4="0.846444" m5="0.528142" m6="-0.0678111" m7="0" m8="-0.514912" m9="0.844298" m10="0.148413" m11="0" m12="-0.46516" m13="0.189707" m14="-0.0343778" m15="1" />
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+            </EnvObjectAttachment>
+        </EnvObjectAttachments>
+        <EnvObject s0="0.143853" s1="0.12617" s2="0.331599" id="28" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+            <parameters />
+        </EnvObject>
+
+ </character>

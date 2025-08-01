@@ -1,0 +1,62 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="9.0518" t1="1.143" t2="-1.09727" s0="20.01" s1="49.7059" s2="21.9298" q0="0" q1="0" q2="0" q3="1" id="36" version="1">
+        <parameters />
+        <Hotspot t0="8.95954" t1="-3.70485" t2="0.58111" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="19" type_file="Data/Objects/Undergrowth/Hotspots/quest2Spot.xml">
+            <parameters>
+                <parameter name="quest2Go" type="int" val="0" />
+                <parameter name="tracked" type="int" val="0" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="9.0518" t1="-13.7049" t2="-2.05716" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="16.5646" t1="-2.65044" t2="5.71525" s0="0.714088" s1="0.714088" s2="0.714088" q0="0" q1="0.595542" q2="0" q3="0.803324" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.033" t1="-2.42784" t2="4.83205" s0="2.10512" s1="2.10512" s2="2.10512" q0="0" q1="0" q2="0" q3="1" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_sapling.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="16.654" t1="-1.35684" t2="5.84424" s0="0.714088" s1="0.714088" s2="0.714088" q0="-0.0188747" q1="0.747917" q2="-0.0648693" q3="0.660347" id="23" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.49836" t1="-1.59704" t2="2.60364" s0="3.28427" s1="3.28427" s2="3.28427" q0="0" q1="-0.743351" q2="0" q3="0.668902" id="24" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_sapling.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="3.93635" t1="-1.42544" t2="5.32904" s0="3.81846" s1="3.81846" s2="3.81846" q0="0" q1="0.568553" q2="0" q3="0.822647" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_sapling.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="17.0717" t1="-3.24098" t2="-8.96839" s0="1.70712" s1="1.70712" s2="1.70712" q0="0" q1="0" q2="0" q3="1" id="26" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.1983" t1="-3.09234" t2="-5.39786" s0="1.70712" s1="1.70712" s2="1.70712" q0="0" q1="0" q2="0" q3="1" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.08178" t1="10.0297" t2="1.81787" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="28" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.8742" t1="-2.95503" t2="-8.61355" s0="1.70712" s1="1.70712" s2="1.70712" q0="0" q1="0" q2="0" q3="1" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <ItemObject t0="9.28334" t1="-0.265191" t2="0.305092" s0="1" s1="1" s2="1" q0="-0.999492" q1="0" q2="0" q3="0.031865" id="30" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </ItemObject>
+        <Decal t0="8.75865" t1="-3.70485" t2="0.0964625" s0="4.73923" s1="2.98093" s2="4.61826" q0="0" q1="0" q2="0" q3="1" id="31" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="0.756863" color_g="0.0593618" color_b="0.0593618" overbright="0">
+            <parameters />
+        </Decal>
+        <EnvObject t0="16.9771" t1="-3.3548" t2="-6.09817" s0="1.70712" s1="1.70712" s2="1.70712" q0="0" q1="0" q2="0" q3="1" id="32" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.07777" t1="-3.55251" t2="0.333314" s0="1" s1="1" s2="1" q0="-0.0884182" q1="-0.720724" q2="-0.682444" q3="0.0837219" id="33" color_r="0.109804" color_g="0.0848289" color_b="0.0848289" overbright="3.107" type_file="Data/Objects/characters/raider_rabbit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.0518" t1="-13.7049" t2="-2.05716" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

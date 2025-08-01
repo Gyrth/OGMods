@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<item>
+    <type>weapon</type>
+    <appearance obj_path = "Data/Objects/Undergrowth/Polearm_SerratedEdge.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_dogweapongrip.anm"/>
+    <physics mass = "2 kg"/>
+    <anim_override idle = "Data/Animations/r_hammeridle.xml"/>
+</item>

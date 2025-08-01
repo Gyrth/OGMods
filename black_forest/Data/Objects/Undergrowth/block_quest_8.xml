@@ -1,0 +1,132 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="6.19294" t1="9.91328" t2="17.1945" s0="20.01" s1="29.2771" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="197" version="1">
+        <parameters />
+        <EnvObject t0="3.30769" t1="8.91325" t2="19.092" s0="6.46988" s1="1" s2="6.38524" q0="0" q1="0" q2="0" q3="1" id="67" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/primitives/edged_cube.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.23515" t1="14.5648" t2="24.0599" s0="0.903906" s1="0.349012" s2="0.691841" q0="0" q1="0" q2="0" q3="1" id="68" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.20455" t1="16.329" t2="24.0747" s0="2.15897" s1="1" s2="2.17164" q0="0" q1="0" q2="0" q3="1" id="69" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/TrapDoor1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.21535" t1="17.0065" t2="25.0179" s0="0.822024" s1="0.578294" s2="1.17806" q0="0" q1="0" q2="0" q3="1" id="70" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.21535" t1="16.9812" t2="23.1387" s0="0.822024" s1="0.578294" s2="1.17806" q0="0" q1="0" q2="0" q3="1" id="71" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.21535" t1="17.864" t2="24.0758" s0="0.822024" s1="0.763747" s2="1.22016" q0="-0.711033" q1="0" q2="0" q3="0.703158" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.50175" t1="16.7292" t2="18.4207" s0="2.21848" s1="1.40926" s2="1" q0="0.0694053" q1="0.684435" q2="0.0158277" q3="0.72559" id="73" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Banner_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.05492" t1="16.3908" t2="23.1384" s0="0.913452" s1="0.913452" s2="0.913452" q0="-0.001657" q1="0" q2="-4.35001e-005" q3="0.999999" id="74" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/ChinaBowl.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.19294" t1="5.27975" t2="17.1945" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="75" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="6.49235" t1="19.7663" t2="16.3295" s0="0.600369" s1="0.600369" s2="0.600369" q0="0" q1="0.638706" q2="0" q3="0.769451" id="76" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/elm_tree_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.0116" t1="15.6736" t2="19.5599" s0="1.36252" s1="1.36252" s2="1.36252" q0="0" q1="0.700893" q2="0" q3="0.713266" id="77" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/winter_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-1.04062" t1="15.2742" t2="12.465" s0="2.16003" s1="2.16003" s2="2.16003" q0="0" q1="0" q2="0" q3="1" id="78" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/low_fern_.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="0.298182" t1="18.3377" t2="22.3947" s0="1.89391" s1="1.89391" s2="1.89391" q0="0" q1="0.689631" q2="0" q3="0.724161" id="223" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="3.76779" t1="16.2313" t2="13.9008" s0="0.831394" s1="0.831394" s2="0.831394" q0="0" q1="0.689631" q2="0" q3="0.724161" id="224" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-0.879018" t1="15.5113" t2="12.7269" s0="1.69169" s1="1.69169" s2="1.69169" q0="0" q1="0.943641" q2="0" q3="0.330971" id="225" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/low_fern_.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.20215" t1="15.2959" t2="10.447" s0="1" s1="1" s2="1" q0="-0.026657" q1="-0.02597" q2="0.0106508" q3="0.999251" id="226" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.92311" t1="15.4808" t2="12.2179" s0="1" s1="1" s2="1" q0="0" q1="0.685259" q2="0" q3="0.7283" id="227" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/StoneFurniture_Stool.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.87642" t1="15.5375" t2="13.6587" s0="1" s1="1" s2="1" q0="0" q1="0.472887" q2="0" q3="0.881123" id="228" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/StoneFurniture_Table.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.88171" t1="15.8319" t2="13.6346" s0="1" s1="1" s2="1" q0="0" q1="0.495763" q2="0" q3="0.868458" id="229" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/GoGame.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="10.3253" t1="15.8526" t2="13.5365" s0="1" s1="1" s2="1" q0="0" q1="0.684826" q2="0" q3="0.728707" id="230" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/TeaSet_Cup.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="11.6663" t1="15.4809" t2="14.8077" s0="1" s1="1" s2="1" q0="0" q1="0.377846" q2="0" q3="0.925868" id="234" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/StoneFurniture_Stool.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.39702" t1="15.9514" t2="13.8327" s0="0.563591" s1="0.563591" s2="0.563591" q0="0" q1="-0.638935" q2="0" q3="0.769261" id="235" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Bottle.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.48855" t1="16.5196" t2="23.2151" s0="0.676691" s1="0.676691" s2="0.676691" q0="0" q1="0.184184" q2="0" q3="0.982892" id="236" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Bottle.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="7.80124" t1="15.2797" t2="24.2052" s0="4.51085" s1="1" s2="5.04945" q0="0" q1="0" q2="0" q3="1" id="237" type_file="Data/Objects/Decals/crete_stains/pooled_stain.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <PlaceholderObject t0="3.49195" t1="16.2798" t2="14.2115" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/Quest8_actor.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="1" />
+            </Connections>
+        </PlaceholderObject>
+        <Hotspot t0="8.93258" t1="15.2798" t2="23.7946" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="239" type_file="Data/Objects/Undergrowth/Hotspots/quest8Spot.xml">
+            <parameters>
+                <parameter name="poisoned" type="int" val="0" />
+                <parameter name="quest8Go" type="int" val="0" />
+            </parameters>
+        </Hotspot>
+        <PathPointObject t0="1.75047" t1="15.2797" t2="21.8943" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="80" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="13.5812" t1="16.1469" t2="17.1658" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="82" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="14.3457" t1="15.2797" t2="8.72066" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="84" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="-1.31105" t1="15.2797" t2="10.8222" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="195" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <ItemObject t0="6.29222" t1="15.3798" t2="14.3006" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="196" type_file="Data/Items/DogWeapons/DogSword.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </ItemObject>
+        <EnvObject t0="6.19294" t1="5.27975" t2="17.1945" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

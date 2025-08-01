@@ -1,0 +1,36 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="52.5201" t1="46.4306" t2="-82.4894" s0="20.1864" s1="50.679" s2="20.2625" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="52.1416" t1="56.8458" t2="-83.7039" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_vip_gate.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="52.5201" t1="41.7227" t2="-82.4894" s0="5.0441" s1="0.27572" s2="5.06313" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="0.0689735" color_g="0.0980392" color_b="0.0495963" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="47.9741" t1="43.8941" t2="-83.7916" s0="0.647315" s1="0.30026" s2="-0.8775" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_door.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="56.2541" t1="43.8676" t2="-83.8465" s0="0.724474" s1="0.307033" s2="-0.8775" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_door.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="59.0396" t1="55.9406" t2="-83.5249" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_door.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="45.3021" t1="54.7006" t2="-83.6326" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_door.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="52.4528" t1="30.9862" t2="-82.5068" s0="1" s1="0.989007" s2="1.00472" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="45.1431" t1="55.8919" t2="-83.4767" s0="0.999984" s1="1.12593" s2="1.08791" q0="0" q1="0.999987" q2="0" q3="0.00511046" euler_x="3.14159" euler_y="0.010221" euler_z="3.14159" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_door.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="52.2309" t1="62.5973" t2="-83.928" s0="1" s1="1" s2="1" q0="0" q1="0.706998" q2="0" q3="0.707215" euler_x="0" euler_y="1.5695" euler_z="0" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_door.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

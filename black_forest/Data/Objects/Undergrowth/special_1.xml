@@ -1,0 +1,378 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-19.3591" t1="9.05188" t2="16.6252" s0="24.9096" s1="49.294" s2="24.0165" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="-21.9014" t1="4.40989" t2="19.0383" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="0.0913751" color_g="0.243137" color_b="0.0610227" overbright="0" type_file="Data/Architecture/Pavement_Rectangle_Small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-22.0647" t1="8.03839" t2="19.0626" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="0.0913751" color_g="0.243137" color_b="0.0610227" overbright="0" type_file="Data/Architecture/Building_Rectangle_Small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-21.8089" t1="-5.59014" t2="18.6284" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-13.2625" t1="4.72739" t2="16.4769" s0="1" s1="1" s2="1" q0="0" q1="-0.522117" q2="0" q3="0.852874" euler_x="0" euler_y="-1.09866" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-13.2414" t1="5.86399" t2="20.9808" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-20.8245" t1="5.52199" t2="10.2044" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/winter_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-15.0635" t1="7.84979" t2="12.5095" s0="1" s1="1" s2="1" q0="0" q1="-0.773688" q2="0" q3="0.633567" euler_x="3.14159" euler_y="-1.37231" euler_z="3.14159" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-13.2135" t1="17.7327" t2="10.5787" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_B_tops.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-27.321" t1="4.62029" t2="10.0325" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <DynamicLightObject t0="-22.0577" t1="7.74319" t2="19.3475" s0="12.0091" s1="12.0091" s2="12.0091" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="13" color_r="0.839216" color_g="0.821482" color_b="0.302776" overbright="1">
+            <parameters />
+        </DynamicLightObject>
+        <EnvObject t0="-22.3692" t1="5.77009" t2="18.8174" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" color_r="0.25098" color_g="0.140989" color_b="0.0925182" overbright="0" type_file="Data/Prototypes/CaveArena/Crate_Table1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-22.3775" t1="6.32299" t2="19.1249" s0="1.15471" s1="1" s2="1.16847" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/openbook.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-23.1898" t1="6.32819" t2="18.5146" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-23.179" t1="6.39049" t2="18.5198" s0="1" s1="1" s2="1" q0="0" q1="0.401563" q2="0" q3="0.915832" euler_x="0" euler_y="0.826446" euler_z="0" id="17" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="-23.2207" t1="6.30169" t2="19.0179" s0="0.403684" s1="0.403684" s2="0.403684" q0="0" q1="0.419157" q2="0" q3="0.907914" euler_x="0" euler_y="0.865034" euler_z="0" id="18" type_file="Data/Objects/therium/Decals/Notes/generic/note3.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="-21.6526" t1="6.30169" t2="18.5735" s0="0.453911" s1="0.453911" s2="0.453911" q0="0" q1="0.974336" q2="0" q3="0.225097" euler_x="3.14159" euler_y="0.454085" euler_z="3.14159" id="19" type_file="Data/Objects/therium/Decals/Notes/generic/note3.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <EnvObject t0="-18.9585" t1="6.51629" t2="21.008" s0="1" s1="1" s2="1" q0="0" q1="-0.169082" q2="0" q3="0.985602" euler_x="0" euler_y="-0.339796" euler_z="0" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.98" t1="6.58409" t2="21.0013" s0="1" s1="1" s2="1" q0="0" q1="0.155142" q2="0" q3="0.987892" euler_x="0" euler_y="0.311542" euler_z="0" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.3016" t1="6.63419" t2="20.9791" s0="1" s1="1" s2="1" q0="0.583697" q1="0.385526" q2="-0.580377" q3="0.41693" euler_x="1.07259" euler_y="1.52614" euler_z="-0.861933" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.9389" t1="6.16859" t2="20.9685" s0="1" s1="1" s2="1" q0="-0.001657" q1="0" q2="-4.35001e-005" q3="0.999999" euler_x="-0.003314" euler_y="0" euler_z="-8.70001e-005" id="23" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Shelves.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.5314" t1="6.51999" t2="20.9305" s0="1" s1="1" s2="1" q0="0" q1="0.915625" q2="0" q3="0.402034" euler_x="3.14159" euler_y="0.827475" euler_z="3.14159" id="24" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Scroll_RolledUp.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.204" t1="7.10189" t2="21.0315" s0="1" s1="1" s2="1" q0="0" q1="0.315735" q2="0" q3="0.948848" euler_x="0" euler_y="0.642463" euler_z="0" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/BrassLantern_HandleDown.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.3932" t1="6.62729" t2="20.9766" s0="1" s1="1" s2="1" q0="0.583697" q1="0.385526" q2="-0.580377" q3="0.41693" euler_x="1.07259" euler_y="1.52614" euler_z="-0.861933" id="26" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.492" t1="6.62599" t2="20.9738" s0="1" s1="1" s2="1" q0="0.583697" q1="0.385526" q2="-0.580377" q3="0.41693" euler_x="1.07259" euler_y="1.52614" euler_z="-0.861933" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.5815" t1="6.61909" t2="20.9714" s0="1" s1="1" s2="1" q0="0.583697" q1="0.385526" q2="-0.580377" q3="0.41693" euler_x="1.07259" euler_y="1.52614" euler_z="-0.861933" id="28" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.7817" t1="6.60359" t2="20.9662" s0="1" s1="1" s2="1" q0="0.29928" q1="0.622992" q2="-0.312007" q3="0.651893" euler_x="0.0322875" euler_y="1.52614" euler_z="-0.86192" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.598" t1="6.19639" t2="20.9874" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="30" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.4967" t1="6.18119" t2="20.9688" s0="1" s1="1" s2="1" q0="0.565745" q1="0.424185" q2="-0.565745" q3="0.424185" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="31" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.3772" t1="6.19289" t2="20.9874" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="32" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.133" t1="6.18219" t2="20.9922" s0="1" s1="1" s2="1" q0="0.455392" q1="0.540942" q2="-0.540942" q3="0.455392" euler_x="-1.5708" euler_y="1.39949" euler_z="3.14159" id="33" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.8997" t1="6.18039" t2="20.9874" s0="1" s1="1" s2="1" q0="0.429813" q1="0.561481" q2="-0.429813" q3="0.561481" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="34" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.795" t1="6.17199" t2="20.9874" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="35" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.4966" t1="6.17999" t2="20.9874" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="36" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.2679" t1="6.17669" t2="20.9874" s0="1" s1="1" s2="1" q0="0.360948" q1="0.608043" q2="-0.360948" q3="0.608043" euler_x="0" euler_y="1.56982" euler_z="0" id="37" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.2571" t1="6.17519" t2="20.9688" s0="1" s1="1" s2="1" q0="0.434383" q1="0.557953" q2="-0.434383" q3="0.557953" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="38" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.0208" t1="6.18769" t2="20.9688" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="39" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.702" t1="6.18169" t2="20.9688" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="40" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.5989" t1="6.16899" t2="20.9688" s0="1" s1="1" s2="1" q0="0.546635" q1="0.448542" q2="-0.546635" q3="0.448542" euler_x="0" euler_y="1.5697" euler_z="0" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.3949" t1="6.18089" t2="20.9688" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="42" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.9585" t1="6.46889" t2="17.0864" s0="1" s1="1" s2="1" q0="0" q1="-0.169082" q2="0" q3="0.985602" euler_x="0" euler_y="-0.339796" euler_z="0" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.98" t1="6.53669" t2="17.0797" s0="1" s1="1" s2="1" q0="0" q1="0.155142" q2="0" q3="0.987892" euler_x="0" euler_y="0.311542" euler_z="0" id="44" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.3016" t1="6.58679" t2="17.0574" s0="1" s1="1" s2="1" q0="0.583697" q1="0.385526" q2="-0.580377" q3="0.41693" euler_x="1.07259" euler_y="1.52614" euler_z="-0.861933" id="45" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.9389" t1="6.12119" t2="17.0469" s0="1" s1="1" s2="1" q0="-0.001657" q1="0" q2="-4.35001e-005" q3="0.999999" euler_x="-0.003314" euler_y="0" euler_z="-8.70001e-005" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Shelves.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.5314" t1="6.47259" t2="17.0089" s0="1" s1="1" s2="1" q0="0" q1="0.915625" q2="0" q3="0.402034" euler_x="3.14159" euler_y="0.827475" euler_z="3.14159" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Scroll_RolledUp.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.3932" t1="6.57989" t2="17.055" s0="1" s1="1" s2="1" q0="0.583697" q1="0.385526" q2="-0.580377" q3="0.41693" euler_x="1.07259" euler_y="1.52614" euler_z="-0.861933" id="49" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.492" t1="6.57859" t2="17.0522" s0="1" s1="1" s2="1" q0="0.583697" q1="0.385526" q2="-0.580377" q3="0.41693" euler_x="1.07259" euler_y="1.52614" euler_z="-0.861933" id="50" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.5815" t1="6.57169" t2="17.0498" s0="1" s1="1" s2="1" q0="0.583697" q1="0.385526" q2="-0.580377" q3="0.41693" euler_x="1.07259" euler_y="1.52614" euler_z="-0.861933" id="51" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.7817" t1="6.55619" t2="17.0445" s0="1" s1="1" s2="1" q0="0.29928" q1="0.622992" q2="-0.312007" q3="0.651893" euler_x="0.0322875" euler_y="1.52614" euler_z="-0.86192" id="52" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.598" t1="6.14899" t2="17.0658" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.4967" t1="6.13379" t2="17.0471" s0="1" s1="1" s2="1" q0="0.565745" q1="0.424185" q2="-0.565745" q3="0.424185" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="54" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.3772" t1="6.14549" t2="17.0658" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="55" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.133" t1="6.13479" t2="17.0706" s0="1" s1="1" s2="1" q0="0.455392" q1="0.540942" q2="-0.540942" q3="0.455392" euler_x="-1.5708" euler_y="1.39949" euler_z="3.14159" id="56" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.8997" t1="6.13289" t2="17.0658" s0="1" s1="1" s2="1" q0="0.429813" q1="0.561481" q2="-0.429813" q3="0.561481" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="57" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.795" t1="6.12459" t2="17.0658" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="58" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.4966" t1="6.13249" t2="17.0658" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="59" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.2679" t1="6.12919" t2="17.0658" s0="1" s1="1" s2="1" q0="0.360948" q1="0.608043" q2="-0.360948" q3="0.608043" euler_x="0" euler_y="1.56982" euler_z="0" id="60" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.2571" t1="6.12779" t2="17.0471" s0="1" s1="1" s2="1" q0="0.434383" q1="0.557953" q2="-0.434383" q3="0.557953" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="61" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.0208" t1="6.14019" t2="17.0471" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="62" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.702" t1="6.13419" t2="17.0471" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="63" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.5989" t1="6.12149" t2="17.0471" s0="1" s1="1" s2="1" q0="0.546635" q1="0.448542" q2="-0.546635" q3="0.448542" euler_x="0" euler_y="1.5697" euler_z="0" id="64" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.3949" t1="6.13349" t2="17.0471" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="65" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.0436" t1="6.48169" t2="17.0864" s0="1" s1="1" s2="1" q0="0" q1="-0.169082" q2="0" q3="0.985602" euler_x="0" euler_y="-0.339796" euler_z="0" id="66" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.0651" t1="6.54949" t2="17.0797" s0="1" s1="1" s2="1" q0="0" q1="0.155142" q2="0" q3="0.987892" euler_x="0" euler_y="0.311542" euler_z="0" id="67" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.3867" t1="6.59959" t2="17.0574" s0="1" s1="1" s2="1" q0="0.583697" q1="0.385526" q2="-0.580377" q3="0.41693" euler_x="1.07259" euler_y="1.52614" euler_z="-0.861933" id="68" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.024" t1="6.13399" t2="17.0469" s0="1" s1="1" s2="1" q0="-0.001657" q1="0" q2="-4.35001e-005" q3="0.999999" euler_x="-0.003314" euler_y="0" euler_z="-8.70001e-005" id="69" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Shelves.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.6165" t1="6.48539" t2="17.0089" s0="1" s1="1" s2="1" q0="0" q1="0.915625" q2="0" q3="0.402034" euler_x="3.14159" euler_y="0.827475" euler_z="3.14159" id="70" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Scroll_RolledUp.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.4784" t1="6.59269" t2="17.055" s0="1" s1="1" s2="1" q0="0.583697" q1="0.385526" q2="-0.580377" q3="0.41693" euler_x="1.07259" euler_y="1.52614" euler_z="-0.861933" id="71" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.5772" t1="6.59139" t2="17.0522" s0="1" s1="1" s2="1" q0="0.583697" q1="0.385526" q2="-0.580377" q3="0.41693" euler_x="1.07259" euler_y="1.52614" euler_z="-0.861933" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.6666" t1="6.58449" t2="17.0498" s0="1" s1="1" s2="1" q0="0.583697" q1="0.385526" q2="-0.580377" q3="0.41693" euler_x="1.07259" euler_y="1.52614" euler_z="-0.861933" id="73" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.8668" t1="6.56899" t2="17.0445" s0="1" s1="1" s2="1" q0="0.29928" q1="0.622992" q2="-0.312007" q3="0.651893" euler_x="0.0322875" euler_y="1.52614" euler_z="-0.86192" id="74" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.6831" t1="6.16179" t2="17.0658" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="75" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.5818" t1="6.14659" t2="17.0471" s0="1" s1="1" s2="1" q0="0.565745" q1="0.424185" q2="-0.565745" q3="0.424185" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="76" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.4623" t1="6.15829" t2="17.0658" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="77" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.2181" t1="6.14759" t2="17.0706" s0="1" s1="1" s2="1" q0="0.455392" q1="0.540942" q2="-0.540942" q3="0.455392" euler_x="-1.5708" euler_y="1.39949" euler_z="3.14159" id="78" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.9848" t1="6.14579" t2="17.0658" s0="1" s1="1" s2="1" q0="0.429813" q1="0.561481" q2="-0.429813" q3="0.561481" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="79" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.8801" t1="6.13739" t2="17.0658" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="80" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.5817" t1="6.14539" t2="17.0658" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="81" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.353" t1="6.14209" t2="17.0658" s0="1" s1="1" s2="1" q0="0.360948" q1="0.608043" q2="-0.360948" q3="0.608043" euler_x="0" euler_y="1.56982" euler_z="0" id="82" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.3423" t1="6.14059" t2="17.0471" s0="1" s1="1" s2="1" q0="0.434383" q1="0.557953" q2="-0.434383" q3="0.557953" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="83" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.1059" t1="6.15309" t2="17.0471" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="84" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.7871" t1="6.14709" t2="17.0471" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="85" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.684" t1="6.13439" t2="17.0471" s0="1" s1="1" s2="1" q0="0.546635" q1="0.448542" q2="-0.546635" q3="0.448542" euler_x="0" euler_y="1.5697" euler_z="0" id="86" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.48" t1="6.14629" t2="17.0471" s0="1" s1="1" s2="1" q0="0.5" q1="0.5" q2="-0.5" q3="0.5" euler_x="0" euler_y="1.5708" euler_z="0" id="87" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.9631" t1="6.62069" t2="21.0624" s0="1" s1="1" s2="1" q0="0" q1="-0.985602" q2="0" q3="-0.169082" euler_x="-3.14159" euler_y="0.339796" euler_z="-3.14159" id="88" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.9416" t1="6.68859" t2="21.0692" s0="1" s1="1" s2="1" q0="0" q1="-0.987892" q2="0" q3="0.155142" euler_x="3.14159" euler_y="-0.311542" euler_z="3.14159" id="89" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.62" t1="6.73859" t2="21.0914" s0="1" s1="1" s2="1" q0="0.580377" q1="-0.41693" q2="0.583697" q3="0.385526" euler_x="-2.06902" euler_y="-1.52614" euler_z="-2.27968" id="90" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.9827" t1="6.27309" t2="21.102" s0="1" s1="1" s2="1" q0="4.34678e-005" q1="-0.999999" q2="-0.00165689" q3="0" euler_x="3.13828" euler_y="0" euler_z="-3.14151" id="91" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Shelves.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.3902" t1="6.62449" t2="21.14" s0="1" s1="1" s2="1" q0="0" q1="-0.402034" q2="0" q3="0.915625" euler_x="0" euler_y="-0.827475" euler_z="0" id="92" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Scroll_RolledUp.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.5284" t1="6.73169" t2="21.0938" s0="1" s1="1" s2="1" q0="0.580377" q1="-0.41693" q2="0.583697" q3="0.385526" euler_x="-2.06902" euler_y="-1.52614" euler_z="-2.27968" id="93" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.4296" t1="6.73039" t2="21.0967" s0="1" s1="1" s2="1" q0="0.580377" q1="-0.41693" q2="0.583697" q3="0.385526" euler_x="-2.06902" euler_y="-1.52614" euler_z="-2.27968" id="94" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.3401" t1="6.72349" t2="21.099" s0="1" s1="1" s2="1" q0="0.580377" q1="-0.41693" q2="0.583697" q3="0.385526" euler_x="-2.06902" euler_y="-1.52614" euler_z="-2.27968" id="95" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.1399" t1="6.70799" t2="21.1043" s0="1" s1="1" s2="1" q0="0.312007" q1="-0.651893" q2="0.29928" q3="0.622992" euler_x="-3.10931" euler_y="-1.52614" euler_z="-2.27969" id="96" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.3236" t1="6.30089" t2="21.083" s0="1" s1="1" s2="1" q0="0.5" q1="-0.5" q2="0.5" q3="0.5" euler_x="0" euler_y="-1.5708" euler_z="0" id="97" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.4249" t1="6.28559" t2="21.1017" s0="1" s1="1" s2="1" q0="0.565745" q1="-0.424185" q2="0.565745" q3="0.424185" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="98" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.5444" t1="6.29739" t2="21.083" s0="1" s1="1" s2="1" q0="0.5" q1="-0.5" q2="0.5" q3="0.5" euler_x="0" euler_y="-1.5708" euler_z="0" id="99" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.7886" t1="6.28669" t2="21.0783" s0="1" s1="1" s2="1" q0="0.540942" q1="-0.455392" q2="0.455392" q3="0.540942" euler_x="1.5708" euler_y="-1.39949" euler_z="0" id="100" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.0219" t1="6.28479" t2="21.083" s0="1" s1="1" s2="1" q0="0.429813" q1="-0.561481" q2="0.429813" q3="0.561481" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="101" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.1266" t1="6.27639" t2="21.083" s0="1" s1="1" s2="1" q0="0.5" q1="-0.5" q2="0.5" q3="0.5" euler_x="0" euler_y="-1.5708" euler_z="0" id="102" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.425" t1="6.28439" t2="21.083" s0="1" s1="1" s2="1" q0="0.5" q1="-0.5" q2="0.5" q3="0.5" euler_x="0" euler_y="-1.5708" euler_z="0" id="103" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.6537" t1="6.28109" t2="21.083" s0="1" s1="1" s2="1" q0="0.360948" q1="-0.608043" q2="0.360948" q3="0.608043" euler_x="0" euler_y="-1.56982" euler_z="0" id="104" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.6645" t1="6.27959" t2="21.1017" s0="1" s1="1" s2="1" q0="0.434383" q1="-0.557953" q2="0.434383" q3="0.557953" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="105" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.9008" t1="6.29209" t2="21.1017" s0="1" s1="1" s2="1" q0="0.5" q1="-0.5" q2="0.5" q3="0.5" euler_x="0" euler_y="-1.5708" euler_z="0" id="106" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.2196" t1="6.28609" t2="21.1017" s0="1" s1="1" s2="1" q0="0.5" q1="-0.5" q2="0.5" q3="0.5" euler_x="0" euler_y="-1.5708" euler_z="0" id="107" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.3227" t1="6.27339" t2="21.1017" s0="1" s1="1" s2="1" q0="0.546635" q1="-0.448542" q2="0.546635" q3="0.448542" euler_x="0" euler_y="-1.5697" euler_z="0" id="108" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.5267" t1="6.28529" t2="21.1017" s0="1" s1="1" s2="1" q0="0.5" q1="-0.5" q2="0.5" q3="0.5" euler_x="0" euler_y="-1.5708" euler_z="0" id="109" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book_bloody.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-21.4816" t1="6.32349" t2="18.4443" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="110" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book6.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-21.4399" t1="6.38079" t2="18.4443" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="111" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book6.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-21.5013" t1="6.45819" t2="18.4443" s0="1" s1="1" s2="1" q0="0" q1="-0.3688" q2="0" q3="0.929509" euler_x="0" euler_y="-0.755436" euler_z="0" id="112" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book6.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="-22.6119" t1="6.41959" t2="18.5384" s0="0.366395" s1="0.567777" s2="0.347227" q0="0" q1="0.287886" q2="0" q3="0.957665" euler_x="0" euler_y="0.584037" euler_z="0" id="113" type_file="Data/Objects/therium/Decals/Notes/generic/cinderbreathe/note2.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="-21.7259" t1="6.41959" t2="18.9863" s0="0.366395" s1="0.567777" s2="0.347227" q0="0" q1="-0.374182" q2="0" q3="0.927355" euler_x="0" euler_y="-0.767029" euler_z="0" id="114" type_file="Data/Objects/therium/Decals/Notes/generic/cinderbreathe/note2.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <EnvObject t0="-22.1772" t1="4.95529" t2="13.7588" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="115" color_r="0.0882737" color_g="0.105538" color_b="0.160784" overbright="0" type_file="Data/Architecture/Pavement_Steps.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-22.1654" t1="4.92199" t2="24.2722" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="116" color_r="0.0882737" color_g="0.105538" color_b="0.160784" overbright="0" type_file="Data/Architecture/Pavement_Steps.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="-22.098" t1="6.52979" t2="19.2657" s0="2.28636" s1="0.589539" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="117" type_file="Data/Objects/Undergrowth/Hotspots/FireSpot.xml">
+            <parameters />
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="-21.6365" t1="5.73089" t2="19.1029" s0="3.82751" s1="1.31182" s2="2.65934" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="118" type_file="Data/Objects/Undergrowth/Hotspots/soundRoof.xml">
+            <parameters>
+                <parameter name="Delay Max" type="float" val="10" />
+                <parameter name="Delay Min" type="float" val="3" />
+                <parameter name="Fade Distance" type="float" val="3" />
+                <parameter name="Gain" type="float" val="1" />
+                <parameter name="Global" type="int" val="0" />
+                <parameter name="Sound Path" type="string" val="Data/Sounds/nothing.wav" />
+                <parameter name="Wind Scale" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="-21.9529" t1="5.68495" t2="18.8599" s0="0.744867" s1="0.49155" s2="0.748456" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" type_file="Data/Objects/Undergrowth/Hotspots/librarySpot.xml">
+            <parameters>
+                <parameter name="ResearchGo" type="int" val="0" />
+                <parameter name="Researched" type="int" val="0" />
+                <parameter name="researchAmount" type="int" val="1" />
+                <parameter name="researchID" type="int" val="1" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="-18.8862" t1="6.89641" t2="17.0531" s0="1" s1="1" s2="1" q0="-0.00485724" q1="0.867523" q2="0.00278476" q3="0.497367" euler_x="3.14159" euler_y="1.04114" euler_z="-3.13039" id="48" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book5.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-21.8089" t1="-5.59014" t2="18.6284" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

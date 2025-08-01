@@ -1,0 +1,63 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="20.0737" t1="79.7104" t2="-44.4956" s0="22.8284" s1="28.29" s2="23.6276" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="29.9877" t1="87" t2="-50.4484" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="0.152941" color_g="0.150542" color_b="0.150542" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar_base.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.1291" t1="87.2866" t2="-34.4687" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="0.152941" color_g="0.150542" color_b="0.150542" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar_base.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="29.9877" t1="87.2866" t2="-34.6818" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="0.152941" color_g="0.150542" color_b="0.150542" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar_base.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.5954" t1="86.8343" t2="-50.0263" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" color_r="0.152941" color_g="0.150542" color_b="0.150542" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar_base.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.8941" t1="85.9915" t2="-50.1608" s0="1.70288" s1="1.5322" s2="1.67299" q0="0.186158" q1="0.694751" q2="-0.179812" q3="0.671069" euler_x="3.14159" euler_y="1.53612" euler_z="2.61799" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/openbook.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.0207" t1="85.88" t2="-50.1642" s0="0.474044" s1="0.999356" s2="0.710849" q0="0" q1="-0.681816" q2="0" q3="0.731524" euler_x="1.10569e-006" euler_y="-1.50048" euler_z="-1.01146e-006" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Furniture/CatCouch.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.5182" t1="86.0435" t2="-49.8352" s0="0.630108" s1="0.630108" s2="0.630108" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/LitterLoads/SmallGourd.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.544" t1="85.7407" t2="-49.4876" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/LitterLoads/LargeGourd.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.6174" t1="86.1858" t2="-50.156" s0="1.49695" s1="1.49695" s2="1.49695" q0="0.0801423" q1="0.702156" q2="-0.0988356" q3="0.700561" euler_x="-1.52903" euler_y="1.54426" euler_z="-1.78284" id="15" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/RatJunk/RatJunkBirdSkull.xml">
+            <parameters />
+        </EnvObject>
+        <DynamicLightObject t0="14.669" t1="87.8459" t2="-50.2998" s0="12.0091" s1="12.0091" s2="12.0091" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="16" color_r="0.823529" color_g="0.766572" color_b="0.510265" overbright="11.802">
+            <parameters />
+        </DynamicLightObject>
+        <EnvObject t0="21.4829" t1="75.5704" t2="-42.6868" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="22.1892" t1="87.8884" t2="-37.8795" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="-0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="8" color_r="0.152941" color_g="0.15294" color_b="0.15294" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="21.9829" t1="87.8884" t2="-47.4648" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="10" color_r="0.152941" color_g="0.150542" color_b="0.150542" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="22.0054" t1="87.9205" t2="-42.6813" s0="1.29575" s1="1.29575" s2="1.29575" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="6" color_r="0.199998" color_g="0.2" color_b="0.199998" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_arch.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="14.2515" t1="86.8092" t2="-50.1261" s0="0.655572" s1="0.655572" s2="0.655572" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="17" type_file="Data/Objects/Undergrowth/HotSpots/tipJar.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Tipper" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="21.4829" t1="75.5704" t2="-42.6868" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

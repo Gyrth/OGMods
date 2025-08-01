@@ -1,0 +1,234 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="8.80267" t1="-2.6881" t2="-0.926267" s0="20.01" s1="37.4452" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="78" version="1">
+        <parameters />
+        <Hotspot t0="13.729" t1="-0.116933" t2="3.77595" s0="0.434139" s1="0.434139" s2="0.434139" q0="0" q1="0" q2="0" q3="1" id="334" type_file="Data/Objects/Undergrowth/Hotspots/SearchSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Searched" type="int" val="0" />
+            </parameters>
+        </Hotspot>
+        <Hotspot t0="8.77383" t1="11.1118" t2="-0.330261" s0="0.390436" s1="0.390436" s2="0.390436" q0="0" q1="0" q2="0" q3="1" id="40" type_file="Data/Objects/Undergrowth/Hotspots/quest9Spot.xml">
+            <parameters>
+                <parameter name="quest9Go" type="int" val="0" />
+                <parameter name="stolen" type="int" val="0" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="8.80267" t1="-11.4057" t2="-0.926267" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="8.83447" t1="7.42387" t2="-1.04736" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="42" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Architecture/Building_Pagoda.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.31697" t1="-1.86233" t2="-0.784661" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Architecture/Pavement_Square_Large.xml">
+            <parameters />
+        </EnvObject>
+        <ItemObject t0="10.6253" t1="0.419867" t2="0.116729" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="44" type_file="Data/Items/DogWeapons/DogSpear.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </ItemObject>
+        <EnvObject t0="11.8976" t1="5.37537" t2="-3.80921" s0="1.48063" s1="2.31443" s2="2.59931" q0="0" q1="0" q2="0" q3="1" id="45" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureA_Table.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="11.7883" t1="5.92687" t2="-3.76151" s0="1" s1="1" s2="1" q0="0" q1="0.725353" q2="0" q3="0.688377" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/GoGame.xml">
+            <parameters />
+        </EnvObject>
+        <PathPointObject t0="11.014" t1="-0.72707" t2="2.35666" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="47" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="7.34685" t1="-0.72707" t2="2.19511" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="48" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="7.22447" t1="2.19497" t2="-4.3882" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="49" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="5.65708" t1="2.19497" t2="-4.31018" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="50" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="5.68406" t1="5.03482" t2="2.0094" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="51" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="9.19546" t1="5.03482" t2="1.9268" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="52" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="11.247" t1="5.03482" t2="-1.51109" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <EnvObject t0="11.9338" t1="11.8869" t2="-1.11819" s0="1.00851" s1="0.999999" s2="1.07113" q0="-0.50389" q1="-0.496066" q2="-0.504645" q3="0.495324" id="54" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Architecture/Components/Building_Stairs_Platform.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.88882" t1="11.8763" t2="-0.933791" s0="1" s1="1" s2="1" q0="-0.50389" q1="-0.496066" q2="-0.504645" q3="0.495324" id="55" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Architecture/Components/Building_Stairs_Platform.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.34287" t1="11.8512" t2="1.9365" s0="1" s1="1" s2="1" q0="0.709062" q1="0" q2="0" q3="0.705146" id="56" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Architecture/Components/Building_Stairs_Platform.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.67289" t1="11.8999" t2="-3.94783" s0="1.00343" s1="0.999999" s2="1.05154" q0="0.709062" q1="0" q2="0" q3="0.705146" id="57" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Architecture/Components/Building_Stairs_Platform.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.81545" t1="-0.0539641" t2="5.09017" s0="0.933851" s1="0.999994" s2="1.05139" q0="0.709062" q1="0" q2="0" q3="0.705146" id="58" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Architecture/Components/Building_Stairs_Platform.xml">
+            <parameters />
+        </EnvObject>
+        <PlaceholderObject t0="9.83046" t1="5.39892" t2="-3.87734" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/Quest9_actor_1.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="9.18224" t1="0.272927" t2="-2.58955" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/Quest9_actor_2.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="1" />
+            </Connections>
+        </PlaceholderObject>
+        <EnvObject t0="14.9917" t1="0.0746839" t2="-0.976941" s0="0.932048" s1="0.999998" s2="1.04824" q0="0.501795" q1="-0.50097" q2="0.498203" q3="0.499024" id="72" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Architecture/Components/Building_Stairs_Platform.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.84326" t1="10.7315" t2="0.293229" s0="1" s1="1" s2="1" q0="0" q1="0.299656" q2="0" q3="-0.954047" id="73" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Scroll_RolledUp.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.82737" t1="10.4977" t2="0.296219" s0="1" s1="1" s2="1" q0="0" q1="0.000304282" q2="0" q3="-1" id="74" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureA_Table.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.82087" t1="10.325" t2="-0.164781" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0.000304282" id="75" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Pillow_2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="2.72825" t1="0.0663848" t2="-1.05159" s0="0.915627" s1="1" s2="1.09221" q0="0.501795" q1="-0.50097" q2="0.498203" q3="0.499024" id="76" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Architecture/Components/Building_Stairs_Platform.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="9.06631" t1="2.9182" t2="-1.2113" s0="4.42518" s1="6.55565" s2="4.39369" q0="0" q1="0" q2="0" q3="1" id="77" type_file="Data/Objects/Undergrowth/Hotspots/quest9AOSpot.xml">
+            <parameters />
+        </Hotspot>
+        <EnvObject t0="11.1938" t1="5.30687" t2="2.02436" s0="1" s1="1" s2="1" q0="0" q1="0.999945" q2="0" q3="0.0104983" id="303" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureA_Bed.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="11.1652" t1="5.48607" t2="2.02476" s0="1" s1="1" s2="1" q0="0" q1="0.999945" q2="0" q3="0.0104983" id="304" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Mattress.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.1894" t1="-0.141944" t2="-3.20777" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="306" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Table.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.2104" t1="-0.0728433" t2="-2.78377" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="307" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Chair.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.2104" t1="-0.0728433" t2="-3.58977" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="308" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Chair.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.0189" t1="0.384856" t2="-3.08677" s0="0.676691" s1="0.676691" s2="0.676691" q0="0" q1="0.184184" q2="0" q3="0.982892" id="309" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Bottle.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.3438" t1="0.275256" t2="-3.26877" s0="0.913452" s1="0.913452" s2="0.913452" q0="-0.001657" q1="0" q2="-4.35001e-005" q3="0.999999" id="310" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/ChinaBowl.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.51" t1="-0.411582" t2="-1.05225" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="312" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Table.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.531" t1="-0.342381" t2="-0.628253" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="313" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Chair.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.531" t1="-0.342381" t2="-1.43525" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="314" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Chair.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.3571" t1="0.0250188" t2="-0.996249" s0="0.848651" s1="0.848651" s2="0.848651" q0="0" q1="0.973675" q2="0" q3="-0.227939" id="315" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/TeaSet_Pot.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.364" t1="-0.0166816" t2="-1.25125" s0="1" s1="1" s2="1" q0="0" q1="0.938599" q2="0" q3="-0.345011" id="316" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/TeaSet_Cup.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.6889" t1="-0.0162811" t2="-0.825252" s0="0.607494" s1="0.607494" s2="0.607494" q0="-0.001657" q1="0" q2="-4.35001e-005" q3="0.999999" id="317" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/ChinaBowl.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.4444" t1="-0.429945" t2="1.05146" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="319" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Table.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.444" t1="-0.360844" t2="1.38746" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" id="320" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Chair.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.6921" t1="0.110055" t2="1.04946" s0="1" s1="1" s2="1" q0="0" q1="-0.383606" q2="0" q3="0.923497" id="321" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/BrassLantern_HandleDown.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.3057" t1="-0.0460439" t2="1.12246" s0="1" s1="1" s2="1" q0="0" q1="0.816767" q2="0" q3="0.576968" id="322" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Scroll_RolledUp.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.0926" t1="-0.178745" t2="4.23227" s0="1" s1="1" s2="1" q0="-0.0134427" q1="-0.938254" q2="0.00367767" q3="0.345665" id="324" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Cabinet.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.9233" t1="0.466094" t2="4.35884" s0="1" s1="1" s2="1" q0="-0.0139161" q1="-0.781122" q2="-0.000754833" q3="0.624223" id="325" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/BrassLantern_HandleDown.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.2225" t1="0.294721" t2="4.12297" s0="1" s1="1" s2="1" q0="-0.0107598" q1="-0.259016" q2="-0.00885767" q3="0.965773" id="326" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Scroll_RolledUp.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.5234" t1="5.64879" t2="-0.308757" s0="1" s1="1" s2="1" q0="0" q1="-0.70756" q2="0" q3="0.706653" id="335" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Shelves.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.4673" t1="6.58209" t2="-1.01653" s0="1" s1="1" s2="1" q0="0" q1="-0.861731" q2="0" q3="0.507366" id="336" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/BrassLantern_HandleDown.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.5242" t1="5.53539" t2="-0.937956" s0="1" s1="1" s2="1" q0="0" q1="0.275832" q2="0" q3="0.961206" id="337" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Scroll_RolledUp.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.512" t1="6.03169" t2="-0.006071" s0="1" s1="1" s2="1" q0="0" q1="-0.70756" q2="0" q3="0.706653" id="338" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/ChinaBowl.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.4816" t1="5.55019" t2="-0.486312" s0="1" s1="1" s2="1" q0="0" q1="-0.872649" q2="0" q3="0.488348" id="339" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/TeaSet_Cup.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.4953" t1="6.60709" t2="-0.262791" s0="0.806832" s1="0.806832" s2="0.806832" q0="0" q1="-0.565301" q2="0" q3="0.824885" id="340" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Bottle.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.434" t1="4.96489" t2="-0.0548694" s0="1" s1="1" s2="1" q0="0" q1="-0.70756" q2="0" q3="0.706653" id="341" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Pillow_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.4516" t1="5.02629" t2="-0.495449" s0="1" s1="1" s2="1" q0="-0.0635038" q1="-0.704705" q2="0.0634222" q3="0.703801" id="342" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Pillow_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.5278" t1="5.51769" t2="0.13665" s0="0.70232" s1="0.70232" s2="0.70232" q0="0" q1="-0.70756" q2="0" q3="0.706653" id="343" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/GoGame.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="12.5229" t1="5.98779" t2="-0.705356" s0="1" s1="1" s2="1" q0="0" q1="-0.70756" q2="0" q3="0.706653" id="344" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Pillow_2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.80267" t1="-11.4057" t2="-0.926267" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

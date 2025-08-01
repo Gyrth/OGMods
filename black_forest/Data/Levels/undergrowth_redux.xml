@@ -1,0 +1,171 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<Name>undergrowth_redux</Name>
+<Description></Description>
+<Shader>post</Shader>
+<Shadows>true</Shadows>
+<LoadingScreen>
+    <Image>Data/Images/OverRogue_full.jpg</Image>
+</LoadingScreen>
+<OutOfDate NavMesh="true" NavMeshParamHash="-1674835251" />
+<AmbientSounds />
+<Script>undergrowth_redux.as</Script>
+<LevelScriptParameters>
+    <parameter name="Achievements" type="string" val="flawless, no_injuries, no_kills" />
+    <parameter name="Block Size" type="float" val="10" />
+    <parameter name="Custom Shader" type="string" val="" />
+    <parameter name="Fog amount" type="float" val="2" />
+    <parameter name="GPU Particle Field" type="string" val="" />
+    <parameter name="HDR Black point" type="float" val="0" />
+    <parameter name="HDR Bloom multiplier" type="float" val="0" />
+    <parameter name="HDR White point" type="float" val="2" />
+    <parameter name="Level Boundaries" type="int" val="0" />
+    <parameter name="Load Tip" type="string" val="" />
+    <parameter name="Objectives" type="string" val="destroy_all" />
+    <parameter name="Rain" type="int" val="0" />
+    <parameter name="Saturation" type="float" val="1" />
+    <parameter name="Sky Brightness" type="float" val="5" />
+    <parameter name="Sky Rotation" type="float" val="-239" />
+    <parameter name="Sky Tint" type="string" val="120, 158, 103" />
+    <parameter name="World Size" type="int" val="32" />
+</LevelScriptParameters>
+<NavMeshParameters generate="true" cell_size="0.3" cell_height="0.2" agent_height="1.7" agent_radius="0.4" agent_max_climb="1.5" agent_max_slope="60" />
+<Sky>
+    <DomeTexture>Data/Textures/skies/esostars2.tga</DomeTexture>
+    <SunAngularRad>0.227</SunAngularRad>
+    <SunColorAngle>8.58902</SunColorAngle>
+    <RayToSun r0="0.843168" r1="0.508385" r2="0.174962" />
+</Sky>
+<ActorObjects>
+    <CameraObject t0="-7.5735" t1="169.17" t2="-10.1001" s0="1" s1="1" s2="1" q0="0.694605" q1="0.0083645" q2="-0.00807736" q3="0.719297" euler_x="1.53587" euler_y="0.0232564" euler_z="0" id="1">
+        <parameters>
+            <parameter name="Old" type="int" val="1" />
+        </parameters>
+    </CameraObject>
+    <ActorObject t0="0" t1="10" t2="0" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" type_file="Data/Objects/IGF_Characters/IGF_TurnerActor.xml" is_player="1">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5" />
+            <parameter name="Assassination" type="int" val="0" />
+            <parameter name="Attack Damage" type="float" val="0.84" />
+            <parameter name="Attack Knockback" type="float" val="0.84" />
+            <parameter name="Attack Speed" type="float" val="0.84" />
+            <parameter name="Bless" type="int" val="0" />
+            <parameter name="Block Follow-up" type="float" val="0.5" />
+            <parameter name="Block Skill" type="float" val="0.5" />
+            <parameter name="Cannot Be Disarmed" type="int" val="0" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="float" val="1" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Faith" type="int" val="25" />
+            <parameter name="Fat" type="float" val="0.295" />
+            <parameter name="Fatigue" type="int" val="0" />
+            <parameter name="FireNear" type="int" val="0" />
+            <parameter name="Focus FOV distance" type="float" val="100" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.242008" />
+            <parameter name="Food" type="int" val="100" />
+            <parameter name="FoodObject" type="string" val="-1" />
+            <parameter name="Forts" type="float" val="0.1" />
+            <parameter name="Freezing" type="int" val="4" />
+            <parameter name="Gold" type="int" val="0" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Hunted" type="int" val="0" />
+            <parameter name="KenjutsuBelt" type="int" val="1" />
+            <parameter name="KenjutsuMastery" type="int" val="0" />
+            <parameter name="KenjutsuUpgrade" type="int" val="0" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="KungfuBelt" type="int" val="0" />
+            <parameter name="KungfuMastery" type="int" val="0" />
+            <parameter name="KungfuUpgrade" type="int" val="0" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Movement Speed" type="float" val="0.84" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="NinjitsuBelt" type="int" val="0" />
+            <parameter name="NinjitsuMastery" type="int" val="0" />
+            <parameter name="NinjitsuUpgrade" type="int" val="0" />
+            <parameter name="Old" type="int" val="1" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.41376" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.41376" />
+            <parameter name="Poison" type="int" val="0" />
+            <parameter name="Read" type="int" val="25" />
+            <parameter name="Scroll" type="int" val="0" />
+            <parameter name="Search" type="int" val="25" />
+            <parameter name="ShurikenBelt" type="int" val="0" />
+            <parameter name="ShurikenMastery" type="int" val="0" />
+            <parameter name="ShurikenUpgrade" type="int" val="0" />
+            <parameter name="Sick" type="int" val="0" />
+            <parameter name="Species" type="string" val="rabbit" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Steal" type="int" val="25" />
+            <parameter name="Teams" type="string" val="Player" />
+            <parameter name="Tracking" type="int" val="25" />
+            <parameter name="Water" type="int" val="100" />
+            <parameter name="Winter" type="int" val="0" />
+            <parameter name="Buddy" type="int" val="0" />
+            <parameter name="special1" type="int" val="0" />
+            <parameter name="special2" type="int" val="0" />
+            <parameter name="special3" type="int" val="0" />
+            <parameter name="special4" type="int" val="0" />
+            <parameter name="special5" type="int" val="0" />
+            <parameter name="special6" type="int" val="0" />
+            <parameter name="special7" type="int" val="0" />
+            <parameter name="special8" type="int" val="0" />
+            <parameter name="special9" type="int" val="0" />
+            <parameter name="special10" type="int" val="0" />
+            <parameter name="noWinter" type="int" val="0" />
+            <parameter name="map" type="int" val="0" />
+            <parameter name="wanted" type="float" val="0.0" />
+            <parameter name="caravanStrike" type="int" val="0" />
+            <parameter name="day" type="int" val="0" />
+            <parameter name="distance" type="int" val="0" />
+            <parameter name="handKills" type="int" val="0" />
+            <parameter name="hour" type="int" val="10" />
+            <parameter name="huntFactor" type="int" val="0" />
+            <parameter name="huntLevel" type="int" val="0" />
+            <parameter name="knockedOut" type="int" val="0" />
+            <parameter name="lastTune" type="string" val="" />
+            <parameter name="lockPick" type="int" val="0" />
+            <parameter name="lvl" type="int" val="1" />
+            <parameter name="playerName" type="string" val="Furry Trailblazer" />
+            <parameter name="powerUp" type="int" val="0" />
+            <parameter name="questKills" type="int" val="0" />
+            <parameter name="questStatus" type="int" val="0" />
+            <parameter name="questType" type="int" val="0" />
+            <parameter name="shurikenMastery" type="int" val="0" />
+            <parameter name="survived" type="int" val="0" />
+            <parameter name="throwFlag" type="int" val="0" />
+            <parameter name="throwKills" type="int" val="0" />
+            <parameter name="trinketChances" type="float" val="0" />
+            <parameter name="trinketPower" type="int" val="0" />
+            <parameter name="trinketType" type="string" val="" />
+            <parameter name="weapon1" type="string" val="" />
+            <parameter name="weapon2" type="string" val="" />
+            <parameter name="weapon3" type="string" val="" />
+            <parameter name="weapon4" type="string" val="" />
+            <parameter name="weaponKills" type="int" val="0" />
+            <parameter name="xp" type="int" val="0" />
+            <parameter name="roninKill" type="int" val="0" />
+            <parameter name="roninGrave" type="int" val="0" />
+            <parameter name="relicDistance" type="int" val="-1" />
+            <parameter name="pausez" type="int" val="0" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Cloth" channel="0" red="1" green="1" blue="1" />
+            <Color label="Rope" channel="1" red="1" green="1" blue="1" />
+            <Color label="Fur" channel="2" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+    <ReflectionCaptureObject t0="-4.16573" t1="51.3054" t2="-4.70992" s0="0.759925" s1="0.759925" s2="0.759925" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="477" gicoeff00="0.172302" gicoeff01="0.227997" gicoeff02="0.144867" gicoeff03="0.21994" gicoeff04="0.297241" gicoeff05="0.194458" gicoeff06="0.157745" gicoeff07="0.212799" gicoeff08="0.15799" gicoeff09="0.163116" gicoeff10="0.216064" gicoeff11="0.124039" gicoeff12="0.207642" gicoeff13="0.273743" gicoeff14="0.178741" gicoeff15="0.201508" gicoeff16="0.270996" gicoeff17="0.174591">
+        <parameters>
+            <parameter name="Global" type="string" val="1" />
+        </parameters>
+    </ReflectionCaptureObject>
+</ActorObjects>
+<RecentItems>
+    <SpawnerItem display_name="Global Reflection" path="Data/Objects/global_reflection_capture.xml" thumbnail_path="" />
+</RecentItems>

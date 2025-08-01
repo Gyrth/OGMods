@@ -1,0 +1,94 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="0" t1="0" t2="0" s0="20.5748" s1="28.8334" s2="20.8634" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="24" version="1">
+        <parameters />
+        <EnvObject t0="-4.9704" t1="8.43175" t2="4.97327" s0="1.43513" s1="1.43513" s2="1.43513" q0="0" q1="-0.408206" q2="0" q3="0.91289" euler_x="0" euler_y="-0.840976" euler_z="0" id="2" color_r="0.232157" color_g="0.263595" color_b="0.290196" overbright="0" type_file="Data/Architecture/Building_Wall_Post.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="-4.85097" t1="8.71315" t2="4.84404" s0="1" s1="1" s2="1" q0="-0.64551" q1="-0.288645" q2="-0.288645" q3="0.64551" euler_x="-1.57079" euler_y="-0.840974" euler_z="0" id="3" type_file="Data/Objects/Undergrowth/Decals/loreBook.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <EnvObject t0="0.28242" t1="-4.4117" t2="-0.426695" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-1.43177" t1="8.12955" t2="-3.87209" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="5" color_r="0.243137" color_g="0.243135" color_b="0.243135" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.25624" t1="9.59215" t2="2.7684" s0="1" s1="1" s2="1" q0="0" q1="-0.999998" q2="0" q3="0.00213953" euler_x="3.14159" euler_y="-0.00427906" euler_z="3.14159" id="6" color_r="0.243137" color_g="0.243135" color_b="0.243135" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.27054" t1="8.06635" t2="3.7875" s0="1" s1="1" s2="1" q0="0" q1="0.00630413" q2="0" q3="0.99998" euler_x="0" euler_y="0.0126083" euler_z="0" id="7" color_r="0.243137" color_g="0.243135" color_b="0.243135" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.26954" t1="9.59455" t2="4.80141" s0="1" s1="1" s2="1" q0="0" q1="-0.00213947" q2="0" q3="-0.999998" euler_x="0" euler_y="0.00427894" euler_z="0" id="8" color_r="0.243137" color_g="0.243135" color_b="0.243135" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_support.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.55034" t1="6.62915" t2="-3.37831" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" color_r="0.243137" color_g="0.243135" color_b="0.243135" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar_base.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-5.20644" t1="6.12095" t2="4.98312" s0="0.700911" s1="0.700911" s2="0.700911" q0="0" q1="0.721821" q2="0" q3="0.692079" euler_x="3.14159" euler_y="1.52871" euler_z="3.14159" id="10" color_r="0.243137" color_g="0.243135" color_b="0.243135" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_floor.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.50804" t1="7.12395" t2="7.48123" s0="0.669047" s1="0.669047" s2="0.669048" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-6.78634" t1="6.68405" t2="-4.12019" s0="0.725229" s1="0.725229" s2="0.725229" q0="0" q1="-0.436793" q2="0" q3="0.899562" euler_x="0" euler_y="-0.904061" euler_z="0" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.91504" t1="6.01505" t2="-6.50278" s0="1" s1="1" s2="1" q0="0" q1="0.858136" q2="0" q3="0.513422" euler_x="3.14159" euler_y="1.07834" euler_z="3.14159" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_green.xml">
+            <parameters />
+        </EnvObject>
+        <NavmeshConnectionObject t0="-5.55364" t1="5.58825" t2="0.530961" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="-1.11816" t1="5.58825" t2="5.45298" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="-5.20224" t1="5.58825" t2="8.76393" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="16" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="-9.04554" t1="5.58825" t2="5.40219" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="17" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="-4.33389" t1="7.13275" t2="3.38894" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="18" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <EnvObject t0="-3.25352" t1="6.77585" t2="5.54335" s0="1" s1="1" s2="1" q0="0" q1="-0.414968" q2="0" q3="0.909836" euler_x="0" euler_y="-0.855815" euler_z="0" id="19" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/Ruins1LongBrick.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-5.60524" t1="6.72395" t2="3.44972" s0="1" s1="1" s2="1" q0="0" q1="-0.998741" q2="0" q3="0.0501688" euler_x="3.14159" euler_y="-0.10038" euler_z="3.14159" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/Ruins1LongBrick.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-3.31872" t1="6.72735" t2="2.44378" s0="1" s1="1" s2="1" q0="0" q1="-0.414968" q2="0" q3="0.909836" euler_x="0" euler_y="-0.855815" euler_z="0" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/Ruins1LongBrick.xml">
+            <parameters />
+        </EnvObject>
+        <DynamicLightObject t0="-4.27787" t1="8.40715" t2="4.42214" s0="12.0091" s1="12.0091" s2="12.0091" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="22" color_r="0.249135" color_g="0.357647" color_b="0.635294" overbright="1">
+            <parameters />
+        </DynamicLightObject>
+        <Hotspot t0="-4.80924" t1="6.70978" t2="4.87217" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="23" type_file="Data/Objects/Undergrowth/HotSpots/loreJar.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Tipper" type="int" val="2" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="0.28242" t1="-4.4117" t2="-0.426695" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

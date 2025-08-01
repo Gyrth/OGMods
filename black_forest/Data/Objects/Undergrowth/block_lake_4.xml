@@ -1,0 +1,114 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-23.8716" t1="32.1717" t2="-9.59925" s0="20.01" s1="30.7759" s2="20.01" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="-23.8716" t1="26.7887" t2="-9.59925" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <Hotspot t0="-23.7287" t1="34.1355" t2="-10.1305" s0="4.07797" s1="1" s2="4.06187" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" type_file="Data/Objects/Hotspots/wet_cube.xml">
+            <parameters>
+                <parameter name="Water Fog" type="float" val="1" />
+                <parameter name="Wave Density" type="float" val="0.25" />
+                <parameter name="Wave Height" type="float" val="0.5" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="-29.6084" t1="36.0452" t2="-10.2624" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="0.250511" q2="0" q3="0.968114" euler_x="0" euler_y="0.506416" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-30.2248" t1="36.0452" t2="-7.24696" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="-0.394906" q2="0" q3="0.918722" euler_x="0" euler_y="-0.811932" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-27.1252" t1="36.0452" t2="-4.44905" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="-0.84032" q2="0" q3="0.54209" euler_x="3.14159" euler_y="-1.14584" euler_z="3.14159" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-22.8438" t1="36.0452" t2="-3.98215" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="-0.352249" q2="0" q3="0.935906" euler_x="0" euler_y="-0.719946" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-29.4994" t1="36.0452" t2="-13.5687" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.3386" t1="36.0452" t2="-5.03416" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="0.40715" q2="0" q3="0.913361" euler_x="0" euler_y="0.838663" euler_z="0" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-17.6837" t1="36.0452" t2="-9.57545" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="0.771305" q2="0" q3="0.636466" euler_x="3.14159" euler_y="1.37982" euler_z="3.14159" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.9005" t1="36.0452" t2="-13.4658" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="0.998868" q2="0" q3="0.0475577" euler_x="3.14159" euler_y="0.0951512" euler_z="3.14159" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-21.9587" t1="36.0452" t2="-15.9989" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="0.889938" q2="0" q3="-0.456082" euler_x="3.14159" euler_y="-0.947176" euler_z="3.14159" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-25.3999" t1="36.0452" t2="-16.1089" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="0.495246" q2="0" q3="-0.868753" euler_x="0" euler_y="-1.03624" euler_z="0" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-27.888" t1="36.0452" t2="-15.1458" s0="5.2093" s1="5.2093" s2="5.2093" q0="0" q1="-0.196692" q2="0" q3="-0.980465" euler_x="0" euler_y="0.395966" euler_z="0" id="15" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/GrassTest/cattail_square.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-24.5949" t1="34.0477" t2="-9.42186" s0="3.05715" s1="1.15912" s2="1" q0="0.707107" q1="0" q2="0" q3="0.707107" euler_x="1.5708" euler_y="0" euler_z="0" id="16" color_r="0.47451" color_g="0.474505" color_b="0.474505" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-22.1027" t1="34.0477" t2="-11.758" s0="2.48211" s1="1.03819" s2="1" q0="0.618421" q1="0.342863" q2="-0.342863" q3="0.618421" euler_x="1.57079" euler_y="1.01245" euler_z="0" id="17" color_r="0.47451" color_g="0.474505" color_b="0.474505" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-22.7005" t1="34.0477" t2="-7.99996" s0="2.40211" s1="1.03398" s2="1" q0="0.297901" q1="0.641291" q2="-0.641291" q3="0.297901" euler_x="-1.57079" euler_y="0.869746" euler_z="3.14159" id="18" color_r="0.47451" color_g="0.474505" color_b="0.474505" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-22.7197" t1="34.0477" t2="-9.71296" s0="3.05715" s1="1.15912" s2="1" q0="0.648468" q1="0.281939" q2="-0.281939" q3="0.648468" euler_x="1.5708" euler_y="0.820246" euler_z="0" id="19" color_r="0.47451" color_g="0.474505" color_b="0.474505" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-29.221" t1="36.1435" t2="-5.44485" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.8866" t1="36.1435" t2="-14.7113" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-28.8765" t1="36.1435" t2="-14.4617" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.5733" t1="36.1435" t2="-3.65096" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="23" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.146" t1="35.8273" t2="-11.4362" s0="1" s1="1" s2="1" q0="-0.703596" q1="-0.0016799" q2="-0.126521" q3="0.699245" euler_x="-1.56073" euler_y="-0.181382" euler_z="-0.178431" id="24" color_r="0.0753556" color_g="0.109804" color_b="0.0849929" overbright="0" type_file="Data/Objects/Buildings/spires/spire_top.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.9285" t1="36.0574" t2="-9.77546" s0="1.04482" s1="1.04482" s2="1.04482" q0="-0.409596" q1="-0.588378" q2="-0.415129" q3="0.560066" euler_x="2.32516" euler_y="-1.52911" euler_z="2.71143" id="25" color_r="0.0753556" color_g="0.109804" color_b="0.0849929" overbright="0" type_file="Data/Objects/Buildings/spires/spire_trim.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="-23.8816" t1="32.1402" t2="-10.4319" s0="3.27277" s1="3.27277" s2="3.27277" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="26" type_file="Data/Objects/Undergrowth/Hotspots/BadWaterSpot.xml">
+            <parameters>
+                <parameter name="Activated" type="int" val="0" />
+                <parameter name="Open" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="-24.5052" t1="39.0062" t2="-9.70415" s0="4.27422" s1="4.27422" s2="4.27422" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="27" type_file="Data/Objects/Hotspots/ambient_sound.xml">
+            <parameters>
+                <parameter name="Delay Max" type="float" val="10" />
+                <parameter name="Delay Min" type="float" val="3" />
+                <parameter name="Fade Distance" type="float" val="10" />
+                <parameter name="Gain" type="float" val="1" />
+                <parameter name="Global" type="int" val="0" />
+                <parameter name="Sound Path" type="string" val="Data/Sounds/ambient/swamp_bugs.wav" />
+                <parameter name="Wind Scale" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="-23.6718" t1="36.1355" t2="-10.5356" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="30" type_file="Data/Objects/Undergrowth/Hotspots/quest15Spot.xml">
+            <parameters>
+                <parameter name="quest15Go" type="int" val="0" />
+                <parameter name="tracked" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="-23.8716" t1="26.7887" t2="-9.59925" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

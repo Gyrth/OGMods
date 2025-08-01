@@ -1,0 +1,51 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="9.27358" t1="-2.38238" t2="0.786015" s0="24.0437" s1="50.9148" s2="24.8929" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" version="1">
+        <parameters />
+        <EnvObject t0="7.25673" t1="-17.8348" t2="-1.65541" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="12.3959" t1="-5.89247" t2="-9.22142" s0="1.87895" s1="1.87895" s2="1.87895" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/Ruins1Wall.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.38223" t1="-5.59837" t2="-9.45632" s0="2.24873" s1="2.24873" s2="2.24873" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/Ruins1Pillar.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.77923" t1="-5.48467" t2="-1.64991" s0="1.29575" s1="1.29575" s2="1.29575" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="5" color_r="0.199998" color_g="0.2" color_b="0.199998" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_arch.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.79233" t1="-5.51677" t2="3.15558" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="-0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="6" color_r="0.152941" color_g="0.15294" color_b="0.15294" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.75673" t1="-5.51677" t2="-6.43341" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="-0.707107" euler_x="-3.14159" euler_y="1.5708" euler_z="-3.14159" id="7" color_r="0.152941" color_g="0.15294" color_b="0.15294" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_half.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.588" t1="7.10879" t2="5.18268" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="0.506428" t1="-6.0787" t2="4.46518" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="10.539" t1="-7.8044" t2="-6.82297" s0="0.507149" s1="0.790058" s2="0.690831" q0="-0.0165242" q1="-0.402053" q2="-0.0375937" q3="0.914695" euler_x="0" euler_y="-0.828258" euler_z="-0.0821532" id="11" type_file="Data/Objects/Undergrowth/HotSpots/mapSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="1" />
+                <parameter name="Prayed" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="9.71603" t1="-7.48308" t2="-7.55526" s0="1.7238" s1="1" s2="2.64913" q0="0" q1="-0.373764" q2="0" q3="0.927524" euler_x="0" euler_y="-0.766127" euler_z="0" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Furniture/CatStand.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="9.7383" t1="-7.17292" t2="-7.54584" s0="1" s1="1" s2="1" q0="0" q1="-0.892458" q2="0" q3="0.45113" euler_x="-3.14159" euler_y="-0.936061" euler_z="3.14159" id="13" type_file="Data/Objects/Undergrowth/Decals/undergrowthMap.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <EnvObject t0="7.25673" t1="-17.8348" t2="-1.65541" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

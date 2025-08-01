@@ -1,0 +1,54 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <ActorObject t0="8.58823" t1="7.79627" t2="-4.74727" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" type_file="Data/Objects/characters/dogs/light_armored_dog_male_1_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.40351" />
+            <parameter name="Attack Damage" type="float" val="1.21637" />
+            <parameter name="Attack Knockback" type="float" val="1.21637" />
+            <parameter name="Attack Speed" type="float" val="0.74854" />
+            <parameter name="Block Follow-up" type="float" val="0.25731" />
+            <parameter name="Block Skill" type="float" val="0.60819" />
+            <parameter name="Cannot Be Disarmed" type="int" val="0" />
+            <parameter name="Character Scale" type="float" val="1.20351" />
+            <parameter name="Damage Resistance" type="float" val="1" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.380115" />
+            <parameter name="Focus FOV distance" type="float" val="30.409" />
+            <parameter name="Focus FOV horizontal" type="float" val="0.62834" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="2" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Movement Speed" type="float" val="1.16433" />
+            <parameter name="Muscle" type="float" val="0.69006" />
+            <parameter name="Peripheral FOV distance" type="float" val="18.713" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="0.867988" />
+            <parameter name="Peripheral FOV vertical" type="float" val="0.867988" />
+            <parameter name="Species" type="string" val="dog" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="meatEater" />
+        </parameters>
+        <Connections>
+            <Connection id="5" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Fur" channel="0" red="0.203922" green="0.18185" blue="0.176732" />
+            <Color label="Shirt" channel="1" red="0" green="0" blue="0" />
+            <Color label="Armor" channel="2" red="0.0901961" green="0.00778162" blue="0.00778162" />
+            <Color label="Fur patches" channel="3" red="0.0588235" green="0.0457927" blue="0.0251442" />
+        </Palette>
+        <EnvObjectAttachments>
+            <EnvObjectAttachment>
+                <BoneConnect bone_id="31" num_connections="1" m0="0.999999" m1="0.00086501" m2="0.00107375" m3="0" m4="-0.000949427" m5="0.996691" m6="0.0812838" m7="0" m8="-0.000999885" m9="-0.0812848" m10="0.99669" m11="0" m12="-0.00335598" m13="0.751471" m14="0.246067" m15="1" />
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+                <BoneConnect bone_id="-1" num_connections="0" m0="1" m1="0" m2="0" m3="0" m4="0" m5="1" m6="0" m7="0" m8="0" m9="0" m10="1" m11="0" m12="0" m13="0" m14="0" m15="1" />
+            </EnvObjectAttachment>
+        </EnvObjectAttachments>
+        <EnvObject s0="0.227219" s1="0.227219" s2="0.227219" id="6" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/Environment/Furniture/FootPillow.xml">
+            <parameters />
+        </EnvObject>
+    </ActorObject>
+</ActorObjects>

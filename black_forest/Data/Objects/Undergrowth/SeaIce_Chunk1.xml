@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<Object>
+	<Model>Data/Prototypes/OG/Models/SeaIce_Chunk1.obj</Model>
+	<ColorMap>Data/Prototypes/OG/Textures/SeaIce_Color.tga</ColorMap>
+	<NormalMap>Data/Prototypes/OG/Textures/SeaIce_Norm.tga</NormalMap>
+	<WeightMap>Data/Prototypes/OG/Textures/SeaIce_Weights.tga</WeightMap>
+	<DetailMaps>
+		<DetailMap colorpath="Data/Prototypes/DetailTextures/FrozenRiverIce_Color.tga" normalpath="Data/Prototypes/DetailTextures/FrozenRiverIce_Norm.tga" materialpath="Data/Materials/default.xml" />
+		<DetailMap colorpath="Data/Prototypes/DetailTextures/WhiteIce_Color.tga" normalpath="Data/Prototypes/DetailTextures/FrozenRiverIce_Norm.tga" materialpath="Data/Materials/default.xml" />
+		<DetailMap colorpath="Data/Prototypes/DetailTextures/Dirt_Color.tga" normalpath="Data/Prototypes/DetailTextures/Dirt_Norm.tga" materialpath="Data/Materials/default.xml" />
+		<DetailMap colorpath="Data/Prototypes/DetailTextures/CliffRock_Color.tga" normalpath="Data/Prototypes/DetailTextures/CliffRock_Norm.tga" materialpath="Data/Materials/default.xml" />
+	</DetailMaps>
+	<MaterialPath>Data/Materials/ice.xml</MaterialPath>
+	<ShaderName>envobject #DETAILMAP4 #TANGENT #KEEP_SPEC #BASE_TANGENT</ShaderName>
+</Object>

@@ -1,0 +1,76 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="8.90113" t1="-3.30866" t2="0.24229" s0="20.1351" s1="27.9698" s2="20.1915" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="20" version="1">
+        <parameters />
+        <EnvObject t0="8.96516" t1="4.56756" t2="1.27717" s0="2.33633" s1="2.33633" s2="2.33633" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Curb1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="11.006" t1="4.56756" t2="-0.924389" s0="2.33633" s1="2.33633" s2="2.33633" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Curb1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.67169" t1="4.55686" t2="-0.70013" s0="2.33633" s1="2.33633" s2="2.33633" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Curb1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.86617" t1="4.54486" t2="-3.16584" s0="2.33633" s1="2.33633" s2="2.33633" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Curb1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.56301" t1="4.78986" t2="-1.07181" s0="0.936024" s1="1.13758" s2="1" q0="0.707107" q1="0" q2="0" q3="0.707107" euler_x="1.5708" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.93831" t1="4.78986" t2="-0.906889" s0="0.936024" s1="1.13758" s2="1" q0="0.707107" q1="0" q2="0" q3="0.707107" euler_x="1.5708" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="8.78395" t1="4.77226" t2="-1.17629" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" type_file="Data/Objects/Hotspots/emitter.xml">
+            <parameters>
+                <parameter name="Type" type="string" val="Smoke" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="8.98443" t1="4.16726" t2="-1.05623" s0="0.985985" s1="1.46543" s2="1" q0="0.707107" q1="0" q2="0" q3="0.707107" euler_x="1.5708" euler_y="0" euler_z="0" id="9" color_r="0" color_g="0" color_b="0" overbright="0" type_file="Data/Objects/Buildings/basics/soft_wall.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="8.8715" t1="6.39066" t2="-0.504219" s0="2.6571" s1="1.27671" s2="2.54111" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" type_file="Data/Objects/Hotspots/ambient_sound.xml">
+            <parameters>
+                <parameter name="Delay Max" type="float" val="10" />
+                <parameter name="Delay Min" type="float" val="3" />
+                <parameter name="Fade Distance" type="float" val="15" />
+                <parameter name="Gain" type="float" val="0.485" />
+                <parameter name="Global" type="int" val="0" />
+                <parameter name="Sound Path" type="string" val="Data/Sounds/sewersLoop.wav" />
+                <parameter name="Wind Scale" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Group t0="8.84356" t1="-7.39347" t2="0.224851" s0="20.01" s1="19.7901" s2="20.1043" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" version="1">
+            <parameters />
+            <EnvObject t0="8.84356" t1="-7.39347" t2="0.22485" s0="1" s1="0.989007" s2="1.00472" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+                <parameters>
+                    <parameter name="BlockBase" type="int" val="1" />
+                </parameters>
+            </EnvObject>
+        </Group>
+        <EnvObject t0="8.91086" t1="3.34304" t2="0.24229" s0="5.02642" s1="0.274753" s2="5.04538" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="13" color_r="0.0689735" color_g="0.0980392" color_b="0.0495963" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="8.93272" t1="4.80656" t2="-0.994049" s0="3.95646" s1="3.95646" s2="3.95646" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" type_file="Data/Objects/Decals/env_blob_shadow.xml" color_r="0" color_g="0" color_b="0" overbright="0">
+            <parameters />
+        </Decal>
+        <Hotspot t0="8.79737" t1="4.56736" t2="-1.11568" s0="1" s1="1" s2="1" q0="-0.0130262" q1="-0.0158092" q2="-0.00863136" q3="0.999754" euler_x="-0.025789" euler_y="-0.0318409" euler_z="-0.0168559" id="15" type_file="Data/Objects/Undergrowth/Hotspots/jailSpot.xml">
+            <parameters />
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="6.53376" t1="6.3543" t2="1.22648" s0="1.32141" s1="1.32141" s2="1.32141" q0="0.127349" q1="-0.92323" q2="-6.18529e-005" q3="0.36253" euler_x="3.01683" euler_y="-0.733376" euler_z="-2.81948" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Banner_2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.55694" t1="4.63396" t2="-3.14029" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="17" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/barrel.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.3709" t1="4.83506" t2="-3.45184" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.166742" q3="0.986" euler_x="0" euler_y="0" euler_z="0.335049" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/barrel.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="8.46113" t1="4.46496" t2="-1.41101" s0="12.4125" s1="12.4125" s2="12.4125" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="19" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="0.0262976" color_g="0.0705882" color_b="0.0294612" overbright="0">
+            <parameters />
+        </Decal>
+    </Group>
+</ActorObjects>

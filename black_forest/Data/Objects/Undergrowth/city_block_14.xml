@@ -1,0 +1,333 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="91.8909" t1="115.64" t2="-76.1128" s0="22.1442" s1="43.157" s2="21.4235" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="95.8745" t1="125.806" t2="-79.7705" s0="1.65944" s1="0.998056" s2="2.52617" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Crete/large_dark_cube.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="95.8159" t1="136.65" t2="-80.0262" s0="1" s1="1" s2="1" q0="0" q1="-0.29991" q2="0" q3="0.953968" euler_x="0" euler_y="-0.609197" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/StoneFurniture_Bench.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="99.9915" t1="117.503" t2="-79.1621" s0="0.519673" s1="0.519673" s2="0.519673" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_door.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="99.9915" t1="117.503" t2="-80.6042" s0="0.519673" s1="0.519673" s2="0.519673" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_door.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="100.113" t1="116.508" t2="-75.274" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/pillar1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="100.016" t1="116.286" t2="-84.2466" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/pillar1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="91.8399" t1="116.174" t2="-84.2466" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/pillar1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="91.8399" t1="115.944" t2="-75.1986" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/pillar1.xml">
+            <parameters />
+        </EnvObject>
+        <Group t0="90.8914" t1="104.8" t2="-75.5018" s0="20.1351" s1="21.4658" s2="20.1915" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" version="1">
+            <parameters />
+            <Group t0="90.8338" t1="103.967" t2="-75.5193" s0="20.01" s1="19.7901" s2="20.1043" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" version="1">
+                <parameters />
+                <EnvObject t0="90.8338" t1="103.967" t2="-75.5193" s0="1" s1="0.989007" s2="1.00472" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+                    <parameters>
+                        <parameter name="BlockBase" type="int" val="1" />
+                    </parameters>
+                </EnvObject>
+            </Group>
+            <EnvObject t0="90.9011" t1="114.703" t2="-75.5018" s0="5.02642" s1="0.274753" s2="5.04538" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" color_r="0.0689735" color_g="0.0980392" color_b="0.0495963" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+                <parameters />
+            </EnvObject>
+        </Group>
+        <Group t0="95.7829" t1="133.084" t2="-79.5502" s0="14.3503" s1="6.59887" s2="4.30659" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" version="1">
+            <parameters />
+            <EnvObject t0="101.306" t1="133.075" t2="-79.5313" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="16" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Buildings/arena/arena_support.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="90.2593" t1="133.092" t2="-79.569" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="17" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Buildings/arena/arena_support.xml">
+                <parameters />
+            </EnvObject>
+        </Group>
+        <Group t0="95.782" t1="133.089" t2="-79.6149" s0="4.43257" s1="6.59879" s2="14.4093" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="18" version="1">
+            <parameters />
+            <EnvObject t0="95.7231" t1="133.08" t2="-85.1381" s0="1" s1="1" s2="1" q0="0" q1="0.999975" q2="0" q3="-0.00703928" euler_x="3.14159" euler_y="-0.0140787" euler_z="3.14159" id="19" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Buildings/arena/arena_support.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="95.8409" t1="133.098" t2="-74.0916" s0="1" s1="1" s2="1" q0="0" q1="0.00703922" q2="0" q3="0.999975" euler_x="0" euler_y="0.0140786" euler_z="0" id="20" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Buildings/arena/arena_support.xml">
+                <parameters />
+            </EnvObject>
+        </Group>
+        <Group t0="91.6586" t1="123.89" t2="-79.7004" s0="0.21961" s1="8.98353" s2="6.26729" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="21" version="1">
+            <parameters />
+            <Group t0="91.6586" t1="127.386" t2="-82.103" s0="0.209608" s1="1.96639" s2="1.45228" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="22" version="1">
+                <parameters />
+                <EnvObject t0="91.7038" t1="127.583" t2="-82.0666" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="23" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="91.6586" t1="126.606" t2="-82.103" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="24" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="91.6586" t1="127.393" t2="-77.2979" s0="0.209608" s1="1.96639" s2="1.45228" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="25" version="1">
+                <parameters />
+                <EnvObject t0="91.7038" t1="127.59" t2="-77.2615" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="26" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="91.6586" t1="126.614" t2="-77.2979" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="91.6586" t1="123.886" t2="-82.103" s0="0.209608" s1="1.96639" s2="1.45228" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="28" version="1">
+                <parameters />
+                <EnvObject t0="91.7038" t1="124.083" t2="-82.0666" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="29" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="91.6586" t1="123.106" t2="-82.103" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="30" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="91.6586" t1="123.893" t2="-77.2979" s0="0.209608" s1="1.96639" s2="1.45228" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="31" version="1">
+                <parameters />
+                <EnvObject t0="91.7038" t1="124.09" t2="-77.2615" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="32" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="91.6586" t1="123.114" t2="-77.2979" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="33" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="91.6586" t1="120.386" t2="-82.103" s0="0.209608" s1="1.96639" s2="1.45228" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="34" version="1">
+                <parameters />
+                <EnvObject t0="91.7038" t1="120.583" t2="-82.0666" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="35" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="91.6586" t1="119.606" t2="-82.103" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="36" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="91.6586" t1="120.393" t2="-77.2979" s0="0.209608" s1="1.96639" s2="1.45228" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="37" version="1">
+                <parameters />
+                <EnvObject t0="91.7038" t1="120.59" t2="-77.2615" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="38" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="91.6586" t1="119.614" t2="-77.2979" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="39" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+        </Group>
+        <Group t0="95.6418" t1="123.967" t2="-75.1614" s0="6.26728" s1="8.98353" s2="0.21961" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="40" version="1">
+            <parameters />
+            <Group t0="93.2393" t1="127.464" t2="-75.1614" s0="1.45228" s1="1.96642" s2="0.209615" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="41" version="1">
+                <parameters />
+                <EnvObject t0="93.2756" t1="127.661" t2="-75.2066" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="42" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="93.2393" t1="126.684" t2="-75.1614" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="43" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="98.0443" t1="127.471" t2="-75.1614" s0="1.45228" s1="1.96633" s2="0.209615" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="44" version="1">
+                <parameters />
+                <EnvObject t0="98.0807" t1="127.668" t2="-75.2066" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="45" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="98.0443" t1="126.691" t2="-75.1614" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="93.2393" t1="123.964" t2="-75.1614" s0="1.45228" s1="1.96642" s2="0.209615" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="47" version="1">
+                <parameters />
+                <EnvObject t0="93.2756" t1="124.161" t2="-75.2066" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="48" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="93.2393" t1="123.184" t2="-75.1614" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="49" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="98.0443" t1="123.971" t2="-75.1614" s0="1.45228" s1="1.96632" s2="0.209615" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="50" version="1">
+                <parameters />
+                <EnvObject t0="98.0807" t1="124.168" t2="-75.2066" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="51" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="98.0443" t1="123.191" t2="-75.1614" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="52" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="93.2393" t1="120.464" t2="-75.1614" s0="1.45228" s1="1.96642" s2="0.209615" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="53" version="1">
+                <parameters />
+                <EnvObject t0="93.2756" t1="120.661" t2="-75.2066" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="54" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="93.2393" t1="119.684" t2="-75.1614" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="55" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="98.0443" t1="120.471" t2="-75.1614" s0="1.45228" s1="1.96632" s2="0.209615" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="56" version="1">
+                <parameters />
+                <EnvObject t0="98.0807" t1="120.668" t2="-75.2066" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="57" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="98.0443" t1="119.691" t2="-75.1614" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="58" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+        </Group>
+        <Group t0="100.184" t1="123.895" t2="-79.8575" s0="0.21961" s1="8.98353" s2="6.26729" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="59" version="1">
+            <parameters />
+            <Group t0="100.184" t1="127.391" t2="-77.455" s0="0.209608" s1="1.96639" s2="1.45228" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="60" version="1">
+                <parameters />
+                <EnvObject t0="100.139" t1="127.588" t2="-77.4914" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="61" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="100.184" t1="126.611" t2="-77.455" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="62" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="100.184" t1="127.398" t2="-82.26" s0="0.209608" s1="1.96639" s2="1.45228" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="63" version="1">
+                <parameters />
+                <EnvObject t0="100.139" t1="127.595" t2="-82.2964" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="64" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="100.184" t1="126.618" t2="-82.26" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="65" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="100.184" t1="123.891" t2="-77.455" s0="0.209608" s1="1.96639" s2="1.45228" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="66" version="1">
+                <parameters />
+                <EnvObject t0="100.139" t1="124.088" t2="-77.4914" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="67" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="100.184" t1="123.111" t2="-77.455" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="68" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="100.184" t1="123.898" t2="-82.26" s0="0.209608" s1="1.96639" s2="1.45228" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="69" version="1">
+                <parameters />
+                <EnvObject t0="100.139" t1="124.095" t2="-82.2964" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="70" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="100.184" t1="123.118" t2="-82.26" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="71" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="100.184" t1="120.391" t2="-77.455" s0="0.209608" s1="1.96639" s2="1.45228" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="72" version="1">
+                <parameters />
+                <EnvObject t0="100.139" t1="120.588" t2="-77.4914" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="73" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="100.184" t1="119.611" t2="-77.455" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="74" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="100.184" t1="120.398" t2="-82.26" s0="0.209608" s1="1.96639" s2="1.45228" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="75" version="1">
+                <parameters />
+                <EnvObject t0="100.139" t1="120.595" t2="-82.2964" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="76" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="100.184" t1="119.618" t2="-82.26" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="77" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+        </Group>
+        <Group t0="95.658" t1="123.097" t2="-84.3975" s0="6.26728" s1="8.98353" s2="0.21961" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="78" version="1">
+            <parameters />
+            <Group t0="98.0605" t1="126.593" t2="-84.3975" s0="1.45228" s1="1.96642" s2="0.209615" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="79" version="1">
+                <parameters />
+                <EnvObject t0="98.0242" t1="126.79" t2="-84.3524" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="80" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="98.0605" t1="125.814" t2="-84.3975" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="81" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="93.2555" t1="126.601" t2="-84.3975" s0="1.45228" s1="1.96632" s2="0.209615" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="82" version="1">
+                <parameters />
+                <EnvObject t0="93.2191" t1="126.797" t2="-84.3524" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="83" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="93.2555" t1="125.821" t2="-84.3975" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="84" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="98.0605" t1="123.093" t2="-84.3975" s0="1.45228" s1="1.96642" s2="0.209615" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="85" version="1">
+                <parameters />
+                <EnvObject t0="98.0242" t1="123.29" t2="-84.3524" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="86" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="98.0605" t1="122.314" t2="-84.3975" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="87" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="93.2555" t1="123.101" t2="-84.3975" s0="1.45228" s1="1.96632" s2="0.209615" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="88" version="1">
+                <parameters />
+                <EnvObject t0="93.2191" t1="123.297" t2="-84.3524" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="89" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="93.2555" t1="122.321" t2="-84.3975" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="90" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="98.0605" t1="119.593" t2="-84.3975" s0="1.45228" s1="1.96642" s2="0.209615" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="91" version="1">
+                <parameters />
+                <EnvObject t0="98.0242" t1="119.79" t2="-84.3524" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="92" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="98.0605" t1="118.814" t2="-84.3975" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="93" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+            <Group t0="93.2555" t1="119.601" t2="-84.3975" s0="1.45228" s1="1.96632" s2="0.209615" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="94" version="1">
+                <parameters />
+                <EnvObject t0="93.2191" t1="119.797" t2="-84.3524" s0="0.842646" s1="0.842646" s2="0.842646" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="95" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Undergrowth/PaperPanel_1.xml">
+                    <parameters />
+                </EnvObject>
+                <EnvObject t0="93.2555" t1="118.821" t2="-84.3975" s0="0.475303" s1="0.836211" s2="1" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="3.14159" id="96" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/cat_town/wood_trim.xml">
+                    <parameters />
+                </EnvObject>
+            </Group>
+        </Group>
+        <EnvObject t0="96.19" t1="136.803" t2="-80.7533" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="97" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Chair.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="95.2726" t1="136.678" t2="-79.1238" s0="1" s1="1" s2="1" q0="-0.0935498" q1="0.724131" q2="0.675897" q3="0.100226" euler_x="1.63967" euler_y="0.275069" euler_z="3.14159" id="98" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Chair.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="96.1227" t1="137.015" t2="-79.6465" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="99" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/LitterLoads/SmallGourd.xml">
+            <parameters />
+        </EnvObject>
+        <ItemObject t0="95.7247" t1="136.959" t2="-80.0876" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="100" type_file="Data/Items/gear/dogtools/dogtoolhammer.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </ItemObject>
+        <PlaceholderObject t0="94.5471" t1="116.528" t2="-69.1732" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="43" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/city_block_14_actor.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PathPointObject t0="98.5666" t1="115.528" t2="-67.2433" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="105" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="83.7088" t1="115.528" t2="-67.7434" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="106" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="87.2815" t1="115.528" t2="-82.7519" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="107" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+    </Group>
+</ActorObjects>

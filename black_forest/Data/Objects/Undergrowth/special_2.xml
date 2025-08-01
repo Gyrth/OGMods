@@ -1,0 +1,89 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="8.59354" t1="-4.00918" t2="0.133961" s0="20.01" s1="33.4696" s2="22.2157" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="23" version="1">
+        <parameters />
+        <EnvObject t0="6.36734" t1="-14.8976" t2="0.0369848" s0="0.999988" s1="0.999988" s2="0.999988" q0="0.917168" q1="0.257666" q2="0.0739943" q3="-0.294848" euler_x="-2.58899" euler_y="-0.291798" euler_z="0.464468" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Sword_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.39164" t1="-14.853" t2="-0.005031" s0="3.19353" s1="3.19353" s2="3.19353" q0="0.0264119" q1="0.940341" q2="0.294953" q3="0.167524" euler_x="2.5097" euler_y="0.304146" euler_z="2.98532" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/dog_armor/dog_armor_bag.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.59354" t1="-10.739" t2="1.23679" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="11.403" t1="0.898593" t2="-5.23551" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="15.5937" t1="0.772891" t2="6.1835" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.64964" t1="-0.18591" t2="-1.60681" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="2.37363" t1="0.050189" t2="-7.62271" s0="1" s1="1" s2="1" q0="0" q1="0.278999" q2="0" q3="0.960291" euler_x="0" euler_y="0.565503" euler_z="0" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree4.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.37003" t1="1.63529" t2="4.61113" s0="9.68888" s1="9.68888" s2="9.68888" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_wall_deco.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.39204" t1="1.95429" t2="-3.02775" s0="1.87843" s1="1.87843" s2="1.87843" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Architecture/Components/Building_Stairs.xml">
+            <parameters />
+        </EnvObject>
+        <DynamicLightObject t0="7.89973" t1="6.71609" t2="4.32691" s0="12.0091" s1="12.0091" s2="12.0091" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" color_r="11.5" color_g="11.5" color_b="11.5" overbright="1">
+            <parameters />
+        </DynamicLightObject>
+        <EnvObject t0="9.79613" t1="4.99159" t2="6.17857" s0="1.17312" s1="1.17312" s2="1.17312" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/FurnitureB_Stool.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.82404" t1="6.69259" t2="6.2513" s0="1.17312" s1="1.17312" s2="1.17312" q0="0" q1="0.5" q2="0" q3="0.866026" euler_x="0" euler_y="1.0472" euler_z="0" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/BrassLantern_HandleUp.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.36504" t1="6.14569" t2="6.19851" s0="1.17312" s1="1.17312" s2="1.17312" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Gong.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.05753" t1="5.36209" t2="6.39559" s0="1.17312" s1="1.17312" s2="1.17312" q0="-0.107538" q1="0.120316" q2="0.983641" q3="0.0800612" euler_x="0.227526" euler_y="0.232923" euler_z="3.0059" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Umbrella_Closed.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="8.36213" t1="4.79819" t2="3.61894" s0="3.50004" s1="3.50004" s2="3.50004" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="17" type_file="Data/Objects/Decals/signs/icon_rabbit.xml" color_r="0" color_g="0" color_b="0" overbright="0">
+            <parameters />
+        </Decal>
+        <Hotspot t0="8.46321" t1="6.00436" t2="4.61918" s0="0.999997" s1="0.609482" s2="0.456124" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="18" type_file="Data/Objects/Undergrowth/Hotspots/gongSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Prayed" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <NavmeshHintObject t0="8.59889" t1="-0.739017" t2="-1.43083" s0="3.11174" s1="2.99993" s2="4.67661" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2">
+            <parameters />
+        </NavmeshHintObject>
+        <NavmeshConnectionObject t0="11.7682" t1="-0.73901" t2="3.65789" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="19" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="9.56458" t1="4.99722" t2="3.10411" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="20" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="4.7943" t1="-0.739012" t2="3.3033" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="21" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="6.8008" t1="5.06019" t2="3.10411" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="22" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <EnvObject t0="8.59354" t1="-10.739" t2="1.23679" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

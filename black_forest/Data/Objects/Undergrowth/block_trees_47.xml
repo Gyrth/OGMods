@@ -1,0 +1,94 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="8.56644" t1="-4.29249" t2="0.717143" s0="20.3281" s1="28.9657" s2="22.0294" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="8.72551" t1="-8.77036" t2="-0.2786" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="13.3582" t1="5.40493" t2="-6.20979" s0="0.600369" s1="0.600369" s2="0.600369" q0="0" q1="0.638706" q2="0" q3="0.769451" euler_x="0" euler_y="1.38563" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/elm_tree_small.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="15.024" t1="3.5003" t2="-4.83448" s0="1.36252" s1="1.36252" s2="1.36252" q0="0" q1="0.700893" q2="0" q3="0.713266" euler_x="0" euler_y="1.55326" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/winter_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.46719" t1="1.231" t2="-5.02068" s0="2.16003" s1="2.16003" s2="2.16003" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/low_fern_.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.1331" t1="4.2945" t2="6.57455" s0="1.89391" s1="1.89391" s2="1.89391" q0="0" q1="0.689631" q2="0" q3="0.724161" euler_x="0" euler_y="1.52196" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.27552" t1="2.1882" t2="-3.58487" s0="0.831394" s1="0.831394" s2="0.831394" q0="0" q1="0.689631" q2="0" q3="0.724161" euler_x="0" euler_y="1.52196" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.62874" t1="1.4681" t2="-4.75878" s0="1.69169" s1="1.69169" s2="1.69169" q0="0" q1="0.943641" q2="0" q3="0.330971" euler_x="3.14159" euler_y="0.674665" euler_z="3.14159" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/low_fern_.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.8322" t1="1.7884" t2="3.58815" s0="1" s1="1" s2="1" q0="0" q1="-0.0886069" q2="0" q3="0.996067" euler_x="0" euler_y="-0.177447" euler_z="0" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.68564" t1="1.13957" t2="-5.05202" s0="1.23507" s1="1.23507" s2="1.23507" q0="0" q1="0.613006" q2="0" q3="0.790078" euler_x="0" euler_y="1.31972" euler_z="0" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/short_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.50147" t1="1.23649" t2="4.72281" s0="3.61378" s1="3.62997" s2="4.46928" q0="0" q1="-0.375912" q2="0" q3="0.926656" euler_x="0" euler_y="-0.770762" euler_z="0" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/twisted_branch_rotting.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.93392" t1="2.02557" t2="3.96356" s0="1.26841" s1="1.26841" s2="1.26841" q0="0.0330793" q1="0.964925" q2="-0.149853" q3="0.213002" euler_x="-2.83345" euler_y="0.434521" euler_z="3.14159" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/rabbit_skull.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="2.52242" t1="1.23649" t2="3.66715" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Bones/DogLegBone.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.94902" t1="1.23649" t2="3.05885" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Bones/DogLegBone.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="2.25549" t1="1.23649" t2="3.39104" s0="1.96729" s1="1.96729" s2="1.96729" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="16" type_file="Data/Objects/Decals/blooddropsplat.xml" color_r="0.92549" color_g="0.0725875" color_b="0.0725875" overbright="0">
+            <parameters />
+        </Decal>
+        <EnvObject t0="1.87145" t1="1.26939" t2="3.37799" s0="1" s1="1" s2="1" q0="0" q1="-0.587247" q2="0" q3="0.809407" euler_x="0" euler_y="-1.2553" euler_z="0" id="17" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Bones/DogLegBone.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="2.66084" t1="1.18802" t2="3.35" s0="1" s1="1" s2="1" q0="0" q1="-0.587247" q2="0" q3="0.809407" euler_x="0" euler_y="-1.2553" euler_z="0" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Bones/DogLegBone.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="2.88363" t1="1.23649" t2="3.70693" s0="1" s1="1" s2="1" q0="0" q1="0.668349" q2="0" q3="0.743848" euler_x="0" euler_y="1.46398" euler_z="0" id="19" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Bones/DogLegBone.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="2.40692" t1="1.26939" t2="3.10262" s0="1" s1="1" s2="1" q0="0" q1="0.516364" q2="0" q3="0.856369" euler_x="0" euler_y="1.0852" euler_z="0" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Bones/DogLegBone.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="3.22148" t1="1.25379" t2="2.98105" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Bones/DogArmBone.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="2.35017" t1="1.27397" t2="2.86636" s0="1" s1="1" s2="1" q0="0" q1="-0.749536" q2="0" q3="0.661963" euler_x="3.14159" euler_y="-1.44686" euler_z="3.14159" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Bones/DogArmBone.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="2.81275" t1="1.4791" t2="3.94367" s0="3.83011" s1="3.83011" s2="3.83011" q0="0.131012" q1="-0.239163" q2="0.00981511" q3="0.96205" euler_x="0.282816" euler_y="-0.48109" euler_z="-0.0494071" id="23" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/RatJunk/RatJunkPouch.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="2.4649" t1="1.22964" t2="3.21866" s0="0.38448" s1="0.38448" s2="0.38448" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="24" type_file="Data/Objects/Undergrowth/Hotspots/SearchSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Searched" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <NavmeshConnectionObject t0="3.42702" t1="1.22964" t2="2.17127" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="25" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <NavmeshConnectionObject t0="1.17665" t1="1.22964" t2="5.34117" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="26" type_file="">
+            <parameters />
+            <NavMeshConnections>
+            </NavMeshConnections>
+        </NavmeshConnectionObject>
+        <EnvObject t0="8.72551" t1="-8.77036" t2="-0.2786" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

@@ -1,0 +1,67 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="32.0684" t1="17.48" t2="-40.0527" s0="26.003" s1="51.0788" s2="23.1394" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="33.986" t1="13.5276" t2="-40.5108" s0="1.02126" s1="0.56281" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="13" color_r="0.580336" color_g="0.847059" color_b="0.544775" overbright="0" type_file="Data/Objects/Environment/Furniture/FootPillow.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="34.3041" t1="14.621" t2="-37.3687" s0="1.25111" s1="1.25111" s2="1.25111" q0="0" q1="0.0263617" q2="0" q3="0.999653" euler_x="0" euler_y="0.0527295" euler_z="0" id="3" color_r="0.282353" color_g="0.28235" color_b="0.28235" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_wall_base.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="35.0251" t1="12.4807" t2="-39.5214" s0="1.13176" s1="1.13176" s2="1.13176" q0="0" q1="-0.00532018" q2="0" q3="0.999986" euler_x="0" euler_y="-0.0106404" euler_z="0" id="4" color_r="0.254902" color_g="0.254899" color_b="0.254899" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_floor.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="35.0649" t1="1.94555" t2="-38.488" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="28.8265" t1="27.0532" t2="-42.1056" s0="1" s1="1" s2="1" q0="0" q1="0.609468" q2="0" q3="0.792811" euler_x="0" euler_y="1.31078" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="28.3146" t1="13.7016" t2="-32.3675" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="42.4121" t1="18.4035" t2="-39.3217" s0="1" s1="1" s2="1" q0="-0.00594278" q1="0.999532" q2="0.0107208" q3="0.0280136" euler_x="3.12046" euler_y="0.0561579" euler_z="-3.1303" id="8" color_r="0.247059" color_g="0.247056" color_b="0.247056" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/tall_ruin_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="42.3694" t1="26.1027" t2="-39.1206" s0="0.511846" s1="0.511846" s2="0.511846" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" type_file="Data/Objects/Undergrowth/Hotspots/SearchSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Searched" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="42.6954" t1="25.2622" t2="-38.7372" s0="0.989244" s1="2.30879" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/baskets/basket_tray.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="33.8973" t1="13.9664" t2="-38.8963" s0="4.2414" s1="4.24143" s2="4.24141" q0="-0.0196008" q1="0.907866" q2="-0.418799" q3="0.00136808" euler_x="-2.27743" euler_y="-0.013934" euler_z="-3.10485" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/openbook.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="34.2277" t1="13.4707" t2="-39.1821" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" type_file="Data/Objects/Undergrowth/HotSpots/tipJar.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Tipper" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Decal t0="32.9372" t1="13.2987" t2="-40.1244" s0="0.622369" s1="0.622369" s2="0.622369" q0="0" q1="0.805527" q2="0" q3="0.592559" euler_x="3.14159" euler_y="1.26846" euler_z="3.14159" id="14" type_file="Data/Objects/therium/Decals/Notes/generic/note4.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <EnvObject t0="33.2722" t1="13.5025" t2="-39.8135" s0="1" s1="1" s2="1" q0="0" q1="0.896226" q2="0" q3="0.443598" euler_x="3.14159" euler_y="0.91922" euler_z="3.14159" id="15" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/book2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="33.2265" t1="13.6227" t2="-39.7255" s0="0.827937" s1="0.511625" s2="0.763252" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/LitterLoads/SmallGourd.xml">
+            <parameters />
+        </EnvObject>
+        <DynamicLightObject t0="34.1512" t1="15.9924" t2="-40.0435" s0="12.0091" s1="12.0091" s2="12.0091" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="17" color_r="0.870588" color_g="0.839551" color_b="0.49504" overbright="10.169">
+            <parameters />
+        </DynamicLightObject>
+        <EnvObject t0="35.0649" t1="1.94555" t2="-38.488" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

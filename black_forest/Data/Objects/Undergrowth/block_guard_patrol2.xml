@@ -1,0 +1,64 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="9.07691" t1="-3.24693" t2="1.4241" s0="20.02" s1="22.503" s2="20.02" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="20" version="1">
+        <parameters />
+        <Group t0="9.07691" t1="-3.24693" t2="1.4241" s0="20.01" s1="22.493" s2="20.01" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="16" version="1">
+            <parameters />
+            <EnvObject t0="9.07691" t1="-4.48844" t2="1.4241" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+                <parameters>
+                    <parameter name="BlockBase" type="int" val="1" />
+                </parameters>
+            </EnvObject>
+            <PathPointObject t0="1.82861" t1="6.29556" t2="-6.1511" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" type_file="">
+                <parameters>
+                    <parameter name="Type" type="string" val="Stand" />
+                    <parameter name="Wait" type="float" val="0" />
+                </parameters>
+                <Connections />
+            </PathPointObject>
+            <PathPointObject t0="1.78721" t1="6.29556" t2="9.37377" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" type_file="">
+                <parameters>
+                    <parameter name="Type" type="string" val="Stand" />
+                    <parameter name="Wait" type="float" val="0" />
+                </parameters>
+                <Connections />
+            </PathPointObject>
+            <PathPointObject t0="16.6309" t1="6.29556" t2="9.29047" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" type_file="">
+                <parameters>
+                    <parameter name="Type" type="string" val="Stand" />
+                    <parameter name="Wait" type="float" val="0" />
+                </parameters>
+                <Connections />
+            </PathPointObject>
+            <PathPointObject t0="15.9753" t1="6.29556" t2="-6.0944" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" type_file="">
+                <parameters>
+                    <parameter name="Type" type="string" val="Stand" />
+                    <parameter name="Wait" type="float" val="0" />
+                </parameters>
+                <Connections />
+            </PathPointObject>
+            <PlaceholderObject t0="8.15741" t1="6.99457" t2="3.15606" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" type_file="" special_type="0">
+                <parameters>
+                    <parameter name="Name" type="string" val="enemy_spawn" />
+                    <parameter name="Path" type="string" val="Data/Characters/Undergrowth/block_guard_patrol2_actor.xml" />
+                </parameters>
+                <Connections>
+                    <Connection id="1" />
+                </Connections>
+            </PlaceholderObject>
+        </Group>
+        <Hotspot t0="7.47184" t1="6.43594" t2="1.2875" s0="1" s1="0.433973" s2="1.01968" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="15" type_file="Data/Objects/Undergrowth/Hotspots/giveWeapon.xml">
+            <parameters>
+                <parameter name="Eaten" type="int" val="0" />
+                <parameter name="Open" type="int" val="1" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="9.07691" t1="-4.48844" t2="1.4241" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

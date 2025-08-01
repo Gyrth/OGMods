@@ -1,0 +1,86 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="9.41598" t1="-2.08222" t2="1.59912" s0="29.1945" s1="50.6163" s2="26.018" q0="0" q1="0" q2="0" q3="1" id="40" version="1">
+        <parameters />
+        <EnvObject t0="7.54449" t1="-3.69911" t2="4.62325" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/terraces/cat_stairs.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.71869" t1="1.98073" t2="-0.201721" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/RockyHallBanner.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.61201" t1="3.59868" t2="-0.348151" s0="1.43679" s1="1.43679" s2="1.43679" q0="0" q1="0" q2="0" q3="1" id="23" color_r="0.0324798" color_g="0.0819366" color_b="0.172549" overbright="0" type_file="Data/Architecture/Gateway.xml">
+            <parameters />
+        </EnvObject>
+        <DynamicLightObject t0="7.65257" t1="1.79796" t2="1.8642" s0="12.0091" s1="12.0091" s2="12.0091" q0="0" q1="0" q2="0" q3="1" id="24" color_r="0.334394" color_g="0.768627" color_b="0.301423" overbright="44.068">
+            <parameters />
+        </DynamicLightObject>
+        <EnvObject t0="7.51244" t1="-17.3854" t2="4.6031" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="15.4756" t1="-5.97627" t2="10.1013" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="26" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="2.20388" t1="-6.91917" t2="11.1181" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.1279" t1="7.25973" t2="0.220809" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="28" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_B_tops.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="10.8262" t1="-6.07697" t2="-0.914004" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.0267" t1="-7.00221" t2="8.28617" s0="1" s1="1" s2="1" q0="0" q1="0.632692" q2="0" q3="0.774404" id="30" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree4.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.77294" t1="-5.21757" t2="4.36941" s0="1.50907" s1="1.50907" s2="1.50907" q0="-0.0159642" q1="-0.318047" q2="-0.0272767" q3="0.947547" id="31" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.43069" t1="-5.51457" t2="-1.0681" s0="1.50907" s1="1.50907" s2="1.50907" q0="0.0122276" q1="0.566778" q2="-0.0291438" q3="0.823263" id="32" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="16.3058" t1="7.16412" t2="-3.3601" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="33" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_B.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.63565" t1="0.143151" t2="0.98211" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="34" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/StoneFurniture_Bench.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.29775" t1="0.174351" t2="1.01811" s0="1" s1="1" s2="1" q0="-0.0326501" q1="0.274074" q2="0.0597705" q3="0.959294" id="35" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Bottle.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.61895" t1="0.38495" t2="1.03012" s0="1" s1="1" s2="1" q0="-0.295064" q1="0.473973" q2="0.653211" q3="0.511471" id="36" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Sword_2.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="7.5192" t1="1.79554" t2="2.36561" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="37" type_file="Data/Objects/Undergrowth/HotSpots/trinketSpot.xml">
+            <parameters>
+                <parameter name="Eaten" type="int" val="0" />
+                <parameter name="Taken" type="int" val="0" />
+                <parameter name="trinketPower" type="int" val="1" />
+                <parameter name="trinketType" type="string" val="Glacier" />
+            </parameters>
+        </Hotspot>
+        <Hotspot t0="7.6075" t1="1.75662" t2="2.3485" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="38" type_file="Data/Objects/Hotspots/ambient_sound.xml">
+            <parameters>
+                <parameter name="Delay Max" type="float" val="10" />
+                <parameter name="Delay Min" type="float" val="3" />
+                <parameter name="Fade Distance" type="float" val="10" />
+                <parameter name="Gain" type="float" val="1" />
+                <parameter name="Global" type="int" val="0" />
+                <parameter name="Sound Path" type="string" val="Data/Sounds/trinketSoundLoop.wav" />
+                <parameter name="Wind Scale" type="int" val="0" />
+            </parameters>
+        </Hotspot>
+        <Hotspot t0="7.40811" t1="-0.126508" t2="1.95669" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="39" type_file="Data/Objects/Hotspots/emitter.xml">
+            <parameters>
+                <parameter name="Type" type="string" val="Smoke" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="7.51244" t1="-17.3854" t2="4.6031" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

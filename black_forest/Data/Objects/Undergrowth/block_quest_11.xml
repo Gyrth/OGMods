@@ -1,0 +1,86 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="9.23838" t1="-2.60512" t2="0.981947" s0="29.7497" s1="48.3381" s2="25.5471" q0="0" q1="0" q2="0" q3="1" id="42" version="1">
+        <parameters />
+        <EnvObject t0="7.53874" t1="-16.7692" t2="-1.7866" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="7.79358" t1="-6.84812" t2="-3.56042" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="23" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/trench_middle.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="3.50751" t1="-6.72064" t2="-4.11469" s0="1.01411" s1="0.754289" s2="0.959979" q0="0" q1="0.998327" q2="0" q3="0.0578272" id="24" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/trench_end.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.83438" t1="-6.06503" t2="-9.58329" s0="1.587" s1="1.587" s2="1.587" q0="0" q1="0" q2="0" q3="1" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="15.0114" t1="6.96373" t2="-0.0838375" s0="0.905165" s1="0.905165" s2="0.905165" q0="0.00871223" q1="0.804038" q2="0.00644157" q3="0.594479" id="26" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_B.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="3.22366" t1="4.63233" t2="4.86106" s0="1" s1="1" s2="1" q0="0" q1="0.353504" q2="0" q3="0.935433" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree1_B.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="11.6431" t1="-6.89965" t2="-3.59591" s0="1" s1="1" s2="1" q0="0" q1="-0.00224304" q2="0" q3="0.999997" id="28" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/trench_end.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="10.4406" t1="-6.30186" t2="-0.744506" s0="1" s1="1" s2="1" q0="0.24406" q1="0.372001" q2="0.102042" q3="0.88974" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Crate_2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="10.9251" t1="-6.03253" t2="-6.49947" s0="1" s1="1" s2="1" q0="0.214724" q1="0.257197" q2="-0.774746" q3="0.536202" id="30" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_long_board.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.97901" t1="-6.24202" t2="-5.37709" s0="1" s1="1" s2="1" q0="0.310872" q1="0.315134" q2="-0.325117" q3="0.835672" id="31" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.44627" t1="-5.58138" t2="-6.83974" s0="1" s1="1" s2="1" q0="-0.538205" q1="0" q2="0" q3="0.842814" id="32" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/sharp_stick_long.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.19704" t1="-5.85036" t2="-7.18721" s0="1" s1="1" s2="1" q0="-0.69641" q1="0" q2="0" q3="0.717644" id="33" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/sharp_stick_long.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="10.6991" t1="-5.13182" t2="-6.45085" s0="1" s1="1" s2="1" q0="-0.37702" q1="0" q2="0" q3="0.926205" id="34" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/sharp_stick_long.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.65357" t1="-5.9064" t2="-0.866845" s0="1" s1="1" s2="1" q0="0.0310718" q1="-0.937368" q2="-0.345859" q3="0.0275287" id="35" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/sharp_stick_long.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.16542" t1="-5.41258" t2="-1.31085" s0="1" s1="1" s2="1" q0="0.0310718" q1="-0.937368" q2="-0.345859" q3="0.0275287" id="36" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/sharp_stick_long.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="11.0755" t1="-5.67817" t2="-1.1006" s0="1" s1="1" s2="1" q0="-0.00244777" q1="-0.912707" q2="-0.402282" q3="0.0716298" id="37" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/sharp_stick_long.xml">
+            <parameters />
+        </EnvObject>
+        <PlaceholderObject t0="7.58055" t1="-6.16856" t2="-4.09651" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="1" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/Quest11_actor_1.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="1" />
+            </Connections>
+        </PlaceholderObject>
+        <ItemObject t0="9.54664" t1="-6.54609" t2="-3.94479" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="39" type_file="Data/Items/staffbasic.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </ItemObject>
+        <Hotspot t0="8.16864" t1="-6.61897" t2="-4.1468" s0="0.897912" s1="1" s2="0.847773" q0="0" q1="0" q2="0" q3="1" id="40" type_file="Data/Objects/Undergrowth/Hotspots/quest11Spot.xml">
+            <parameters>
+                <parameter name="attacked" type="int" val="0" />
+                <parameter name="quest11Go" type="int" val="0" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="11.6676" t1="-3.57657" t2="-4.90047" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.0720366" q3="0.997402" id="41" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Ground1a.xml">
+            <parameters />
+        </EnvObject>
+        <DynamicLightObject t0="7.54925" t1="-4.94112" t2="-4.00792" s0="12.0091" s1="12.0091" s2="12.0091" q0="0" q1="0" q2="0" q3="1" id="47" color_r="0.0885813" color_g="0.293983" color_b="0.352941" overbright="37.288">
+            <parameters />
+        </DynamicLightObject>
+        <EnvObject t0="39.5129" t1="-3.87126" t2="80.5351" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

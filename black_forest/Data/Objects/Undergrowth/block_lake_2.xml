@@ -1,0 +1,143 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-15.0142" t1="17.8735" t2="-3.52986" s0="20.01" s1="38.3118" s2="20.0803" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <Hotspot t0="-14.7835" t1="18.9039" t2="-4.01692" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="39" type_file="Data/Objects/Hotspots/ambient_sound.xml">
+            <parameters>
+                <parameter name="Delay Max" type="float" val="10" />
+                <parameter name="Delay Min" type="float" val="3" />
+                <parameter name="Fade Distance" type="float" val="20" />
+                <parameter name="Gain" type="float" val="1" />
+                <parameter name="Global" type="int" val="0" />
+                <parameter name="Sound Path" type="string" val="Data/Sounds/pond2.wav" />
+                <parameter name="Wind Scale" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="-15.0142" t1="8.72263" t2="-3.56502" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <Hotspot t0="-14.6922" t1="16.5452" t2="-3.71452" s0="4.13929" s1="0.966606" s2="4.25841" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" type_file="Data/Objects/Hotspots/wet_cube.xml">
+            <parameters>
+                <parameter name="Water Fog" type="float" val="1" />
+                <parameter name="Wave Density" type="float" val="0.25" />
+                <parameter name="Wave Height" type="float" val="0.5" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="-15.5581" t1="21.1956" t2="-3.90542" s0="1.22503" s1="1.22503" s2="1.22503" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="0.803922" color_g="0.762937" color_b="0.762937" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_stump_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-13.1112" t1="24.4154" t2="-2.87692" s0="1" s1="1" s2="1" q0="0.485544" q1="0.1726" q2="0.851332" q3="-0.09844" euler_x="0.400059" euler_y="-1.03664" euler_z="-3.14159" id="6" color_r="0.803922" color_g="0.762937" color_b="0.762937" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_roots_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-16.3417" t1="24.0092" t2="-6.28332" s0="1" s1="1.09832" s2="1.01525" q0="-0.93604" q1="0.299547" q2="0.183759" q3="-0.0182289" euler_x="2.98804" euler_y="0.33958" euler_z="-0.645808" id="7" color_r="0.803922" color_g="0.762937" color_b="0.762937" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_roots_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-16.9034" t1="24.7068" t2="-3.01532" s0="0.715486" s1="0.715486" s2="0.715486" q0="-0.43612" q1="0.107566" q2="0.892849" q3="0.0324007" euler_x="0.268044" euler_y="0.903906" euler_z="-3.08341" id="8" color_r="0.803922" color_g="0.762937" color_b="0.762937" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_roots_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-16.6433" t1="27.1858" t2="-4.00652" s0="0.715486" s1="0.785833" s2="0.726399" q0="-0.61648" q1="0.432938" q2="0.632952" q3="0.178558" euler_x="1.96126" euler_y="1.2083" euler_z="-2.09059" id="9" color_r="0.803922" color_g="0.762937" color_b="0.762937" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_roots_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.904" t1="26.3517" t2="-4.51012" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0.252056" q3="0.967713" euler_x="0" euler_y="0" euler_z="0.509609" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/broken_branch_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-15.1496" t1="28.4597" t2="-6.47232" s0="3.11106" s1="3.11103" s2="3.11104" q0="-0.0831905" q1="0.38515" q2="-0.0930434" q3="0.914374" euler_x="-0.313872" euler_y="0.759917" euler_z="-0.329035" id="11" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-11.1784" t1="27.3156" t2="-1.54902" s0="2.21351" s1="2.21351" s2="2.21351" q0="0.171558" q1="0.894806" q2="0.196754" q3="-0.362187" euler_x="2.80929" euler_y="-0.797603" euler_z="2.90383" id="12" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.328" t1="28.9417" t2="-1.87982" s0="3.56203" s1="3.56199" s2="3.56201" q0="0.212994" q1="-0.245466" q2="-0.0213282" q3="0.945475" euler_x="0.482585" euler_y="-0.47246" euler_z="-0.163449" id="13" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-17.2073" t1="29.2898" t2="-3.47842" s0="3.16413" s1="3.16412" s2="3.16409" q0="0.202924" q1="-0.781474" q2="0.148533" q3="0.571016" euler_x="-3.14026" euler_y="-1.26216" euler_z="-2.63445" id="14" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-16.4234" t1="24.4192" t2="-5.32402" s0="1.53023" s1="1.53023" s2="1.53023" q0="-0.332593" q1="0.27115" q2="0.100466" q3="0.897645" euler_x="-0.70967" euler_y="0.586707" euler_z="0" id="15" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-13.7293" t1="23.7298" t2="-5.82502" s0="2.12699" s1="2.12699" s2="2.12699" q0="0.271453" q1="0.753529" q2="-0.54277" q3="0.252808" euler_x="-1.96477" euler_y="0.741872" euler_z="2.9579" id="16" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-11.3959" t1="23.9951" t2="-2.40402" s0="2.00118" s1="2.00118" s2="2.00118" q0="0.673724" q1="0.346704" q2="-0.324931" q3="0.565965" euler_x="1.83996" euler_y="0.979596" euler_z="0.179238" id="17" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-15.2681" t1="23.4815" t2="-2.00922" s0="2.22558" s1="2.22558" s2="2.22558" q0="0.652546" q1="-0.041975" q2="-0.000305998" q3="0.756588" euler_x="1.42515" euler_y="-0.0631582" euler_z="-0.0553829" id="18" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-17.6577" t1="25.0898" t2="-3.70632" s0="2.2384" s1="2.22558" s2="2.31291" q0="0.359397" q1="-0.394528" q2="0.447608" q3="0.717518" euler_x="0.36116" euler_y="-1.09276" euler_z="0.894375" id="19" color_r="0.811765" color_g="0.767254" color_b="0.719446" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-15.4348" t1="20.9587" t2="-5.65602" s0="0.795065" s1="0.795065" s2="0.795065" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="20" color_r="0.780392" color_g="0.67328" color_b="0.728726" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.0516" t1="20.9327" t2="-2.92882" s0="0.802923" s1="0.795065" s2="0.672221" q0="0" q1="-0.912713" q2="0" q3="0.408601" euler_x="3.14159" euler_y="-0.841841" euler_z="3.14159" id="21" color_r="0.780392" color_g="0.67328" color_b="0.728726" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-16.7064" t1="21.7373" t2="-3.62462" s0="0.802923" s1="0.795065" s2="0.672221" q0="0" q1="-0.869343" q2="0" q3="-0.494209" euler_x="-3.14159" euler_y="1.03385" euler_z="-3.14159" id="22" color_r="0.780392" color_g="0.67328" color_b="0.728726" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.5849" t1="20.8648" t2="-3.35502" s0="1" s1="1" s2="1" q0="0" q1="0.861793" q2="0" q3="-0.507259" euler_x="3.14159" euler_y="-1.064" euler_z="3.14159" id="23" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_FernWall1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-13.4659" t1="17.8473" t2="-5.05132" s0="1" s1="1" s2="1" q0="0" q1="-0.276748" q2="0" q3="0.960943" euler_x="0" euler_y="-0.560817" euler_z="0" id="24" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-17.5755" t1="18.1323" t2="-4.42682" s0="1" s1="1" s2="1" q0="0" q1="0.150764" q2="0" q3="0.98857" euler_x="0" euler_y="0.302682" euler_z="0" id="25" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-20.604" t1="19.4042" t2="3.02308" s0="4.85635" s1="4.85635" s2="4.85635" q0="0" q1="0.516811" q2="0" q3="0.856099" euler_x="0" euler_y="1.08624" euler_z="0" id="26" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/ForkedWeed.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-20.4952" t1="18.6174" t2="-8.86022" s0="1" s1="1" s2="1" q0="0" q1="-0.956572" q2="0" q3="0.291496" euler_x="3.14159" euler_y="-0.591581" euler_z="3.14159" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-7.27494" t1="19.4042" t2="-6.16662" s0="4.85635" s1="4.85635" s2="4.85635" q0="0" q1="0.999979" q2="0" q3="0.0065161" euler_x="3.14159" euler_y="0.0130323" euler_z="3.14159" id="28" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/ForkedWeed.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-16.9188" t1="19.4042" t2="-10.8218" s0="4.85635" s1="4.85635" s2="4.85635" q0="0" q1="0.999979" q2="0" q3="0.0065161" euler_x="3.14159" euler_y="0.0130323" euler_z="3.14159" id="29" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/ForkedWeed.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-22.0124" t1="18.6174" t2="-2.67032" s0="1" s1="1" s2="1" q0="0" q1="-0.661138" q2="0" q3="0.750264" euler_x="0" euler_y="-1.44467" euler_z="0" id="30" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-10.7906" t1="18.6174" t2="3.58388" s0="1" s1="1" s2="1" q0="0" q1="0.132978" q2="0" q3="0.991119" euler_x="0" euler_y="0.266746" euler_z="0" id="31" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-8.44844" t1="18.6174" t2="-9.00282" s0="1" s1="1" s2="1" q0="0" q1="-0.87383" q2="0" q3="-0.486232" euler_x="-3.14159" euler_y="1.01555" euler_z="-3.14159" id="32" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-7.66544" t1="18.7438" t2="-0.704016" s0="1" s1="1" s2="1" q0="0" q1="-0.910118" q2="0" q3="0.414349" euler_x="3.14159" euler_y="-0.854455" euler_z="3.14159" id="33" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.3299" t1="18.7438" t2="-10.6403" s0="1" s1="1" s2="1" q0="0" q1="-0.910118" q2="0" q3="0.414349" euler_x="3.14159" euler_y="-0.854455" euler_z="3.14159" id="34" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-15.5031" t1="18.7438" t2="3.59498" s0="1" s1="1" s2="1" q0="0" q1="-0.910118" q2="0" q3="0.414349" euler_x="3.14159" euler_y="-0.854455" euler_z="3.14159" id="35" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/WaterfallArena/CavePlants_Fern1.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="-15.1248" t1="12.9354" t2="-3.94102" s0="3.84218" s1="3.84218" s2="3.84218" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="36" type_file="Data/Objects/Undergrowth/Hotspots/WaterSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="-15.5342" t1="18.4785" t2="-3.21612" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="40" type_file="Data/Objects/Undergrowth/Hotspots/quest15Spot.xml">
+            <parameters>
+                <parameter name="quest15Go" type="int" val="0" />
+                <parameter name="tracked" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="-15.0142" t1="8.72263" t2="-3.56502" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

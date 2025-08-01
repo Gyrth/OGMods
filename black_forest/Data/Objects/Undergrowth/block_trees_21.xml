@@ -1,0 +1,59 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-7.57005" t1="27.1506" t2="-10.786" s0="25.9079" s1="51.3179" s2="22.2283" q0="0" q1="0" q2="0" q3="1" id="223" version="1">
+        <parameters />
+        <EnvObject t0="-8.67773" t1="21.7472" t2="-11.7124" s0="1" s1="1" s2="1" q0="0.0144567" q1="0.00135408" q2="-0.00510967" q3="0.999884" id="209" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Furniture/CatStand.xml">
+            <parameters />
+        </EnvObject>
+        <ItemObject t0="-8.68653" t1="22.2901" t2="-11.7417" s0="1" s1="1" s2="1" q0="-0.0154668" q1="0.17291" q2="0.0381181" q3="0.98408" id="210" type_file="Data/Items/gear/dogtools/dogtoolhammer.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </ItemObject>
+        <EnvObject t0="-6.86523" t1="21.4967" t2="-12.3251" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="211" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/LitterLoads/LargeGourd.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-8.65233" t1="22.1534" t2="-11.6401" s0="1" s1="1" s2="1" q0="0.759668" q1="0.0144193" q2="-0.333789" q3="0.557927" id="212" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/LargeNail1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-8.76543" t1="22.0706" t2="-12.342" s0="0.808798" s1="0.808799" s2="0.808798" q0="0.0159838" q1="-0.00521323" q2="0.00766256" q3="0.999828" id="213" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/LitterLoads/Basket1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-8.67143" t1="21.6734" t2="-12.3343" s0="0.345957" s1="0.345957" s2="0.345957" q0="0" q1="-0.173648" q2="0" q3="0.984808" id="214" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Crate_2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-6.27993" t1="11.4966" t2="-9.89888" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="215" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-0.928726" t1="32.7087" t2="-5.96618" s0="0.773731" s1="0.773731" s2="0.773731" q0="0" q1="0.575929" q2="0" q3="0.8175" id="216" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree1_B.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-11.8686" t1="22.4972" t2="-2.88498" s0="1.58312" s1="1.58312" s2="1.58312" q0="0" q1="0" q2="0" q3="1" id="217" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-3.33883" t1="23.6183" t2="-12.0894" s0="1.59323" s1="1.59323" s2="1.59323" q0="0" q1="0" q2="0" q3="1" id="218" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-11.8685" t1="23.1541" t2="-17.0447" s0="1.91122" s1="1.91122" s2="1.91122" q0="0" q1="0.772081" q2="0" q3="0.635524" id="219" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-0.800627" t1="21.8483" t2="-17.8067" s0="1.36714" s1="1.36714" s2="1.36714" q0="0" q1="0" q2="0" q3="1" id="220" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/low_fern_.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-10.3837" t1="36.6789" t2="-11.837" s0="1" s1="1" s2="1" q0="0" q1="0.444173" q2="0" q3="0.895941" id="221" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree1_A.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="-8.36863" t1="20.7142" t2="-12.1409" s0="0.427306" s1="0.575139" s2="0.319788" q0="0" q1="0" q2="0" q3="1" id="222" type_file="Data/Objects/Undergrowth/Hotspots/SearchSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Searched" type="int" val="0" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="-6.27993" t1="11.4966" t2="-9.89888" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

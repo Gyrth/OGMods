@@ -1,0 +1,11 @@
+<?xml version="2.0" ?>
+<Type>generic</Type>
+<Hotspot>
+	<BillboardColorMap>Data/UI/spawner/thumbs/Hotspot/empty.png</BillboardColorMap>
+	<Script>hotspots/spawnPlace.as</Script>
+	<parameters>
+    	<parameter name="spawnTag" type="string" val="none" />
+    </parameters>
+</Hotspot>
+    
+       

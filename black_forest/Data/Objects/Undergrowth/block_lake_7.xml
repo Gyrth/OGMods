@@ -1,0 +1,118 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-35.786" t1="21.3677" t2="1.74884" s0="20.01" s1="24.3965" s2="21.0109" q0="0" q1="0" q2="0" q3="1" id="649" version="1">
+        <parameters />
+        <Hotspot t0="-36.0781" t1="29.2691" t2="2.07417" s0="2.13882" s1="2.13882" s2="2.13882" q0="0" q1="0" q2="0" q3="1" id="619" type_file="Data/Objects/Hotspots/ambient_sound.xml">
+            <parameters>
+                <parameter name="Delay Max" type="float" val="10" />
+                <parameter name="Delay Min" type="float" val="3" />
+                <parameter name="Fade Distance" type="float" val="10" />
+                <parameter name="Gain" type="float" val="1" />
+                <parameter name="Global" type="int" val="0" />
+                <parameter name="Sound Path" type="string" val="Data/Sounds/ambient/annoying_bugs.wav" />
+                <parameter name="Wind Scale" type="int" val="0" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="-35.786" t1="19.1745" t2="2.24927" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="620" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-36.1043" t1="29.2369" t2="2.73227" s0="1" s1="1" s2="1" q0="-0.707107" q1="0" q2="0" q3="0.707107" id="621" color_r="0.854902" color_g="0.854893" color_b="0.854893" overbright="0" type_file="Data/Prototypes/CaveArena/Banner_Bars2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-35.1372" t1="27.4785" t2="-3.35103" s0="0.879282" s1="1.18901" s2="0.914135" q0="-0.0293955" q1="-0.0293955" q2="-0.706496" q3="0.706496" id="622" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_facade_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-35.1785" t1="28.611" t2="7.81067" s0="0.620729" s1="0.620729" s2="0.620729" q0="0.706541" q1="-0.70654" q2="-0.0282944" q3="-0.0282944" id="623" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_facade_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-39.942" t1="27.7617" t2="-0.96703" s0="1.73983" s1="1.73983" s2="1.73983" q0="0" q1="0" q2="0" q3="1" id="624" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_boulder_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-40.2516" t1="29.173" t2="7.61787" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="625" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_pillar_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-33.2659" t1="29.1535" t2="2.76467" s0="2.80591" s1="2.7644" s2="5.49169" q0="0" q1="-0.707107" q2="0.707107" q3="0" id="626" color_r="0.854902" color_g="0.854893" color_b="0.854893" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-38.8342" t1="29.1535" t2="2.61737" s0="2.80591" s1="2.7644" s2="5.49169" q0="0" q1="-0.707107" q2="0.707107" q3="0" id="627" color_r="0.854902" color_g="0.854893" color_b="0.854893" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-36.0566" t1="29.1398" t2="0.0360713" s0="2.82747" s1="3.04726" s2="5.49169" q0="-0.5" q1="-0.5" q2="0.5" q3="-0.5" id="628" color_r="0.854902" color_g="0.854893" color_b="0.854893" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-36.0174" t1="29.1398" t2="5.50587" s0="2.82747" s1="3.04726" s2="5.49169" q0="-0.5" q1="-0.5" q2="0.5" q3="-0.5" id="629" color_r="0.854902" color_g="0.854893" color_b="0.854893" overbright="0" type_file="Data/Objects/Buildings/Fence1.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="-35.7886" t1="29.3111" t2="0.612571" s0="2.70397" s1="1" s2="1.7339" q0="0" q1="0" q2="0" q3="1" id="630" type_file="Data/Objects/Decals/crete_stains/leaky_rust.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="-38.1044" t1="29.3111" t2="2.75667" s0="2.70397" s1="1" s2="1.7339" q0="0" q1="0.707107" q2="0" q3="0.707107" id="631" type_file="Data/Objects/Decals/crete_stains/leaky_rust.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="-35.783" t1="29.3111" t2="2.63167" s0="2.70397" s1="1" s2="1.7339" q0="0" q1="-0.707107" q2="0" q3="0.707107" id="632" type_file="Data/Objects/Decals/crete_stains/leaky_rust.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="-37.5562" t1="29.36" t2="3.64377" s0="1.55536" s1="1" s2="0.632515" q0="-0.114691" q1="-0.703857" q2="-0.116787" q3="0.691225" id="633" type_file="Data/Objects/Decals/Scratches/scratches_03.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="-37.6168" t1="29.3856" t2="2.84847" s0="1.55536" s1="1" s2="0.632515" q0="-0.114691" q1="-0.703857" q2="-0.116787" q3="0.691225" id="634" type_file="Data/Objects/Decals/Scratches/scratches_03.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Hotspot t0="-35.2748" t1="26.2964" t2="1.94987" s0="3.28181" s1="1" s2="3.18235" q0="0" q1="0" q2="0" q3="1" id="635" type_file="Data/Objects/Hotspots/wet_cube.xml">
+            <parameters>
+                <parameter name="Water Fog" type="float" val="0.715" />
+                <parameter name="Wave Density" type="float" val="0.238" />
+                <parameter name="Wave Height" type="float" val="0.152" />
+            </parameters>
+        </Hotspot>
+        <Decal t0="-37.6255" t1="29.3926" t2="2.18847" s0="1.55536" s1="1" s2="0.632515" q0="-0.114691" q1="-0.703857" q2="-0.116787" q3="0.691225" id="636" type_file="Data/Objects/Decals/Scratches/scratches_03.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <EnvObject t0="-30.4305" t1="29.1422" t2="3.40567" s0="0.55811" s1="0.485637" s2="0.661685" q0="0" q1="-0.998595" q2="0" q3="0.0529951" id="637" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_capital_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-40.3557" t1="27.6176" t2="3.37087" s0="0.639447" s1="0.639447" s2="0.639447" q0="0" q1="0.276449" q2="0" q3="0.961029" id="638" color_r="0.611765" color_g="0.560784" color_b="0.380392" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_block_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="-34.3512" t1="29.2934" t2="2.18567" s0="1.55536" s1="1" s2="0.632515" q0="0.127684" q1="-0.701534" q2="0.130018" q3="0.688943" id="639" type_file="Data/Objects/Decals/Scratches/scratches_03.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="-34.4126" t1="29.2757" t2="3.03317" s0="1.55536" s1="1" s2="0.632515" q0="0.127684" q1="-0.701534" q2="0.130018" q3="0.688943" id="640" type_file="Data/Objects/Decals/Scratches/scratches_03.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <Decal t0="-34.4603" t1="29.2622" t2="3.71187" s0="1.55536" s1="1" s2="0.632515" q0="0.127684" q1="-0.701534" q2="0.130018" q3="0.688943" id="641" type_file="Data/Objects/Decals/Scratches/scratches_03.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <EnvObject t0="-36.9177" t1="28.2082" t2="3.26287" s0="1" s1="1" s2="1" q0="0.361554" q1="-0.212445" q2="-0.638393" q3="0.645445" id="642" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Bones/DogSkull.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-35.0495" t1="28.2658" t2="2.77347" s0="1" s1="1" s2="1" q0="0" q1="0.60649" q2="0" q3="0.795091" id="643" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Bones/DogLegBone.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-35.4658" t1="28.2658" t2="2.13527" s0="1" s1="1" s2="1" q0="-0.393983" q1="0.833074" q2="0.254731" q3="-0.293049" id="644" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Bones/DogLegBone.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-35.6764" t1="28.2658" t2="2.82857" s0="1" s1="1" s2="1" q0="0.126182" q1="-0.24225" q2="-0.0213345" q3="0.961737" id="645" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Bones/DogLegBone.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-35.2257" t1="28.2658" t2="3.89547" s0="1" s1="1" s2="1" q0="-0.0567615" q1="-0.224947" q2="-0.0131276" q3="0.972628" id="646" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Bones/DogLegBone.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-35.6504" t1="27.8117" t2="3.23377" s0="1" s1="1" s2="1" q0="0.582997" q1="-0.165898" q2="0.264627" q3="0.750044" id="647" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/IGF_Characters/IGF_RabbitCiv.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="-36.7721" t1="29.013" t2="1.95357" s0="1.50908" s1="0.332514" s2="1.5417" q0="0" q1="0" q2="0" q3="1" id="648" type_file="Data/Objects/Undergrowth/Hotspots/BadWaterSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="-35.786" t1="19.1745" t2="2.24927" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

@@ -1,0 +1,41 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="7.25626" t1="-23.1085" t2="-9.20293" s0="20.0914" s1="25.8144" s2="20.01" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" version="1">
+        <parameters />
+        <EnvObject t0="-0.962171" t1="-14.9466" t2="-9.10496" s0="2.7929" s1="5.56661" s2="3.52767" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_relief.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.29696" t1="-26.0107" t2="-9.20293" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="2.68446" t1="-14.9678" t2="-9.10496" s0="2.7929" s1="5.56661" s2="3.52767" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_relief.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="15.4722" t1="-14.7933" t2="-9.10496" s0="2.7929" s1="5.56661" s2="3.52767" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_relief.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="11.8318" t1="-14.7924" t2="-9.10496" s0="2.7929" s1="5.56661" s2="3.52767" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_relief.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.01427" t1="-13.5698" t2="-9.01738" s0="1.52057" s1="2.84532" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="0.313725" color_g="0.313722" color_b="0.313722" overbright="0" type_file="Data/Objects/Buildings/spires/spire_center.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.47283" t1="-13.5596" t2="-9.01738" s0="1.52057" s1="2.84532" s2="1" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="-3.14159" id="8" color_r="0.313725" color_g="0.313722" color_b="0.313722" overbright="0" type_file="Data/Objects/Buildings/spires/spire_center.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="5.74941" t1="-10.6654" t2="-9.01432" s0="5.44907" s1="5.44907" s2="5.44907" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_bricks.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.92656" t1="-10.6663" t2="-9.05061" s0="5.44907" s1="5.44907" s2="5.44907" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_bricks.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.29696" t1="-26.0107" t2="-9.20293" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

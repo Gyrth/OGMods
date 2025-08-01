@@ -1,0 +1,120 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="31.5657" t1="93.4082" t2="83.1187" s0="20.6924" s1="29.5732" s2="20.7767" q0="0" q1="0" q2="0" q3="1" id="1401" version="1">
+        <parameters />
+        <Hotspot t0="27.9934" t1="99.3816" t2="80.441" s0="0.485657" s1="0.374965" s2="0.379595" q0="0" q1="0.00309046" q2="0" q3="0.999995" id="1439" type_file="Data/Objects/Undergrowth/Hotspots/StealSpot.xml">
+            <parameters>
+                <parameter name="Activated" type="int" val="0" />
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Stealed" type="int" val="0" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="31.9069" t1="88.6266" t2="82.7354" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="1402" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="31.2206" t1="101.54" t2="82.4925" s0="0.296068" s1="0.514795" s2="0.284761" q0="0.0266216" q1="-0.0837011" q2="-0.00444305" q3="0.996125" id="1409" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/RaiderBase.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="37.7708" t1="97.9351" t2="89.3738" s0="1.49705" s1="1.49705" s2="1.49705" q0="-0.472515" q1="0.650404" q2="-0.112592" q3="0.583976" id="1410" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_boulder_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="29.7221" t1="96.0846" t2="87.4202" s0="1.23088" s1="1.08083" s2="1.21761" q0="0" q1="0.602443" q2="0" q3="0.798162" id="1411" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_facade.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="24.5913" t1="98.2465" t2="81.1798" s0="1.09542" s1="2.46017" s2="1.92745" q0="-0.542197" q1="0.397348" q2="-0.470134" q3="0.571937" id="1412" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Rocks/strata_rocks/strata_rock_boulder_mossy.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="30.7022" t1="99.365" t2="82.9755" s0="4.27314" s1="3.35703" s2="5.36119" q0="0.0529933" q1="-0.0584297" q2="-0.00506151" q3="0.996872" id="1413" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_square_board.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="30.6883" t1="100.294" t2="82.9614" s0="3.33924" s1="3.48736" s2="5.36119" q0="0.0712789" q1="-0.0337881" q2="-0.385056" q3="0.919517" id="1414" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_square_board.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="30.6098" t1="99.64" t2="79.3316" s0="0.68148" s1="0.68148" s2="0.68148" q0="-0.0019962" q1="0.997974" q2="0.0486401" q3="0.0409577" id="1415" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Door1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="31.8685" t1="99.9632" t2="79.5752" s0="1.70641" s1="1.28812" s2="1" q0="-0.00231247" q1="0.996827" q2="0.0315598" q3="0.0730392" id="1416" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="31.2876" t1="99.6767" t2="79.6419" s0="4.08764" s1="3.32385" s2="5.36119" q0="0.0529933" q1="-0.0584297" q2="-0.00506151" q3="0.996872" id="1417" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_square_board.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="29.3805" t1="99.5412" t2="81.0984" s0="4.27314" s1="3.35703" s2="5.36119" q0="0.0412371" q1="0.659455" q2="0.0336661" q3="0.749858" id="1418" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_square_board.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="32.6837" t1="99.103" t2="81.6874" s0="4.27314" s1="3.35703" s2="5.36119" q0="0.0112021" q1="0.660648" q2="-0.000472672" q3="0.750613" id="1419" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_square_board.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="32.1052" t1="101.492" t2="81.5847" s0="1.74617" s1="1.43826" s2="1.04336" q0="0" q1="0.654398" q2="0" q3="0.75615" id="1420" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Roofs/RoofSlate.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="29.8407" t1="101.506" t2="81.3176" s0="1.74617" s1="1.43826" s2="1.04336" q0="0" q1="-0.748789" q2="0" q3="0.662808" id="1421" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Roofs/RoofSlate.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="31.3013" t1="100.541" t2="79.9287" s0="3.33924" s1="3.48736" s2="5.36119" q0="0.0712789" q1="-0.0337881" q2="-0.385056" q3="0.919517" id="1422" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/shops/sign_square_board.xml">
+            <parameters />
+        </EnvObject>
+        <Decal t0="27.932" t1="98.6133" t2="80.6908" s0="2.99307" s1="1" s2="2.16557" q0="0" q1="0" q2="0" q3="1" id="1423" type_file="Data/Objects/Decals/fall_leaves.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <EnvObject t0="32.7496" t1="98.916" t2="79.5011" s0="1.68328" s1="1.68328" s2="1.68328" q0="0.64686" q1="-0.424512" q2="-0.552776" q3="0.309516" id="1424" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/DogTools/DogToolHammer.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="29.8619" t1="101.213" t2="82.6431" s0="0.348471" s1="0.35509" s2="0.165524" q0="0.000489771" q1="-0.0791736" q2="-0.00616574" q3="0.996842" id="1425" color_r="0.184314" color_g="0.143837" color_b="0.143837" overbright="0" type_file="Data/Objects/Buildings/arena/arena_pillar.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="29.9607" t1="103.621" t2="82.643" s0="0.271809" s1="0.271809" s2="0.271809" q0="0" q1="0" q2="0" q3="1" id="1426" type_file="Data/Objects/Hotspots/emitter.xml">
+            <parameters>
+                <parameter name="Type" type="string" val="Smoke" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="29.7129" t1="99.0098" t2="78.8795" s0="1.40564" s1="1.20306" s2="1.19895" q0="0.132803" q1="-0.751636" q2="-0.112409" q3="0.636216" id="1427" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/RabbitPack.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="35.3737" t1="99.2176" t2="78.4513" s0="0.485657" s1="0.374965" s2="0.379595" q0="0" q1="0.161289" q2="0" q3="0.986907" id="1437" type_file="Data/Objects/Undergrowth/Hotspots/StealSpot.xml">
+            <parameters>
+                <parameter name="Activated" type="int" val="0" />
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Stealed" type="int" val="0" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="27.8788" t1="99.1262" t2="81.6525" s0="0.652056" s1="1.09181" s2="1" q0="0" q1="0" q2="0" q3="1" id="1436" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Crate_2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="35.7114" t1="99.7074" t2="84.1115" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="1430" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Crate_Pile3.xml">
+            <parameters />
+        </EnvObject>
+        <PlaceholderObject t0="31.1553" t1="99.1567" t2="77.8831" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="1440" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <EnvObject t0="32.7749" t1="99.6559" t2="82.4678" s0="1.70641" s1="1.28812" s2="1" q0="0.0204815" q1="0.659473" q2="0.0241221" q3="0.751062" id="1432" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="32.9792" t1="99.6828" t2="81.1105" s0="1.70641" s1="1.28812" s2="1" q0="-0.00647563" q1="0.659759" q2="-0.00657946" q3="0.75142" id="1433" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window1.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="36.0647" t1="98.5905" t2="83.2543" s0="0.566736" s1="0.438384" s2="0.584117" q0="0.00028342" q1="-0.0129759" q2="-0.0218339" q3="0.999677" id="1438" type_file="Data/Objects/Undergrowth/Hotspots/StealSpot.xml">
+            <parameters>
+                <parameter name="Activated" type="int" val="0" />
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Stealed" type="int" val="0" />
+            </parameters>
+        </Hotspot>
+        <EnvObject t0="36.5424" t1="99.413" t2="78.8916" s0="0.731585" s1="0.731585" s2="0.731585" q0="0" q1="-0.457855" q2="0" q3="0.889027" id="1435" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/Crate_Pile3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="31.9069" t1="88.6266" t2="82.7354" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

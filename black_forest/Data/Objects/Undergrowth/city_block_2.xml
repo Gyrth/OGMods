@@ -1,0 +1,30 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="9.59589" t1="-0.983801" t2="1.69491" s0="20.1351" s1="27.8322" s2="20.1915" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" version="1">
+        <parameters />
+        <Group t0="9.53832" t1="-4.99986" t2="1.67747" s0="20.01" s1="19.7901" s2="20.1043" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+            <parameters />
+            <EnvObject t0="9.53832" t1="-4.99986" t2="1.67747" s0="1" s1="0.989007" s2="1.00472" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+                <parameters>
+                    <parameter name="BlockBase" type="int" val="1" />
+                </parameters>
+            </EnvObject>
+        </Group>
+        <EnvObject t0="9.60562" t1="5.73664" t2="1.69491" s0="5.02642" s1="0.274753" s2="5.04538" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="0.0689735" color_g="0.0980392" color_b="0.0495963" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.25869" t1="9.59532" t2="1.73629" s0="0.724143" s1="0.724143" s2="0.724143" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="0.215517" color_g="0.321526" color_b="0.356863" overbright="0" type_file="Data/Objects/Buildings/cat_town/window_block.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="10.0901" t1="7.84036" t2="-4.72014" s0="0.784916" s1="1.12898" s2="0.79591" q0="0" q1="0.715987" q2="0" q3="0.698114" euler_x="3.14159" euler_y="1.54554" euler_z="3.14159" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/arena/arena_door.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.7387" t1="10.5421" t2="-5.31714" s0="1.62093" s1="1.62093" s2="1.62093" q0="0" q1="0.999997" q2="0" q3="0.00231414" euler_x="3.14159" euler_y="0.00462828" euler_z="3.14159" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window_boxes/box_base_squared.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.67304" t1="10.5333" t2="-5.29415" s0="1.62093" s1="1.62093" s2="1.62093" q0="0" q1="0.999997" q2="0" q3="0.00231414" euler_x="3.14159" euler_y="0.00462828" euler_z="3.14159" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window_boxes/box_base_squared.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

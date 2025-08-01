@@ -1,0 +1,85 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-24.3769" t1="22.6948" t2="-4.36636" s0="30.1579" s1="50.5563" s2="30.1617" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="-25.398" t1="19.3487" t2="3.34604" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/snowy_green_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-13.0798" t1="17.4906" t2="-2.40266" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-13.1309" t1="18.4732" t2="5.01465" s0="1.8787" s1="1.8787" s2="1.8787" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_green.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-29.4244" t1="20.1278" t2="-11.8953" s0="1.59044" s1="1.14057" s2="1.26695" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_B_tops.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-12.4942" t1="17.8567" t2="-8.64433" s0="1.81166" s1="2.1058" s2="0.974764" q0="-0.698331" q1="-0.0154018" q2="0.10183" q3="0.708328" euler_x="-1.54642" euler_y="0.120696" euler_z="0.16777" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/fat_branch_rotting.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="-18.9905" t1="18.4031" t2="-4.11936" s0="1.00003" s1="1.00003" s2="1.00003" q0="-0.00367236" q1="-0.0114512" q2="-0.00121462" q3="0.999927" euler_x="-0.00731835" euler_y="-0.0229117" euler_z="-0.00234557" id="8" type_file="Data/Objects/Hotspots/emitter.xml">
+            <parameters>
+                <parameter name="Type" type="string" val="falling_water_drops" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="-19.4201" t1="17.4074" t2="-4.51453" s0="1.23865" s1="1.23865" s2="1.23865" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" type_file="Data/Objects/Undergrowth/HotSpots/PraySpot.xml">
+            <parameters>
+                <parameter name="Activated" type="int" val="0" />
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Prayed" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Decal t0="-19.1547" t1="17.6545" t2="-3.89816" s0="2.37692" s1="2.37692" s2="2.37692" q0="0" q1="-0.418093" q2="0" q3="0.908404" euler_x="0" euler_y="-0.86269" euler_z="0" id="10" type_file="Data/Objects/Decals/rugs/red_trim_rug.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+            <parameters />
+        </Decal>
+        <EnvObject t0="-20.6487" t1="7.42164" t2="-3.15786" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-12.6358" t1="18.1585" t2="-11.3819" s0="0.536814" s1="0.536814" s2="0.536814" q0="0" q1="0.68707" q2="0" q3="0.726592" euler_x="0" euler_y="1.51492" euler_z="0" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-21.1042" t1="19.1222" t2="-0.706162" s0="1.3154" s1="1.3154" s2="1.3154" q0="-0.147204" q1="0.450649" q2="0.0756216" q3="0.877227" euler_x="-0.332514" euler_y="0.949125" euler_z="0" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree4.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-12.6219" t1="18.6043" t2="-7.23273" s0="0.698187" s1="0.698187" s2="0.698187" q0="0" q1="0.393977" q2="0" q3="0.91912" euler_x="0" euler_y="0.809909" euler_z="0" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/winter_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-28.1144" t1="19.9234" t2="-9.74523" s0="1.6419" s1="1.6419" s2="1.6419" q0="0" q1="0.765802" q2="0" q3="0.643076" euler_x="3.14159" euler_y="1.39701" euler_z="3.14159" id="15" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/young_evergreen.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-14.2314" t1="19.3171" t2="-7.21733" s0="0.963274" s1="0.963274" s2="0.963274" q0="0" q1="0.393977" q2="0" q3="0.91912" euler_x="0" euler_y="0.809909" euler_z="0" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/winter_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-23.6391" t1="32.0068" t2="4.75275" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="17" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_A_tops.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-20.208" t1="17.8303" t2="-5.0702" s0="1.23739" s1="1.23739" s2="1.2374" q0="-0.514925" q1="0.0699115" q2="-0.172613" q3="0.836761" euler_x="-1.09192" euler_y="-0.0608045" euler_z="-0.369917" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Bottle.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-19.0334" t1="17.6615" t2="-5.74299" s0="1.28955" s1="1.28955" s2="1.28955" q0="0.00127262" q1="0.735983" q2="-0.00568947" q3="0.676975" euler_x="-3.06195" euler_y="1.48709" euler_z="-3.07181" id="19" color_r="0.776471" color_g="0.660072" color_b="0.261869" overbright="0" type_file="Data/Objects/Undergrowth/BrassLantern_HandleDown.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-20.6143" t1="19.4005" t2="-5.90246" s0="2.55691" s1="2.55691" s2="2.55691" q0="-0.0017426" q1="0.298893" q2="-0.00556359" q3="0.954269" euler_x="-0.00809856" euler_y="0.607028" euler_z="-0.0141967" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/BuddaStatue.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-21.2147" t1="17.5753" t2="-4.31587" s0="1.887" s1="1.887" s2="1.887" q0="-0.0017426" q1="0.298893" q2="-0.00556359" q3="0.954269" euler_x="-0.00809856" euler_y="0.607028" euler_z="-0.0141967" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/ChinaBowl.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-21.1239" t1="18.227" t2="-5.17188" s0="1.84831" s1="1.84832" s2="1.84832" q0="0.456681" q1="-0.0534045" q2="-0.0511514" q3="0.886552" euler_x="0.954709" euler_y="-0.0479904" euler_z="-0.140093" id="22" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/Scroll_RolledUp.xml">
+            <parameters />
+        </EnvObject>
+        <DynamicLightObject t0="-18.8986" t1="17.756" t2="-5.59603" s0="12.0091" s1="12.0091" s2="12.0091" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="23" color_r="0.921569" color_g="0.788324" color_b="0.332487" overbright="0">
+            <parameters />
+        </DynamicLightObject>
+        <EnvObject t0="-20.6487" t1="7.42164" t2="-3.15786" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

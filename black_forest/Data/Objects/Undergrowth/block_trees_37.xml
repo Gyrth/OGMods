@@ -1,0 +1,35 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="2.72364" t1="2.40466" t2="0.435593" s0="25.8646" s1="46.7639" s2="20.01" q0="0" q1="0" q2="0" q3="1" id="372" version="1">
+        <parameters />
+        <EnvObject t0="-0.20368" t1="-10.9723" t2="0.435593" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="354" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-5.8834" t1="11.3882" t2="3.42008" s0="1" s1="1" s2="1" q0="0" q1="0" q2="-0.693596" q3="0.720364" id="355" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_log_rotting.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.17221" t1="3.94159" t2="-4.54428" s0="1" s1="1" s2="1" q0="-0.519892" q1="0.449673" q2="-0.461413" q3="0.560896" id="359" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/evergreen_log_rotting.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-6.32312" t1="-0.506367" t2="-5.74618" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="363" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="6.82224" t1="7.34815" t2="6.19329" s0="5.94727" s1="5.94727" s2="5.94727" q0="-0.0419794" q1="0.0233861" q2="0.486101" q3="0.87258" id="369" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/broken_branch_rotting.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.16903" t1="-1.17263" t2="7.92026" s0="4.73281" s1="4.73281" s2="4.73281" q0="0" q1="0" q2="0" q3="1" id="370" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Groundcover/Groundcover1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-5.082" t1="8.57891" t2="3.43847" s0="0.654457" s1="0.641858" s2="0.574582" q0="-0.00638092" q1="-0.775464" q2="-0.00916708" q3="0.631292" id="371" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/Lugaru/HangingVines_2.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-0.20368" t1="-10.9723" t2="0.435593" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

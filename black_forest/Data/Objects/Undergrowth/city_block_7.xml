@@ -1,0 +1,24 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="40.3967" t1="63.6836" t2="-43.9108" s0="20.3136" s1="42.4383" s2="20.1915" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="40.3967" t1="52.4658" t2="-43.9282" s0="1" s1="0.989007" s2="1.00472" q0="-0.00375953" q1="-0.707097" q2="-0.00375953" q3="0.707097" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="40.464" t1="63.2023" t2="-43.9108" s0="5.02642" s1="0.274753" s2="5.04538" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="0.0689735" color_g="0.0980392" color_b="0.0495963" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="40.2451" t1="71.124" t2="-43.7819" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="0.142637" color_g="0.145753" color_b="0.207843" overbright="0" type_file="Data/Objects/Buildings/cat_town/babylon_tower.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="40.2219" t1="69.5975" t2="-46.5467" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/BuildingSign_Wall_1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="40.3152" t1="81.5212" t2="-43.8556" s0="4.30981" s1="4.30981" s2="4.30981" q0="0" q1="-0.999392" q2="0" q3="0.0348598" euler_x="3.14159" euler_y="-0.0697337" euler_z="3.14159" id="7" color_r="0.197832" color_g="0.22372" color_b="0.262745" overbright="0" type_file="Data/Objects/Buildings/arena/arena_statue_standing.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

@@ -1,0 +1,54 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="9.13158" t1="-3.13988" t2="2.24533" s0="20.1351" s1="29.8601" s2="20.1915" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" version="1">
+        <parameters />
+        <EnvObject t0="9.67213" t1="4.65402" t2="-3.43147" s0="1" s1="1" s2="1" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="0" euler_y="-1.57045" euler_z="0" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Door1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="15.465" t1="7.18121" t2="-6.37723" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="-3.14159" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window_boxes/window_box_medium.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="15.6152" t1="7.03683" t2="1.55458" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="-1" euler_x="0" euler_y="0" euler_z="0" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window_boxes/window_box_medium.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.6588" t1="7.14496" t2="-2.40435" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/House.xml">
+            <parameters />
+        </EnvObject>
+        <Group t0="9.07401" t1="-8.16988" t2="2.22789" s0="20.01" s1="19.7901" s2="20.1043" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" version="1">
+            <parameters />
+            <EnvObject t0="9.07401" t1="-8.16988" t2="2.22789" s0="1" s1="0.989007" s2="1.00472" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+                <parameters>
+                    <parameter name="BlockBase" type="int" val="1" />
+                </parameters>
+            </EnvObject>
+        </Group>
+        <EnvObject t0="9.14131" t1="2.56662" t2="2.24533" s0="5.02642" s1="0.274753" s2="5.04538" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="0.0689735" color_g="0.0980392" color_b="0.0495963" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.71896" t1="6.86399" t2="-3.64367" s0="1.40558" s1="1.40558" s2="1.40558" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="0" euler_y="-1.57045" euler_z="0" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="9.71896" t1="6.85903" t2="-3.19539" s0="1.40558" s1="1.40558" s2="1.40558" q0="0" q1="-0.707107" q2="0" q3="0.707107" euler_x="0" euler_y="-1.57045" euler_z="0" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.88421" t1="4.65402" t2="8.15389" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="-0.632763" euler_y="1.57045" euler_z="-0.632763" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Door1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="2.09139" t1="7.18121" t2="11.0997" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="-1" euler_x="0" euler_y="0" euler_z="0" id="15" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window_boxes/window_box_medium.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.94114" t1="7.03683" t2="3.16784" s0="1" s1="1" s2="1" q0="0" q1="-1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="-3.14159" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window_boxes/window_box_medium.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="3.89757" t1="7.14497" t2="7.12677" s0="1" s1="1" s2="1" q0="0" q1="1" q2="0" q3="0" euler_x="3.14159" euler_y="0" euler_z="-3.14159" id="17" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Undergrowth/House.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.83739" t1="6.86399" t2="8.36609" s0="1.40558" s1="1.40558" s2="1.40558" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="-0.632763" euler_y="1.57045" euler_z="-0.632763" id="18" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="7.83739" t1="6.85903" t2="7.91781" s0="1.40558" s1="1.40558" s2="1.40558" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="-0.632763" euler_y="1.57045" euler_z="-0.632763" id="19" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/window1.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

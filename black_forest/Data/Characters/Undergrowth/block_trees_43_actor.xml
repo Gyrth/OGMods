@@ -1,0 +1,43 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <ActorObject t0="8.80786" t1="17.396" t2="-5.21689" s0="1" s1="1" s2="1" q0="0" q1="-0.999699" q2="0" q3="0.024529" euler_x="3.14159" euler_y="-0.0490629" euler_z="3.14159" id="21" type_file="Data/Objects/characters/rats/rat_actor.xml" is_player="0">
+        <parameters>
+            <parameter name="Aggression" type="float" val="0.5" />
+            <parameter name="Attack Damage" type="float" val="0.82432" />
+            <parameter name="Attack Knockback" type="float" val="1.12162" />
+            <parameter name="Attack Speed" type="float" val="1.21622" />
+            <parameter name="Block Follow-up" type="float" val="0.70946" />
+            <parameter name="Block Skill" type="float" val="0.80405" />
+            <parameter name="Cannot Be Disarmed" type="int" val="0" />
+            <parameter name="Character Scale" type="float" val="1" />
+            <parameter name="Damage Resistance" type="float" val="1.2027" />
+            <parameter name="Ear Size" type="float" val="1" />
+            <parameter name="Fat" type="float" val="0.5" />
+            <parameter name="Focus FOV distance" type="float" val="17.568" />
+            <parameter name="Focus FOV horizontal" type="float" val="1.5708" />
+            <parameter name="Focus FOV vertical" type="float" val="0.62834" />
+            <parameter name="Ground Aggression" type="float" val="0.5" />
+            <parameter name="Knockout Shield" type="int" val="0" />
+            <parameter name="Left handed" type="int" val="0" />
+            <parameter name="Movement Speed" type="float" val="1" />
+            <parameter name="Muscle" type="float" val="0.5" />
+            <parameter name="Peripheral FOV distance" type="float" val="4" />
+            <parameter name="Peripheral FOV horizontal" type="float" val="1.5708" />
+            <parameter name="Peripheral FOV vertical" type="float" val="1.4126" />
+            <parameter name="Species" type="string" val="rat" />
+            <parameter name="Static" type="int" val="0" />
+            <parameter name="Teams" type="string" val="meatEater" />
+        </parameters>
+        <Connections>
+            <Connection id="-1" />
+        </Connections>
+        <ItemConnections />
+        <Palette>
+            <Color label="Pelts" channel="0" red="0.072772" green="0.0814884" blue="0.109804" />
+            <Color label="Shirt" channel="1" red="0.218593" green="0.301456" blue="0.403922" />
+            <Color label="Fur" channel="2" red="0.541176" green="0.301785" blue="0.108235" />
+            <Color label="Skin" channel="3" red="1" green="1" blue="1" />
+        </Palette>
+    </ActorObject>
+</ActorObjects>

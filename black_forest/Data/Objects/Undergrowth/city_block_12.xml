@@ -1,0 +1,106 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="8.01826" t1="-5.23335" t2="-0.253172" s0="21.3583" s1="25.3255" s2="21.3953" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="55" version="1">
+        <parameters />
+        <EnvObject t0="14.3841" t1="5.37209" t2="6.64576" s0="1" s1="1" s2="1" q0="0" q1="0.9948" q2="0" q3="0.101851" euler_x="-3.14159" euler_y="0.204057" euler_z="-3.14159" id="2" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Buildings/yert.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="0.667128" t1="5.42641" t2="6.93241" s0="1" s1="1" s2="1" q0="0" q1="0.694288" q2="0" q3="0.719697" euler_x="0" euler_y="1.53486" euler_z="0" id="3" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Buildings/yert.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.07105" t1="2.71497" t2="-0.10108" s0="5.02642" s1="0.274753" s2="5.04538" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="0.0689735" color_g="0.0980392" color_b="0.0495963" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="1.62168" t1="5.47475" t2="-6.87144" s0="1" s1="1" s2="1" q0="0" q1="-0.0565636" q2="0" q3="0.998399" euler_x="0" euler_y="-0.113188" euler_z="0" id="5" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Buildings/yert.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.9886" t1="5.32825" t2="-7.24159" s0="1" s1="1" s2="1" q0="0" q1="0.76424" q2="0" q3="-0.644932" euler_x="-3.14159" euler_y="-1.40187" euler_z="3.14159" id="6" color_r="0.182699" color_g="0.188235" color_b="0.211765" overbright="0" type_file="Data/Objects/Buildings/yert.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.86469" t1="3.63132" t2="-0.765442" s0="1.26066" s1="1.26066" s2="1.26066" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_pit.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.83858" t1="3.76904" t2="-0.801742" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/camp/fire_wood.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.19105" t1="-8.00103" t2="-0.10797" s0="1" s1="0.989007" s2="1.00472" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <Hotspot t0="8.80349" t1="3.53923" t2="-0.752489" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" type_file="Data/Objects/Undergrowth/Hotspots/FireSpot.xml">
+            <parameters />
+            <Connections />
+        </Hotspot>
+        <PlaceholderObject t0="7.67634" t1="4.53923" t2="0.152268" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="43" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/city_block_12_actor_1.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="9.70397" t1="4.53923" t2="-1.60744" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="43" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/city_block_12_actor_2.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PlaceholderObject t0="9.50235" t1="4.53923" t2="0.792924" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="43" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/city_block_12_actor_3.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <EnvObject t0="4.04681" t1="3.94847" t2="5.24528" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="46" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Furniture/CatStand.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="3.40584" t1="3.78726" t2="-3.91988" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="47" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/LitterLoads/LargeGourd.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="3.20825" t1="3.58489" t2="-3.55691" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="48" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/bowl.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.09589" t1="4.25725" t2="5.22488" s0="1" s1="1" s2="1" q0="0" q1="-0.489848" q2="0" q3="0.871808" euler_x="0" euler_y="-1.02383" euler_z="0" id="49" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Bones/DogLegBone.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="8.37304" t1="3.68813" t2="-1.62389" s0="3.26081" s1="3.26081" s2="3.26081" q0="0" q1="0.332494" q2="0" q3="0.943105" euler_x="0" euler_y="0.677893" euler_z="0" id="50" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/therium/bottle.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="14.9245" t1="4.48889" t2="3.13534" s0="1" s1="1" s2="1" q0="0.593769" q1="-0.356176" q2="-0.61318" q3="0.380247" euler_x="1.5245" euler_y="0.474962" euler_z="-1.57721" id="51" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/LitterLoads/DogLitter.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="4.06057" t1="4.33563" t2="5.2455" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="52" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/Bones/DogSkull.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="13.349" t1="3.68426" t2="-4.1189" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Gear/DogTools/DogToolbox.xml">
+            <parameters />
+        </EnvObject>
+        <Group t0="8.90289" t1="3.82783" t2="-0.804805" s0="0.359445" s1="0.372465" s2="0.360915" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" version="1">
+            <parameters />
+            <Hotspot t0="8.90289" t1="3.83434" t2="-0.80388" s0="0.0872662" s1="0.0872662" s2="0.0872662" q0="0" q1="0" q2="-1" q3="0.000545621" euler_x="0" euler_y="0" euler_z="-3.1405" id="10" type_file="Data/Objects/Hotspots/fire_test.xml">
+                <parameters>
+                    <parameter name="Fire Ribbons" type="int" val="4" />
+                    <parameter name="Ignite Characters" type="int" val="1" />
+                    <parameter name="Light Amplify" type="float" val="1" />
+                    <parameter name="Light Distance" type="float" val="2" />
+                </parameters>
+                <Connections />
+            </Hotspot>
+            <Decal t0="8.90537" t1="3.7819" t2="-0.84496" s0="0.270606" s1="0.270606" s2="0.270606" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="13" type_file="Data/Objects/Decals/flame_base.xml" color_r="1" color_g="1" color_b="1" overbright="0">
+                <parameters />
+            </Decal>
+        </Group>
+        <EnvObject t0="8.76337" t1="3.70882" t2="0.332146" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="54" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Environment/LitterLoads/LargeGourd.xml">
+            <parameters />
+        </EnvObject>
+    </Group>
+</ActorObjects>

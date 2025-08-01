@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<item>
+    <type>weapon</type>
+    <appearance obj_path = "Data/jims_weapon_pack/kendostick_2h/03_scripts/jims_kendostick_blue.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_dogweapongrip.anm"
+		  hands = "2"/>
+        <sheathe ik_attach = "torso"
+    anim = "Data/Animations/r_arrow_sheathed.anm"/>
+    <physics mass = "3 kg"/>
+    <points>
+        <pommel x="0" y="-0.23" z="0"/>
+        <guard x="0" y="0.15" z="0"/>
+        <tip x="0" y="1.00" z="0"/>
+    </points>
+    <lines>
+        <wood start="pommel" end="tip"/>
+    </lines>
+    <label>big_sword</label>
+    <anim_blend idle = "Data/Animations/r_bigdogsword.xml"
+				movement = "Data/Animations/r_bigdogswordmove.xml"/>
+    <attack_override stationary = "Data/jims_weapon_pack/kendostick_2h/03_scripts/jims_kendostick_2h_overhand.xml"
+                     moving = "Data/jims_weapon_pack/kendostick_2h/03_scripts/jims_kendostick_2h_side.xml"
+                     moving_close = "Data/jims_weapon_pack/kendostick_2h/03_scripts/jims_kendostick_2h_sideclose.xml"
+                     stationary_close = "Data/jims_weapon_pack/kendostick_2h/03_scripts/jims_kendostick_2h_sideclose.xml"/>
+    <anim_override idle = "Data/Animations/r_weaponidlestance.xml"
+                   movement = "Data/Animations/r_weaponmovestance.xml"
+                   medrightblock = "Data/Animations/r_dogswordparryright.anm"
+                   medleftblock = "Data/Animations/r_dogswordparryleft.anm"
+                   highrightblock = "Data/Animations/r_dogswordparryright.anm"
+                   highleftblock = "Data/Animations/r_dogswordparryleft.anm"
+                   blockflinch = "Data/Animations/r_dogswordflinch.anm"/>
+    <range extend = "0.7"/>
+</item>

@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<attack>
+    <animations unblocked = "Data/Animations/r_knifeslash.anm"
+                blocked = "Data/Animations/r_knifeslash.anm"/>
+    <flags height = "medium"
+           direction = "left"
+           swap_stance = "false"
+           swap_stance_blocked = "false"
+           mobile = "false"
+		   flesh_unblockable = "true"
+           as_layer = "true"
+           alternate = "Data/Attacks/knifebackslash.xml"/>
+    <reaction>Data/Attacks/reaction_highright.xml</reaction>
+    <impact_dir x="-1.0" y="0.0" z="1.0"/>
+    <block_damage min="0.0" max="0.0"/>
+    <damage min="0.0" max="0.1"/>
+    <!--
+    <sharp_damage min="0.0" max="0.1"/>
+    -->
+    <force val="1000"/>
+    <materialevent></materialevent>
+    <cut_plane type="light" x="0.5" y="-1.0" z="0.0"/>
+</attack>

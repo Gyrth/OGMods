@@ -1,0 +1,79 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="37.0225" t1="31.0415" t2="-59.1744" s0="20.3136" s1="38.1535" s2="20.1915" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="37.0225" t1="21.9661" t2="-59.1919" s0="1" s1="0.989007" s2="1.00472" q0="-0.00375953" q1="-0.707097" q2="-0.00375953" q3="0.707097" euler_x="3.14159" euler_y="-1.5708" euler_z="3.14159" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="37.0898" t1="32.7026" t2="-59.1744" s0="5.02642" s1="0.274753" s2="5.04538" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="0.0689735" color_g="0.0980392" color_b="0.0495963" overbright="0" type_file="Data/Objects/Crete/crete_block_marble_standard.xml">
+            <parameters />
+        </EnvObject>
+        <Group t0="43.0868" t1="41.7421" t2="-54.7471" s0="4.6735" s1="16.7181" s2="7.0656" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" version="1">
+            <parameters />
+            <EnvObject t0="43.0868" t1="41.7932" t2="-53.6261" s0="1" s1="1" s2="1" q0="0" q1="0.707107" q2="0" q3="0.707107" euler_x="3.14159" euler_y="1.5708" euler_z="3.14159" id="6" color_r="0.168304" color_g="0.265606" color_b="0.298039" overbright="0" type_file="Data/Objects/Buildings/cat_town/high_tower.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="43.0415" t1="35.7273" t2="-56.0319" s0="1" s1="1" s2="1" q0="0" q1="-0.999823" q2="-0.0188031" q3="0" euler_x="3.10398" euler_y="0" euler_z="-3.14159" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Door1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="43.0956" t1="34.0025" t2="-57.0793" s0="1" s1="1" s2="1" q0="0" q1="0.692684" q2="0" q3="0.721241" euler_x="0" euler_y="1.5304" euler_z="0" id="8" color_r="0.215517" color_g="0.321526" color_b="0.356863" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+                <parameters />
+            </EnvObject>
+        </Group>
+        <Group t0="31.0963" t1="41.7542" t2="-64.9931" s0="4.6735" s1="16.7181" s2="7.0656" q0="0" q1="-0.708703" q2="0" q3="0.705507" euler_x="3.14159" euler_y="-1.56628" euler_z="3.14159" id="9" version="1">
+            <parameters />
+            <EnvObject t0="29.9753" t1="41.8053" t2="-64.9981" s0="1" s1="1" s2="1" q0="0" q1="-0.00226045" q2="0" q3="0.999997" euler_x="0" euler_y="-0.0045209" euler_z="0" id="10" color_r="0.168304" color_g="0.265606" color_b="0.298039" overbright="0" type_file="Data/Objects/Buildings/cat_town/high_tower.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="32.3813" t1="35.7394" t2="-65.0325" s0="1" s1="1" s2="1" q0="0.0133257" q1="-0.705382" q2="-0.0132657" q3="-0.708578" euler_x="-0.0375756" euler_y="1.56629" euler_z="3.29633e-005" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Door1.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="33.4285" t1="34.0146" t2="-64.9737" s0="1" s1="1" s2="1" q0="0" q1="-0.022453" q2="0" q3="0.999748" euler_x="0" euler_y="-0.0449098" euler_z="0" id="12" color_r="0.20203" color_g="0.30639" color_b="0.341176" overbright="0" type_file="Data/Objects/Buildings/arena/arena_steps_small.xml">
+                <parameters />
+            </EnvObject>
+        </Group>
+        <EnvObject t0="36.5078" t1="48.18" t2="-59.1473" s0="0.686546" s1="0.668528" s2="0.735657" q0="0" q1="-0.3454" q2="0" q3="0.938455" euler_x="0" euler_y="-0.705329" euler_z="0" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/CaveArena/HangingLamp_2.xml">
+            <parameters />
+        </EnvObject>
+        <PlaceholderObject t0="31.8349" t1="34.5268" t2="-53.3887" s0="1.5" s1="1.5" s2="1.5" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="43" type_file="" special_type="0">
+            <parameters>
+                <parameter name="Name" type="string" val="enemy_spawn" />
+                <parameter name="Path" type="string" val="Data/Characters/Undergrowth/city_block_5_actor.xml" />
+            </parameters>
+            <Connections>
+                <Connection id="-1" />
+            </Connections>
+        </PlaceholderObject>
+        <PathPointObject t0="44.0463" t1="33.5268" t2="-58.9958" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="18" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="45.1136" t1="33.5269" t2="-67.3233" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="19" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="35.628" t1="33.5269" t2="-67.6398" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="20" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+        <PathPointObject t0="28.048" t1="33.5269" t2="-50.4289" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="21" type_file="">
+            <parameters>
+                <parameter name="Type" type="string" val="Stand" />
+                <parameter name="Wait" type="float" val="0" />
+            </parameters>
+            <Connections />
+        </PathPointObject>
+    </Group>
+</ActorObjects>

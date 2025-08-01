@@ -1,0 +1,93 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-46.7687" t1="30.0924" t2="-75.7583" s0="25.2997" s1="50.1684" s2="24.6962" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="-49.4136" t1="15.0132" t2="-73.4152" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <EnvObject t0="-41.6586" t1="26.4222" t2="-68.2678" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-54.9304" t1="25.4793" t2="-67.251" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/tall_fern_yellow.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-48.1754" t1="38.147" t2="-81.8571" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_B_tops.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-46.308" t1="26.3215" t2="-79.2831" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree3.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-56.164" t1="25.3224" t2="-77.9154" s0="1" s1="1" s2="1" q0="0" q1="0.632692" q2="0" q3="0.774404" euler_x="0" euler_y="1.37005" euler_z="0" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/test/TestTree4.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-43.1399" t1="26.4096" t2="-75.0737" s0="0.97945" s1="0.97945" s2="0.97945" q0="-0.0159642" q1="-0.318047" q2="-0.0272767" q3="0.947547" euler_x="-0.0161845" euler_y="-0.648009" euler_z="-0.0521218" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-51.7036" t1="26.8839" t2="-79.4372" s0="1.50907" s1="1.50907" s2="1.50907" q0="0.0122276" q1="0.566778" q2="-0.0291438" q3="0.823263" euler_x="-0.0361044" euler_y="1.20525" euler_z="-0.095612" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/thick_bush.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-41.8262" t1="39.2104" t2="-80.0567" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Prototypes/OG/PineTree2_B.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-51.0154" t1="25.1986" t2="-72.1337" s0="5.16261" s1="5.16261" s2="5.16261" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_flagstone.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-51.7644" t1="25.4979" t2="-73.2594" s0="1" s1="1" s2="1" q0="-0.0186284" q1="-0.621648" q2="0.0147909" q3="0.782935" euler_x="-0.207044" euler_y="-1.33732" euler_z="0.20158" id="13" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-50.0564" t1="25.5307" t2="-73.17" s0="1" s1="1" s2="1" q0="-0.00996165" q1="-0.90671" q2="-0.0215998" q3="-0.421082" euler_x="3.06793" euler_y="0.868202" euler_z="3.08546" id="14" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-48.7517" t1="25.0739" t2="-72.4056" s0="1" s1="1" s2="1" q0="0.0220762" q1="-0.374657" q2="-0.00885573" q3="0.926858" euler_x="0.0661146" euler_y="-0.767192" euler_z="-0.0457998" id="15" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-46.9026" t1="25.1967" t2="-73.3991" s0="1" s1="1" s2="1" q0="-0.377198" q1="-0.492203" q2="0.217669" q3="-0.753709" euler_x="0.993217" euler_y="1.13412" euler_z="0.102319" id="16" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-49.5376" t1="25.6285" t2="-73.0408" s0="1" s1="1" s2="1" q0="0.049995" q1="-0.85437" q2="-0.0198485" q3="-0.516875" euler_x="-3.1034" euler_y="1.0869" euler_z="-3.00161" id="17" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-46.9441" t1="25.1252" t2="-73.702" s0="1" s1="1" s2="1" q0="-0.316207" q1="0.302154" q2="-0.621279" q3="0.650175" euler_x="-0.905322" euler_y="0" euler_z="-1.52535" id="20" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Post1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-49.9588" t1="25.0782" t2="-70.2475" s0="1" s1="1" s2="1" q0="-0.0142015" q1="-0.870233" q2="0.000737727" q3="0.492432" euler_x="-3.11195" euler_y="-1.0295" euler_z="3.09219" id="21" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-49.8631" t1="25.5028" t2="-72.4819" s0="1" s1="1" s2="1" q0="-0.0115767" q1="-0.998504" q2="0.00825873" q3="-0.0527748" euler_x="-3.12624" euler_y="0.10578" euler_z="3.11922" id="23" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-52.0429" t1="25.6366" t2="-71.1928" s0="1" s1="1" s2="1" q0="0.0226086" q1="-0.917301" q2="-0.0480381" q3="0.394636" euler_x="2.98786" euler_y="-0.80644" euler_z="-3.02662" id="24" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-47.9515" t1="25.9247" t2="-71.0059" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="27" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/Ruins/mysterious/ruin_pillar_top.xml">
+            <parameters />
+        </EnvObject>
+        <Group t0="-46.9466" t1="25.0323" t2="-71.6938" s0="1.02263" s1="0.212297" s2="0.718298" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="36" version="1">
+            <parameters />
+            <EnvObject t0="-46.522" t1="25.0473" t2="-71.872" s0="1" s1="1" s2="1" q0="-0.0115767" q1="-0.998504" q2="0.00825873" q3="-0.0527748" euler_x="-3.12624" euler_y="0.10578" euler_z="3.11922" id="39" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+                <parameters />
+            </EnvObject>
+            <EnvObject t0="-47.2714" t1="25.017" t2="-71.4693" s0="1" s1="1" s2="1" q0="-1.81794e-005" q1="0.535841" q2="-0.0142206" q3="0.844198" euler_x="-0.0358524" euler_y="1.1307" euler_z="-0.0564342" id="38" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/hanging_garden_arena/hanging_garden_floor_brick.xml">
+                <parameters />
+            </EnvObject>
+        </Group>
+        <EnvObject t0="-51.0723" t1="25.4888" t2="-72.1234" s0="2.4617" s1="1" s2="2.31719" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="44" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Buildings/TrapDoor1.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="-51.0743" t1="24.7411" t2="-72.179" s0="0.534295" s1="0.755405" s2="0.577658" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="45" type_file="Data/Objects/Undergrowth/Hotspots/StealSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+                <parameter name="Stealed" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="-49.4136" t1="15.0132" t2="-73.4152" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_basic_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>

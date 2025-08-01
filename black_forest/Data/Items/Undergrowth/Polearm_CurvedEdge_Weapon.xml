@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<item>
+    <type>weapon</type>
+    <label>foo</label>
+    <appearance obj_path = "Data/Objects/Undergrowth/Polearm_CurvedEdge.xml"/>
+    <grip ik_attach = "rightarm"
+          anim = "Data/Animations/r_dogweapongrip.anm"
+		  hands = "2"/>
+    <sheathe ik_attach = "torso"
+    anim = "Data/Animations/r_arrow_sheathed.anm"/>
+    <points>
+        <pommel x="0" y="-0.72" z="0"/>
+        <guard x="0" y="0.62" z="0"/>
+        <tip x="0" y="0.975" z="0"/>
+    </points>
+    <lines>
+        <wood start="pommel" end="guard"/>
+        <metal start="guard" end="tip"/>
+    </lines>
+    <anim_blend idle = "Data/Animations/r_spearidle.xml"
+				movement = "Data/Animations/r_spearmove.xml"/>
+    <anim_override idle = "Data/Animations/r_weaponidlestance.xml"
+                   movement = "Data/Animations/r_weaponmovestance.xml"/>"/>
+    <attack_override stationary = "Data/Attacks/glaiveslash.xml"
+                     moving = "Data/Attacks/glaiveslash.xml"
+                     moving_close = "Data/Attacks/glaiveslashclose.xml"
+                     stationary_close = "Data/Attacks/glaiveslashclose.xml"/>
+    <range extend = "1.0"/>
+    <physics mass = "3 kg"/>
+</item>

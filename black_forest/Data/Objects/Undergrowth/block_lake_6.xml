@@ -1,0 +1,77 @@
+<?xml version="2.0" ?>
+<Type>saved</Type>
+<ActorObjects>
+    <Group t0="-21.4786" t1="43.2376" t2="-13.7192" s0="20.01" s1="33.1373" s2="20.01" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="2" version="1">
+        <parameters />
+        <EnvObject t0="-21.4786" t1="36.6739" t2="-13.7192" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="3" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent.xml">
+            <parameters>
+                <parameter name="BlockBase" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+        <Hotspot t0="-21.3356" t1="44.0206" t2="-14.2503" s0="4.07797" s1="1" s2="4.06187" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="4" type_file="Data/Objects/Hotspots/wet_cube.xml">
+            <parameters>
+                <parameter name="Water Fog" type="float" val="1" />
+                <parameter name="Wave Density" type="float" val="0.25" />
+                <parameter name="Wave Height" type="float" val="0.5" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="-22.2865" t1="45.7101" t2="-11.1224" s0="1" s1="1" s2="1" q0="0.0886138" q1="0.68406" q2="0.709577" q3="-0.14391" euler_x="1.51962" euler_y="-0.32852" euler_z="-3.05379" id="5" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/temperate/small_evergreen_log_rotting.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-17.5182" t1="45.2837" t2="-12.8104" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="6" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/plants/trees/Redwood/log1.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-15.933" t1="46.8973" t2="-6.62979" s0="0.768242" s1="0.768242" s2="0.768242" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="7" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-29.237" t1="47.5915" t2="-8.03034" s0="0.655432" s1="0.655432" s2="0.655432" q0="0" q1="0.749177" q2="0" q3="0.66237" euler_x="3.14159" euler_y="1.44796" euler_z="3.14159" id="8" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-27.0335" t1="46.8244" t2="-19.4576" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="9" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/small_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.0551" t1="46.9527" t2="-20.5583" s0="0.655432" s1="0.655432" s2="0.655432" q0="0" q1="0.749177" q2="0" q3="0.66237" euler_x="3.14159" euler_y="1.44796" euler_z="3.14159" id="10" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <EnvObject t0="-18.0525" t1="47.0665" t2="-20.6038" s0="1.40044" s1="1.40044" s2="1.40044" q0="0" q1="0.999329" q2="0" q3="0.0366405" euler_x="3.14159" euler_y="0.0732974" euler_z="3.14159" id="11" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/Plants/Trees/temperate/medium_deciduous_winter.xml">
+            <parameters />
+        </EnvObject>
+        <Hotspot t0="-21.5869" t1="46.0876" t2="-13.8135" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="12" type_file="Data/Objects/Hotspots/emitter.xml">
+            <parameters>
+                <parameter name="Type" type="string" val="Smoke" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="-21.4571" t1="51.9827" t2="-14.015" s0="4.73839" s1="3.76729" s2="4.60907" q0="-0.00899297" q1="-0.000927603" q2="-0.00633413" q3="0.999939" euler_x="-0.0179741" euler_y="-0.00196902" euler_z="-0.0126512" id="13" type_file="Data/Objects/Hotspots/ambient_sound.xml">
+            <parameters>
+                <parameter name="Delay Max" type="float" val="10" />
+                <parameter name="Delay Min" type="float" val="3" />
+                <parameter name="Fade Distance" type="float" val="10" />
+                <parameter name="Gain" type="float" val="1" />
+                <parameter name="Global" type="int" val="0" />
+                <parameter name="Sound Path" type="string" val="Data/Sounds/ambient/swamp_bugs.wav" />
+                <parameter name="Wind Scale" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="-22.2791" t1="45.7433" t2="-13.6518" s0="3.32128" s1="0.819332" s2="4.02332" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="14" type_file="Data/Objects/Undergrowth/Hotspots/BadWaterSpot.xml">
+            <parameters>
+                <parameter name="Open" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <Hotspot t0="-22.1693" t1="46.0206" t2="-12.7169" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" euler_x="0" euler_y="0" euler_z="0" id="17" type_file="Data/Objects/Undergrowth/Hotspots/quest15Spot.xml">
+            <parameters>
+                <parameter name="quest15Go" type="int" val="0" />
+                <parameter name="tracked" type="int" val="0" />
+            </parameters>
+            <Connections />
+        </Hotspot>
+        <EnvObject t0="-21.4786" t1="36.6739" t2="-13.7192" s0="1" s1="1" s2="1" q0="0" q1="0" q2="0" q3="1" id="53" color_r="1" color_g="1" color_b="1" overbright="0" type_file="Data/Objects/block_dent_detail_objects.xml">
+            <parameters>
+                <parameter name="DetailObjects" type="int" val="1" />
+            </parameters>
+        </EnvObject>
+    </Group>
+</ActorObjects>
