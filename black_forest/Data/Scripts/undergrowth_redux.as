@@ -608,6 +608,13 @@ class Block{
 		array<int> nav_connections;
 
 		for(uint i = 0; i < obj_ids.size(); i++){
+
+			if(!ObjectExists(obj_ids[i])){
+				obj_ids.removeAt(i);
+				i--;
+				continue;
+			}
+
 			Object@ obj = ReadObjectFromID(obj_ids[i]);
 			if(obj.GetType() == _path_point_object){
 				pathpoints.insertLast(obj_ids[i]);
@@ -1350,10 +1357,11 @@ class World{
 				quaternion start_rot = obj.GetRotation();
 				obj.SetTranslation(start_pos + base_pos + offset);
 			}
+
 			if(!add_detail_objects && obj.GetType() == _env_object){
 				ScriptParams@ obj_params = obj.GetScriptParams();
 				if(obj_params.HasParam("DetailObjects")){
-					QueueDeleteObjectID(obj_ids[i]);
+					DeleteObjectID(obj.GetID());
 				}
 			}
 		}
@@ -2510,6 +2518,11 @@ void DrawGUI() {
 
 int update_counter = 0;
 void PostInit(){
+
+	//Force add detail objects off for now.
+	//Stable has a bug that get's fixed in the next release.
+	add_detail_objects = false;
+
 	if(!post_init_done){
 		if(update_counter > 100){
 			post_init_done = true;
