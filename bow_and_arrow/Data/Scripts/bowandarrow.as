@@ -114,9 +114,12 @@ class BowAndArrow {
 				}
 			}
 			aimingParticle = MakeParticle("Data/Particles/bow_and_arrow_aim.xml", throw_target_pos, vec3(0));
-			fov = max(fov - ((time - start_throwing_time) * 10.0), 40.0f);
+			// fov = max(fov - ((time - start_throwing_time) * 15.0), 40.0f);
+			if(time - start_throwing_time > 0.1){
+				fov = 40;
+				cam_pos_offset = vec3(cameraFacing.z * -0.5, 0, cameraFacing.x * 0.5);
+			}
 
-			cam_pos_offset = vec3(cameraFacing.z * -0.5, 0, cameraFacing.x * 0.5);
 			int8 flags = _ANM_MOBILE;
 
 			if(floor(length(this_mo.velocity)) < 2.0f && on_ground){
@@ -154,7 +157,7 @@ class BowAndArrow {
 		}else{
 			this_mo.rigged_object().anim_client().RemoveLayer(bowUpDownAnim, 1.0f);
 			true_max_speed = _base_true_max_speed;
-			if((time - start_throwing_time) < 0.5f || floor(length(this_mo.velocity)) > 1.0f){
+			if((time - start_throwing_time) < 0.25f || floor(length(this_mo.velocity)) > 1.0f){
 				shortDrawAnim = false;
 				longDrawAnim = true;
 			}else{

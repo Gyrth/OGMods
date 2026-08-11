@@ -3860,14 +3860,10 @@ void UpdateState(const Timestep &in ts) {
 	//For the bow and arrow.
     //When the character starts walking again after shooting an arrow the normal fov and camera offset need to be set.
     if((bowAndArrow.arrows.length < 1 || length_squared(this_mo.velocity) > 1.0f) && !bowAndArrow.isAiming){
-        //Slowly change the fov back to 90.
-        if(fov < 90){
-        	fov += 1.0;
-        }
-        if(length(cam_pos_offset) > 0.1f){
-    		cam_pos_offset *= 0.5f;
-        }
+        fov = 90;
+        cam_pos_offset = 0.0f;
     }
+
 	bowAndArrow.HandleArrows();
     EnterTelemetryZone("UpdateState");
     UpdateEyeLookTarget();
@@ -6892,11 +6888,9 @@ void Sheathe(int src, int dst){
         }else if(weapon_slots[_sheathed_arrow_six] == -1){
             dst = _sheathed_arrow_six;
         }
-        if(dst % 2 == 0){
-            dst_right = true;
-        }else{
-            dst_right = false;
-        }
+
+        dst_right = dst % 2 == 0;
+
         this_mo.rigged_object().SheatheItem(weapon_slots[src], dst_right);
         weapon_slots[dst+2] = weapon_slots[dst];
         weapon_slots[dst] = weapon_slots[src];
@@ -6922,20 +6916,8 @@ void UnSheathe(int dst, int src){
         UpdatePrimaryWeapon();
     }else if(weapon_slots[dst] == -1 && ArrowsInQuiver() > 0){
         bool dst_right = (dst == _held_right);
-        int chosenItem = -1;
-        if(weapon_slots[_sheathed_arrow_one] != -1){
-            chosenItem = _sheathed_arrow_one;
-        }else if(weapon_slots[_sheathed_arrow_two] != -1){
-            chosenItem = _sheathed_arrow_two;
-        }else if(weapon_slots[_sheathed_arrow_three] != -1){
-            chosenItem = _sheathed_arrow_three;
-        }else if(weapon_slots[_sheathed_arrow_four] != -1){
-            chosenItem = _sheathed_arrow_four;
-        }else if(weapon_slots[_sheathed_arrow_five] != -1){
-            chosenItem = _sheathed_arrow_five;
-        }else if(weapon_slots[_sheathed_arrow_six] != -1){
-            chosenItem = _sheathed_arrow_six;
-        }
+        int chosenItem = NextArrowInQuiver();
+
         if(chosenItem != -1){
             ItemObject@ item_obj = ReadItemID(weapon_slots[chosenItem]);
             vec3 pos = item_obj.GetPhysicsPosition();
@@ -6965,6 +6947,23 @@ int ArrowsInQuiver(){
         amount++;
     }
     return amount;
+}
+
+int NextArrowInQuiver(){
+    if(weapon_slots[_sheathed_arrow_one] != -1){
+        return _sheathed_arrow_one;
+    }else if(weapon_slots[_sheathed_arrow_two] != -1){
+        return _sheathed_arrow_two;
+    }else if(weapon_slots[_sheathed_arrow_three] != -1){
+        return _sheathed_arrow_three;
+    }else if(weapon_slots[_sheathed_arrow_four] != -1){
+        return _sheathed_arrow_four;
+    }else if(weapon_slots[_sheathed_arrow_five] != -1){
+        return _sheathed_arrow_five;
+    }else if(weapon_slots[_sheathed_arrow_six] != -1){
+        return _sheathed_arrow_six;
+    }
+    return -1;
 }
 
 void HandleAnimationMiscEvent(const string &in event, const vec3 &in world_pos) {
@@ -10677,7 +10676,7 @@ void HandlePickUp() {
                     }
                 } else {
 					if(ArrowsInQuiver() > 0){
-						if(ArrowsInQuiver() % 2 == 0){
+						if(NextArrowInQuiver() % 2 == 0){
 							sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_arrow_unsheathe_sameside.anm",8.0f,0);
 						}else{
 							sheathe_layer_id = this_mo.rigged_object().anim_client().AddLayer("Data/Animations/r_arrow_unsheathe.anm",8.0f,0);
